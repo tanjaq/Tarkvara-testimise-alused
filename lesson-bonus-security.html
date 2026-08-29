@@ -161,8 +161,7 @@
       URL &rarr; allow-list protocols and URL patterns<br>
       Content-Type &rarr; verify response header and charset<br>
       Web content files &rarr; integrity checks; never include untrusted SVG as an object</div>
-    <div class="card r"><strong>What XSS lets an attacker do</strong>
-      Run scripts in the background &middot; change how the page looks &middot; modify the DOM, change links, steal input &middot; redirect to another site &middot; embed an iframe inside the page</div>
+    <div class="card r"><strong>What XSS lets an attacker do</strong>&middot; Run scripts in the background<br>&middot; Change how the page looks<br>&middot; Modify the DOM, change links, steal input<br>&middot; Redirect to another site<br>&middot; Embed an iframe inside the page</div>
   </div>
 </section>
 
@@ -184,8 +183,8 @@
   <span class="lbl">Topic 4</span>
   <h3>Components, Files and Injections</h3>
   <div class="g3">
-    <div class="card"><strong>Frameworks, libraries, components</strong>Not enough background checks &middot; assuming the framework handles security &middot; publicly known issues.<br><span style="color:#888">Defence: identify and verify every component &mdash; OS, web server, languages, add-ons.</span></div>
-    <div class="card o"><strong>Web server and files</strong>Public and private folders &middot; folder-based configuration &middot; server-side code exposure.<br><span style="color:#888">Defence: allow-lists and authorization &middot; never use user-supplied filenames &middot; read-only permissions. An uploaded evilimage.php.jpg can end up executed.</span></div>
+    <div class="card"><strong>Frameworks, libraries, components</strong>&middot; Not enough background checks<br>&middot; Assuming the framework handles security<br>&middot; Publicly known issues.<br><span style="color:#888">Defence: identify and verify every component &mdash; OS, web server, languages, add-ons.</span></div>
+    <div class="card o"><strong>Web server and files</strong>&middot; Public and private folders<br>&middot; Folder-based configuration<br>&middot; Server-side code exposure.<br><span style="color:#888">Defence: allow-lists and authorization &middot; never use user-supplied filenames &middot; read-only permissions. An uploaded evilimage.php.jpg can end up executed.</span></div>
     <div class="card r"><strong>Command and SQL injection</strong>Commands: running OS commands, remote shells, reading and writing files. SQL: queries built dynamically from input.<br><span style="color:#888">Defence: never build commands from user input &middot; do not let an attacker see or guess the database structure &middot; use prepared statements.</span></div>
   </div>
 </section>

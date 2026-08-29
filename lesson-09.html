@@ -162,8 +162,7 @@
     <div class="card"><strong>SFDIPOT &mdash; what to cover</strong>
       <strong style="display:inline;color:var(--blue)">S</strong>tructure &middot; <strong style="display:inline;color:var(--blue)">F</strong>unction &middot; <strong style="display:inline;color:var(--blue)">D</strong>ata &middot; <strong style="display:inline;color:var(--blue)">I</strong>nterfaces &middot; <strong style="display:inline;color:var(--blue)">P</strong>latform &middot; <strong style="display:inline;color:var(--blue)">O</strong>perations &middot; <strong style="display:inline;color:var(--blue)">T</strong>ime<br>
       <span style="color:#888">Ask of each: what could go wrong here?</span></div>
-    <div class="card g"><strong>CRUD &mdash; for every entity</strong>
-      Create it &middot; read it &middot; update it &middot; delete it &mdash; then read it again.<br>
+    <div class="card g"><strong>CRUD &mdash; for every entity</strong>&middot; Create it<br>&middot; Read it<br>&middot; Update it<br>&middot; Delete it &mdash; then read it again.<br>
       <span style="color:#888">Delete something that is referenced elsewhere. That is where the defects are.</span></div>
   </div>
   <div class="g2" style="margin-top:8px">
@@ -212,9 +211,9 @@
   <span class="lbl">Topic 3</span>
   <h3>Bug Report Fields (1/2)</h3>
   <div class="card" style="margin-bottom:6px"><strong>Summary / title</strong>A short summary of the defect, ideally naming the affected functionality.<br>Good: "[Search] Price filter shows products below $50 minimum"<br>Bad: "Filter broken" &mdash; unactionable and unsearchable.</div>
-  <div class="card g" style="margin-bottom:6px"><strong>Environment</strong>Which environment (dev, QA, staging, production) &middot; which user role &middot; device and OS &middot; browser and version.</div>
-  <div class="card o" style="margin-bottom:6px"><strong>Severity</strong>How badly does this break the system? Critical &middot; Major &middot; Minor &middot; Trivial</div>
-  <div class="card r"><strong>Priority</strong>How urgent is the fix? P0 &mdash; core functionality unusable &middot; P1 &mdash; key functions do not meet requirements &middot; P2 &mdash; specific functions fail but the product is usable</div>
+  <div class="card g" style="margin-bottom:6px"><strong>Environment</strong>&middot; Which environment (dev, QA, staging, production)<br>&middot; Which user role<br>&middot; Device and OS<br>&middot; Browser and version.</div>
+  <div class="card o" style="margin-bottom:6px"><strong>Severity</strong>How badly does this break the system?<br>&middot; Critical<br>&middot; Major<br>&middot; Minor<br>&middot; Trivial</div>
+  <div class="card r"><strong>Priority</strong>How urgent is the fix?<br>&middot; P0 &mdash; core functionality unusable<br>&middot; P1 &mdash; key functions do not meet requirements<br>&middot; P2 &mdash; specific functions fail but the product is usable</div>
 </section>
 
 <section>
@@ -224,7 +223,7 @@
   <div class="card g" style="margin-bottom:6px"><strong>Expected result</strong>What should happen at the final step &mdash; ideally with a link to the requirement that defines it.</div>
   <div class="card o" style="margin-bottom:6px"><strong>Actual result</strong>What actually happens, precisely. Not "it doesn't work" but "products priced $12, $32 and $41 appear in the results".</div>
   <div class="card p" style="margin-bottom:6px"><strong>Visuals</strong>Screenshots, recordings, files &mdash; anything that makes the failure obvious.</div>
-  <div class="card r"><strong>Logs</strong>Browser console and network tab &middot; device logs &middot; server logs. If you cannot access logs, record the exact time it happened.</div>
+  <div class="card r"><strong>Logs</strong>&middot; Browser console and network tab<br>&middot; Device logs<br>&middot; Server logs<br>If you cannot access logs, record the exact time it happened.</div>
 </section>
 
 <section>
@@ -272,8 +271,8 @@
   <div class="g2" style="align-items:center">
     <div class="figure" style="margin:0"><img src="images/bug-lifecycle.png" alt="Bug lifecycle from New to Closed with alternative paths" style="max-height:46vh"></div>
     <div>
-      <div class="card o"><strong>Alternative paths, all valid</strong>Re-opened &mdash; the fix did not work &middot; Rejected / won't fix &middot; Deferred &middot; Duplicate &middot; Not a bug &middot; Cannot reproduce</div>
-      <div class="card g" style="margin-top:8px"><strong>Why teams track this</strong>Progress and statistics &middot; prioritising and fixing &middot; trend analysis &mdash; is the defect count growing or shrinking, and do defects come from documentation or from code?</div>
+      <div class="card o"><strong>Alternative paths, all valid</strong>&middot; Re-opened &mdash; the fix did not work<br>&middot; Rejected / won't fix<br>&middot; Deferred<br>&middot; Duplicate<br>&middot; Not a bug<br>&middot; Cannot reproduce</div>
+      <div class="card g" style="margin-top:8px"><strong>Why teams track this</strong>&middot; Progress and statistics<br>&middot; Prioritising and fixing<br>&middot; Trend analysis &mdash; is the defect count growing or shrinking, and do defects come from documentation or from code?</div>
       <p style="font-size:.55em;color:#888;margin-top:.4em">Tools: Jira &middot; GitHub Issues (used in this course) &middot; Linear &middot; YouTrack &middot; Azure DevOps</p>
     </div>
   </div>

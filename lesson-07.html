@@ -127,8 +127,7 @@
   <span class="lbl">Topic 3</span>
   <h3>Equivalence Partitioning</h3>
   <p style="font-size:.63em">Divide input data into groups (partitions) whose members should be handled identically. Test one value from each partition instead of all of them.</p>
-  <div class="card o" style="margin-bottom:8px"><strong>Example: an age field accepting 18&ndash;65</strong>
-    Invalid low: &lt;18 &nbsp;&middot;&nbsp; Valid: 18&ndash;65 &nbsp;&middot;&nbsp; Invalid high: &gt;65 &nbsp;&middot;&nbsp; Invalid type: letters, symbols, empty<br>
+  <div class="card o" style="margin-bottom:8px"><strong>Example: an age field accepting 18&ndash;65</strong>&middot; Invalid low: &lt;18<br>&middot; Valid: 18&ndash;65<br>&middot; Invalid high: &gt;65<br>&middot; Invalid type: letters, symbols, empty<br>
     Four tests instead of forty-eight &mdash; one per partition.</div>
   <blockquote>The technique only works if the partitions are drawn correctly. If two values in "your" partition are actually processed differently, the partition was wrong, not the technique.</blockquote>
 </section>
