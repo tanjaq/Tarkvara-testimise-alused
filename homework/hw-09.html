@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Homework 9 &ndash; Test Cases for Your Project</title>
+<title>Homework 9 &ndash; Test Plan and Test Cases for Your Project</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:#0f0c29;color:#e0e0e0;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;padding:40px 20px;line-height:1.65;}
@@ -38,27 +38,34 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08)
 <body>
 <div class="wrap">
 <div class="crumb"><a href="../index.html">Course</a> &rsaquo; <a href="index.html">Homework</a> &rsaquo; Homework 9</div>
-<h1>Homework 9 &mdash; Test Cases for Your Project</h1>
+<h1>Homework 9 &mdash; Test Plan and Test Cases for Your Project</h1>
 <div class="meta"><span>Group project</span><span>Lesson 10</span><span>Submit: Teams</span></div>
 
 <h2>Objective</h2>
-<p>Close the loop: requirements you wrote in Lesson 4, verified by test cases you write now.</p>
+<p>Close the loop: the requirements you wrote in Homework 3, now verified by a plan that says how you will test them and by cases that actually do it.</p>
 
 <h2>Task</h2>
 <ol>
-  <li>With your team, write test cases for your project and add them to your SRS document, section 7.1 Test Cases.</li>
-  <li>The test cases must cover <strong>all</strong> of your functional requirements &mdash; check them off one by one.</li>
-  <li>Each test case needs: ID and title, description, preconditions, numbered steps, test data, expected results, and a status column.</li>
-  <li>Include negative and edge cases, not only the happy path. Use the techniques from Lessons 7 and 8 to decide which values to test.</li>
+  <li><strong>Part 1 &mdash; the test plan.</strong> Write it into your SRS document, section 7.1 Test Plan. Keep it to one page. It must contain:</li>
+  <li>&bull; <strong>Scope</strong> &mdash; which parts of the system the plan covers, and at which test level<br>&bull; <strong>Features to be tested</strong> &mdash; listed explicitly and traceable to the functional requirements in section 3<br>&bull; <strong>Features not to be tested</strong> &mdash; and why<br>&bull; <strong>Test approach</strong> &mdash; which techniques from Lessons 7 and 8 you will use, and what you will test manually<br>&bull; <strong>Entry and exit criteria</strong> &mdash; when testing can start, and when it is finished<br>&bull; <strong>Test environment and test data</strong> &mdash; which environment, which accounts, which data<br>&bull; <strong>Risks and mitigations</strong> &mdash; what could stop testing, and what you will do<br>&bull; <strong>Deliverables and schedule</strong></li>
+  <li>Write the exit criteria so that someone outside your team could look at your project and answer yes or no. "Testing is done when it works" is not an exit criterion.</li>
+  <li>Writing the plan usually finds requirement defects &mdash; a behaviour nobody has decided yet. Note those; they count in your favour.</li>
+  <li><strong>Part 2 &mdash; the test cases.</strong> Add them to your SRS document, section 7.2 Test Cases.</li>
+  <li>The test cases must cover <strong>all</strong> of your functional requirements &mdash; check them off one by one against section 3.</li>
+  <li>Each test case needs: ID and title, description and the requirement it covers, preconditions, numbered steps, test data, expected results, and a status column.</li>
+  <li>Include negative and edge cases, not only the happy path. Use equivalence partitioning and boundary value analysis to decide which values to test.</li>
   <li>Keep each case focused on one scenario, and make sure no case depends on the output of another.</li>
 </ol>
 
 <h2>Deliverable</h2>
-<div class="box g">Test cases in the SRS document covering every functional requirement.</div>
+<div class="box g">Your SRS document with section 7.1 Test Plan and section 7.2 Test Cases completed.</div>
 
 <h2>Assessment criteria</h2>
 <table>
   <tr><th>Criterion</th><th>What we look for</th></tr>
+  <tr><td><strong>Plan is complete</strong></td><td>All eight parts of the test plan are filled in, including what will <em>not</em> be tested</td></tr>
+  <tr><td><strong>Exit criteria are checkable</strong></td><td>Someone else could decide from them whether testing is finished</td></tr>
+  <tr><td><strong>Approach matches the product</strong></td><td>The chosen techniques fit what your system actually does</td></tr>
   <tr><td><strong>Traceability</strong></td><td>Every functional requirement has at least one test case, and every case names its requirement</td></tr>
   <tr><td><strong>Executable</strong></td><td>Another team could run your cases without asking questions</td></tr>
   <tr><td><strong>Measurable expected results</strong></td><td>No "works correctly"</td></tr>
@@ -68,6 +75,7 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08)
 <h2>Resources</h2>
 <ul>
   <li><a href="../materials/Software Requirements Specification (SRS) Document Template.docx">SRS document template (.docx)</a></li>
+  <li><a href="../lesson-03.html">Lesson 3 &mdash; planning and control</a></li>
   <li><a href="../lesson-10.html">Lesson 10 &mdash; Test Cases &amp; Documentation</a></li>
 </ul>
 

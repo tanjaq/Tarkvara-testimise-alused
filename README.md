@@ -61,12 +61,12 @@ Full briefs with assessment criteria: **[homework/](homework/index.html)**
 | 7 | 6 | Decision table + EP/BVA on the trip planner form | Individual / pair | Teams |
 | 8 | 7 | Boarding pass — coverage analysis | Individual / pair | Teams |
 | 9 | 8 | Exploratory session + bug report | Individual | [Bug-Reporting](https://github.com/tanjaq/Bug-Reporting/issues) |
-| 10 | 9 | Test cases for your project | Group project | Teams |
+| 10 | 9 | Test plan + test cases for your project | Group project | Teams |
 | 11 | 10 | SQL verification — shop database | Individual / pair | Teams |
 | 12 | 11 | Accessibility audit | Individual / pair | Teams |
 | 13 | 12 | Mobile test charter | Individual / pair | Teams |
 
-The group project runs through the whole course: requirements (L4) → architecture (L5) → test cases (L10) all land in the same SRS document.
+The group project runs through the whole course: requirements (L4) → architecture (L5) → test plan and test cases (L10) all land in the same SRS document.
 
 ---
 
