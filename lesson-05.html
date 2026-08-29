@@ -54,10 +54,10 @@
 .bug-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
 .bug-card{background:rgba(229,115,115,.08);border:1px solid rgba(229,115,115,.3);border-radius:6px;padding:8px 10px;font-size:.62em;line-height:1.5;text-align:left;}
 .bug-card .co{font-weight:700;color:var(--red);margin-bottom:.2em;}
-.figure{text-align:center;margin:.4em 0;}
-.figure img{max-width:100%;max-height:52vh;border-radius:8px;background:#fff;padding:6px;box-shadow:0 4px 18px rgba(0,0,0,.4);}
+.figure{text-align:center;margin:.5em 0;}
+.figure img{max-width:100%;max-height:380px;border-radius:8px;background:#fff;padding:6px;box-shadow:0 4px 18px rgba(0,0,0,.4);}
 .figure .cap{font-size:.42em;color:#888;margin-top:.35em;}
-.g2 .figure img,.g3 .figure img{max-height:34vh;}
+.g2 .figure img,.g3 .figure img{max-height:300px;}
 .newsgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:start;}
 .newsgrid img{width:100%;border-radius:6px;background:#fff;padding:3px;}
 .newsgrid .n{font-size:.5em;color:#aaa;margin-top:.2em;text-align:left;line-height:1.4;}
@@ -117,7 +117,7 @@
   <span class="lbl">Topic 2</span>
   <h3>Layered Architecture</h3>
   <div class="g2">
-    <div class="figure" style="margin:0"><img src="images/arch-layered.png" alt="Layered architecture: presentation, business, persistence, database" style="max-height:40vh"></div>
+    <div class="figure" style="margin:0"><img src="images/arch-layered.png" alt="Layered architecture: presentation, business, persistence, database" style="max-height:320px"></div>
     <div>
       <div class="card"><strong>What it is</strong>The application is split into layers &mdash; presentation, business, persistence, database. Each layer talks only to the one below it.</div>
       <div class="card g" style="margin-top:6px"><strong>Advantages</strong>Clear separation of concerns; straightforward to develop and maintain.</div>
@@ -138,7 +138,7 @@
 <section>
   <span class="lbl">Topic 2</span>
   <h3>Event-Driven Architecture</h3>
-  <div class="figure"><img src="images/arch-event-driven.png" alt="Event sources publishing to an event broker with subscribers" style="width:56%"><div class="cap">Event sources publish; an event broker routes; subscribers react to what they subscribed to</div></div>
+  <div class="figure"><img src="images/arch-event-driven.png" alt="Event sources publishing to an event broker with subscribers" style="width:64%"><div class="cap">Event sources publish; an event broker routes; subscribers react to what they subscribed to</div></div>
   <p style="font-size:.58em">+ excellent for dynamic and distributed systems &nbsp;&middot;&nbsp; &ndash; harder to trace and debug, because there is no single call stack. Examples: real-time data systems, financial applications.</p>
   <p style="font-size:.56em;color:#888"><strong>Testing angle:</strong> ordering, duplicate and lost events are the classic defects. Expect asynchronous tests, waits and correlation IDs.</p>
 </section>
@@ -156,11 +156,11 @@
   <h3>Modular Architecture and Monorepo</h3>
   <div class="g2">
     <div>
-      <div class="figure" style="margin:0"><img src="images/arch-modular.png" alt="Modular architecture with plugins merged into one output" style="max-height:30vh"><div class="cap">Modular &mdash; plugins added and removed independently</div></div>
+      <div class="figure" style="margin:0"><img src="images/arch-modular.png" alt="Modular architecture with plugins merged into one output" style="max-height:260px"><div class="cap">Modular &mdash; plugins added and removed independently</div></div>
       <p style="font-size:.55em">+ flexible and easy to extend &nbsp;&middot;&nbsp; &ndash; module dependencies get tangled. Example: browsers and their plugins.</p>
     </div>
     <div>
-      <div class="figure" style="margin:0"><img src="images/arch-monorepo.png" alt="Monorepo with apps and libraries in one dependency graph" style="max-height:30vh"><div class="cap">Monorepo &mdash; every app and library in one code base</div></div>
+      <div class="figure" style="margin:0"><img src="images/arch-monorepo.png" alt="Monorepo with apps and libraries in one dependency graph" style="max-height:260px"><div class="cap">Monorepo &mdash; every app and library in one code base</div></div>
       <p style="font-size:.55em">+ faster builds and tests through dependency tracking, shared code, one workflow &nbsp;&middot;&nbsp; &ndash; the graph gets complex at scale. Examples: Google, Uber, Airbnb.</p>
     </div>
   </div>
