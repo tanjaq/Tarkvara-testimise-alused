@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lesson 9 &ndash; Defect Management</title>
+<title>Lesson 9 &ndash; Defect Management &amp; Exploratory Testing</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/black.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css">
@@ -54,34 +54,42 @@
 .bug-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
 .bug-card{background:rgba(229,115,115,.08);border:1px solid rgba(229,115,115,.3);border-radius:6px;padding:8px 10px;font-size:.62em;line-height:1.5;text-align:left;}
 .bug-card .co{font-weight:700;color:var(--red);margin-bottom:.2em;}
+.figure{text-align:center;margin:.4em 0;}
+.figure img{max-width:100%;max-height:52vh;border-radius:8px;background:#fff;padding:6px;box-shadow:0 4px 18px rgba(0,0,0,.4);}
+.figure .cap{font-size:.42em;color:#888;margin-top:.35em;}
+.g2 .figure img,.g3 .figure img{max-height:34vh;}
+.newsgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:start;}
+.newsgrid img{width:100%;border-radius:6px;background:#fff;padding:3px;}
+.newsgrid .n{font-size:.5em;color:#aaa;margin-top:.2em;text-align:left;line-height:1.4;}
+.portrait{width:100%;border-radius:8px;}
 .nav{position:fixed;top:12px;right:12px;z-index:999;font-size:.55em;display:flex;gap:8px;}
 .nav a{color:#555;text-decoration:none;padding:3px 8px;border:1px solid #333;border-radius:5px;}
 .nav a:hover{color:#fff;border-color:#fff;}
 </style>
 </head>
 <body>
-<div class="nav"><a href="lesson-08.html">&larr; L8</a><a href="index.html">&#8617; All</a><a href="lesson-10.html">L10 &rarr;</a></div>
+<div class="nav"><a href="lesson-08.html">&larr; L8</a><a href="index.html">&#8617; All lessons</a><a href="lesson-10.html">L10 &rarr;</a></div>
 <div class="reveal"><div class="slides">
 <section data-background-gradient="linear-gradient(135deg,#0f0c29,#302b63,#24243e)">
-  <span class="lbl">Lesson 9 of 12</span>
-  <h2>Defect Management</h2>
+  <span class="lbl">Lesson 9 of 13</span>
+  <h2>Defect Management &amp; Exploratory Testing</h2>
   <div class="divider"></div>
-  <p style="font-size:.62em">Error, defect, failure &middot; Bug report anatomy &middot; Severity vs priority &middot; Lifecycle &middot; RCA</p>
+  <p style="font-size:.62em">Error, defect, failure &middot; Bug reports &middot; Severity vs priority &middot; Lifecycle &middot; RCA &middot; Exploratory testing</p>
   <p style="font-size:.5em;color:#555;margin-top:.8em">&rarr; next slide &nbsp;|&nbsp; ESC overview</p>
 </section>
 
 <section>
   <span class="lbl">Lesson Plan</span>
   <div class="plan">
-    <div class="plan-title">Lesson 9: Defect Management<br>Focus: Reporting defects so they actually get fixed</div>
+    <div class="plan-title">Lesson 9: Defect Management &amp; Exploratory Testing<br>Focus: Finding defects without a script, and reporting them so they get fixed</div>
       <div class="plan-topics">
         <p><span>1.</span> Error, defect, failure &mdash; and why the words matter</p>
-        <p><span>2.</span> Who reads a bug report, and what they need from it</p>
+        <p><span>2.</span> Exploratory testing &mdash; charters, tours and heuristics</p>
         <p><span>3.</span> The fields of a good bug report</p>
         <p><span>4.</span> Severity vs priority</p>
         <p><span>5.</span> Bug lifecycle and root cause analysis</p>
       </div>
-      <div class="plan-hw"><strong>Homework:</strong> Find a real defect in a real application and file it as a GitHub issue using the bug report template.</div>
+      <div class="plan-hw"><strong>Homework:</strong> Run an exploratory session, then file a real defect as a GitHub issue in the Bug-Reporting repository.</div>
   </div>
 </section>
 
@@ -99,6 +107,93 @@
 
 <section>
   <span class="lbl">Topic 2</span>
+  <h3>Exploratory Testing &mdash; What It Actually Is</h3>
+  <p style="font-size:.64em">Simultaneous <strong>learning</strong>, <strong>test design</strong> and <strong>test execution</strong>. You design the next test based on what the last one just taught you.</p>
+  <div class="g2">
+    <div class="card g"><strong>It is</strong>
+      &middot; Structured and time-boxed<br>
+      &middot; Documented &mdash; notes, screenshots, questions<br>
+      &middot; Driven by a stated mission<br>
+      &middot; Reviewable: someone can read what you did</div>
+    <div class="card r"><strong>It is not</strong>
+      &middot; Random clicking<br>
+      &middot; "Just have a play with it"<br>
+      &middot; An excuse for having no test cases<br>
+      &middot; Unrepeatable &mdash; your notes make it repeatable</div>
+  </div>
+  <p style="font-size:.58em;margin-top:.4em">Scripted testing checks what you already thought of. Exploratory testing finds what nobody thought of &mdash; which is where the interesting defects live.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>Session-Based Test Management</h3>
+  <div class="chain">
+    <div class="node">Charter<br><span style="font-size:.85em;color:#888">what am I exploring, and why</span></div><span class="arr">&rarr;</span>
+    <div class="node">Time box<br><span style="font-size:.85em;color:#888">45&ndash;90 minutes, uninterrupted</span></div><span class="arr">&rarr;</span>
+    <div class="node">Notes<br><span style="font-size:.85em;color:#888">what you did, saw, questioned</span></div><span class="arr">&rarr;</span>
+    <div class="node">Debrief<br><span style="font-size:.85em;color:#888">findings, defects, next charter</span></div>
+  </div>
+  <div class="card" style="margin-top:.6em"><strong>Charter format</strong>
+    Explore <em>&lt;target&gt;</em> with <em>&lt;resources&gt;</em> to discover <em>&lt;information&gt;</em>.<br>
+    <span style="color:#888">"Explore the checkout flow with an expired discount code to discover how the system handles invalid promotions."</span></div>
+  <p style="font-size:.58em;margin-top:.4em">A charter turns an hour of clicking into a testable claim about the product. Without one, you cannot say afterwards what you covered.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>Tours &mdash; Ways to Walk Through a Product</h3>
+  <div class="g3">
+    <div class="card"><strong>The guidebook tour</strong>Follow the user manual or the onboarding exactly. Does the documented path still work?</div>
+    <div class="card g"><strong>The money tour</strong>Walk the features that make the money &mdash; checkout, subscription, upgrade. These are never allowed to break.</div>
+    <div class="card o"><strong>The landmark tour</strong>Pick five key features and move between them in an unusual order.</div>
+  </div>
+  <div class="g3" style="margin-top:8px">
+    <div class="card r"><strong>The back alley tour</strong>Deliberately test the least-used, least-loved features. Nobody has looked there in a year.</div>
+    <div class="card p"><strong>The saboteur tour</strong>Actively try to break it: kill the network mid-request, submit twice, hit back, paste 5,000 characters.</div>
+    <div class="card"><strong>The couch potato tour</strong>Do as little as possible &mdash; accept every default, submit every form empty, click straight to the end.</div>
+  </div>
+  <p style="font-size:.55em;color:#888;margin-top:.4em">Touring heuristics popularised by James Whittaker in <em>Exploratory Software Testing</em>.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>Heuristics &mdash; Where to Point Your Attention</h3>
+  <div class="g2">
+    <div class="card"><strong>SFDIPOT &mdash; what to cover</strong>
+      <strong style="display:inline;color:var(--blue)">S</strong>tructure &middot; <strong style="display:inline;color:var(--blue)">F</strong>unction &middot; <strong style="display:inline;color:var(--blue)">D</strong>ata &middot; <strong style="display:inline;color:var(--blue)">I</strong>nterfaces &middot; <strong style="display:inline;color:var(--blue)">P</strong>latform &middot; <strong style="display:inline;color:var(--blue)">O</strong>perations &middot; <strong style="display:inline;color:var(--blue)">T</strong>ime<br>
+      <span style="color:#888">Ask of each: what could go wrong here?</span></div>
+    <div class="card g"><strong>CRUD &mdash; for every entity</strong>
+      Create it &middot; read it &middot; update it &middot; delete it &mdash; then read it again.<br>
+      <span style="color:#888">Delete something that is referenced elsewhere. That is where the defects are.</span></div>
+  </div>
+  <div class="g2" style="margin-top:8px">
+    <div class="card o"><strong>Goldilocks</strong>Too big, too small, just right. Zero items, one item, a thousand items. Empty string, one character, maximum length, maximum length + 1.</div>
+    <div class="card p"><strong>Oracles &mdash; how do you know it is wrong?</strong>Compare against the requirement, a comparable product, the product's own past behaviour, user expectation, or plain internal consistency &mdash; the same action behaving differently in two screens is a defect even with no spec.</div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>When to Explore, and What to Write Down</h3>
+  <div class="g2">
+    <div class="card"><strong>Good moments for a session</strong>
+      &middot; A new feature has just landed and there are no test cases yet<br>
+      &middot; There is no specification and you need to write one<br>
+      &middot; After a fix, to check the neighbourhood<br>
+      &middot; Before release, as a time-boxed risk hunt<br>
+      &middot; When the scripted suite keeps passing and you do not believe it</div>
+    <div class="card g"><strong>Your session notes</strong>
+      &middot; The charter and the time box<br>
+      &middot; What you covered &mdash; areas, data, configurations<br>
+      &middot; Defects found, with evidence<br>
+      &middot; Questions and risks raised, for the analyst or product owner<br>
+      &middot; What you did <em>not</em> get to &mdash; the next charter</div>
+  </div>
+  <blockquote>The output of an exploratory session is not just bugs. It is a map of the product and a list of better questions.</blockquote>
+</section>
+
+<section>
+  <span class="lbl">Topic 3</span>
   <h3>Who Reads a Bug Report?</h3>
   <div class="g2">
     <div>
@@ -114,42 +209,28 @@
 </section>
 
 <section>
-  <span class="lbl">Topic 2</span>
-  <h3>Which Defects Are Worth Reporting?</h3>
-  <p style="font-size:.62em">Testing time is always limited. Part of the job is deciding what to chase and how to report it.</p>
-  <table>
-    <tr><th></th><th>vs</th><th></th></tr>
-    <tr><td>Small and easy bug</td><td></td><td>Big and complex bug</td></tr>
-    <tr><td>Many insignificant bugs</td><td></td><td>A few valuable bugs</td></tr>
-    <tr><td>Report everything weird</td><td></td><td>Report only certain bugs</td></tr>
-    <tr><td>Undetailed report</td><td></td><td>Thorough report</td></tr>
-  </table>
-  <p style="font-size:.6em;margin-top:.4em">There is no universally right column. There is the answer that fits your product's risk &mdash; and you should be able to defend it.</p>
-</section>
-
-<section>
   <span class="lbl">Topic 3</span>
   <h3>Bug Report Fields (1/2)</h3>
   <div class="card" style="margin-bottom:6px"><strong>Summary / title</strong>A short summary of the defect, ideally naming the affected functionality.<br>Good: "[Search] Price filter shows products below $50 minimum"<br>Bad: "Filter broken" &mdash; unactionable and unsearchable.</div>
-  <div class="card g" style="margin-bottom:6px"><strong>Environment</strong>Which environment (dev, QA, staging, production) &middot; which user role (regular, admin, manager) &middot; device and OS (Mac, Windows, Linux, mobile) &middot; browser and version.</div>
-  <div class="card o" style="margin-bottom:6px"><strong>Severity</strong>How badly does this break the system? Does it crash? Can you keep using it? Is there a workaround?<br>Critical &middot; Major &middot; Minor &middot; Trivial</div>
-  <div class="card r"><strong>Priority</strong>How urgent is the fix?<br>P0 &mdash; core functionality unusable &middot; P1 &mdash; key functions do not meet requirements &middot; P2 &mdash; specific functions fail but the product is usable</div>
+  <div class="card g" style="margin-bottom:6px"><strong>Environment</strong>Which environment (dev, QA, staging, production) &middot; which user role &middot; device and OS &middot; browser and version.</div>
+  <div class="card o" style="margin-bottom:6px"><strong>Severity</strong>How badly does this break the system? Critical &middot; Major &middot; Minor &middot; Trivial</div>
+  <div class="card r"><strong>Priority</strong>How urgent is the fix? P0 &mdash; core functionality unusable &middot; P1 &mdash; key functions do not meet requirements &middot; P2 &mdash; specific functions fail but the product is usable</div>
 </section>
 
 <section>
   <span class="lbl">Topic 3</span>
   <h3>Bug Report Fields (2/2)</h3>
-  <div class="card" style="margin-bottom:6px"><strong>Steps to reproduce</strong>Numbered, exact, starting from a known state. Someone who has never seen the app should be able to follow them.<br>Vague: "go to search and filter". Exact: "1. Open /search 2. Set min $50, max $200 3. Click Apply 4. Scroll results".</div>
-  <div class="card g" style="margin-bottom:6px"><strong>Expected result</strong>What should happen at the final step &mdash; ideally with a link to the requirement or design that defines it.</div>
+  <div class="card" style="margin-bottom:6px"><strong>Steps to reproduce</strong>Numbered, exact, starting from a known state. Vague: "go to search and filter". Exact: "1. Open /search 2. Set min $50, max $200 3. Click Apply 4. Scroll results".</div>
+  <div class="card g" style="margin-bottom:6px"><strong>Expected result</strong>What should happen at the final step &mdash; ideally with a link to the requirement that defines it.</div>
   <div class="card o" style="margin-bottom:6px"><strong>Actual result</strong>What actually happens, precisely. Not "it doesn't work" but "products priced $12, $32 and $41 appear in the results".</div>
   <div class="card p" style="margin-bottom:6px"><strong>Visuals</strong>Screenshots, recordings, files &mdash; anything that makes the failure obvious.</div>
-  <div class="card r"><strong>Logs</strong>Browser console and network tab &middot; device logs &middot; server-side logs. If you cannot access logs, at least record the exact time the problem occurred.</div>
+  <div class="card r"><strong>Logs</strong>Browser console and network tab &middot; device logs &middot; server logs. If you cannot access logs, record the exact time it happened.</div>
 </section>
 
 <section>
   <span class="lbl">Topic 3</span>
   <h3>Evidence From the Browser</h3>
-  <p style="font-size:.62em">Open DevTools (F12) before you reproduce the defect, not after.</p>
+  <p style="font-size:.62em">Open DevTools (F12) <em>before</em> you reproduce the defect, not after.</p>
   <div class="g3">
     <div class="card"><strong>Console</strong>JavaScript errors and stack traces &mdash; often names the exact file and line.</div>
     <div class="card g"><strong>Network</strong>The failing request: URL, status code, request payload, response body. A 500 here saves the developer an hour.</div>
@@ -165,7 +246,7 @@
     <strong>PRF-115 &middot; [Search] Price filter shows products below the minimum price</strong>
     <p style="font-size:.85em;margin:.2em 0">Environment: Chrome 124 &middot; macOS 14.4 &middot; QA env v2.3.1 &nbsp;&middot;&nbsp; Severity: Major &middot; Priority: P1</p>
     <p style="font-size:.85em;margin:.3em 0"><strong style="display:inline">Steps:</strong> 1. Log in as a registered user 2. Go to product search 3. Locate the "Price Range" filter 4. Enter min $50, max $200 5. Click Apply 6. Scroll the results</p>
-    <p style="font-size:.85em;margin:.3em 0"><strong style="display:inline">Expected:</strong> all products in results are priced $50&ndash;$200 inclusive.</p>
+    <p style="font-size:.85em;margin:.3em 0"><strong style="display:inline">Expected:</strong> all products in results are priced between $50 and $200 inclusive.</p>
     <p style="font-size:.85em;margin:.3em 0"><strong style="display:inline">Actual:</strong> products priced $12, $32 and $41 appear. The minimum price is not applied.</p>
   </div>
   <p style="font-size:.58em;margin-top:.4em">This is the defect that failed step 3 of test case TC-014 in Lesson 10. The actual result names specific prices, so the developer can reproduce the exact failure immediately.</p>
@@ -188,19 +269,14 @@
 <section>
   <span class="lbl">Topic 5</span>
   <h3>Bug Lifecycle</h3>
-  <div class="chain">
-    <div class="node">New</div><span class="arr">&rarr;</span>
-    <div class="node">Assigned</div><span class="arr">&rarr;</span>
-    <div class="node">In progress</div><span class="arr">&rarr;</span>
-    <div class="node">Fixed</div><span class="arr">&rarr;</span>
-    <div class="node">Re-test</div><span class="arr">&rarr;</span>
-    <div class="node" style="border-color:var(--green)">Closed</div>
+  <div class="g2" style="align-items:center">
+    <div class="figure" style="margin:0"><img src="images/bug-lifecycle.png" alt="Bug lifecycle from New to Closed with alternative paths" style="max-height:46vh"></div>
+    <div>
+      <div class="card o"><strong>Alternative paths, all valid</strong>Re-opened &mdash; the fix did not work &middot; Rejected / won't fix &middot; Deferred &middot; Duplicate &middot; Not a bug &middot; Cannot reproduce</div>
+      <div class="card g" style="margin-top:8px"><strong>Why teams track this</strong>Progress and statistics &middot; prioritising and fixing &middot; trend analysis &mdash; is the defect count growing or shrinking, and do defects come from documentation or from code?</div>
+      <p style="font-size:.55em;color:#888;margin-top:.4em">Tools: Jira &middot; GitHub Issues (used in this course) &middot; Linear &middot; YouTrack &middot; Azure DevOps</p>
+    </div>
   </div>
-  <div class="g2" style="margin-top:.5em">
-    <div class="card o"><strong>Alternative paths, all valid</strong>Re-opened &mdash; the fix did not work &middot; Rejected / won't fix &middot; Deferred &middot; Duplicate &middot; Cannot reproduce</div>
-    <div class="card g"><strong>Why teams track this</strong>Progress and statistics &middot; prioritising and fixing &middot; trend analysis &mdash; is the defect count growing or shrinking, and are defects coming from documentation or from code?</div>
-  </div>
-  <p style="font-size:.58em;margin-top:.4em">Tools: Jira &middot; GitHub Issues (used in this course) &middot; Linear &middot; YouTrack &middot; Azure DevOps</p>
 </section>
 
 <section>
@@ -231,14 +307,13 @@
 <section>
   <span class="lbl">In-Class Exercise</span>
   <div class="teams">
-    <h3>File a Real Bug Report</h3>
-    <ul style="font-size:.7em">
-      <li>Pick an application or website.</li>
-      <li>Do some exploratory testing using the techniques from Lessons 7 and 8.</li>
-      <li>Find one real problem &mdash; an error, a UI issue, a typo, a missing validation.</li>
-      <li>Write a full bug report for it.</li>
-      <li>File it as an issue: <a href="https://github.com/tanjaq/OnlineShopping/issues" style="color:#9b9fe3">tanjaq/OnlineShopping &middot; Issues</a> &mdash; existing issues in that repo are worked examples.</li>
-      <li>Add a couple of sentences on why you wrote the report the way you did.</li>
+    <h3>One Exploratory Session, One Bug Report</h3>
+    <ul style="font-size:.68em">
+      <li>Write a charter for an application or website you use: <em>Explore &lt;target&gt; with &lt;resources&gt; to discover &lt;information&gt;.</em></li>
+      <li>Time-box it: 20 minutes in class. Pick a tour &mdash; money, back alley, saboteur or couch potato.</li>
+      <li>Take notes as you go: what you covered, what surprised you, what you could not check.</li>
+      <li>Pick the most interesting defect you found and write the full bug report for it.</li>
+      <li>File it as an issue: <a href="https://github.com/tanjaq/Bug-Reporting/issues" style="color:#9b9fe3">tanjaq/Bug-Reporting &middot; Issues</a> &mdash; use the bug report template; existing issues are worked examples.</li>
     </ul>
   </div>
 </section>
@@ -248,16 +323,17 @@
   <h3>Can You Answer These?</h3>
   <ul style="font-size:.68em">
     <li>Explain error, defect and failure with one example of your own.</li>
+    <li>Write a charter for exploring a password reset flow.</li>
+    <li>Name three tours and say what kind of defect each is good at finding.</li>
     <li>A crash on a rarely used admin page &mdash; what severity, what priority, and why do they differ?</li>
-    <li>Name three bug report fields and say what each one tells the developer.</li>
     <li>Draw the bug lifecycle from memory, including two alternative paths.</li>
   </ul>
 </section>
 
 <section>
   <div class="hw">
-    <h3>Homework 9 &mdash; Real Bug Report</h3>
-    <p style="font-size:.68em">File one real defect as a GitHub issue with every required field completed, plus a short explanation of the severity and priority you assigned.</p>
+    <h3>Homework 9 &mdash; Exploratory Session + Bug Report</h3>
+    <p style="font-size:.68em">Run a time-boxed exploratory session with a written charter, then file one real defect as a GitHub issue in the Bug-Reporting repository, with your session notes attached.</p>
     <p style="font-size:.62em">Full brief: <a href="homework/hw-09.html">Homework 9</a></p>
   </div>
 </section>
@@ -265,7 +341,8 @@
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
 <script>
-Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight]});
+Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight],keyboard:{27:null}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();e.stopPropagation();window.location.href='index.html';}},true);
 </script>
 </body>
 </html>

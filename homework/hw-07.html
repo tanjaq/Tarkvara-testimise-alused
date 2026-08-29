@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Homework 7 &ndash; Decision Table &mdash; Photo Ordering</title>
+<title>Homework 7 &ndash; Decision Table + EP/BVA</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:#0f0c29;color:#e0e0e0;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;padding:40px 20px;line-height:1.65;}
@@ -32,44 +32,53 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08)
 .hwcard .n{font-size:.72em;letter-spacing:2px;text-transform:uppercase;color:#888;}
 .hwcard .t{font-weight:600;color:#fff;margin:.25em 0;font-size:1em;}
 .hwcard .d{font-size:.85em;color:#aaa;}
+.esc{font-size:.75em;color:#555;margin-top:2em;}
 </style>
 </head>
 <body>
 <div class="wrap">
 <div class="crumb"><a href="../index.html">Course</a> &rsaquo; <a href="index.html">Homework</a> &rsaquo; Homework 7</div>
-<h1>Homework 7 &mdash; Decision Table &mdash; Photo Ordering</h1>
-<div class="meta"><span>Individual or pair</span><span>Lesson 7</span><span>Submit: Teams &mdash; decision table</span></div>
+<h1>Homework 7 &mdash; Decision Table + EP/BVA</h1>
+<div class="meta"><span>Individual or pair</span><span>Lesson 7</span><span>Submit: Decision table + analysis</span></div>
 
 <h2>Objective</h2>
-<p>Apply a specification-based technique to a rule set complex enough that intuition fails.</p>
+<p>Apply specification-based techniques to a rule set complex enough that intuition fails, and to a real form that really is broken.</p>
 
 <h2>Task</h2>
 <ol>
-  <li>A user wants to print holiday photos. The photo ordering website has the following business rules:</li>
+  <li><strong>Part 1 &mdash; decision table.</strong> A user wants to print holiday photos. The business rules are:</li>
   <li>&bull; An unregistered regular user has no permanent discount.<br>&bull; A registered user gets a 5% discount on every purchase.<br>&bull; Additional discounts: ordering more than 10 photos adds 3%; ordering photo frames as well adds 3%.<br>&bull; On a registered user's birthday, the standard 5% is replaced by 8%.</li>
-  <li>Build the decision table showing every possible combination of the business rules and the discount that applies to the user.</li>
-  <li>Mark which combinations you would test first, and explain why (risk, likelihood, business impact).</li>
-  <li>Note any rule that is ambiguous as written &mdash; that is a defect in the requirement, and finding it is part of the exercise.</li>
+  <li>Build the decision table showing every possible combination of the business rules and the discount that applies.</li>
+  <li>Mark which combinations you would test first, and why. Note any rule that is ambiguous as written &mdash; that is a defect in the requirement.</li>
+  <li><strong>Part 2 &mdash; EP and BVA on a live form.</strong> Open the <a href="../materials/input-form-example.html">trip planner form</a>.</li>
+  <li>Define the equivalence partitions and boundary values for: number of travellers (1&ndash;8), budget (100&ndash;10000), email, and promo code (4&ndash;10 characters).</li>
+  <li>Run them. Record every case where the form's behaviour does not match its own stated rules &mdash; there are several real defects in it.</li>
+  <li>For each defect say which technique found it: would equivalence partitioning alone have caught it, or did you need the boundary values?</li>
 </ol>
 
 <h2>Deliverable</h2>
-<div class="box g">The complete decision table plus your prioritisation and any ambiguities found.</div>
+<div class="box g">The complete decision table with prioritisation, plus your EP/BVA table and the list of defects found in the form.</div>
 
 <h2>Assessment criteria</h2>
 <table>
   <tr><th>Criterion</th><th>What we look for</th></tr>
-  <tr><td><strong>Completeness</strong></td><td>Every combination of conditions appears</td></tr>
+  <tr><td><strong>Completeness</strong></td><td>Every combination of conditions appears in the table</td></tr>
   <tr><td><strong>Correct outcomes</strong></td><td>The discount for each row is calculated correctly</td></tr>
-  <tr><td><strong>Prioritisation</strong></td><td>You can justify which rows to test first</td></tr>
-  <tr><td><strong>Requirement review</strong></td><td>Ambiguities in the rules are identified</td></tr>
+  <tr><td><strong>Partitions and boundaries</strong></td><td>Both are defined for every field, and the boundary values are the right ones</td></tr>
+  <tr><td><strong>Defects found</strong></td><td>Real mismatches between the form's rules and its behaviour, with evidence</td></tr>
+  <tr><td><strong>Technique awareness</strong></td><td>You can say which technique caught which defect</td></tr>
 </table>
 
 <h2>Resources</h2>
 <ul>
+  <li><a href="../materials/input-form-example.html">Trip planner form</a></li>
   <li><a href="../lesson-07.html">Lesson 7 &mdash; Black Box Techniques</a></li>
 </ul>
 
-<footer>Software Testing Fundamentals &middot; Tarkvara testimise alused &middot; Tatjana Kirotar</footer>
+<footer>Software Testing Fundamentals &middot; Tatjana Kirotar &middot; <span class="esc">press ESC to go back to all lessons</span></footer>
 </div>
+<script>
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();window.location.href='../index.html';}},true);
+</script>
 </body>
 </html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bonus &ndash; Application Security</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/black.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css">
+<style>
+:root{--blue:#4fc3f7;--green:#81c784;--orange:#ffb74d;--red:#e57373;--purple:#ce93d8;}
+.reveal{font-family:'Segoe UI',system-ui,sans-serif;font-size:34px;}
+.reveal h2{color:var(--blue);font-size:0.95em;}
+.reveal h3{color:var(--green);margin-bottom:.3em;font-size:0.85em;}
+.reveal p{font-size:.60em;line-height:1.5;}.reveal li{font-size:.68em;line-height:1.5;}
+.reveal pre{font-size:.44em;width:100%;box-shadow:none;}
+.reveal ul{text-align:left;margin-left:1em;}
+.reveal table{font-size:.5em;}
+.reveal table th{color:var(--blue);}
+.reveal blockquote{width:100%;box-sizing:border-box;border-left:4px solid var(--blue);padding:.4em 1em;font-style:italic;color:#ccc;background:rgba(79,195,247,.06);margin:.5em 0;font-size:.60em;}
+.lbl{font-size:.38em;letter-spacing:3px;text-transform:uppercase;color:#888;display:block;margin-bottom:.2em;}
+.divider{width:40px;height:3px;background:var(--blue);margin:.3em auto .6em;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:left;}
+.card{background:rgba(255,255,255,.05);border-left:4px solid var(--blue);padding:8px 12px;border-radius:0 5px 5px 0;font-size:.65em;line-height:1.5;text-align:left;}
+.card.g{border-left-color:var(--green);}
+.card.o{border-left-color:var(--orange);}
+.card.r{border-left-color:var(--red);}
+.card.p{border-left-color:var(--purple);}
+.card strong{display:block;margin-bottom:.15em;}
+.plan{background:rgba(255,255,255,.04);border:1px solid rgba(79,195,247,.3);border-radius:10px;padding:16px 20px;text-align:left;max-width:860px;margin:0 auto;}
+.plan-title{color:var(--blue);font-size:.8em;font-weight:700;margin-bottom:.6em;border-bottom:1px solid rgba(79,195,247,.2);padding-bottom:.4em;}
+.plan-topics p{font-size:.68em;margin:.25em 0;color:#ddd;}
+.plan-topics p span{color:var(--blue);font-weight:600;}
+.plan-hw{background:rgba(79,195,247,.08);border:1px solid var(--blue);border-radius:6px;padding:8px 12px;font-size:.65em;margin-top:.7em;}
+.plan-hw strong{color:var(--blue);}
+.hw{background:rgba(79,195,247,.08);border:2px solid var(--blue);border-radius:10px;padding:14px 18px;text-align:left;}
+.hw h3{color:var(--blue)!important;margin-top:0;}
+.hw a{color:var(--orange);}
+.teams{background:rgba(100,100,255,.08);border:2px solid #6264a7;border-radius:10px;padding:14px 18px;text-align:left;}
+.teams h3{color:#9b9fe3!important;margin-top:0;}
+.ai{background:linear-gradient(135deg,rgba(206,147,216,.10),rgba(79,195,247,.08));border:2px solid var(--purple);border-radius:12px;padding:14px 18px;text-align:left;}
+.ai h3{color:var(--purple)!important;margin-top:0;}
+.bio-grid{display:grid;grid-template-columns:1fr 2fr;gap:20px;text-align:left;}
+.bio-left{background:rgba(255,255,255,.04);border-radius:8px;padding:12px;font-size:.65em;}
+.bio-left .name{font-size:1.2em;font-weight:700;color:var(--blue);margin-bottom:.3em;}
+.bio-left .role{color:var(--green);margin-bottom:.5em;}
+.timeline{font-size:.62em;line-height:1.8;}
+.timeline .year{color:var(--orange);font-weight:600;}
+.chain{display:flex;align-items:center;gap:6px;justify-content:center;margin:.6em 0;flex-wrap:wrap;}
+.chain .node{background:rgba(255,255,255,.07);border:1px solid var(--blue);border-radius:6px;padding:6px 10px;font-size:.62em;}
+.chain .arr{color:var(--orange);}
+.num{display:inline-block;width:20px;height:20px;background:var(--blue);color:#111;border-radius:50%;text-align:center;line-height:20px;font-size:.6em;font-weight:700;margin-right:5px;}
+.bug-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.bug-card{background:rgba(229,115,115,.08);border:1px solid rgba(229,115,115,.3);border-radius:6px;padding:8px 10px;font-size:.62em;line-height:1.5;text-align:left;}
+.bug-card .co{font-weight:700;color:var(--red);margin-bottom:.2em;}
+.figure{text-align:center;margin:.4em 0;}
+.figure img{max-width:100%;max-height:52vh;border-radius:8px;background:#fff;padding:6px;box-shadow:0 4px 18px rgba(0,0,0,.4);}
+.figure .cap{font-size:.42em;color:#888;margin-top:.35em;}
+.g2 .figure img,.g3 .figure img{max-height:34vh;}
+.newsgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:start;}
+.newsgrid img{width:100%;border-radius:6px;background:#fff;padding:3px;}
+.newsgrid .n{font-size:.5em;color:#aaa;margin-top:.2em;text-align:left;line-height:1.4;}
+.portrait{width:100%;border-radius:8px;}
+.nav{position:fixed;top:12px;right:12px;z-index:999;font-size:.55em;display:flex;gap:8px;}
+.nav a{color:#555;text-decoration:none;padding:3px 8px;border:1px solid #333;border-radius:5px;}
+.nav a:hover{color:#fff;border-color:#fff;}
+</style>
+</head>
+<body>
+<div class="nav"><a href="lesson-bonus-performance.html">&larr; Bonus</a><a href="index.html">&#8617; All lessons</a></div>
+<div class="reveal"><div class="slides">
+<section data-background-gradient="linear-gradient(135deg,#0f0c29,#302b63,#24243e)">
+  <span class="lbl">Bonus Lesson</span>
+  <h2>Application Security</h2>
+  <div class="divider"></div>
+  <p style="font-size:.62em">CIA &middot; OWASP Top 10 and ASVS &middot; Injection, XSS, authentication, business logic</p>
+  <p style="font-size:.5em;color:#555;margin-top:.8em">&rarr; next slide &nbsp;|&nbsp; ESC back to all lessons</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 1</span>
+  <h3>Three Components of Security</h3>
+  <div class="g3">
+    <div class="card"><strong>Confidentiality</strong>Information is accessible only by authorised users</div>
+    <div class="card g"><strong>Integrity</strong>Information can be modified only by authorised users</div>
+    <div class="card o"><strong>Availability</strong>Information is accessible to users whenever it is needed</div>
+  </div>
+  <blockquote>An attacker only needs to find one vulnerability. A developer has to fix all of them.</blockquote>
+  <p style="font-size:.58em;color:#888">Meltdown, Spectre, HeartBleed, ShellShock, Ghostcat &mdash; and the endless stream of WordPress, Drupal and Joomla issues.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>Where Vulnerabilities Come From</h3>
+  <ul style="font-size:.66em">
+    <li>The cost of doing security properly</li>
+    <li>Short timelines</li>
+    <li>Hoping the framework fixes it all</li>
+    <li>Senior programmers who "know what they are doing"</li>
+    <li>"It's only an internal web app"</li>
+    <li>"It's a non-critical system"</li>
+    <li>"Not my job"</li>
+  </ul>
+  <p style="font-size:.6em;margin-top:.4em">Every one of these is a process problem, not a technical one &mdash; which is exactly the organizational root cause from Lesson 9.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>Where the Weaknesses Sit</h3>
+  <div class="g3">
+    <div class="card"><strong>Client&ndash;server communication</strong>HTTP in plain text &middot; HTTPS with weak encryption</div>
+    <div class="card o"><strong>Client side</strong>Malware, hostile browser extensions, insecure storage</div>
+    <div class="card r"><strong>Server side</strong>Storage issues, framework and component vulnerabilities, misconfiguration</div>
+  </div>
+  <p style="font-size:.62em;margin-top:.5em">Public leaks put the scale in perspective: LinkedIn &mdash; 167 million passwords offered for sale &middot; Tumblr &mdash; 65 million &middot; MySpace &mdash; 427 million.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 3</span>
+  <h3>OWASP</h3>
+  <p style="font-size:.63em">The Open Web Application Security Project &mdash; rankings, manuals, cheat sheets, standards and tools, all free.</p>
+  <div class="g3">
+    <div class="card"><strong>OWASP Top 10</strong>The most common web application attacks. Start here.<br><a href="https://owasp.org/Top10/">owasp.org/Top10</a></div>
+    <div class="card g"><strong>OWASP ASVS</strong>Application Security Verification Standard &mdash; a checklist of "verify that..." statements you can test against.</div>
+    <div class="card o"><strong>OWASP WSTG</strong>Web Security Testing Guide &mdash; how to actually perform the tests.</div>
+  </div>
+  <p style="font-size:.58em;margin-top:.4em">ASVS v4 chapters: architecture &middot; authentication &middot; session management &middot; access control &middot; validation and encoding &middot; stored cryptography &middot; error handling and logging &middot; data protection &middot; communication &middot; malicious code &middot; business logic &middot; files and resources &middot; API and web services &middot; configuration</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 3</span>
+  <h3>Where to Gather Information</h3>
+  <div class="g2">
+    <div class="card"><strong>Known vulnerabilities</strong><a href="https://cve.mitre.org/cve/">cve.mitre.org</a> &middot; <a href="https://seclists.org/">seclists.org</a><br>Security updates and fixes on vendor homepages</div>
+    <div class="card o"><strong>Known exploits and community</strong><a href="https://www.exploit-db.com/">exploit-db.com</a><br>Communities &mdash; security accounts on social platforms, Reddit</div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Topic 4</span>
+  <h3>Exploiting User Input</h3>
+  <p style="font-size:.62em">Anything a user can send, an attacker can craft. The entry points:</p>
+  <ul style="font-size:.66em">
+    <li>HTTP(S) POST and GET requests</li>
+    <li>The browser itself &mdash; and its developer tools</li>
+    <li>Plugins: cookie managers, user agent switchers, request tamperers</li>
+    <li>The command line</li>
+    <li>Program code calling your API directly</li>
+  </ul>
+  <blockquote>Client-side validation is a usability feature, not a security control. Everything must be validated again on the server.</blockquote>
+</section>
+
+<section>
+  <span class="lbl">Topic 4</span>
+  <h3>Web Content Injection and XSS</h3>
+  <div class="g2">
+    <div class="card"><strong>Injection points and defences</strong>
+      HTML injection &rarr; verify HTML syntax, HTML-encode output<br>
+      JavaScript injection &rarr; verify JS syntax, never eval user input<br>
+      URL &rarr; allow-list protocols and URL patterns<br>
+      Content-Type &rarr; verify response header and charset<br>
+      Web content files &rarr; integrity checks; never include untrusted SVG as an object</div>
+    <div class="card r"><strong>What XSS lets an attacker do</strong>
+      Run scripts in the background &middot; change how the page looks &middot; modify the DOM, change links, steal input &middot; redirect to another site &middot; embed an iframe inside the page</div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Topic 4</span>
+  <h3>Authentication and Business Logic</h3>
+  <div class="g2">
+    <div class="card g"><strong>Authentication</strong>
+      <span style="color:#888">User side:</span> avoid passwords where possible (Mobile-ID, Smart-ID, ID card) &middot; two-factor authentication &middot; unique passwords &middot; check <a href="https://haveibeenpwned.com/">haveibeenpwned.com</a><br>
+      <span style="color:#888">Server side:</span> store passwords as hashes &middot; limit authentication attempts &middot; log attempts</div>
+    <div class="card o"><strong>Business logic mistakes</strong>
+      Problems caused by business rules that were never fully checked in the implementation: negative amounts in a shopping cart, steps that are not enforced, excessive requests, cancelling transactions at the wrong moment.<br>
+      <span style="color:#888">Defence: discuss the logic with several parties, implement all controls server side, double-check inputs.</span></div>
+  </div>
+  <p style="font-size:.58em;margin-top:.4em">Business logic flaws are the ones you find with the black-box techniques from Lesson 7 &mdash; not with a scanner.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 4</span>
+  <h3>Components, Files and Injections</h3>
+  <div class="g3">
+    <div class="card"><strong>Frameworks, libraries, components</strong>Not enough background checks &middot; assuming the framework handles security &middot; publicly known issues.<br><span style="color:#888">Defence: identify and verify every component &mdash; OS, web server, languages, add-ons.</span></div>
+    <div class="card o"><strong>Web server and files</strong>Public and private folders &middot; folder-based configuration &middot; server-side code exposure.<br><span style="color:#888">Defence: allow-lists and authorization &middot; never use user-supplied filenames &middot; read-only permissions. An uploaded evilimage.php.jpg can end up executed.</span></div>
+    <div class="card r"><strong>Command and SQL injection</strong>Commands: running OS commands, remote shells, reading and writing files. SQL: queries built dynamically from input.<br><span style="color:#888">Defence: never build commands from user input &middot; do not let an attacker see or guess the database structure &middot; use prepared statements.</span></div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Exercise</span>
+  <div class="teams">
+    <h3>Security Review of Your Own Project</h3>
+    <ul style="font-size:.7em">
+      <li>Capture every potentially problematic place in your application: user input fields, dropdowns, login, file uploads, payments.</li>
+      <li>Write all the places where security testing should be conducted into your SRS document.</li>
+      <li>Add <strong>GitHub Dependabot</strong> to your repository.</li>
+      <li>Add <strong>SonarLint</strong> (or a similar static analysis tool) to your application.</li>
+      <li>Report what the tools found in the first run.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Self-Check</span>
+  <h3>Can You Answer These?</h3>
+  <ul style="font-size:.68em">
+    <li>Give an example failure for each of confidentiality, integrity and availability.</li>
+    <li>Why is client-side validation not a security control?</li>
+    <li>Name a business logic flaw a security scanner would never find.</li>
+    <li>What is the first thing you would check in your own project after this lesson?</li>
+  </ul>
+</section>
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
+<script>
+Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight],keyboard:{27:null}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();e.stopPropagation();window.location.href='index.html';}},true);
+</script>
+</body>
+</html>

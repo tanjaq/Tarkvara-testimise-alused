@@ -54,106 +54,281 @@
 .bug-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
 .bug-card{background:rgba(229,115,115,.08);border:1px solid rgba(229,115,115,.3);border-radius:6px;padding:8px 10px;font-size:.62em;line-height:1.5;text-align:left;}
 .bug-card .co{font-weight:700;color:var(--red);margin-bottom:.2em;}
+.figure{text-align:center;margin:.4em 0;}
+.figure img{max-width:100%;max-height:52vh;border-radius:8px;background:#fff;padding:6px;box-shadow:0 4px 18px rgba(0,0,0,.4);}
+.figure .cap{font-size:.42em;color:#888;margin-top:.35em;}
+.g2 .figure img,.g3 .figure img{max-height:34vh;}
+.newsgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:start;}
+.newsgrid img{width:100%;border-radius:6px;background:#fff;padding:3px;}
+.newsgrid .n{font-size:.5em;color:#aaa;margin-top:.2em;text-align:left;line-height:1.4;}
+.portrait{width:100%;border-radius:8px;}
 .nav{position:fixed;top:12px;right:12px;z-index:999;font-size:.55em;display:flex;gap:8px;}
 .nav a{color:#555;text-decoration:none;padding:3px 8px;border:1px solid #333;border-radius:5px;}
 .nav a:hover{color:#fff;border-color:#fff;}
 </style>
 </head>
 <body>
-<div class="nav"><a href="lesson-12.html">&larr; L12</a><a href="index.html">&#8617; All</a></div>
+<div class="nav"><a href="lesson-13.html">&larr; L13</a><a href="index.html">&#8617; All lessons</a><a href="lesson-bonus-performance.html">Bonus &rarr;</a></div>
 <div class="reveal"><div class="slides">
 <section data-background-gradient="linear-gradient(135deg,#0f0c29,#302b63,#24243e)">
-  <span class="lbl">Bonus Lesson &middot; No homework</span>
+  <span class="lbl">Bonus Lesson</span>
   <h2>Using AI Responsibly in Testing</h2>
   <div class="divider"></div>
-  <p style="font-size:.62em">Where AI helps &middot; Where it fails silently &middot; Ground rules</p>
-  <p style="font-size:.5em;color:#555;margin-top:.8em">&rarr; next slide &nbsp;|&nbsp; ESC overview</p>
+  <p style="font-size:.62em">The rules &middot; Four things AI is good at &middot; Four ways it quietly fails &middot; Prompting &middot; Testing AI features</p>
+  <p style="font-size:.5em;color:#555;margin-top:.8em">&rarr; next slide &nbsp;|&nbsp; ESC back to all lessons</p>
 </section>
 
 <section>
-  <span class="lbl">Why This Lesson Exists</span>
-  <h3>AI Is Already in Your Toolchain</h3>
-  <p style="font-size:.64em">Copilot, ChatGPT, Cursor, Claude &mdash; these are part of the developer toolkit now. Nobody is going to ask you whether you used one. They are going to ask whether the result is correct.</p>
-  <blockquote>Everything in this course &mdash; requirements, techniques, coverage, defect reports &mdash; is what turns "the AI produced something" into "I know this is right".</blockquote>
-</section>
-
-<section>
-  <span class="lbl">Topic 1</span>
-  <h3>Where AI Genuinely Helps</h3>
-  <div class="g2">
-    <div class="card g"><strong>Good uses</strong>
-      &middot; Generate boilerplate and scaffolding<br>
-      &middot; Draft a first set of test cases from a requirement<br>
-      &middot; Suggest edge cases you might have missed<br>
-      &middot; Explain code you did not write<br>
-      &middot; Speed up a first-pass refactoring<br>
-      &middot; Turn a vague requirement into questions to ask the analyst</div>
-    <div class="card r"><strong>Where it fails silently</strong>
-      &middot; It does not know your requirements<br>
-      &middot; It does not understand your system's context<br>
-      &middot; Generated tests are often shallow &mdash; happy path only<br>
-      &middot; Code looks clean while the logic is subtly wrong<br>
-      &middot; It produces wrong answers with complete confidence</div>
-  </div>
-  <p style="font-size:.62em;margin-top:.4em">AI-generated code compiles. It might even pass basic tests. That does not make it correct.</p>
-</section>
-
-<section>
-  <span class="lbl">Topic 2</span>
-  <h3>Test First, Then Let AI Write the Code</h3>
-  <div class="chain">
-    <div class="node" style="border-color:var(--red)"><strong>You write the test</strong><br><span style="font-size:.85em;color:#888">you define what correct means &mdash; AI has no say here</span></div><span class="arr">&rarr;</span>
-    <div class="node" style="border-color:var(--green)"><strong>AI writes the code</strong><br><span style="font-size:.85em;color:#888">let it generate &mdash; then read what it produced</span></div><span class="arr">&rarr;</span>
-    <div class="node" style="border-color:var(--blue)"><strong>Tests judge the result</strong><br><span style="font-size:.85em;color:#888">does it pass? are the edge cases covered?</span></div>
-  </div>
-  <p style="font-size:.63em;margin-top:.5em">This ordering is the whole trick. If the tests come first and they came from the requirements, then the AI cannot quietly redefine what "working" means.</p>
-</section>
-
-<section>
-  <span class="lbl">Topic 3</span>
+  <span class="lbl">The Rules</span>
   <div class="ai">
-    <h3>Ground Rules</h3>
+    <h3>AI Is Allowed &mdash; and Encouraged</h3>
+    <p style="font-size:.68em">ChatGPT, Claude, Gemini, Copilot and the rest are <strong>permitted in this course, and I recommend using them</strong>. Working well with AI is a real skill for developers and testers, and pretending otherwise helps nobody.</p>
+    <div class="g2" style="margin-top:.5em">
+      <div class="card g"><strong>The golden rule</strong>Use AI &mdash; but with your brain switched on.</div>
+      <div class="card r"><strong>The consequence</strong>You are responsible for the result, not the AI. Every submitted homework must be something you can explain and defend out loud.</div>
+    </div>
+    <p style="font-size:.62em;margin-top:.5em">"The AI wrote it" is not an answer to "why does this test assert that?"</p>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Why It Fits This Course</span>
+  <h3>Everything You Learn Here Is How You Supervise AI</h3>
+  <div class="g2">
+    <div class="card"><strong>Requirements (L4)</strong>AI does not know them. You supply them, and you notice when the output contradicts them.</div>
+    <div class="card g"><strong>Techniques (L7, L8)</strong>EP, BVA, decision tables and coverage are how you audit a set of AI-generated tests in two minutes.</div>
+  </div>
+  <div class="g2" style="margin-top:8px">
+    <div class="card o"><strong>Exploratory testing (L9)</strong>AI cannot be curious about your product. Charters and tours are yours.</div>
+    <div class="card p"><strong>Bug reports (L9)</strong>AI can improve your writing. It cannot observe the failure for you.</div>
+  </div>
+  <blockquote>The people who get the most out of AI are the ones who could have done the work themselves &mdash; and therefore know when the answer is wrong.</blockquote>
+</section>
+
+<section>
+  <span class="lbl">The Honest Summary</span>
+  <h3>What AI Is and Is Not Good At</h3>
+  <div class="g2">
+    <div class="card g"><strong>Genuinely good at</strong>
+      &middot; Boilerplate and scaffolding<br>
+      &middot; A first draft of test cases from a requirement<br>
+      &middot; Suggesting edge cases you did not think of<br>
+      &middot; Explaining code, error messages and stack traces<br>
+      &middot; Turning your rough notes into clear prose<br>
+      &middot; Converting formats &mdash; a table into a checklist, notes into a report</div>
+    <div class="card r"><strong>Quietly bad at</strong>
+      &middot; Knowing your requirements<br>
+      &middot; Knowing your system's context and history<br>
+      &middot; Depth &mdash; generated tests are usually happy path only<br>
+      &middot; Being wrong <em>visibly</em> &mdash; the code looks clean and the logic is subtly off<br>
+      &middot; Saying "I don't know"<br>
+      &middot; Anything requiring it to have actually run the software</div>
+  </div>
+  <p style="font-size:.6em;margin-top:.4em">AI-generated code compiles. It might even pass basic tests. That does not make it correct.</p>
+</section>
+
+<section>
+  <span class="lbl">Good Example 1</span>
+  <h3>First-Draft Test Cases From a Requirement</h3>
+  <div class="card g" style="margin-bottom:8px"><strong>The prompt &mdash; note how much context it carries</strong>
+    <p style="font-size:.88em;margin:.2em 0">"Here is a requirement: <em>Users must be able to book between 1 and 8 travellers per trip. Bookings above 8 must show the error 'Maximum 8 travellers per booking'.</em><br>
+    Generate test cases using equivalence partitioning and boundary value analysis. For each case give the input, the technique it comes from, and the expected result. List any assumptions you had to make."</p></div>
+  <div class="card" style="margin-bottom:8px"><strong>What comes back is useful</strong>0, 1, 2, 7, 8, 9 &middot; non-numeric input &middot; empty field &middot; negative &middot; decimal &mdash; a solid starting grid, in seconds.</div>
+  <div class="card o"><strong>What you must still do</strong>Check the partitions against the <em>real</em> rule &middot; delete cases that duplicate each other &middot; add the ones only you know matter (what happens on the second booking? with a group discount?) &middot; read the "assumptions" list &mdash; that is where the requirement gaps are.</div>
+</section>
+
+<section>
+  <span class="lbl">Bad Example 1</span>
+  <h3>"Write Tests for This Function"</h3>
+  <div class="g2">
+    <div>
+      <pre><code class="language-javascript">function applyDiscount(price, isMember) {
+  if (isMember) return price * 0.95;
+  return price;
+}</code></pre>
+      <div class="card r" style="margin-top:6px"><strong>What AI typically produces</strong>Two tests: a member gets 5% off, a non-member pays full price. Both pass. Coverage: 100%.</div>
+    </div>
+    <div class="card" style="font-size:.95em"><strong>What nobody tested</strong>
+      &middot; A negative price<br>
+      &middot; A price of 0<br>
+      &middot; <code>isMember</code> as the string "false" &mdash; which is truthy<br>
+      &middot; Floating point: 19.99 &rarr; 18.9905, and what gets stored<br>
+      &middot; The birthday rule from the requirement that is <em>not in this function at all</em><br>
+      <span style="color:var(--red)">The last one is the real defect. AI cannot see a requirement you did not give it.</span></div>
+  </div>
+  <p style="font-size:.6em;margin-top:.4em">100% coverage of the wrong logic is still the wrong logic &mdash; exactly the trap from Lesson 8.</p>
+</section>
+
+<section>
+  <span class="lbl">Good Example 2</span>
+  <h3>Explaining Code, Errors and Logs</h3>
+  <div class="card g" style="margin-bottom:8px"><strong>Prompt</strong>
+    "Explain what this function does, step by step, and list the inputs for which it would behave unexpectedly."<br>
+    "Here is a stack trace from our test environment. What is the most likely cause, and what would you check first?"</div>
+  <p style="font-size:.63em">This is the single highest-value use for a junior tester. You get a fast orientation in unfamiliar code, and a list of suspicious inputs to go and try yourself.</p>
+  <div class="card o"><strong>Still your job</strong>Verify the explanation against the code. AI describing a function is a hypothesis, not documentation &mdash; and when it is wrong, it is wrong confidently and fluently.</div>
+</section>
+
+<section>
+  <span class="lbl">Bad Example 2</span>
+  <h3>"Is This Code Correct?"</h3>
+  <div class="card r" style="margin-bottom:8px"><strong>Why this question cannot be answered</strong>
+    Correct <em>against what</em>? Correctness is a relationship between code and a requirement. If you did not supply the requirement, the model invents a plausible one and then grades the code against its own invention.</div>
+  <div class="g2">
+    <div class="card"><strong>What you get</strong>"Yes, this looks correct and follows best practice." Delivered with total confidence, about code that computes VAT at the wrong rate.</div>
+    <div class="card g"><strong>Ask this instead</strong>"Here is the requirement. Here is the code. List every case where the code's behaviour differs from the requirement, and say which requirement clause each one breaks."</div>
+  </div>
+  <p style="font-size:.6em;margin-top:.4em">The pattern generalises: never ask AI to <em>judge</em>. Ask it to <em>compare against something you provided</em>.</p>
+</section>
+
+<section>
+  <span class="lbl">Good Example 3</span>
+  <h3>Interrogating a Vague Requirement</h3>
+  <div class="card g" style="margin-bottom:8px"><strong>Prompt</strong>
+    "Here is a requirement from our SRS: <em>'The system should let users cancel their orders.'</em><br>
+    Act as a tester reviewing this requirement. List every question that must be answered before it can be tested, and rewrite it as a SMART requirement once you have flagged the gaps."</div>
+  <div class="card"><strong>What comes back</strong>Until when can an order be cancelled? What happens to a paid order &mdash; refund, credit, nothing? Partial cancellation? Who can cancel &mdash; the customer, support, both? What does the customer see? What if the order already shipped?</div>
+  <p style="font-size:.62em;margin-top:.4em;color:var(--green)">Every one of those is a question <em>you</em> then take to the product owner. That is static testing (Lesson 6) with a very fast assistant.</p>
+</section>
+
+<section>
+  <span class="lbl">Bad Example 3</span>
+  <h3>Letting AI Write the Requirements</h3>
+  <div class="card r" style="margin-bottom:8px"><strong>The prompt that ruins a project</strong>"Write the functional requirements for an online shop."</div>
+  <p style="font-size:.63em">You will get forty confident, well-formatted requirements. They describe a generic shop that does not exist. Nobody in your team agreed to them, no user asked for them, and half of them contradict what you are actually building.</p>
+  <div class="g2">
+    <div class="card o"><strong>Then it compounds</strong>Test cases get written against invented requirements. The build gets judged against invented requirements. Real gaps stay invisible because the document looks complete.</div>
+    <div class="card g"><strong>Use it the other way round</strong>Write your requirements yourself, then ask: "Here are our requirements. What is missing, ambiguous or contradictory? What would a tester be unable to verify?"</div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Good Example 4</span>
+  <h3>Polishing a Bug Report You Actually Observed</h3>
+  <div class="g2">
+    <div class="card"><strong>Your rough notes</strong>
+      "price filter min 50 max 200, still shows 12 and 32 euro stuff, chrome, qa env, logged in as normal user, console clean, network shows the request goes out with min=50 so backend problem probably"</div>
+    <div class="card g"><strong>Prompt</strong>
+      "Turn these observations into a bug report with summary title, environment, severity, priority, numbered steps to reproduce, expected and actual result. Do not add any facts I did not give you. Mark anything you think is missing."</div>
+  </div>
+  <p style="font-size:.62em;margin-top:.4em">You supply every fact; the model supplies structure and clarity. The "do not add facts" clause is the important part of that prompt &mdash; and "mark anything missing" turns it into a checklist.</p>
+</section>
+
+<section>
+  <span class="lbl">Bad Example 4</span>
+  <h3>Inventing the Evidence</h3>
+  <div class="card r" style="margin-bottom:8px"><strong>What goes wrong without that clause</strong>
+    Ask for "a bug report about a broken price filter" and you will get plausible steps you never performed, an environment you never used, a log line that was never printed and an error code that does not exist in your system.</div>
+  <div class="g2">
+    <div class="card o"><strong>The cost</strong>A developer spends an afternoon chasing a reproduction path that was never real. Do that twice and your reports stop being trusted &mdash; which is the end of your usefulness as a tester.</div>
+    <div class="card p"><strong>The rule</strong>Facts come from the product. AI may only rearrange facts you observed. Never paste an AI-written step you have not run yourself.</div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Prompting</span>
+  <h3>What Makes a Prompt Work for Testing</h3>
+  <div class="g2">
+    <div class="card g"><strong>Include</strong>
+      &middot; The requirement, pasted in full<br>
+      &middot; The code or the observation, pasted in full<br>
+      &middot; The role: "act as a tester reviewing this"<br>
+      &middot; The technique: "use equivalence partitioning and BVA"<br>
+      &middot; The output shape: "a table with input, technique, expected result"<br>
+      &middot; A constraint: "do not invent facts"<br>
+      &middot; A request for uncertainty: "list your assumptions and anything you are unsure about"</div>
+    <div class="card r"><strong>Avoid</strong>
+      &middot; "Is this good?" &mdash; no yardstick<br>
+      &middot; "Write tests" &mdash; no requirement<br>
+      &middot; "Fix it" &mdash; you will not learn what was wrong<br>
+      &middot; Pasting company code, customer data or credentials into a public tool<br>
+      &middot; Accepting the first answer &mdash; ask it to critique its own output and it will often find the gap itself</div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">The Loop That Works</span>
+  <h3>You Define Correct, Before AI Touches Anything</h3>
+  <div class="chain">
+    <div class="node" style="border-color:var(--red)"><strong>You write the test</strong><br><span style="font-size:.85em;color:#888">from the requirement &mdash; AI has no say here</span></div><span class="arr">&rarr;</span>
+    <div class="node" style="border-color:var(--green)"><strong>AI writes the code</strong><br><span style="font-size:.85em;color:#888">let it draft &mdash; then read what it produced</span></div><span class="arr">&rarr;</span>
+    <div class="node" style="border-color:var(--blue)"><strong>Tests judge the result</strong><br><span style="font-size:.85em;color:#888">trust the tests, not the model</span></div>
+  </div>
+  <p style="font-size:.63em;margin-top:.5em">If the tests come first, and the tests come from the requirements, then the model cannot quietly redefine what "working" means. This is why test-first thinking and AI fit together so well.</p>
+</section>
+
+<section>
+  <span class="lbl">Ground Rules</span>
+  <div class="ai">
+    <h3>Do and Don't</h3>
     <div class="g2" style="margin-top:.4em">
       <div>
         <p style="font-size:.72em;color:var(--green);font-weight:600">Do</p>
-        <ul style="font-size:.68em">
+        <ul style="font-size:.66em">
           <li>Use AI for boilerplate and first drafts</li>
-          <li>Use AI to suggest test cases &mdash; then review them</li>
-          <li>Read everything AI writes before you commit it</li>
-          <li>Run your full test suite against AI output</li>
-          <li>Ask AI to explain its reasoning &mdash; gaps appear fast</li>
+          <li>Give it the requirement, always</li>
+          <li>Ask it for edge cases you might have missed</li>
+          <li>Read everything before you submit or commit it</li>
+          <li>Run the full test suite against anything it produced</li>
+          <li>Ask it to explain its reasoning &mdash; gaps appear fast</li>
+          <li>Ask it what it is unsure about</li>
         </ul>
       </div>
       <div>
         <p style="font-size:.72em;color:var(--red);font-weight:600">Don't</p>
-        <ul style="font-size:.68em">
-          <li>Submit AI output you do not understand</li>
-          <li>Treat AI-generated tests as complete coverage</li>
-          <li>Skip code review because "AI wrote it"</li>
+        <ul style="font-size:.66em">
+          <li>Submit output you do not understand</li>
+          <li>Treat generated tests as complete coverage</li>
+          <li>Skip review because "AI wrote it"</li>
           <li>Accept a passing test as proof of correctness</li>
-          <li>Let AI define your requirements for you</li>
+          <li>Let it define your requirements</li>
+          <li>Paste confidential code or real user data into it</li>
+          <li>Report a defect you did not personally reproduce</li>
         </ul>
       </div>
     </div>
-    <p style="font-size:.63em;margin-top:.5em">AI is a junior developer who works fast and never complains &mdash; and always needs review.</p>
+    <p style="font-size:.62em;margin-top:.5em">AI is a fast junior colleague who never complains and never says "I'm not sure". Both halves of that need managing.</p>
   </div>
 </section>
 
 <section>
-  <span class="lbl">Topic 4</span>
-  <h3>Try It &mdash; and Then Check It</h3>
-  <ul style="font-size:.66em">
-    <li>Take one functional requirement from your SRS. Ask an AI tool to write test cases for it.</li>
-    <li>Now apply Lesson 7: does it cover the equivalence partitions? The boundaries? Any negative cases?</li>
-    <li>Count what is missing. That gap is the value you add.</li>
-  </ul>
-  <blockquote>Students who can say exactly what an AI missed are the ones who get hired. Anyone can paste a prompt.</blockquote>
+  <span class="lbl">The Other Direction</span>
+  <h3>When the AI Is the Thing Being Tested</h3>
+  <p style="font-size:.63em">More and more products have an AI feature in them. Testing those breaks some assumptions from this whole course:</p>
+  <div class="g2">
+    <div class="card o"><strong>What changes</strong>
+      &middot; The same input can produce different output &mdash; there is no single expected result<br>
+      &middot; "Correct" becomes a range of acceptable answers<br>
+      &middot; Failures are not crashes; they are confident wrong answers<br>
+      &middot; Behaviour changes when the underlying model is updated, without any code change on your side</div>
+    <div class="card g"><strong>What you test instead</strong>
+      &middot; Properties, not exact strings: is it in the right format? within the right bounds? does it refuse what it should refuse?<br>
+      &middot; A fixed evaluation set of inputs with graded expectations, re-run on every change<br>
+      &middot; The guard rails: prompt injection, leaking data, unsafe content<br>
+      &middot; The fallback: what happens when the model is slow, down or returns nonsense</div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">In-Class Exercise</span>
+  <div class="teams">
+    <h3>Audit the Machine</h3>
+    <ul style="font-size:.68em">
+      <li>Take one functional requirement from your team's SRS.</li>
+      <li>Ask an AI tool to write test cases for it. Save what it gives you.</li>
+      <li>Now apply Lesson 7 to that output: are the equivalence partitions complete? Are the boundaries there? Any negative cases? Any case that contradicts the requirement?</li>
+      <li>Count: how many cases did it miss, and how many did it invent?</li>
+      <li>Write one paragraph on what the tool was actually useful for.</li>
+    </ul>
+    <p style="font-size:.62em;margin-top:.4em">Being able to say precisely what an AI missed is the skill. Anyone can paste a prompt.</p>
+  </div>
 </section>
 </div></div>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
 <script>
-Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight]});
+Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight],keyboard:{27:null}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();e.stopPropagation();window.location.href='index.html';}},true);
 </script>
 </body>
 </html>

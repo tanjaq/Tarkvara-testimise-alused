@@ -32,6 +32,7 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08)
 .hwcard .n{font-size:.72em;letter-spacing:2px;text-transform:uppercase;color:#888;}
 .hwcard .t{font-weight:600;color:#fff;margin:.25em 0;font-size:1em;}
 .hwcard .d{font-size:.85em;color:#aaa;}
+.esc{font-size:.75em;color:#555;margin-top:2em;}
 </style>
 </head>
 <body>
@@ -62,9 +63,15 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08)
   <tr><td><strong>Reflection</strong></td><td>Your definition of quality goes beyond "no bugs"</td></tr>
 </table>
 
+<h2>Resources</h2>
+<ul>
+  <li><a href="../lesson-01.html">Lesson 1 &mdash; Testing Fundamentals</a></li>
+</ul>
 
-
-<footer>Software Testing Fundamentals &middot; Tarkvara testimise alused &middot; Tatjana Kirotar</footer>
+<footer>Software Testing Fundamentals &middot; Tatjana Kirotar &middot; <span class="esc">press ESC to go back to all lessons</span></footer>
 </div>
+<script>
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();window.location.href='../index.html';}},true);
+</script>
 </body>
 </html>

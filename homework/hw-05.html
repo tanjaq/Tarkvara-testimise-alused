@@ -32,13 +32,14 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08)
 .hwcard .n{font-size:.72em;letter-spacing:2px;text-transform:uppercase;color:#888;}
 .hwcard .t{font-weight:600;color:#fff;margin:.25em 0;font-size:1em;}
 .hwcard .d{font-size:.85em;color:#aaa;}
+.esc{font-size:.75em;color:#555;margin-top:2em;}
 </style>
 </head>
 <body>
 <div class="wrap">
 <div class="crumb"><a href="../index.html">Course</a> &rsaquo; <a href="index.html">Homework</a> &rsaquo; Homework 5</div>
 <h1>Homework 5 &mdash; Project Architecture</h1>
-<div class="meta"><span>Group project</span><span>Lesson 5</span><span>Submit: Teams &mdash; diagram added to the SRS</span></div>
+<div class="meta"><span>Group project</span><span>Lesson 5</span><span>Submit: Diagram added to the SRS</span></div>
 
 <h2>Objective</h2>
 <p>Make the structure of your system explicit, so you can reason about where to test it.</p>
@@ -68,7 +69,10 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08)
   <li><a href="../lesson-05.html">Lesson 5 &mdash; Software Architecture</a></li>
 </ul>
 
-<footer>Software Testing Fundamentals &middot; Tarkvara testimise alused &middot; Tatjana Kirotar</footer>
+<footer>Software Testing Fundamentals &middot; Tatjana Kirotar &middot; <span class="esc">press ESC to go back to all lessons</span></footer>
 </div>
+<script>
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();window.location.href='../index.html';}},true);
+</script>
 </body>
 </html>

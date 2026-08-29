@@ -54,16 +54,24 @@
 .bug-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
 .bug-card{background:rgba(229,115,115,.08);border:1px solid rgba(229,115,115,.3);border-radius:6px;padding:8px 10px;font-size:.62em;line-height:1.5;text-align:left;}
 .bug-card .co{font-weight:700;color:var(--red);margin-bottom:.2em;}
+.figure{text-align:center;margin:.4em 0;}
+.figure img{max-width:100%;max-height:52vh;border-radius:8px;background:#fff;padding:6px;box-shadow:0 4px 18px rgba(0,0,0,.4);}
+.figure .cap{font-size:.42em;color:#888;margin-top:.35em;}
+.g2 .figure img,.g3 .figure img{max-height:34vh;}
+.newsgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:start;}
+.newsgrid img{width:100%;border-radius:6px;background:#fff;padding:3px;}
+.newsgrid .n{font-size:.5em;color:#aaa;margin-top:.2em;text-align:left;line-height:1.4;}
+.portrait{width:100%;border-radius:8px;}
 .nav{position:fixed;top:12px;right:12px;z-index:999;font-size:.55em;display:flex;gap:8px;}
 .nav a{color:#555;text-decoration:none;padding:3px 8px;border:1px solid #333;border-radius:5px;}
 .nav a:hover{color:#fff;border-color:#fff;}
 </style>
 </head>
 <body>
-<div class="nav"><a href="lesson-03.html">&larr; L3</a><a href="index.html">&#8617; All</a><a href="lesson-05.html">L5 &rarr;</a></div>
+<div class="nav"><a href="lesson-03.html">&larr; L3</a><a href="index.html">&#8617; All lessons</a><a href="lesson-05.html">L5 &rarr;</a></div>
 <div class="reveal"><div class="slides">
 <section data-background-gradient="linear-gradient(135deg,#0f0c29,#302b63,#24243e)">
-  <span class="lbl">Lesson 4 of 12</span>
+  <span class="lbl">Lesson 4 of 13</span>
   <h2>Software Requirements</h2>
   <div class="divider"></div>
   <p style="font-size:.62em">Business vs system requirements &middot; FR and NFR &middot; SMART &middot; SRS</p>
@@ -87,18 +95,26 @@
 
 <section>
   <span class="lbl">Topic 1</span>
-  <h3>What Is a Requirement?</h3>
-  <p style="font-size:.64em">A requirement is a documented need that the product or service must satisfy.</p>
-  <div class="g2">
-    <div class="card"><strong>Business requirements</strong>Why the change is needed. The goal, in business terms.<br><span style="color:#888">"Reduce the time it takes a candidate to apply for a job."</span></div>
-    <div class="card g"><strong>Software / system requirements</strong>The properties and behaviour that satisfy the business requirement. Detailed and structured enough to build from.<br><span style="color:#888">Split into functional and non-functional.</span></div>
-  </div>
-  <div class="chain" style="margin-top:.5em">
+  <h3>From Business Need to a Testable Requirement</h3>
+  <div class="figure"><img src="images/requirements-hierarchy.png" alt="Business requirements to user, product, functional and non-functional requirements" style="width:80%"><div class="cap">High level on the left, detailed on the right</div></div>
+  <p style="font-size:.6em">A requirement is a documented need that the product must satisfy. Business requirements say <em>why</em>; system requirements say <em>what</em>, in enough detail to build and to test.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 1</span>
+  <h3>The Chain You Will Use All Course</h3>
+  <div class="chain">
     <div class="node">Business need</div><span class="arr">&rarr;</span>
     <div class="node">Business requirement</div><span class="arr">&rarr;</span>
-    <div class="node">System requirement (FR / NFR)</div><span class="arr">&rarr;</span>
-    <div class="node">Test case</div>
+    <div class="node">System requirement<br>(FR / NFR)</div><span class="arr">&rarr;</span>
+    <div class="node">Test case</div><span class="arr">&rarr;</span>
+    <div class="node">Bug report</div>
   </div>
+  <div class="g2" style="margin-top:.5em">
+    <div class="card"><strong>Functional requirements (FR)</strong>Describe <em>what</em> the software must do</div>
+    <div class="card g"><strong>Non-functional requirements (NFR)</strong>Describe <em>how</em> the software must behave</div>
+  </div>
+  <p style="font-size:.58em;margin-top:.4em">Both must be SMART: specific, measurable, achievable, realistic, timely.</p>
 </section>
 
 <section>
@@ -152,7 +168,7 @@
     <tr><td>Service level agreements</td><td>System follows the formally agreed rules</td></tr>
     <tr><td>Extensibility</td><td>System can be updated with new functionality easily</td></tr>
   </table>
-  <p style="font-size:.58em;margin-top:.4em">You will come back to this table twice more: in Lesson 11 (performance) and Lesson 12 (security). Those lessons are just two NFR categories taken seriously.</p>
+  <p style="font-size:.58em;margin-top:.4em">Several of these get a whole lesson later: accessibility and usability in Lesson 12, and performance and security in the bonus lessons.</p>
 </section>
 
 <section>
@@ -189,7 +205,7 @@
     <div class="card"><strong>Template</strong><a href="materials/Software Requirements Specification (SRS) Document Template.docx">SRS document template (.docx)</a></div>
     <div class="card g"><strong>Real examples</strong><a href="materials/srs_example_1.pdf">Example 1</a> &middot; <a href="materials/srs_example_2.pdf">Example 2</a><br><a href="https://www.reqview.com/doc/iso-iec-ieee-29148-srs-example/">ISO/IEC/IEEE 29148 example</a></div>
   </div>
-  <p style="font-size:.58em;margin-top:.4em">Your SRS grows through the course: requirements now, architecture in Lesson 5, test cases in Lesson 10, performance NFRs in Lesson 11, security notes in Lesson 12.</p>
+  <p style="font-size:.58em;margin-top:.4em">Your SRS grows through the course: requirements now, architecture in Lesson 5, test cases in Lesson 10, and it gets peer reviewed by another team afterwards.</p>
 </section>
 
 <section>
@@ -215,7 +231,8 @@
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
 <script>
-Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight]});
+Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight],keyboard:{27:null}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();e.stopPropagation();window.location.href='index.html';}},true);
 </script>
 </body>
 </html>

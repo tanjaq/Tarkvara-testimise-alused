@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lesson 11 &ndash; Performance Testing</title>
+<title>Lesson 11 &ndash; Database &amp; SQL Testing</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/black.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css">
@@ -54,130 +54,184 @@
 .bug-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
 .bug-card{background:rgba(229,115,115,.08);border:1px solid rgba(229,115,115,.3);border-radius:6px;padding:8px 10px;font-size:.62em;line-height:1.5;text-align:left;}
 .bug-card .co{font-weight:700;color:var(--red);margin-bottom:.2em;}
+.figure{text-align:center;margin:.4em 0;}
+.figure img{max-width:100%;max-height:52vh;border-radius:8px;background:#fff;padding:6px;box-shadow:0 4px 18px rgba(0,0,0,.4);}
+.figure .cap{font-size:.42em;color:#888;margin-top:.35em;}
+.g2 .figure img,.g3 .figure img{max-height:34vh;}
+.newsgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:start;}
+.newsgrid img{width:100%;border-radius:6px;background:#fff;padding:3px;}
+.newsgrid .n{font-size:.5em;color:#aaa;margin-top:.2em;text-align:left;line-height:1.4;}
+.portrait{width:100%;border-radius:8px;}
 .nav{position:fixed;top:12px;right:12px;z-index:999;font-size:.55em;display:flex;gap:8px;}
 .nav a{color:#555;text-decoration:none;padding:3px 8px;border:1px solid #333;border-radius:5px;}
 .nav a:hover{color:#fff;border-color:#fff;}
 </style>
 </head>
 <body>
-<div class="nav"><a href="lesson-10.html">&larr; L10</a><a href="index.html">&#8617; All</a><a href="lesson-12.html">L12 &rarr;</a></div>
+<div class="nav"><a href="lesson-10.html">&larr; L10</a><a href="index.html">&#8617; All lessons</a><a href="lesson-12.html">L12 &rarr;</a></div>
 <div class="reveal"><div class="slides">
 <section data-background-gradient="linear-gradient(135deg,#0f0c29,#302b63,#24243e)">
-  <span class="lbl">Lesson 11 of 12</span>
-  <h2>Performance Testing</h2>
+  <span class="lbl">Lesson 11 of 13</span>
+  <h2>Database &amp; SQL Testing</h2>
   <div class="divider"></div>
-  <p style="font-size:.62em">Response time &middot; Throughput &middot; Resource utilization &middot; Load, stress and endurance tests</p>
+  <p style="font-size:.62em">Why data hides defects &middot; SQL for testers &middot; Integrity &middot; Migrations &middot; Test data</p>
   <p style="font-size:.5em;color:#555;margin-top:.8em">&rarr; next slide &nbsp;|&nbsp; ESC overview</p>
 </section>
 
 <section>
   <span class="lbl">Lesson Plan</span>
   <div class="plan">
-    <div class="plan-title">Lesson 11: Performance Testing<br>Focus: Testing how fast and how much &mdash; not just whether it works</div>
+    <div class="plan-title">Lesson 11: Database &amp; SQL Testing<br>Focus: Checking what the application actually stored, not what the screen claims</div>
       <div class="plan-topics">
-        <p><span>1.</span> Where performance problems come from</p>
-        <p><span>2.</span> The three performance metrics</p>
-        <p><span>3.</span> Load, stress and endurance testing</p>
-        <p><span>4.</span> A performance testing approach that works</p>
-        <p><span>5.</span> Tools</p>
+        <p><span>1.</span> Why a tester needs SQL</p>
+        <p><span>2.</span> The SQL you actually need &mdash; SELECT, WHERE, JOIN, GROUP BY</p>
+        <p><span>3.</span> Verifying a UI action against the database</p>
+        <p><span>4.</span> Data integrity defects and where they hide</p>
+        <p><span>5.</span> Migrations and test data management</p>
       </div>
-      <div class="plan-hw"><strong>Homework:</strong> Group work &mdash; define the performance requirements for your own project and add them to your SRS.</div>
+      <div class="plan-hw"><strong>Homework:</strong> Load the sample shop database, verify the requirements with SQL and find the data defects hiding in it.</div>
   </div>
 </section>
 
 <section>
   <span class="lbl">Topic 1</span>
-  <h3>Why Performance Matters</h3>
-  <p style="font-size:.64em">Most performance problems come down to speed, response time, load time and poor scalability. A slow application loses users &mdash; performance testing makes sure it stays fast enough to keep their attention.</p>
+  <h3>The Screen Is Not the Truth</h3>
+  <p style="font-size:.64em">The user interface shows you what the application <em>says</em> happened. The database shows you what actually happened. These are not always the same thing.</p>
   <div class="g2">
-    <div class="card o"><strong>Long load time</strong>Load time is how long the application takes to start. Keep it to a minimum &mdash; ideally a few seconds.</div>
-    <div class="card r"><strong>Poor response time</strong>The time from a user's input to the application's response. Wait too long and the user is gone.</div>
+    <div class="card r"><strong>Defects the UI will happily hide</strong>
+      &middot; The order was saved twice<br>
+      &middot; The amount was rounded to 2 decimals for display but stored with 6<br>
+      &middot; The "deleted" record is still there, just flagged<br>
+      &middot; The timestamp was stored in the wrong timezone<br>
+      &middot; The cancel button updated the screen and nothing else</div>
+    <div class="card g"><strong>What SQL gives you</strong>
+      &middot; Proof, not inference<br>
+      &middot; The ability to set up exactly the test data you need<br>
+      &middot; A way to check 10,000 rows instead of 3 screens<br>
+      &middot; Evidence to attach to a bug report</div>
   </div>
-</section>
-
-<section>
-  <span class="lbl">Topic 1</span>
-  <h3>Scalability and Bottlenecks</h3>
-  <div class="g2">
-    <div class="card"><strong>Poor scalability</strong>The product cannot handle the expected number of users, or does not accommodate a wide enough range of them. Load testing tells you whether it can carry the anticipated user count.</div>
-    <div class="card r"><strong>Bottlenecks</strong>Obstructions that degrade overall system performance &mdash; coding errors or hardware issues that reduce throughput under load.<br><span style="color:#888">Common ones: CPU utilization, memory utilization, network utilization, operating-system limits, disk usage.</span></div>
-  </div>
-  <p style="font-size:.6em;margin-top:.4em">Performance testing checks three things: <strong>speed</strong> (does it respond quickly), <strong>scalability</strong> (what user load can it carry), <strong>stability</strong> (is it stable under varying load).</p>
 </section>
 
 <section>
   <span class="lbl">Topic 2</span>
-  <h3>Response Time</h3>
-  <p style="font-size:.62em">The amount of time taken to respond to a request. There is more than one place to measure it:</p>
-  <div class="g2">
-    <div class="card"><strong>Latency at the server</strong>For serverless applications, one form is the duration of the function from start to finish of the computation.</div>
-    <div class="card g"><strong>Latency at the client</strong>Measured from the user's perspective &mdash; includes the API gateway, request queue, computation and result queue.</div>
-  </div>
-  <p style="font-size:.6em;margin-top:.4em"><strong>Example requirement:</strong> small requests 1 second, heavy computation requests 5&ndash;7 seconds.</p>
-  <blockquote>Always state which measurement point a number refers to. "200 ms" at the server and "200 ms" at the client are very different promises.</blockquote>
+  <h3>The SQL You Actually Need</h3>
+  <pre><code class="language-sql">-- 1. Look at a table
+SELECT * FROM orders LIMIT 20;
+
+-- 2. Filter
+SELECT id, total, status FROM orders WHERE status = 'PAID' AND total > 100;
+
+-- 3. Count and group
+SELECT status, COUNT(*) FROM orders GROUP BY status;
+
+-- 4. Join two tables
+SELECT o.id, c.email, o.total
+FROM orders o
+JOIN customers c ON c.id = o.customer_id
+WHERE o.created_at >= '2026-01-01';
+
+-- 5. Find what should not exist
+SELECT * FROM orders WHERE customer_id NOT IN (SELECT id FROM customers);</code></pre>
+  <p style="font-size:.58em;margin-top:.3em">Five patterns cover most of a tester's day. Query 5 is the one that finds real defects.</p>
 </section>
 
 <section>
   <span class="lbl">Topic 2</span>
-  <h3>Throughput and Resource Utilization</h3>
+  <h3>JOIN Types &mdash; and the Defect They Cause</h3>
   <div class="g2">
-    <div class="card o"><strong>Throughput</strong>The number of requests the application handles per second. Can be defined as transactions completed per second, or concurrent function executions.<br><span style="color:#888">Example: 10 requests per second sustained for at least 5 minutes.</span></div>
-    <div class="card p"><strong>Resource utilization</strong>The cost in server and network resources: CPU &middot; memory &middot; disk I/O &middot; network I/O.<br><span style="color:#888">Example: idle CPU usage 1&ndash;5%, heavy load 80&ndash;100%.</span></div>
+    <div class="card"><strong>INNER JOIN</strong>Only rows that match on both sides. Silently <em>drops</em> anything unmatched.</div>
+    <div class="card g"><strong>LEFT JOIN</strong>All rows from the left table, matched or not. Unmatched right-hand columns come back NULL.</div>
   </div>
-  <p style="font-size:.6em;margin-top:.4em">These three &mdash; response time, throughput, resource utilization &mdash; are the traditional performance indicators. Every performance NFR you write should be expressed in one of them.</p>
+  <blockquote>A report that "lost" 40 orders overnight is very often an INNER JOIN against a table where some rows have a NULL foreign key. Swap it to LEFT JOIN and count again &mdash; if the number changes, you have found the defect.</blockquote>
+  <p style="font-size:.6em">Same trap with <code>NULL</code>: <code>WHERE status != 'PAID'</code> does <strong>not</strong> return rows where status is NULL. You need <code>OR status IS NULL</code>.</p>
 </section>
 
 <section>
   <span class="lbl">Topic 3</span>
-  <h3>Three Types of Performance Test</h3>
-  <div class="g3">
-    <div class="card"><strong>Load testing</strong>Measures performance under expected, production-like workload. The closest approximation to real usage. Main goal: make sure changes still meet the agreed non-functional requirements.</div>
-    <div class="card r"><strong>Stress testing</strong>Measures the workload at which the application starts to fail. Shows the real capacity limits, which components break first, and how the system recovers.</div>
-    <div class="card o"><strong>Endurance testing</strong>Load tests run for a long time with production-like workload, to find issues that only appear after extended running &mdash; memory leaks, log growth, connection exhaustion.</div>
+  <h3>Verifying a UI Action Against the Database</h3>
+  <div class="chain">
+    <div class="node">1. Note the state<br><span style="font-size:.85em;color:#888">query before</span></div><span class="arr">&rarr;</span>
+    <div class="node">2. Do the action<br><span style="font-size:.85em;color:#888">in the UI</span></div><span class="arr">&rarr;</span>
+    <div class="node">3. Query again<br><span style="font-size:.85em;color:#888">what changed?</span></div><span class="arr">&rarr;</span>
+    <div class="node">4. Compare<br><span style="font-size:.85em;color:#888">against the requirement</span></div>
   </div>
-  <p style="font-size:.6em;margin-top:.4em">Performance tests should run regularly and eventually be part of the CI/CD pipeline &mdash; a performance test run once before release tells you nothing about the trend.</p>
+  <div class="card" style="margin-top:.6em"><strong>Example &mdash; "cancelling an order refunds the customer"</strong>
+    <p style="font-size:.9em;margin:.2em 0">Before: <code>SELECT status, refunded_at FROM orders WHERE id = 4711;</code> &rarr; PAID, NULL</p>
+    <p style="font-size:.9em;margin:.2em 0">Action: click Cancel in the UI. Screen says "Order cancelled, refund issued".</p>
+    <p style="font-size:.9em;margin:.2em 0">After: status = CANCELLED, <strong>refunded_at still NULL</strong>, and no row in <code>refunds</code>.</p>
+    <p style="font-size:.9em;margin:.2em 0;color:var(--red)">That is a Critical defect the UI told you was a success.</p></div>
 </section>
 
 <section>
   <span class="lbl">Topic 4</span>
-  <h3>A Performance Testing Approach</h3>
-  <table>
-    <tr><th>Step</th><th>Description</th></tr>
-    <tr><td>NFR capture</td><td>Gather performance NFRs from all stakeholders: performance targets, key use cases, data requirements</td></tr>
-    <tr><td>Environment build</td><td>Make a close replica of production &mdash; at minimum reflect the production deployment and database size</td></tr>
-    <tr><td>Use-case scripting</td><td>Identify key use cases and any components that need separate monitoring</td></tr>
-    <tr><td>Scenario build</td><td>Choose the test type, volume and duration</td></tr>
-    <tr><td>Execution</td><td>Run and monitor the tests</td></tr>
-    <tr><td>Analysis &amp; reporting</td><td>Collect data from all runs, compare against requirements, write the report</td></tr>
-  </table>
-  <p style="font-size:.55em;color:#888;margin-top:.4em">Approach proposed by Ian Molyneaux, <em>The Art of Application Performance Testing</em></p>
+  <h3>Where Data Defects Hide</h3>
+  <div class="g3">
+    <div class="card"><strong>Orphan records</strong>A child row whose parent no longer exists. Deleting a customer should not leave their orders pointing at nothing.</div>
+    <div class="card g"><strong>Duplicates</strong>The same customer created twice because the unique constraint is on the wrong column &mdash; or missing.</div>
+    <div class="card o"><strong>NULL where NULL is not allowed</strong>An email, a price or a status that the requirement says is mandatory.</div>
+  </div>
+  <div class="g3" style="margin-top:8px">
+    <div class="card r"><strong>Money and rounding</strong>Prices stored as floating point. 0.1 + 0.2 is not 0.3. Use integers (cents) or a decimal type.</div>
+    <div class="card p"><strong>Dates and timezones</strong>Stored in local time, displayed in UTC &mdash; or the other way round. Test around midnight and across a DST change.</div>
+    <div class="card"><strong>Encoding and length</strong>Names with &otilde;, &auml;, emoji or 300 characters. Silent truncation is a real and common defect.</div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Topic 4</span>
+  <h3>Constraints Are Tests the Database Runs for You</h3>
+  <div class="g2">
+    <div class="card"><strong>Check they exist</strong>
+      &middot; <code>PRIMARY KEY</code> &mdash; every row identifiable<br>
+      &middot; <code>FOREIGN KEY</code> &mdash; references stay valid<br>
+      &middot; <code>UNIQUE</code> &mdash; no duplicate emails<br>
+      &middot; <code>NOT NULL</code> &mdash; mandatory fields<br>
+      &middot; <code>CHECK</code> &mdash; quantity &gt; 0, status in a known set</div>
+    <div class="card g"><strong>Then test them</strong>
+      Try to break each one deliberately: insert a duplicate email, an order for a customer that does not exist, a negative quantity.<br>
+      If the database accepts it, the constraint is missing &mdash; and sooner or later the application will write that row.</div>
+  </div>
+  <p style="font-size:.58em;margin-top:.4em">Application-side validation is not enough: data also arrives through imports, admin tools, migrations and other services.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 5</span>
+  <h3>Migrations and Test Data</h3>
+  <div class="g2">
+    <div class="card o"><strong>Testing a migration</strong>
+      &middot; Does it run on a copy of production-sized data, not just an empty schema?<br>
+      &middot; How long does it take &mdash; and does it lock the table?<br>
+      &middot; Is existing data preserved and correctly transformed?<br>
+      &middot; Does the rollback work?<br>
+      &middot; Does the old application version still run against the new schema during deployment?</div>
+    <div class="card p"><strong>Test data management</strong>
+      &middot; Fixtures &mdash; a known, versioned data set you can reset to<br>
+      &middot; Generated data for volume testing<br>
+      &middot; Copies of production data must be anonymised &mdash; real names, emails and payment data in a test environment is a data protection incident waiting to happen<br>
+      &middot; Every test should leave the database in a state the next test can rely on</div>
+  </div>
 </section>
 
 <section>
   <span class="lbl">Topic 5</span>
   <h3>Tools</h3>
-  <div class="g2">
-    <div>
-      <div class="card" style="margin-bottom:6px"><strong>JMeter</strong>Open source, load and performance testing across many servers and protocols. The usual starting point.</div>
-      <div class="card g" style="margin-bottom:6px"><strong>k6</strong>Modern open-source load testing, tests written in JavaScript &mdash; fits well into a CI pipeline.</div>
-      <div class="card o"><strong>BlazeMeter</strong>Scales load and performance testing; combines UX and load testing so you see what users see under load.</div>
-    </div>
-    <div>
-      <div class="card r" style="margin-bottom:6px"><strong>LoadRunner</strong>Helps identify likely causes of performance issues in applications.</div>
-      <div class="card p" style="margin-bottom:6px"><strong>LoadNinja</strong>Scriptless load test creation and playback; real-browser load execution at scale.</div>
-      <div class="card"><strong>HeadSpin</strong>Mobile app performance optimisation across applications, devices and networks.</div>
-    </div>
+  <div class="g3">
+    <div class="card"><strong>DBeaver</strong>Free, cross-platform desktop client. Connects to almost anything.</div>
+    <div class="card g"><strong>pgAdmin / MySQL Workbench</strong>The official clients for PostgreSQL and MySQL.</div>
+    <div class="card o"><strong>sqliteonline.com / DB Fiddle</strong>Browser-based &mdash; nothing to install. We use these in class.</div>
   </div>
+  <p style="font-size:.6em;margin-top:.5em">In a real job you will usually be given read-only access to a test database. Ask for it on day one &mdash; it is the difference between reporting "the screen looks wrong" and "row 4711 has refunded_at NULL after a successful cancel".</p>
 </section>
 
 <section>
   <span class="lbl">In-Class Exercise</span>
   <div class="teams">
-    <h3>Performance Requirements for Your Project</h3>
-    <ul style="font-size:.7em">
-      <li>Discuss with your team and capture performance requirements for response time and throughput, if you have not already.</li>
-      <li>Questions to answer: How quickly should the main page load? How many concurrent users should the application hold? What would a stress test scenario look like?</li>
-      <li>Write the requirements into your SRS document &mdash; expressed as numbers, with a measurement point.</li>
+    <h3>Find the Defects in the Shop Database</h3>
+    <ul style="font-size:.68em">
+      <li>Open <a href="https://sqliteonline.com" style="color:#9b9fe3">sqliteonline.com</a> and load <a href="materials/shop-database.sql" style="color:#9b9fe3">shop-database.sql</a> (paste it and run).</li>
+      <li>The schema has customers, products, orders and order_items, with the requirements written in comments at the top of the file.</li>
+      <li>Write a query for each requirement to check whether the data honours it.</li>
+      <li>There are <strong>at least six data defects</strong> in there. Find them, and for each one say which requirement it breaks and what severity you would give it.</li>
     </ul>
   </div>
 </section>
@@ -186,25 +240,27 @@
   <span class="lbl">Self-Check</span>
   <h3>Can You Answer These?</h3>
   <ul style="font-size:.68em">
-    <li>Turn "the site should handle a lot of users" into a testable requirement using all three metrics.</li>
-    <li>When would you run an endurance test rather than a load test?</li>
-    <li>Your load test passes but users still complain the app is slow. Name two explanations.</li>
-    <li>Why must the performance test environment resemble production?</li>
+    <li>Write a query that finds order items pointing at a product that no longer exists.</li>
+    <li>Why does <code>WHERE status != 'PAID'</code> miss rows, and how do you fix it?</li>
+    <li>A total on screen is &euro;19.99 and in the database it is 19.989999. Is that a defect? What would you check first?</li>
+    <li>Name two things you must test about a migration besides "it ran".</li>
+    <li>Why must production data be anonymised before it goes into a test environment?</li>
   </ul>
 </section>
 
 <section>
   <div class="hw">
-    <h3>Homework 11 &mdash; Performance Requirements</h3>
-    <p style="font-size:.68em">Add a performance section to your team's SRS: response time, throughput and resource targets, plus one load scenario and one stress scenario described in words.</p>
-    <p style="font-size:.62em">Full brief: <a href="homework/hw-11.html">Homework 11</a></p>
+    <h3>Homework 12 &mdash; SQL Verification</h3>
+    <p style="font-size:.68em">Submit one query per requirement, the defects you found with the evidence, and a short note on which constraint would have prevented each one.</p>
+    <p style="font-size:.62em">Full brief: <a href="homework/hw-12.html">Homework 12</a></p>
   </div>
 </section>
 </div></div>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
 <script>
-Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight]});
+Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight],keyboard:{27:null}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();e.stopPropagation();window.location.href='index.html';}},true);
 </script>
 </body>
 </html>

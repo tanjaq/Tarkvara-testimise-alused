@@ -54,16 +54,24 @@
 .bug-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
 .bug-card{background:rgba(229,115,115,.08);border:1px solid rgba(229,115,115,.3);border-radius:6px;padding:8px 10px;font-size:.62em;line-height:1.5;text-align:left;}
 .bug-card .co{font-weight:700;color:var(--red);margin-bottom:.2em;}
+.figure{text-align:center;margin:.4em 0;}
+.figure img{max-width:100%;max-height:52vh;border-radius:8px;background:#fff;padding:6px;box-shadow:0 4px 18px rgba(0,0,0,.4);}
+.figure .cap{font-size:.42em;color:#888;margin-top:.35em;}
+.g2 .figure img,.g3 .figure img{max-height:34vh;}
+.newsgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:start;}
+.newsgrid img{width:100%;border-radius:6px;background:#fff;padding:3px;}
+.newsgrid .n{font-size:.5em;color:#aaa;margin-top:.2em;text-align:left;line-height:1.4;}
+.portrait{width:100%;border-radius:8px;}
 .nav{position:fixed;top:12px;right:12px;z-index:999;font-size:.55em;display:flex;gap:8px;}
 .nav a{color:#555;text-decoration:none;padding:3px 8px;border:1px solid #333;border-radius:5px;}
 .nav a:hover{color:#fff;border-color:#fff;}
 </style>
 </head>
 <body>
-<div class="nav"><a href="lesson-07.html">&larr; L7</a><a href="index.html">&#8617; All</a><a href="lesson-09.html">L9 &rarr;</a></div>
+<div class="nav"><a href="lesson-07.html">&larr; L7</a><a href="index.html">&#8617; All lessons</a><a href="lesson-09.html">L9 &rarr;</a></div>
 <div class="reveal"><div class="slides">
 <section data-background-gradient="linear-gradient(135deg,#0f0c29,#302b63,#24243e)">
-  <span class="lbl">Lesson 8 of 12</span>
+  <span class="lbl">Lesson 8 of 13</span>
   <h2>Test Techniques III &mdash; White Box</h2>
   <div class="divider"></div>
   <p style="font-size:.62em">Function, statement and branch coverage &middot; What coverage does and does not prove</p>
@@ -87,11 +95,12 @@
 <section>
   <span class="lbl">Topic 1</span>
   <h3>Two Kinds of Coverage</h3>
+  <div class="figure"><img src="images/white-box.png" alt="White box testing approach: test case input through application code to output" style="width:46%"></div>
   <div class="g2">
-    <div class="card g"><strong>Black box &rarr; test coverage</strong>How much of the <em>requirements</em> is covered by tests. Answers: did we test everything we promised to build?</div>
-    <div class="card p"><strong>White box &rarr; code coverage</strong>How much of the <em>code</em> is executed by tests. Answers: did any test ever run this line?</div>
+    <div class="card g"><strong>Black box &rarr; test coverage</strong>How much of the <em>requirements</em> is covered. Did we test everything we promised to build?</div>
+    <div class="card p"><strong>White box &rarr; code coverage</strong>How much of the <em>code</em> is executed. Did any test ever run this line?</div>
   </div>
-  <blockquote>These two numbers can both be high while the product is still broken &mdash; and one being high tells you nothing about the other.</blockquote>
+  <p style="font-size:.56em;margin-top:.3em">Both numbers can be high while the product is still broken &mdash; and one being high tells you nothing about the other.</p>
 </section>
 
 <section>
@@ -192,7 +201,8 @@
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
 <script>
-Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight]});
+Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight],keyboard:{27:null}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();e.stopPropagation();window.location.href='index.html';}},true);
 </script>
 </body>
 </html>

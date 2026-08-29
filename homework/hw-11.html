@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Homework 11 &ndash; Performance Requirements</title>
+<title>Homework 11 &ndash; Cross-Team SRS Review</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:#0f0c29;color:#e0e0e0;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;padding:40px 20px;line-height:1.65;}
@@ -32,45 +32,52 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08)
 .hwcard .n{font-size:.72em;letter-spacing:2px;text-transform:uppercase;color:#888;}
 .hwcard .t{font-weight:600;color:#fff;margin:.25em 0;font-size:1em;}
 .hwcard .d{font-size:.85em;color:#aaa;}
+.esc{font-size:.75em;color:#555;margin-top:2em;}
 </style>
 </head>
 <body>
 <div class="wrap">
 <div class="crumb"><a href="../index.html">Course</a> &rsaquo; <a href="index.html">Homework</a> &rsaquo; Homework 11</div>
-<h1>Homework 11 &mdash; Performance Requirements</h1>
-<div class="meta"><span>Group project</span><span>Lesson 11</span><span>Submit: Teams &mdash; SRS performance section</span></div>
+<h1>Homework 11 &mdash; Cross-Team SRS Review</h1>
+<div class="meta"><span>Group &rarr; group</span><span>Lesson 10</span><span>Submit: Review report to the other team + revised SRS</span></div>
 
 <h2>Objective</h2>
-<p>Turn "it should be fast" into something you could actually run a test against.</p>
+<p>Do a real static review of a real document written by people who are not in the room &mdash; and find out what your own document looks like to a stranger.</p>
 
 <h2>Task</h2>
 <ol>
-  <li>Discuss with your team and capture performance requirements for response time and throughput, if you have not already.</li>
-  <li>Answer concretely: How quickly should the main page load? How many concurrent users should the application hold? What would a stress test scenario look like for your product?</li>
-  <li>Express every requirement with a number, a unit and a measurement point (server or client).</li>
-  <li>Add a resource utilization target: what CPU and memory usage is acceptable at idle and under heavy load?</li>
-  <li>Describe one load scenario and one stress scenario in words &mdash; who does what, how many of them, for how long.</li>
-  <li>Write it all into the SRS document.</li>
+  <li>Teams are paired up. You review the other team's SRS; they review yours. Both reviews happen at the same time.</li>
+  <li><strong>Preparation</strong> &mdash; read the whole document individually first, without commenting. Note where you had to guess what something meant.</li>
+  <li><strong>Review against a checklist:</strong></li>
+  <li>&bull; <strong>Complete</strong> &mdash; is anything obviously missing? Are there requirements for every feature described in the scope?<br>&bull; <strong>Unambiguous</strong> &mdash; could two developers read a requirement and build different things?<br>&bull; <strong>Testable</strong> &mdash; can you write a test case with one expected result from each requirement? Try it on three of them.<br>&bull; <strong>SMART</strong> &mdash; specific, measurable, achievable, realistic, timely.<br>&bull; <strong>Consistent</strong> &mdash; do any two requirements contradict each other? Is the same term used for the same thing throughout?<br>&bull; <strong>NFRs</strong> &mdash; are performance, security, usability, availability and accessibility covered with numbers?<br>&bull; <strong>Architecture</strong> &mdash; does the diagram match the requirements?<br>&bull; <strong>Test cases</strong> &mdash; does every functional requirement have at least one, and do they have measurable expected results?</li>
+  <li><strong>Write the review report:</strong> one row per finding &mdash; location, what is wrong, which checklist item it breaks, severity (blocking / should fix / suggestion), and a suggested rewrite for at least the blocking ones.</li>
+  <li><strong>Hold the review meeting</strong> &mdash; 20 minutes with the other team. You present your findings; they ask questions. Comment on the document, never on the people. Then swap roles.</li>
+  <li><strong>Follow-up</strong> &mdash; each team revises their own SRS based on the review received, and records which findings they accepted, which they rejected, and why.</li>
 </ol>
 
 <h2>Deliverable</h2>
-<div class="box g">A performance section in the SRS with response time, throughput and resource targets, plus one load and one stress scenario.</div>
+<div class="box g">A review report handed to the other team, plus your own revised SRS and a short list of accepted and rejected findings with reasons.</div>
 
 <h2>Assessment criteria</h2>
 <table>
   <tr><th>Criterion</th><th>What we look for</th></tr>
-  <tr><td><strong>Measurable</strong></td><td>Every requirement has a number and a unit</td></tr>
-  <tr><td><strong>Measurement point</strong></td><td>It is clear where the number is measured</td></tr>
-  <tr><td><strong>Realistic</strong></td><td>The targets match the size of your product and its expected use</td></tr>
-  <tr><td><strong>Scenarios</strong></td><td>Load and stress scenarios are described well enough to script</td></tr>
+  <tr><td><strong>Real findings</strong></td><td>Substantive issues found, not only typos and formatting</td></tr>
+  <tr><td><strong>Testability check</strong></td><td>You actually tried to write test cases from their requirements and reported where it failed</td></tr>
+  <tr><td><strong>Severity</strong></td><td>Blocking issues separated from suggestions</td></tr>
+  <tr><td><strong>Constructive</strong></td><td>Every blocking finding comes with a suggested rewrite</td></tr>
+  <tr><td><strong>Follow-up</strong></td><td>Your own SRS improved, and rejected findings are argued rather than ignored</td></tr>
 </table>
 
 <h2>Resources</h2>
 <ul>
-  <li><a href="../lesson-11.html">Lesson 11 &mdash; Performance Testing</a></li>
+  <li><a href="../lesson-06.html">Lesson 6 &mdash; Static Testing (review types and etiquette)</a></li>
+  <li><a href="../lesson-04.html">Lesson 4 &mdash; Software Requirements</a></li>
 </ul>
 
-<footer>Software Testing Fundamentals &middot; Tarkvara testimise alused &middot; Tatjana Kirotar</footer>
+<footer>Software Testing Fundamentals &middot; Tatjana Kirotar &middot; <span class="esc">press ESC to go back to all lessons</span></footer>
 </div>
+<script>
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();window.location.href='../index.html';}},true);
+</script>
 </body>
 </html>

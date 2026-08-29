@@ -54,16 +54,24 @@
 .bug-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
 .bug-card{background:rgba(229,115,115,.08);border:1px solid rgba(229,115,115,.3);border-radius:6px;padding:8px 10px;font-size:.62em;line-height:1.5;text-align:left;}
 .bug-card .co{font-weight:700;color:var(--red);margin-bottom:.2em;}
+.figure{text-align:center;margin:.4em 0;}
+.figure img{max-width:100%;max-height:52vh;border-radius:8px;background:#fff;padding:6px;box-shadow:0 4px 18px rgba(0,0,0,.4);}
+.figure .cap{font-size:.42em;color:#888;margin-top:.35em;}
+.g2 .figure img,.g3 .figure img{max-height:34vh;}
+.newsgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:start;}
+.newsgrid img{width:100%;border-radius:6px;background:#fff;padding:3px;}
+.newsgrid .n{font-size:.5em;color:#aaa;margin-top:.2em;text-align:left;line-height:1.4;}
+.portrait{width:100%;border-radius:8px;}
 .nav{position:fixed;top:12px;right:12px;z-index:999;font-size:.55em;display:flex;gap:8px;}
 .nav a{color:#555;text-decoration:none;padding:3px 8px;border:1px solid #333;border-radius:5px;}
 .nav a:hover{color:#fff;border-color:#fff;}
 </style>
 </head>
 <body>
-<div class="nav"><a href="lesson-04.html">&larr; L4</a><a href="index.html">&#8617; All</a><a href="lesson-06.html">L6 &rarr;</a></div>
+<div class="nav"><a href="lesson-04.html">&larr; L4</a><a href="index.html">&#8617; All lessons</a><a href="lesson-06.html">L6 &rarr;</a></div>
 <div class="reveal"><div class="slides">
 <section data-background-gradient="linear-gradient(135deg,#0f0c29,#302b63,#24243e)">
-  <span class="lbl">Lesson 5 of 12</span>
+  <span class="lbl">Lesson 5 of 13</span>
   <h2>Software Architecture</h2>
   <div class="divider"></div>
   <p style="font-size:.62em">Monolith &middot; Layered &middot; Microservices &middot; Event-driven &middot; Serverless &middot; Modular &middot; Monorepo</p>
@@ -87,74 +95,74 @@
 <section>
   <span class="lbl">Topic 1</span>
   <h3>What Is Software Architecture?</h3>
-  <p style="font-size:.64em">Architecture describes the structure of a system: which components exist, and how they work together.</p>
-  <p style="font-size:.64em">A good architecture gives the system scalability, maintainability and the ability to adapt.</p>
-  <blockquote>For a tester, architecture answers a practical question: <em>where can I observe this behaviour, and where can I break it?</em> A defect in a monolith and the same defect across microservices need completely different test setups.</blockquote>
+  <p style="font-size:.64em">Architecture describes the structure of a system: which components exist, and how they work together. A good architecture gives the system scalability, maintainability and the ability to adapt.</p>
+  <blockquote>For a tester, architecture answers a practical question: <em>where can I observe this behaviour, and where can I break it?</em> The same defect in a monolith and across microservices needs completely different test setups.</blockquote>
 </section>
 
 <section>
   <span class="lbl">Topic 2</span>
   <h3>Monolithic Architecture</h3>
   <div class="g2">
-    <div class="card"><strong>What it is</strong>One single application where all parts of the system are tightly coupled.</div>
-    <div class="card g"><strong>Advantages</strong>Simple to develop and deploy for smaller applications.</div>
+    <div class="card"><strong>What it is</strong>One single application where all parts of the system are tightly coupled &mdash; user interface, business logic and data access ship together as one deployable unit.</div>
+    <div class="card g"><strong>Advantages</strong>Simple to develop, run locally and deploy for smaller applications. One place to look when something breaks.</div>
   </div>
   <div class="g2" style="margin-top:8px">
-    <div class="card r"><strong>Disadvantages</strong>Hard to maintain and scale as the system grows.</div>
-    <div class="card o"><strong>Example</strong>Early web applications, early e-commerce platforms.</div>
+    <div class="card r"><strong>Disadvantages</strong>Hard to maintain and scale as the system grows. One change means redeploying everything.</div>
+    <div class="card o"><strong>Example</strong>Early web applications and early e-commerce platforms.</div>
   </div>
-  <p style="font-size:.58em;margin-top:.4em"><strong>Testing angle:</strong> easy to spin up locally end to end &mdash; but every change needs a full regression run.</p>
+  <p style="font-size:.58em;margin-top:.4em"><strong>Testing angle:</strong> easy to spin up end to end &mdash; but every change needs a full regression run.</p>
 </section>
 
 <section>
   <span class="lbl">Topic 2</span>
   <h3>Layered Architecture</h3>
   <div class="g2">
-    <div class="card"><strong>What it is</strong>The application is split into layers &mdash; presentation, business logic, data.</div>
-    <div class="card g"><strong>Advantages</strong>Clear separation of concerns; straightforward to develop and maintain.</div>
+    <div class="figure" style="margin:0"><img src="images/arch-layered.png" alt="Layered architecture: presentation, business, persistence, database" style="max-height:40vh"></div>
+    <div>
+      <div class="card"><strong>What it is</strong>The application is split into layers &mdash; presentation, business, persistence, database. Each layer talks only to the one below it.</div>
+      <div class="card g" style="margin-top:6px"><strong>Advantages</strong>Clear separation of concerns; straightforward to develop and maintain.</div>
+      <div class="card r" style="margin-top:6px"><strong>Disadvantages</strong>Can become rigid once layers start depending on each other.</div>
+    </div>
   </div>
-  <div class="g2" style="margin-top:8px">
-    <div class="card r"><strong>Disadvantages</strong>Can become rigid once layers start depending on each other.</div>
-    <div class="card o"><strong>Example</strong>Traditional enterprise information systems.</div>
-  </div>
-  <p style="font-size:.58em;margin-top:.4em"><strong>Testing angle:</strong> layers give you natural test levels &mdash; unit tests at the logic layer, integration tests at the data layer, UI tests at the top.</p>
+  <p style="font-size:.56em;margin-top:.4em"><strong>Testing angle:</strong> the layers give you natural test levels &mdash; unit tests in the business layer, integration tests at the persistence layer, UI tests at the top.</p>
 </section>
 
 <section>
   <span class="lbl">Topic 2</span>
   <h3>Microservices Architecture</h3>
-  <div class="g2">
-    <div class="card"><strong>What it is</strong>The system is built from small independent services that talk to each other through APIs.</div>
-    <div class="card g"><strong>Advantages</strong>Scalability, independent deployments, technology flexibility per service.</div>
-  </div>
-  <div class="g2" style="margin-top:8px">
-    <div class="card r"><strong>Disadvantages</strong>More complex to deploy and operate; network becomes a failure mode.</div>
-    <div class="card o"><strong>Example</strong>Netflix, Amazon.</div>
-  </div>
-  <p style="font-size:.58em;margin-top:.4em"><strong>Testing angle:</strong> most defects live between services, not inside them. API and contract testing matter more than UI clicking.</p>
+  <div class="figure"><img src="images/arch-microservices.png" alt="Microservices with separate databases behind a user interface" style="width:62%"><div class="cap">Independent services, each with its own database, talking over APIs</div></div>
+  <p style="font-size:.58em">+ scalability, independent deployments, technology flexibility per service &nbsp;&middot;&nbsp; &ndash; more complex to deploy and operate; the network becomes a failure mode. Examples: Netflix, Amazon.</p>
+  <p style="font-size:.56em;color:#888"><strong>Testing angle:</strong> most defects live <em>between</em> services, not inside them. API and contract testing matter more than clicking the UI.</p>
 </section>
 
 <section>
   <span class="lbl">Topic 2</span>
   <h3>Event-Driven Architecture</h3>
-  <div class="g2">
-    <div class="card"><strong>What it is</strong>Components communicate by producing and reacting to events.</div>
-    <div class="card g"><strong>Advantages</strong>Excellent for dynamic and distributed systems.</div>
-  </div>
-  <div class="g2" style="margin-top:8px">
-    <div class="card r"><strong>Disadvantages</strong>Harder to trace and debug &mdash; there is no single call stack.</div>
-    <div class="card o"><strong>Example</strong>Real-time data systems, financial-sector applications.</div>
-  </div>
-  <p style="font-size:.58em;margin-top:.4em"><strong>Testing angle:</strong> ordering, duplicates and lost events are the classic defects. Expect to test asynchronously, with waits and correlation IDs.</p>
+  <div class="figure"><img src="images/arch-event-driven.png" alt="Event sources publishing to an event broker with subscribers" style="width:56%"><div class="cap">Event sources publish; an event broker routes; subscribers react to what they subscribed to</div></div>
+  <p style="font-size:.58em">+ excellent for dynamic and distributed systems &nbsp;&middot;&nbsp; &ndash; harder to trace and debug, because there is no single call stack. Examples: real-time data systems, financial applications.</p>
+  <p style="font-size:.56em;color:#888"><strong>Testing angle:</strong> ordering, duplicate and lost events are the classic defects. Expect asynchronous tests, waits and correlation IDs.</p>
 </section>
 
 <section>
   <span class="lbl">Topic 2</span>
-  <h3>Serverless, Modular and Monorepo</h3>
-  <div class="g3">
-    <div class="card p"><strong>Serverless</strong>Logic runs as functions in the cloud; the provider manages servers.<br>+ no infrastructure to manage, scales automatically<br>&ndash; best for smaller, self-contained tasks<br><span style="color:#888">AWS Lambda, Google Cloud Functions</span></div>
-    <div class="card o"><strong>Modular</strong>The system is split into modules or plugins that can be added and removed independently.<br>+ flexible, easy to extend<br>&ndash; module dependencies can get tangled<br><span style="color:#888">Browsers and their plugins</span></div>
-    <div class="card g"><strong>Monorepo</strong>All projects and components live in one code base; build and dependency relations form a graph.<br>+ faster builds and tests through dependency tracking, shared code, one standard workflow<br>&ndash; the graph gets complex at scale<br><span style="color:#888">Google, Uber, Airbnb</span></div>
+  <h3>Serverless Architecture</h3>
+  <div class="figure"><img src="images/arch-serverless.png" alt="Serverless architecture with an API gateway and functions" style="width:68%"><div class="cap">Clients reach an API gateway; each piece of logic is a separate managed function</div></div>
+  <p style="font-size:.58em">+ no infrastructure to manage, scales automatically &nbsp;&middot;&nbsp; &ndash; best suited to smaller, self-contained tasks; cold starts and vendor limits are real. Examples: AWS Lambda, Google Cloud Functions.</p>
+  <p style="font-size:.56em;color:#888"><strong>Testing angle:</strong> you cannot attach a debugger to production. Logging, tracing and testing each function in isolation carry the load.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>Modular Architecture and Monorepo</h3>
+  <div class="g2">
+    <div>
+      <div class="figure" style="margin:0"><img src="images/arch-modular.png" alt="Modular architecture with plugins merged into one output" style="max-height:30vh"><div class="cap">Modular &mdash; plugins added and removed independently</div></div>
+      <p style="font-size:.55em">+ flexible and easy to extend &nbsp;&middot;&nbsp; &ndash; module dependencies get tangled. Example: browsers and their plugins.</p>
+    </div>
+    <div>
+      <div class="figure" style="margin:0"><img src="images/arch-monorepo.png" alt="Monorepo with apps and libraries in one dependency graph" style="max-height:30vh"><div class="cap">Monorepo &mdash; every app and library in one code base</div></div>
+      <p style="font-size:.55em">+ faster builds and tests through dependency tracking, shared code, one workflow &nbsp;&middot;&nbsp; &ndash; the graph gets complex at scale. Examples: Google, Uber, Airbnb.</p>
+    </div>
   </div>
 </section>
 
@@ -179,7 +187,7 @@
       <li>As a team, draw the software architecture of your own project.</li>
       <li>Decide which of the styles above fits your project best &mdash; and why.</li>
       <li>Draw a simple diagram: components, the relationships between them, and the communication channels.</li>
-      <li>Add notes explaining why this architecture is the right one for your project.</li>
+      <li>Add notes explaining why this architecture is the right choice for your project.</li>
       <li>Present to the class: why you chose it, and what challenges you expect.</li>
     </ul>
   </div>
@@ -207,7 +215,8 @@
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
 <script>
-Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight]});
+Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight],keyboard:{27:null}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();e.stopPropagation();window.location.href='index.html';}},true);
 </script>
 </body>
 </html>

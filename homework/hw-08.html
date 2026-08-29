@@ -32,13 +32,14 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08)
 .hwcard .n{font-size:.72em;letter-spacing:2px;text-transform:uppercase;color:#888;}
 .hwcard .t{font-weight:600;color:#fff;margin:.25em 0;font-size:1em;}
 .hwcard .d{font-size:.85em;color:#aaa;}
+.esc{font-size:.75em;color:#555;margin-top:2em;}
 </style>
 </head>
 <body>
 <div class="wrap">
 <div class="crumb"><a href="../index.html">Course</a> &rsaquo; <a href="index.html">Homework</a> &rsaquo; Homework 8</div>
 <h1>Homework 8 &mdash; Boarding Pass &mdash; Coverage Analysis</h1>
-<div class="meta"><span>Individual or pair</span><span>Lesson 8</span><span>Submit: Teams &mdash; analysis</span></div>
+<div class="meta"><span>Individual or pair</span><span>Lesson 8</span><span>Submit: Analysis</span></div>
 
 <h2>Objective</h2>
 <p>Read code coverage honestly &mdash; and see what it does not tell you.</p>
@@ -71,7 +72,10 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08)
   <li><a href="../lesson-08.html">Lesson 8 &mdash; White Box Techniques</a></li>
 </ul>
 
-<footer>Software Testing Fundamentals &middot; Tarkvara testimise alused &middot; Tatjana Kirotar</footer>
+<footer>Software Testing Fundamentals &middot; Tatjana Kirotar &middot; <span class="esc">press ESC to go back to all lessons</span></footer>
 </div>
+<script>
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();window.location.href='../index.html';}},true);
+</script>
 </body>
 </html>

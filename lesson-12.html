@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lesson 12 &ndash; Application Security</title>
+<title>Lesson 12 &ndash; Accessibility Testing</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/black.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css">
@@ -54,159 +54,157 @@
 .bug-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
 .bug-card{background:rgba(229,115,115,.08);border:1px solid rgba(229,115,115,.3);border-radius:6px;padding:8px 10px;font-size:.62em;line-height:1.5;text-align:left;}
 .bug-card .co{font-weight:700;color:var(--red);margin-bottom:.2em;}
+.figure{text-align:center;margin:.4em 0;}
+.figure img{max-width:100%;max-height:52vh;border-radius:8px;background:#fff;padding:6px;box-shadow:0 4px 18px rgba(0,0,0,.4);}
+.figure .cap{font-size:.42em;color:#888;margin-top:.35em;}
+.g2 .figure img,.g3 .figure img{max-height:34vh;}
+.newsgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:start;}
+.newsgrid img{width:100%;border-radius:6px;background:#fff;padding:3px;}
+.newsgrid .n{font-size:.5em;color:#aaa;margin-top:.2em;text-align:left;line-height:1.4;}
+.portrait{width:100%;border-radius:8px;}
 .nav{position:fixed;top:12px;right:12px;z-index:999;font-size:.55em;display:flex;gap:8px;}
 .nav a{color:#555;text-decoration:none;padding:3px 8px;border:1px solid #333;border-radius:5px;}
 .nav a:hover{color:#fff;border-color:#fff;}
 </style>
 </head>
 <body>
-<div class="nav"><a href="lesson-11.html">&larr; L11</a><a href="index.html">&#8617; All</a><a href="lesson-bonus-ai.html">Bonus &rarr;</a></div>
+<div class="nav"><a href="lesson-11.html">&larr; L11</a><a href="index.html">&#8617; All lessons</a><a href="lesson-13.html">L13 &rarr;</a></div>
 <div class="reveal"><div class="slides">
 <section data-background-gradient="linear-gradient(135deg,#0f0c29,#302b63,#24243e)">
-  <span class="lbl">Lesson 12 of 12</span>
-  <h2>Application Security</h2>
+  <span class="lbl">Lesson 12 of 13</span>
+  <h2>Accessibility Testing</h2>
   <div class="divider"></div>
-  <p style="font-size:.62em">CIA &middot; OWASP Top 10 and ASVS &middot; Injection, XSS, authentication, business logic</p>
+  <p style="font-size:.62em">WCAG &middot; POUR &middot; Keyboard &middot; Contrast &middot; Screen readers &middot; Automated vs manual</p>
   <p style="font-size:.5em;color:#555;margin-top:.8em">&rarr; next slide &nbsp;|&nbsp; ESC overview</p>
 </section>
 
 <section>
   <span class="lbl">Lesson Plan</span>
   <div class="plan">
-    <div class="plan-title">Lesson 12: Application Security<br>Focus: The other non-functional requirement that ends careers when ignored</div>
+    <div class="plan-title">Lesson 12: Accessibility Testing<br>Focus: Testing that the product works for everyone, not just for you</div>
       <div class="plan-topics">
-        <p><span>1.</span> Confidentiality, integrity, availability</p>
-        <p><span>2.</span> Where vulnerabilities come from</p>
-        <p><span>3.</span> OWASP &mdash; Top 10, ASVS, WSTG</p>
-        <p><span>4.</span> Common ways applications get exploited</p>
-        <p><span>5.</span> What you can do on your own project this week</p>
+        <p><span>1.</span> Who accessibility is for &mdash; and why it is now the law</p>
+        <p><span>2.</span> WCAG and the four POUR principles</p>
+        <p><span>3.</span> The checks you can run today</p>
+        <p><span>4.</span> Screen readers and keyboard-only operation</p>
+        <p><span>5.</span> What automation catches, and what it never will</p>
       </div>
-      <div class="plan-hw"><strong>Homework:</strong> Group work &mdash; identify the attack surface of your project, document it, and add Dependabot and a static analysis tool.</div>
+      <div class="plan-hw"><strong>Homework:</strong> Run an accessibility audit of your own project and one public site, mapped to WCAG criteria.</div>
   </div>
 </section>
 
 <section>
   <span class="lbl">Topic 1</span>
-  <h3>Three Components of Security</h3>
+  <h3>Who Is This For?</h3>
   <div class="g3">
-    <div class="card"><strong>Confidentiality</strong>Information is accessible only by authorised users</div>
-    <div class="card g"><strong>Integrity</strong>Information can be modified only by authorised users</div>
-    <div class="card o"><strong>Availability</strong>Information is accessible to users whenever it is needed</div>
+    <div class="card"><strong>Permanent</strong>Blind, low vision, colour blind, deaf, motor impairment, cognitive differences.<br><span style="color:#888">Roughly 1 in 6 people worldwide.</span></div>
+    <div class="card g"><strong>Temporary</strong>A broken arm, an eye infection, a lost pair of glasses, an ear infection.</div>
+    <div class="card o"><strong>Situational</strong>Bright sunlight on a phone screen, a noisy train, holding a baby, a slow connection, a trackpad that just died.</div>
   </div>
-  <blockquote>An attacker only needs to find one vulnerability. A developer has to fix all of them.</blockquote>
-  <p style="font-size:.58em;color:#888">Meltdown, Spectre, HeartBleed, ShellShock, Ghostcat &mdash; and the endless stream of WordPress, Drupal and Joomla issues.</p>
+  <blockquote>Accessibility is not a minority feature. Everybody is temporarily or situationally impaired several times a week &mdash; accessible products are simply better products.</blockquote>
+</section>
+
+<section>
+  <span class="lbl">Topic 1</span>
+  <h3>And It Is Now a Legal Requirement</h3>
+  <div class="g2">
+    <div class="card"><strong>The standards</strong>
+      &middot; <strong style="display:inline">WCAG</strong> &mdash; Web Content Accessibility Guidelines, currently 2.2. The reference everyone uses.<br>
+      &middot; <strong style="display:inline">EN 301 549</strong> &mdash; the European standard, which points at WCAG.<br>
+      &middot; <strong style="display:inline">European Accessibility Act</strong> &mdash; applies to a wide range of consumer digital products and services.</div>
+    <div class="card o"><strong>Conformance levels</strong>
+      &middot; <strong style="display:inline">A</strong> &mdash; the absolute minimum<br>
+      &middot; <strong style="display:inline">AA</strong> &mdash; the level almost every law and contract requires<br>
+      &middot; <strong style="display:inline">AAA</strong> &mdash; aspirational; not required for whole sites<br>
+      <span style="color:#888">When someone says "we need to be accessible", they mean WCAG 2.2 level AA.</span></div>
+  </div>
+  <p style="font-size:.58em;margin-top:.4em">Accessibility is a non-functional requirement, exactly like performance and security &mdash; and it belongs in your SRS with a stated conformance target.</p>
 </section>
 
 <section>
   <span class="lbl">Topic 2</span>
-  <h3>Where Vulnerabilities Come From</h3>
-  <ul style="font-size:.66em">
-    <li>The cost of doing security properly</li>
-    <li>Short timelines</li>
-    <li>Hoping the framework fixes it all</li>
-    <li>Senior programmers who "know what they are doing"</li>
-    <li>"It's only an internal web app"</li>
-    <li>"It's a non-critical system"</li>
-    <li>"Not my job"</li>
-  </ul>
-  <p style="font-size:.6em;margin-top:.4em">Every one of these is a process problem, not a technical one &mdash; which is exactly the organizational root cause from Lesson 9.</p>
-</section>
-
-<section>
-  <span class="lbl">Topic 2</span>
-  <h3>Where the Weaknesses Sit</h3>
-  <div class="g3">
-    <div class="card"><strong>Client&ndash;server communication</strong>HTTP in plain text &middot; HTTPS with weak encryption</div>
-    <div class="card o"><strong>Client side</strong>Malware, hostile browser extensions, insecure storage</div>
-    <div class="card r"><strong>Server side</strong>Storage issues, framework and component vulnerabilities, misconfiguration</div>
+  <h3>POUR &mdash; the Four Principles</h3>
+  <div class="g2">
+    <div>
+      <div class="card" style="margin-bottom:6px"><strong>Perceivable</strong>Users can perceive the content. Text alternatives for images, captions for video, sufficient contrast, content that does not rely on colour alone.</div>
+      <div class="card g"><strong>Operable</strong>Users can operate the interface. Everything reachable by keyboard, enough time to act, no content that flashes dangerously, clear focus indication.</div>
+    </div>
+    <div>
+      <div class="card o" style="margin-bottom:6px"><strong>Understandable</strong>Content and behaviour are predictable. Readable language, consistent navigation, clear labels, helpful error messages that say how to fix the problem.</div>
+      <div class="card p"><strong>Robust</strong>It works with assistive technology now and later. Valid semantic HTML, correct roles and names, no custom widget that only a mouse understands.</div>
+    </div>
   </div>
-  <p style="font-size:.62em;margin-top:.5em">Public leaks put the scale in perspective: LinkedIn &mdash; 167 million passwords offered for sale &middot; Tumblr &mdash; 65 million &middot; MySpace &mdash; 427 million.</p>
 </section>
 
 <section>
   <span class="lbl">Topic 3</span>
-  <h3>OWASP</h3>
-  <p style="font-size:.63em">The Open Web Application Security Project &mdash; rankings, manuals, cheat sheets, standards and tools, all free.</p>
-  <div class="g3">
-    <div class="card"><strong>OWASP Top 10</strong>The most common web application attacks. Start here.<br><a href="https://owasp.org/Top10/">owasp.org/Top10</a></div>
-    <div class="card g"><strong>OWASP ASVS</strong>Application Security Verification Standard &mdash; a checklist of "verify that..." statements you can test against.</div>
-    <div class="card o"><strong>OWASP WSTG</strong>Web Security Testing Guide &mdash; how to actually perform the tests.</div>
+  <h3>Checks You Can Run in Ten Minutes</h3>
+  <div class="g2">
+    <div class="card"><strong>Unplug the mouse</strong>
+      Tab through the whole page. Can you reach every control? Activate it with Enter or Space? Can you always <em>see</em> where the focus is? Can you get out of every component again &mdash; or is there a keyboard trap?</div>
+    <div class="card g"><strong>Zoom to 200%</strong>
+      Does the content reflow, or does text get cut off and overlap? Try 400% too &mdash; WCAG asks for it.</div>
   </div>
-  <p style="font-size:.58em;margin-top:.4em">ASVS v4 chapters: architecture &middot; authentication &middot; session management &middot; access control &middot; validation and encoding &middot; stored cryptography &middot; error handling and logging &middot; data protection &middot; communication &middot; malicious code &middot; business logic &middot; files and resources &middot; API and web services &middot; configuration</p>
+  <div class="g2" style="margin-top:8px">
+    <div class="card o"><strong>Check the contrast</strong>
+      Normal text needs a ratio of at least <strong style="display:inline">4.5:1</strong> against its background; large text and UI components, <strong style="display:inline">3:1</strong>. Grey-on-grey placeholder text fails almost every time.</div>
+    <div class="card r"><strong>Turn off the colour</strong>
+      Is any information conveyed only by colour? A red border with no error text. A green dot with no label. Both fail.</div>
+  </div>
 </section>
 
 <section>
   <span class="lbl">Topic 3</span>
-  <h3>Where to Gather Information</h3>
-  <div class="g2">
-    <div class="card"><strong>Known vulnerabilities</strong><a href="https://cve.mitre.org/cve/">cve.mitre.org</a> &middot; <a href="https://seclists.org/">seclists.org</a><br>Security updates and fixes on vendor homepages</div>
-    <div class="card o"><strong>Known exploits and community</strong><a href="https://www.exploit-db.com/">exploit-db.com</a><br>Communities &mdash; security accounts on social platforms, Reddit</div>
-  </div>
-</section>
-
-<section>
-  <span class="lbl">Topic 4</span>
-  <h3>Exploiting User Input</h3>
-  <p style="font-size:.62em">Anything a user can send, an attacker can craft. The entry points:</p>
+  <h3>The Structural Checks</h3>
   <ul style="font-size:.66em">
-    <li>HTTP(S) POST and GET requests</li>
-    <li>The browser itself &mdash; and its developer tools</li>
-    <li>Plugins: cookie managers, user agent switchers, request tamperers</li>
-    <li>The command line</li>
-    <li>Program code calling your API directly</li>
+    <li><strong>Images</strong> &mdash; does every meaningful image have an <code>alt</code> that describes its purpose? Is every decorative image marked <code>alt=""</code> so it is skipped?</li>
+    <li><strong>Headings</strong> &mdash; is there exactly one <code>h1</code>, and do heading levels descend without skipping? Screen reader users navigate by heading.</li>
+    <li><strong>Form labels</strong> &mdash; is every input associated with a real <code>&lt;label&gt;</code>? A placeholder is not a label; it disappears the moment you type.</li>
+    <li><strong>Error identification</strong> &mdash; is the error announced, tied to the field, and does it say how to fix the problem?</li>
+    <li><strong>Link text</strong> &mdash; does it make sense out of context? A page of "click here" links is unusable when read as a list.</li>
+    <li><strong>Target size</strong> &mdash; are interactive targets big enough to hit with a finger or an unsteady hand?</li>
   </ul>
-  <blockquote>Client-side validation is a usability feature, not a security control. Everything must be validated again on the server.</blockquote>
 </section>
 
 <section>
   <span class="lbl">Topic 4</span>
-  <h3>Web Content Injection and XSS</h3>
-  <div class="g2">
-    <div class="card"><strong>Injection points and defences</strong>
-      HTML injection &rarr; verify HTML syntax, HTML-encode output<br>
-      JavaScript injection &rarr; verify JS syntax, never eval user input<br>
-      URL &rarr; allow-list protocols and URL patterns<br>
-      Content-Type &rarr; verify response header and charset<br>
-      Web content files &rarr; integrity checks; never include untrusted SVG as an object</div>
-    <div class="card r"><strong>What XSS lets an attacker do</strong>
-      Run scripts in the background &middot; change how the page looks &middot; modify the DOM, change links, steal input &middot; redirect to another site &middot; embed an iframe inside the page<br>
-      <span style="color:#888">Estonian websites have been defaced through exactly this class of attack.</span></div>
-  </div>
-</section>
-
-<section>
-  <span class="lbl">Topic 4</span>
-  <h3>Authentication and Business Logic</h3>
-  <div class="g2">
-    <div class="card g"><strong>Authentication</strong>
-      <span style="color:#888">User side:</span> avoid passwords where possible (Mobile-ID, Smart-ID, ID card) &middot; two-factor authentication &middot; unique passwords &middot; check <a href="https://haveibeenpwned.com/">haveibeenpwned.com</a><br>
-      <span style="color:#888">Server side:</span> store passwords as hashes &middot; limit authentication attempts &middot; log attempts</div>
-    <div class="card o"><strong>Business logic mistakes</strong>
-      Problems caused by business rules that were never fully checked in the implementation: negative amounts in a shopping cart, steps that are not enforced, excessive requests, cancelling transactions at the wrong moment.<br>
-      <span style="color:#888">Defence: discuss the logic with several parties, implement all controls server side, double-check inputs.</span></div>
-  </div>
-  <p style="font-size:.58em;margin-top:.4em">Business logic flaws are the ones you find with the black-box techniques from Lesson 7 &mdash; not with a scanner.</p>
-</section>
-
-<section>
-  <span class="lbl">Topic 4</span>
-  <h3>Components, Files and Injections</h3>
+  <h3>Screen Readers</h3>
   <div class="g3">
-    <div class="card"><strong>Frameworks, libraries, components</strong>Not enough background checks &middot; assuming the framework handles security &middot; publicly known issues.<br><span style="color:#888">Defence: identify and verify every component &mdash; OS, web server, languages, add-ons.</span></div>
-    <div class="card o"><strong>Web server and files</strong>Public and private folders &middot; folder-based configuration &middot; server-side code exposure.<br><span style="color:#888">Defence: allow-lists and authorization &middot; never use user-supplied filenames &middot; read-only permissions, write only for logs and user files. An uploaded evilimage.php.jpg can end up executed.</span></div>
-    <div class="card r"><strong>Command and SQL injection</strong>Commands: running OS commands, remote shells, reading and writing files. SQL: queries built dynamically from input.<br><span style="color:#888">Defence: never build commands from user input &middot; do not let an attacker see or guess the database structure &middot; use prepared statements.</span></div>
+    <div class="card"><strong>VoiceOver</strong>Built into macOS (Cmd + F5) and iOS. Nothing to install.</div>
+    <div class="card g"><strong>NVDA</strong>Free and open source, Windows. The most common one in testing.</div>
+    <div class="card o"><strong>TalkBack</strong>Built into Android. Pairs well with Lesson 13.</div>
+  </div>
+  <p style="font-size:.63em;margin-top:.5em">You do not need to be an expert user. Turn one on, close your eyes for one flow &mdash; log in, or add something to a basket &mdash; and see whether it is possible at all. That single exercise finds more real defects than any scan.</p>
+  <blockquote>Listen for what the screen reader announces when focus lands on a control. If it just says "button", nobody knows what it does.</blockquote>
+</section>
+
+<section>
+  <span class="lbl">Topic 5</span>
+  <h3>Automated Tools &mdash; and Their Limits</h3>
+  <div class="g2">
+    <div class="card g"><strong>Tools worth having</strong>
+      &middot; <strong style="display:inline">axe DevTools</strong> &mdash; browser extension, the industry standard engine<br>
+      &middot; <strong style="display:inline">WAVE</strong> &mdash; visual overlay of issues on the page<br>
+      &middot; <strong style="display:inline">Lighthouse</strong> &mdash; built into Chrome DevTools<br>
+      &middot; Contrast checkers, built into DevTools and available online<br>
+      &middot; <strong style="display:inline">axe-core</strong> in your CI pipeline, so regressions get caught automatically</div>
+    <div class="card r"><strong>What they cannot tell you</strong>
+      Automated checks find roughly a third of accessibility problems.<br>
+      A tool can see that an image has <code>alt</code> text. It cannot see that the alt text says "image123.png".<br>
+      It can see a heading. It cannot see that the heading is wrong.<br>
+      It never knows whether a flow is actually usable.</div>
   </div>
 </section>
 
 <section>
   <span class="lbl">In-Class Exercise</span>
   <div class="teams">
-    <h3>Security Review of Your Own Project</h3>
-    <ul style="font-size:.7em">
-      <li>Discuss with your team and capture every potentially problematic place in your application: user input text fields? dropdowns? login (authentication and authorization)? file uploads? payments?</li>
-      <li>Write all the places where security testing should be conducted into your SRS document.</li>
-      <li>Add <strong>GitHub Dependabot</strong> to your repository.</li>
-      <li>Add <strong>SonarLint</strong> (or a similar static analysis tool) to your application.</li>
+    <h3>Ten Minutes, No Mouse</h3>
+    <ul style="font-size:.68em">
+      <li>Pick a well-known site &mdash; a shop, a bank, a public service, a news site.</li>
+      <li>Put the mouse away. Complete one real task using only the keyboard: search for something, or start a checkout.</li>
+      <li>Note every point where you got stuck, lost the focus indicator, or could not tell what was selected.</li>
+      <li>Then run axe DevTools or Lighthouse on the same page. Compare: what did the tool catch that you missed, and what did you catch that the tool did not?</li>
     </ul>
   </div>
 </section>
@@ -215,25 +213,27 @@
   <span class="lbl">Self-Check</span>
   <h3>Can You Answer These?</h3>
   <ul style="font-size:.68em">
-    <li>Give an example failure for each of confidentiality, integrity and availability.</li>
-    <li>Why is client-side validation not a security control?</li>
-    <li>Name a business logic flaw a security scanner would never find.</li>
-    <li>What is the first thing you would check in your own project after this lesson?</li>
+    <li>What do the letters in POUR stand for, and give one check for each?</li>
+    <li>What contrast ratio does normal body text need at level AA?</li>
+    <li>Why is a placeholder not a label?</li>
+    <li>Name an accessibility defect that no automated tool can detect.</li>
+    <li>Write an accessibility requirement for your project that a tester could pass or fail.</li>
   </ul>
 </section>
 
 <section>
   <div class="hw">
-    <h3>Homework 12 &mdash; Security Review</h3>
-    <p style="font-size:.68em">Document your project's attack surface in the SRS, enable Dependabot, add a static analysis tool, and report what the tools found.</p>
-    <p style="font-size:.62em">Full brief: <a href="homework/hw-12.html">Homework 12</a></p>
+    <h3>Homework 13 &mdash; Accessibility Audit</h3>
+    <p style="font-size:.68em">Audit one public site and your own project: keyboard-only walkthrough, contrast check, structural checks and an automated scan. Report the findings mapped to WCAG criteria, with severity.</p>
+    <p style="font-size:.62em">Full brief: <a href="homework/hw-13.html">Homework 13</a></p>
   </div>
 </section>
 </div></div>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
 <script>
-Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight]});
+Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight],keyboard:{27:null}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();e.stopPropagation();window.location.href='index.html';}},true);
 </script>
 </body>
 </html>

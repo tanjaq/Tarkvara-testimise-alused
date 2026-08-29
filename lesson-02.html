@@ -54,16 +54,24 @@
 .bug-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
 .bug-card{background:rgba(229,115,115,.08);border:1px solid rgba(229,115,115,.3);border-radius:6px;padding:8px 10px;font-size:.62em;line-height:1.5;text-align:left;}
 .bug-card .co{font-weight:700;color:var(--red);margin-bottom:.2em;}
+.figure{text-align:center;margin:.4em 0;}
+.figure img{max-width:100%;max-height:52vh;border-radius:8px;background:#fff;padding:6px;box-shadow:0 4px 18px rgba(0,0,0,.4);}
+.figure .cap{font-size:.42em;color:#888;margin-top:.35em;}
+.g2 .figure img,.g3 .figure img{max-height:34vh;}
+.newsgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:start;}
+.newsgrid img{width:100%;border-radius:6px;background:#fff;padding:3px;}
+.newsgrid .n{font-size:.5em;color:#aaa;margin-top:.2em;text-align:left;line-height:1.4;}
+.portrait{width:100%;border-radius:8px;}
 .nav{position:fixed;top:12px;right:12px;z-index:999;font-size:.55em;display:flex;gap:8px;}
 .nav a{color:#555;text-decoration:none;padding:3px 8px;border:1px solid #333;border-radius:5px;}
 .nav a:hover{color:#fff;border-color:#fff;}
 </style>
 </head>
 <body>
-<div class="nav"><a href="lesson-01.html">&larr; L1</a><a href="index.html">&#8617; All</a><a href="lesson-03.html">L3 &rarr;</a></div>
+<div class="nav"><a href="lesson-01.html">&larr; L1</a><a href="index.html">&#8617; All lessons</a><a href="lesson-03.html">L3 &rarr;</a></div>
 <div class="reveal"><div class="slides">
 <section data-background-gradient="linear-gradient(135deg,#0f0c29,#302b63,#24243e)">
-  <span class="lbl">Lesson 2 of 12</span>
+  <span class="lbl">Lesson 2 of 13</span>
   <h2>The Purpose of Testing</h2>
   <div class="divider"></div>
   <p style="font-size:.62em">Why we test &middot; Real-world failures &middot; Cost of defects &middot; Where bugs come from</p>
@@ -87,26 +95,48 @@
 
 <section>
   <span class="lbl">Topic 1</span>
-  <h3>Why Test? &mdash; It Is Not Theoretical</h3>
-  <div class="bug-grid">
-    <div class="bug-card"><div class="co">Uber &middot; 2017</div>A man ordered a ride from his wife's phone and logged out. The app kept sending notifications to her iPhone, revealing his travel history. The couple divorced; he sued Uber for &euro;45m.</div>
-    <div class="bug-card"><div class="co">YouTube &middot; 2014</div>"Gangnam Style" exceeded the view counter limit. The counter was a signed 32-bit integer &mdash; it broke past 2,147,483,647 views.</div>
-    <div class="bug-card"><div class="co">Tesla &middot; 2021</div>135,000 cars recalled. Flash memory in the touchscreen wore out, taking the rear-view camera and defroster controls with it.</div>
-  </div>
-  <div class="bug-grid" style="margin-top:8px">
-    <div class="bug-card"><div class="co">Boeing 737 MAX &middot; 2018/19</div>MCAS relied on a single angle-of-attack sensor. Two crashes, 346 people dead.</div>
-    <div class="bug-card"><div class="co">Boeing Starliner &middot; 2020</div>Two software defects in one flight: the spacecraft clock was 11 hours off, and the wrong thrusters fired.</div>
-    <div class="bug-card"><div class="co">CrowdStrike &middot; 2024</div>A faulty content update crashed ~8.5 million Windows machines worldwide. Estimated damage: ~US$10 billion.</div>
-  </div>
-  <p style="font-size:.5em;color:#888;margin-top:.4em">Data breaches belong on the same list: T-Mobile 2022 (37M users), Juspay 2021 (card data), Yahoo 2014 (500M users).</p>
+  <h3>Testing Happens Everywhere, Not Only in Software</h3>
+  <div class="figure"><img src="images/iihs-safety-ratings.png" alt="IIHS vehicle safety ratings table" style="width:42%"><div class="cap">Independent crash-test ratings for midsize cars. Somebody defined the criteria, ran the tests and published the results &mdash; that is exactly what a test report is.</div></div>
+  <p style="font-size:.6em">You already trust test results every day. The question is what happens when nobody runs them.</p>
 </section>
 
 <section>
   <span class="lbl">Topic 1</span>
-  <h3>It Happens in Estonia Too</h3>
+  <h3>Users Tell You About Quality &mdash; Constantly</h3>
   <div class="g2">
-    <div class="card r"><strong>Ehitisregister</strong>Municipalities missed statutory deadlines because of defects in the new building register.</div>
-    <div class="card o"><strong>SKAIS2</strong>A social-insurance information system project that failed after years of work &mdash; requirements overloaded, multiple procurement disputes, deadlines missed.</div>
+    <div class="figure" style="margin:0"><img src="images/uber-reviews.png" alt="Uber app store reviews" style="max-height:40vh"><div class="cap">Uber &mdash; 4.8</div></div>
+    <div class="figure" style="margin:0"><img src="images/lyft-reviews.png" alt="Lyft app store reviews" style="max-height:40vh"><div class="cap">Lyft &mdash; 4.9</div></div>
+  </div>
+  <p style="font-size:.58em;margin-top:.4em">App store reviews are unstructured defect reports written by your users. They arrive too late and cost you the customer &mdash; but they are still evidence of quality.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 1</span>
+  <h3>Why Test? &mdash; Real Failures</h3>
+  <div class="newsgrid">
+    <div><img src="images/uber-affair.png" alt="Uber notification bug headline"><div class="n"><strong>Uber, 2017</strong> &mdash; a man ordered a ride from his wife's phone and logged out. The app kept sending notifications to her phone, revealing his travel history. The couple divorced; he sued Uber for &euro;45m.</div></div>
+    <div><img src="images/gangnam-style.png" alt="Gangnam Style broke YouTube view counter"><div class="n"><strong>YouTube, 2014</strong> &mdash; the view counter was a signed 32-bit integer. It broke past 2,147,483,647 views. A boundary value defect, live, in front of a billion people.</div></div>
+    <div><img src="images/tesla-recall.png" alt="Tesla recall over computer memory failure"><div class="n"><strong>Tesla, 2021</strong> &mdash; 135,000 cars recalled. Flash memory in the touchscreen wore out, taking the rear-view camera and defroster controls with it.</div></div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Topic 1</span>
+  <h3>When Software Kills</h3>
+  <div class="newsgrid">
+    <div><img src="images/boeing-737max.png" alt="Boeing 737 MAX killer software headline"><div class="n"><strong>Boeing 737 MAX, 2018 &amp; 2019</strong> &mdash; the MCAS system relied on a single angle-of-attack sensor. Two crashes, 346 people dead. No redundancy, and pilots were not told the system existed.</div></div>
+    <div><img src="images/starliner.png" alt="Boeing Starliner software errors headline"><div class="n"><strong>Boeing Starliner, 2020</strong> &mdash; two software defects in one flight: the spacecraft clock was 11 hours off, and the wrong thrusters fired. Investigators blamed the engineering culture, not one programmer.</div></div>
+    <div><img src="images/crowdstrike-airport.jpg" alt="CrowdStrike outage blue screen at an airport"><div class="n"><strong>CrowdStrike, 2024</strong> &mdash; a faulty content update crashed ~8.5 million Windows machines worldwide. Airports, hospitals and banks stopped. Estimated damage: ~US$10 billion.</div></div>
+  </div>
+  <p style="font-size:.5em;color:#888;margin-top:.4em">Data breaches belong on the same list: T-Mobile 2022 (37M users) &middot; Juspay 2021 (card data) &middot; Yahoo 2014 (500M users).</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 1</span>
+  <h3>It Happens Close to Home Too</h3>
+  <div class="g2">
+    <div class="card r"><strong>A national building register</strong>Municipalities missed statutory deadlines because of defects in a newly launched register &mdash; a government system where the deadline is written into law.</div>
+    <div class="card o"><strong>A national social insurance system</strong>A large public IT project that failed after years of work. Requirements overloaded, multiple procurement disputes, deadlines missed, the system never delivered as specified.</div>
   </div>
   <blockquote>Most failures are not "someone wrote a bad line of code". They are requirements that were never clear, and testing that started too late.</blockquote>
 </section>
@@ -195,17 +225,6 @@
 </section>
 
 <section>
-  <span class="lbl">Topic 5</span>
-  <h3>When Is the Product Ready for the User?</h3>
-  <ul style="font-size:.68em">
-    <li>Testing has been carried out across the different functional areas.</li>
-    <li>The application is compatible with the required hardware and software.</li>
-    <li>Performance and security meet the requirements &mdash; not just "it works on my laptop".</li>
-  </ul>
-  <blockquote>"Ready" is a decision made against exit criteria you agreed in advance &mdash; not a feeling at the end of the sprint. We define those criteria in Lesson 3.</blockquote>
-</section>
-
-<section>
   <span class="lbl">Self-Check</span>
   <h3>Can You Answer These?</h3>
   <ul style="font-size:.68em">
@@ -220,14 +239,15 @@
   <div class="hw">
     <h3>Homework 2 &mdash; Failure Case Analysis</h3>
     <p style="font-size:.68em">In your group, write up the failure you analysed in class: what happened, what the consequences were, which testing activity would have caught it, and at which stage the defect was introduced.</p>
-    <p style="font-size:.62em">Full brief and submission format: <a href="homework/hw-02.html">Homework 2</a></p>
+    <p style="font-size:.62em">Full brief: <a href="homework/hw-02.html">Homework 2</a></p>
   </div>
 </section>
 </div></div>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
 <script>
-Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight]});
+Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight],keyboard:{27:null}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();e.stopPropagation();window.location.href='index.html';}},true);
 </script>
 </body>
 </html>

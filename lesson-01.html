@@ -54,19 +54,27 @@
 .bug-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
 .bug-card{background:rgba(229,115,115,.08);border:1px solid rgba(229,115,115,.3);border-radius:6px;padding:8px 10px;font-size:.62em;line-height:1.5;text-align:left;}
 .bug-card .co{font-weight:700;color:var(--red);margin-bottom:.2em;}
+.figure{text-align:center;margin:.4em 0;}
+.figure img{max-width:100%;max-height:52vh;border-radius:8px;background:#fff;padding:6px;box-shadow:0 4px 18px rgba(0,0,0,.4);}
+.figure .cap{font-size:.42em;color:#888;margin-top:.35em;}
+.g2 .figure img,.g3 .figure img{max-height:34vh;}
+.newsgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:start;}
+.newsgrid img{width:100%;border-radius:6px;background:#fff;padding:3px;}
+.newsgrid .n{font-size:.5em;color:#aaa;margin-top:.2em;text-align:left;line-height:1.4;}
+.portrait{width:100%;border-radius:8px;}
 .nav{position:fixed;top:12px;right:12px;z-index:999;font-size:.55em;display:flex;gap:8px;}
 .nav a{color:#555;text-decoration:none;padding:3px 8px;border:1px solid #333;border-radius:5px;}
 .nav a:hover{color:#fff;border-color:#fff;}
 </style>
 </head>
 <body>
-<div class="nav"><a href="index.html">&#8617; All</a><a href="lesson-02.html">L2 &rarr;</a></div>
+<div class="nav"><a href="index.html">&#8617; All lessons</a><a href="lesson-02.html">L2 &rarr;</a></div>
 <div class="reveal"><div class="slides">
 <section data-background-gradient="linear-gradient(135deg,#0f0c29,#302b63,#24243e)">
-  <span class="lbl">Lesson 1 of 12</span>
+  <span class="lbl">Lesson 1 of 13</span>
   <h2>Testing Fundamentals &amp; the Quality Mindset</h2>
   <div class="divider"></div>
-  <p style="font-size:.62em">Course intro &middot; What is quality &middot; What can be tested &middot; The quality mindset</p>
+  <p style="font-size:.62em">Course intro &middot; Using AI in this course &middot; What is quality &middot; What can be tested</p>
   <p style="font-size:.5em;color:#555;margin-top:.8em">&rarr; next slide &nbsp;|&nbsp; ESC overview</p>
 </section>
 
@@ -76,10 +84,10 @@
     <div class="plan-title">Lesson 1: Testing Fundamentals &amp; the Quality Mindset<br>Focus: Course introduction and what software quality actually means</div>
       <div class="plan-topics">
         <p><span>1.</span> Course introduction &mdash; structure, grading, prerequisites</p>
-        <p><span>2.</span> Who is teaching this &mdash; and who are you</p>
-        <p><span>3.</span> What is (software) quality? &mdash; the seven aspects</p>
-        <p><span>4.</span> What is testing? What can be tested?</p>
-        <p><span>5.</span> AI tools and the quality mindset</p>
+        <p><span>2.</span> Using AI in this course &mdash; the ground rules</p>
+        <p><span>3.</span> Who is teaching this &mdash; and who are you</p>
+        <p><span>4.</span> What is (software) quality? &mdash; the seven aspects</p>
+        <p><span>5.</span> What is testing? What can be tested? Verification vs validation</p>
       </div>
       <div class="plan-hw"><strong>Homework:</strong> No formal submission. Come to the next lesson with one example of software you consider high quality &mdash; and one you don't.</div>
   </div>
@@ -89,22 +97,21 @@
   <span class="lbl">About Me</span>
   <div class="bio-grid">
     <div class="bio-left">
+      <img class="portrait" src="images/instructor.jpg" alt="Tatjana Kirotar" style="margin-bottom:.5em">
       <div class="name">Tatjana Kirotar</div>
       <div class="role">Staff QA Engineer / QA Lead</div>
-      <div style="font-size:.85em;color:#aaa;margin-bottom:.6em">MS Teams &middot; Tatjana Kirotar<br>tatjana.kirotar@tptlive.ee<br>tatjana.kirotar@gmail.com</div>
-      <div style="color:#888;font-size:.85em">Estonian &nbsp;<br>English &nbsp;<br>Russian</div>
+      <div style="font-size:.85em;color:#aaa">Teams &middot; Tatjana Kirotar<br>tatjana.kirotar@tptlive.ee<br>tatjana.kirotar@gmail.com</div>
     </div>
     <div class="timeline">
       <p><strong>Working experience:</strong></p>
-      <p><span class="year">2025 &ndash;</span> &nbsp;<strong>Wolt</strong> &mdash; Staff QA Engineer / QA Lead</p>
+      <p><span class="year">2025 &ndash;</span> &nbsp;<strong>DoorDash / Wolt</strong> &mdash; Staff QA Engineer / Lead QA</p>
       <p><span class="year">2023 &ndash;</span> &nbsp;<strong>TPT</strong> &mdash; Visiting Lecturer</p>
       <p><span class="year">2020&ndash;25</span> <strong>CyberCube</strong> &mdash; QA Automation Engineer &rarr; Engineering Manager</p>
       <p><span class="year">2019</span> &nbsp;&nbsp;&nbsp;<strong>Testlio</strong> &mdash; Test Automation Specialist</p>
       <p><span class="year">2015&ndash;19</span> <strong>Evitec</strong> &mdash; QA Engineer &rarr; System Analyst</p>
       <p><span class="year">2016&ndash;19</span> <strong>TalTech</strong> &mdash; Assistant / Visiting Lecturer</p>
-      <p style="margin-top:.5em"><strong>Education:</strong></p>
-      <p><span class="year">2017&ndash;23</span> MSc Engineering &mdash; TalTech</p>
-      <p><span class="year">2014&ndash;17</span> BSc Engineering &mdash; TalTech</p>
+      <p style="margin-top:.4em"><strong>Education:</strong> &nbsp;<span class="year">MSc</span> Engineering, TalTech &nbsp;&middot;&nbsp; <span class="year">BSc</span> Engineering, TalTech</p>
+      <p style="margin-top:.3em;color:#888">Languages: Estonian &middot; English &middot; Russian</p>
     </div>
   </div>
 </section>
@@ -116,7 +123,7 @@
     <div>
       <div class="card" style="margin-bottom:8px">
         <strong>Structure</strong>
-        2 &times; 45 min per week &middot; Teams / TPT<br>
+        2 &times; 45 min per week<br>
         New topic + in-class exercise
       </div>
       <div class="card g">
@@ -141,23 +148,51 @@
 </section>
 
 <section>
+  <span class="lbl">Everything In One Place</span>
+  <h3>This Course Lives on the Web</h3>
+  <div class="g2" style="align-items:center">
+    <div>
+      <div class="figure" style="margin:0"><img src="images/qr-course.png" alt="QR code to the course site" style="width:56%;max-height:38vh"></div>
+    </div>
+    <div>
+      <div class="card"><strong>All slides, all homework</strong>Every lesson, every assignment brief and all course materials are on one page. Scan the code or type the address.</div>
+      <div class="card g" style="margin-top:8px"><strong>Nothing to install</strong>Works on a phone. Use it during the lesson to follow along, and afterwards to redo an exercise.</div>
+      <p style="font-size:.55em;color:#888;margin-top:.6em">tanjaq.github.io/Tarkvara-testimise-alused</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <div class="ai">
+    <h3>Using AI in This Course</h3>
+    <p style="font-size:.68em">AI tools &mdash; ChatGPT, Claude, Gemini, Copilot and the rest &mdash; are <strong>allowed and encouraged</strong> in my subjects. Using AI well is a real skill for both developers and testers today.</p>
+    <div class="g2" style="margin-top:.4em">
+      <div class="card g" style="border-left-color:var(--green)"><strong>The golden rule</strong>Use AI &mdash; but use it with your brain engaged.<br>You are always responsible for the result, not the AI. You must be able to explain and justify every piece of homework you submit.</div>
+      <div class="card r"><strong>Trust, but verify</strong>AI can draft your first test cases, explain code and produce a documentation skeleton.<br>AI does not know your requirements, does not know your users, and does not know whether its own answer is correct.</div>
+    </div>
+    <p style="font-size:.6em;margin-top:.5em">Full treatment, with worked good and bad examples: <a href="lesson-bonus-ai.html" style="color:var(--orange)">bonus lesson on using AI responsibly</a>.</p>
+  </div>
+</section>
+
+<section>
   <span class="lbl">Syllabus</span>
-  <h3>What We Cover in 12 Lessons</h3>
+  <h3>What We Cover</h3>
   <div class="g3" style="font-size:.95em">
-    <div class="card"><strong>Foundations</strong>1. Quality mindset<br>2. Purpose of testing<br>3. The testing process</div>
+    <div class="card"><strong>Foundations</strong>1. Quality mindset<br>2. Purpose of testing<br>3. Test process &amp; test plan</div>
     <div class="card g"><strong>Design inputs</strong>4. Software requirements<br>5. Software architecture</div>
     <div class="card o"><strong>Techniques</strong>6. Static testing<br>7. Black box<br>8. White box</div>
-    <div class="card r"><strong>Documentation</strong>9. Defect management<br>10. Test cases &amp; docs</div>
-    <div class="card p"><strong>Non-functional</strong>11. Performance testing<br>12. Application security</div>
-    <div class="card"><strong>Bonus</strong>Using AI responsibly in testing</div>
+    <div class="card r"><strong>Documentation</strong>9. Defects &amp; exploratory testing<br>10. Test cases &amp; documentation</div>
+    <div class="card p"><strong>Specialised testing</strong>11. Database &amp; SQL<br>12. Accessibility<br>13. Mobile</div>
+    <div class="card"><strong>Bonus lessons</strong>Using AI responsibly<br>Performance testing<br>Application security</div>
   </div>
-  <p style="font-size:.55em;color:#888;margin-top:.6em">The topics and exercises are chosen for what the Estonian job market actually expects from a junior QA or developer.</p>
+  <p style="font-size:.55em;color:#888;margin-top:.6em">The topics and exercises are chosen for what the job market actually expects from a junior QA engineer or developer.</p>
 </section>
 
 <section>
   <div class="teams">
     <h3>Your Turn &mdash; Let's Meet</h3>
-    <p style="font-size:.63em">Answer in the Teams chat or speak up.</p>
+    <p style="font-size:.63em">Answer in the chat or speak up.</p>
     <ul style="font-size:.72em;line-height:1.9">
       <li>What do you want to get out of this course?</li>
       <li>What is your tech stack?</li>
@@ -168,7 +203,7 @@
 </section>
 
 <section>
-  <span class="lbl">Topic 1</span>
+  <span class="lbl">Topic 3</span>
   <h3>What Is (Software) Quality?</h3>
   <div class="g2">
     <div>
@@ -187,7 +222,7 @@
 </section>
 
 <section>
-  <span class="lbl">Topic 2</span>
+  <span class="lbl">Topic 4</span>
   <h3>What Is Testing?</h3>
   <p style="font-size:.66em">The process of evaluating software quality and checking whether the product:</p>
   <div class="g2" style="margin-top:.4em">
@@ -199,12 +234,12 @@
 </section>
 
 <section>
-  <span class="lbl">Topic 3</span>
+  <span class="lbl">Topic 4</span>
   <h3>What Can Be Tested? &mdash; Everything</h3>
   <div class="g2">
     <div>
-      <div class="card" style="margin-bottom:6px"><strong>Procurement / business analysis doc</strong>Describes end-user needs. Is it complete? Unambiguous?</div>
-      <div class="card g" style="margin-bottom:6px"><strong>System analysis / design doc</strong>Does it match the business analysis? Are FR and NFR both covered?</div>
+      <div class="card" style="margin-bottom:6px"><strong>Business analysis document</strong>Describes end-user needs. Is it complete? Unambiguous?</div>
+      <div class="card g" style="margin-bottom:6px"><strong>System analysis / design document</strong>Does it match the business analysis? Are FR and NFR both covered?</div>
       <div class="card o"><strong>Source code</strong>Does it meet the requirements? Readable, maintainable, testable?</div>
     </div>
     <div>
@@ -217,7 +252,7 @@
 </section>
 
 <section>
-  <span class="lbl">Topic 4</span>
+  <span class="lbl">Topic 5</span>
   <h3>Two Words You Will Use Constantly</h3>
   <div class="g2">
     <div class="card"><strong>Verification</strong>Are we building the product <em>right</em>?<br>Does it match the specification, the design, the standard?<br><span style="color:#888">Reviews, static analysis, unit tests</span></div>
@@ -227,31 +262,10 @@
 </section>
 
 <section>
-  <span class="lbl">Topic 5</span>
-  <div class="ai">
-    <h3>AI Tools Are Here &mdash; Use Them With Brains</h3>
-    <div class="g2" style="margin-top:.4em">
-      <div>
-        <p style="font-size:.72em;color:var(--green);font-weight:600">AI can help you:</p>
-        <ul style="font-size:.7em">
-          <li>Write code and documents faster</li>
-          <li>Generate first-draft test cases</li>
-          <li>Explain unfamiliar code</li>
-          <li>Suggest refactoring ideas</li>
-        </ul>
-      </div>
-      <div>
-        <p style="font-size:.72em;color:var(--red);font-weight:600">AI cannot know:</p>
-        <ul style="font-size:.7em">
-          <li>Your actual requirements</li>
-          <li>Your users' real expectations</li>
-          <li>Whether the system is usable</li>
-          <li>Whether its own output is correct</li>
-        </ul>
-      </div>
-    </div>
-    <p style="font-size:.62em;margin-top:.5em">The quality mindset you build in this course is exactly what makes AI safe to use. <strong>Trust, but verify.</strong> Full treatment in the <a href="lesson-bonus-ai.html" style="color:var(--orange)">bonus lesson</a>.</p>
-  </div>
+  <span class="lbl">And One More Thing</span>
+  <h3>Know What You Are Actually Claiming</h3>
+  <div class="figure"><img src="images/fullstack-meme.png" alt="Everyone can do everything badly - full stack developer meme" style="width:48%"></div>
+  <p style="font-size:.6em">"It works" is a claim. This course is about being able to say precisely <em>what</em> works, <em>under which conditions</em>, and <em>what you did not check</em>.</p>
 </section>
 
 <section>
@@ -262,6 +276,7 @@
     <li>Give one artefact other than code that can be tested, and say what you would check in it.</li>
     <li>Explain verification vs validation in your own words.</li>
     <li>Why is "the software has no known bugs" not the same as "the software has quality"?</li>
+    <li>What are you responsible for when you use AI on a homework submission?</li>
   </ul>
 </section>
 
@@ -280,7 +295,8 @@
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
 <script>
-Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight]});
+Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight],keyboard:{27:null}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();e.stopPropagation();window.location.href='index.html';}},true);
 </script>
 </body>
 </html>

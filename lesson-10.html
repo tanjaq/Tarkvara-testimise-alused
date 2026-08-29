@@ -54,16 +54,24 @@
 .bug-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
 .bug-card{background:rgba(229,115,115,.08);border:1px solid rgba(229,115,115,.3);border-radius:6px;padding:8px 10px;font-size:.62em;line-height:1.5;text-align:left;}
 .bug-card .co{font-weight:700;color:var(--red);margin-bottom:.2em;}
+.figure{text-align:center;margin:.4em 0;}
+.figure img{max-width:100%;max-height:52vh;border-radius:8px;background:#fff;padding:6px;box-shadow:0 4px 18px rgba(0,0,0,.4);}
+.figure .cap{font-size:.42em;color:#888;margin-top:.35em;}
+.g2 .figure img,.g3 .figure img{max-height:34vh;}
+.newsgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:start;}
+.newsgrid img{width:100%;border-radius:6px;background:#fff;padding:3px;}
+.newsgrid .n{font-size:.5em;color:#aaa;margin-top:.2em;text-align:left;line-height:1.4;}
+.portrait{width:100%;border-radius:8px;}
 .nav{position:fixed;top:12px;right:12px;z-index:999;font-size:.55em;display:flex;gap:8px;}
 .nav a{color:#555;text-decoration:none;padding:3px 8px;border:1px solid #333;border-radius:5px;}
 .nav a:hover{color:#fff;border-color:#fff;}
 </style>
 </head>
 <body>
-<div class="nav"><a href="lesson-09.html">&larr; L9</a><a href="index.html">&#8617; All</a><a href="lesson-11.html">L11 &rarr;</a></div>
+<div class="nav"><a href="lesson-09.html">&larr; L9</a><a href="index.html">&#8617; All lessons</a><a href="lesson-11.html">L11 &rarr;</a></div>
 <div class="reveal"><div class="slides">
 <section data-background-gradient="linear-gradient(135deg,#0f0c29,#302b63,#24243e)">
-  <span class="lbl">Lesson 10 of 12</span>
+  <span class="lbl">Lesson 10 of 13</span>
   <h2>Test Cases &amp; Documentation</h2>
   <div class="divider"></div>
   <p style="font-size:.62em">User story &rarr; requirement &rarr; test case &middot; Re-testing &middot; Regression &middot; Test management tools</p>
@@ -81,7 +89,7 @@
         <p><span>4.</span> Confirmation testing and regression testing</p>
         <p><span>5.</span> Best practices and test management tools</p>
       </div>
-      <div class="plan-hw"><strong>Homework:</strong> Group project &mdash; write the test cases for your own project and add them to your SRS document.</div>
+      <div class="plan-hw"><strong>Homework:</strong> Write the test cases for your own project &mdash; then review another team's SRS.</div>
   </div>
 </section>
 
@@ -111,6 +119,13 @@
       <div class="card o"><strong>Status</strong>Pass / Fail / Blocked / Not executed, updated each run</div>
     </div>
   </div>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>What a Real Test Case Document Looks Like</h3>
+  <div class="figure"><img src="images/test-case-template.png" alt="Test case template with scenario ID, priority, steps, expected and actual output" style="width:76%"><div class="cap">Scenario ID, case ID, priority, pre- and post-requisites, then numbered steps with expected and actual output</div></div>
+  <p style="font-size:.58em">Every column earns its place. The comments column with a timestamp and initials is what makes a result traceable weeks later.</p>
 </section>
 
 <section>
@@ -202,21 +217,6 @@
 </section>
 
 <section>
-  <span class="lbl">Worked Examples</span>
-  <h3>Two Small Test Cases</h3>
-  <p style="font-size:.55em"><strong>Requirement:</strong> the user can search for products by keyword. <strong>Preconditions:</strong> the site is open.</p>
-  <table>
-    <tr><th>Step</th><th>Expected result</th><th>Actual</th></tr>
-    <tr><td>1. Find the search field 2. Type "apple" 3. Press Enter</td><td>Results contain all products whose name includes "apple"</td><td>Works as expected</td></tr>
-  </table>
-  <p style="font-size:.55em;margin-top:.5em"><strong>Requirement:</strong> the user can sort found products by price. <strong>Preconditions:</strong> a search for "apple" returns more than one result.</p>
-  <table>
-    <tr><th>Step</th><th>Expected result</th><th>Actual</th></tr>
-    <tr><td>1. Open the sort control 2. Choose "Price: low to high"</td><td>Sort options are: price low, price high, name A&ndash;Z, name Z&ndash;A. Results are sorted by ascending price.</td><td>Works as expected</td></tr>
-  </table>
-</section>
-
-<section>
   <span class="lbl">Self-Check</span>
   <h3>Can You Answer These?</h3>
   <ul style="font-size:.68em">
@@ -229,16 +229,18 @@
 
 <section>
   <div class="hw">
-    <h3>Homework 10 &mdash; Test Cases for Your Project</h3>
-    <p style="font-size:.68em">With your team, write test cases for your own project and add them to your SRS document (section 7.1 Test Cases). The cases must cover all of your functional requirements.</p>
-    <p style="font-size:.62em">Full brief: <a href="homework/hw-10.html">Homework 10</a></p>
+    <h3>Homework 10 &amp; 11</h3>
+    <p style="font-size:.68em"><strong>Homework 10 &mdash; Test cases for your project.</strong> Write test cases covering all of your functional requirements and add them to your SRS document (section 7.1).</p>
+    <p style="font-size:.68em"><strong>Homework 11 &mdash; Review another team's SRS.</strong> Once every team's SRS is complete, you review another team's document and they review yours.</p>
+    <p style="font-size:.62em">Briefs: <a href="homework/hw-10.html">Homework 10</a> &middot; <a href="homework/hw-11.html">Homework 11</a></p>
   </div>
 </section>
 </div></div>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
 <script>
-Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight]});
+Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight],keyboard:{27:null}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();e.stopPropagation();window.location.href='index.html';}},true);
 </script>
 </body>
 </html>

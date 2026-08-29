@@ -32,13 +32,14 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08)
 .hwcard .n{font-size:.72em;letter-spacing:2px;text-transform:uppercase;color:#888;}
 .hwcard .t{font-weight:600;color:#fff;margin:.25em 0;font-size:1em;}
 .hwcard .d{font-size:.85em;color:#aaa;}
+.esc{font-size:.75em;color:#555;margin-top:2em;}
 </style>
 </head>
 <body>
 <div class="wrap">
 <div class="crumb"><a href="../index.html">Course</a> &rsaquo; <a href="index.html">Homework</a> &rsaquo; Homework 4</div>
 <h1>Homework 4 &mdash; Requirements for Your Project</h1>
-<div class="meta"><span>Group project</span><span>Lesson 4</span><span>Submit: Teams &mdash; SRS document</span></div>
+<div class="meta"><span>Group project</span><span>Lesson 4</span><span>Submit: SRS document</span></div>
 
 <h2>Objective</h2>
 <p>Produce requirements you can actually build and test against for the rest of the course.</p>
@@ -47,7 +48,7 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08)
 <ol>
   <li>Start from the SRS template.</li>
   <li>Write the <strong>functional requirements</strong> &mdash; what the software must do. Derive them from user stories; do not submit the user stories as requirements.</li>
-  <li>Write the <strong>non-functional requirements</strong> &mdash; how the software must behave. Cover at least: performance, security, usability, availability.</li>
+  <li>Write the <strong>non-functional requirements</strong> &mdash; how the software must behave. Cover at least: performance, security, usability, availability and accessibility.</li>
   <li>Check every requirement against SMART: specific, measurable, achievable, realistic, timely.</li>
   <li>Review each other's requirements inside the team before submitting &mdash; that is a peer review, and it counts.</li>
 </ol>
@@ -73,7 +74,10 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08)
   <li><a href="../lesson-04.html">Lesson 4 &mdash; Software Requirements</a></li>
 </ul>
 
-<footer>Software Testing Fundamentals &middot; Tarkvara testimise alused &middot; Tatjana Kirotar</footer>
+<footer>Software Testing Fundamentals &middot; Tatjana Kirotar &middot; <span class="esc">press ESC to go back to all lessons</span></footer>
 </div>
+<script>
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();window.location.href='../index.html';}},true);
+</script>
 </body>
 </html>
