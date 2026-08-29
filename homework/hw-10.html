@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Homework 10 &ndash; Test Cases for Your Project</title>
+<title>Homework 10 &ndash; SQL Verification &mdash; Shop Database</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:#0f0c29;color:#e0e0e0;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;padding:40px 20px;line-height:1.65;}
@@ -38,37 +38,41 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08)
 <body>
 <div class="wrap">
 <div class="crumb"><a href="../index.html">Course</a> &rsaquo; <a href="index.html">Homework</a> &rsaquo; Homework 10</div>
-<h1>Homework 10 &mdash; Test Cases for Your Project</h1>
-<div class="meta"><span>Group project</span><span>Lesson 10</span><span>Submit: SRS section 7.1</span></div>
+<h1>Homework 10 &mdash; SQL Verification &mdash; Shop Database</h1>
+<div class="meta"><span>Individual or pair</span><span>Lesson 11</span><span>Submit: Teams</span></div>
 
 <h2>Objective</h2>
-<p>Close the loop: requirements you wrote in Lesson 4, verified by test cases you write now.</p>
+<p>Prove things about data instead of trusting the screen &mdash; and see which defects a missing constraint lets through.</p>
 
 <h2>Task</h2>
 <ol>
-  <li>With your team, write test cases for your project and add them to your SRS document, section 7.1 Test Cases.</li>
-  <li>The test cases must cover <strong>all</strong> of your functional requirements &mdash; check them off one by one.</li>
-  <li>Each test case needs: ID and title, description, preconditions, numbered steps, test data, expected results, and a status column.</li>
-  <li>Include negative and edge cases, not only the happy path. Use the techniques from Lessons 7 and 8 to decide which values to test.</li>
-  <li>Keep each case focused on one scenario, and make sure no case depends on the output of another.</li>
+  <li>Open <a href="https://sqliteonline.com">sqliteonline.com</a> (or any SQLite client). Paste <a href="../materials/shop-database.sql">shop-database.sql</a> and run it.</li>
+  <li>The nine requirements the application is supposed to guarantee are listed in comments at the top of the file.</li>
+  <li><strong>Write one query per requirement</strong> that checks whether the data actually honours it. A good check returns zero rows when everything is fine, and the offending rows when it is not.</li>
+  <li>Run the join comparison suggested at the bottom of the file: <code>JOIN</code> versus <code>LEFT JOIN</code> on orders and customers. Explain the difference in the row count.</li>
+  <li><strong>Find the defects.</strong> There are at least six. For each one record: the query that found it, the rows returned, which requirement it breaks, and the severity you would assign.</li>
+  <li>For each defect, name the <strong>database constraint</strong> that would have prevented it &mdash; <code>NOT NULL</code>, <code>UNIQUE</code>, <code>FOREIGN KEY</code> or <code>CHECK</code>.</li>
+  <li>Finally: one of the requirements is about money. Look at how prices and totals are stored and say what you would change, and why.</li>
 </ol>
 
 <h2>Deliverable</h2>
-<div class="box g">Test cases in the SRS document covering every functional requirement.</div>
+<div class="box g">Your queries, the defects found with evidence, the constraint that would have prevented each, and your note on the money storage.</div>
 
 <h2>Assessment criteria</h2>
 <table>
   <tr><th>Criterion</th><th>What we look for</th></tr>
-  <tr><td><strong>Traceability</strong></td><td>Every functional requirement has at least one test case, and every case names its requirement</td></tr>
-  <tr><td><strong>Executable</strong></td><td>Another team could run your cases without asking questions</td></tr>
-  <tr><td><strong>Measurable expected results</strong></td><td>No "works correctly"</td></tr>
-  <tr><td><strong>Negative coverage</strong></td><td>Invalid input and edge cases are included</td></tr>
+  <tr><td><strong>Query per requirement</strong></td><td>Each requirement has a check that returns rows only when it is violated</td></tr>
+  <tr><td><strong>Defects found</strong></td><td>At least six, correctly mapped to the requirement they break</td></tr>
+  <tr><td><strong>Constraints</strong></td><td>The right constraint is named for each defect</td></tr>
+  <tr><td><strong>Join understanding</strong></td><td>You can explain the row-count difference between JOIN and LEFT JOIN</td></tr>
+  <tr><td><strong>Severity</strong></td><td>Assigned and justified per defect</td></tr>
 </table>
 
 <h2>Resources</h2>
 <ul>
-  <li><a href="../materials/Software Requirements Specification (SRS) Document Template.docx">SRS document template (.docx)</a></li>
-  <li><a href="../lesson-10.html">Lesson 10 &mdash; Test Cases &amp; Documentation</a></li>
+  <li><a href="../materials/shop-database.sql">shop-database.sql</a></li>
+  <li><a href="https://sqliteonline.com">SQLite Online</a></li>
+  <li><a href="../lesson-11.html">Lesson 11 &mdash; Database &amp; SQL Testing</a></li>
 </ul>
 
 <footer>Software Testing Fundamentals &middot; Tatjana Kirotar &middot; <span class="esc">press ESC to go back to all lessons</span></footer>

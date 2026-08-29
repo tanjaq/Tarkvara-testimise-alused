@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Homework 2 &ndash; Failure Case Analysis</title>
+<title>Homework 2 &ndash; Test Process Worksheet &mdash; Calculator</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:#0f0c29;color:#e0e0e0;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;padding:40px 20px;line-height:1.65;}
@@ -38,35 +38,41 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08)
 <body>
 <div class="wrap">
 <div class="crumb"><a href="../index.html">Course</a> &rsaquo; <a href="index.html">Homework</a> &rsaquo; Homework 2</div>
-<h1>Homework 2 &mdash; Failure Case Analysis</h1>
-<div class="meta"><span>Group of 3&ndash;4</span><span>Lesson 2</span><span>Submit: One document per group</span></div>
+<h1>Homework 2 &mdash; Test Process Worksheet &mdash; Calculator</h1>
+<div class="meta"><span>Group of 3&ndash;4</span><span>Lesson 3</span><span>Submit: Teams</span></div>
 
 <h2>Objective</h2>
-<p>Connect a real-world failure to a specific, missing testing activity.</p>
+<p>Experience the full test process end to end on something small enough to finish in one session.</p>
 
 <h2>Task</h2>
 <ol>
-  <li>Pick one failure from the lesson (Uber, YouTube, Tesla, Boeing 737 MAX, Starliner, CrowdStrike, or one of the public-sector examples) or find your own online.</li>
-  <li>Answer as a group: What happened? What were the consequences (money, reputation, safety, environment)?</li>
-  <li>At which stage was the defect introduced &mdash; requirements, design, development, testing, acceptance?</li>
-  <li>What testing should have been done to prevent it? Be specific: which technique, at which stage, checking what.</li>
-  <li>Prepare a 2&ndash;3 minute summary for the class.</li>
+  <li>The system under test: a simple web calculator that takes two numbers, offers four operations (add, subtract, multiply, divide) and shows a result.</li>
+  <li><strong>1. Planning and control</strong> &mdash; define the scope of testing. What are the risks? (division by zero, negative numbers, empty fields, very large numbers, decimal separators)</li>
+  <li><strong>2. Analysis and design</strong> &mdash; identify test conditions. Choose which conditions matter most, based on risk, frequency and criticality.</li>
+  <li><strong>3. Test creation</strong> &mdash; write at least three test cases with inputs, steps and expected result.</li>
+  <li><strong>4. Test execution</strong> &mdash; assume the calculator is built (you may use your OS or phone calculator). Mark each test PASS or FAIL. For a FAIL, write a short defect description.</li>
+  <li><strong>5. Closure</strong> &mdash; was the testing sufficient? What was left uncovered? What would you improve next round?</li>
+  <li><strong>Filling it in</strong> &mdash; either download the <a href="../materials/testing-process-worksheet.docx">Word version</a> and type into it, or type straight into the <a href="testing-process-worksheet.html">worksheet page</a> and use its Print button to save a PDF. Hand the finished file in through Teams.</li>
+  <li>Present to the class and discuss whether the testing was enough.</li>
 </ol>
 
 <h2>Deliverable</h2>
-<div class="box g">A one-page write-up per group, plus the in-class summary.</div>
+<div class="box g">The completed worksheet with all five sections filled in.</div>
 
 <h2>Assessment criteria</h2>
 <table>
   <tr><th>Criterion</th><th>What we look for</th></tr>
-  <tr><td><strong>Accuracy</strong></td><td>The facts of the incident are right and sourced</td></tr>
-  <tr><td><strong>Root cause</strong></td><td>You identify the stage where the defect was introduced, not just where it was noticed</td></tr>
-  <tr><td><strong>Prevention</strong></td><td>The proposed testing is specific and would actually have caught it</td></tr>
+  <tr><td><strong>Completeness</strong></td><td>All five process steps are filled in, not just the test cases</td></tr>
+  <tr><td><strong>Risk thinking</strong></td><td>Risks named are real and specific to a calculator</td></tr>
+  <tr><td><strong>Test cases</strong></td><td>At least three cases with concrete inputs and a single, measurable expected result</td></tr>
+  <tr><td><strong>Honest closure</strong></td><td>You can name what you did not cover</td></tr>
 </table>
 
 <h2>Resources</h2>
 <ul>
-  <li><a href="../lesson-02.html">Lesson 2 &mdash; The Purpose of Testing</a></li>
+  <li><a href="../materials/testing-process-worksheet.docx">Worksheet &mdash; Word version (.docx)</a></li>
+  <li><a href="testing-process-worksheet.html">Worksheet &mdash; fill in on the page</a></li>
+  <li><a href="../lesson-03.html">Lesson 3 &mdash; The Testing Process</a></li>
 </ul>
 
 <footer>Software Testing Fundamentals &middot; Tatjana Kirotar &middot; <span class="esc">press ESC to go back to all lessons</span></footer>

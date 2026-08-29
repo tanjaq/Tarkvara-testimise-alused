@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Homework 7 &ndash; Decision Table + EP/BVA</title>
+<title>Homework 7 &ndash; Boarding Pass &mdash; Coverage Analysis</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:#0f0c29;color:#e0e0e0;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;padding:40px 20px;line-height:1.65;}
@@ -38,41 +38,38 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08)
 <body>
 <div class="wrap">
 <div class="crumb"><a href="../index.html">Course</a> &rsaquo; <a href="index.html">Homework</a> &rsaquo; Homework 7</div>
-<h1>Homework 7 &mdash; Decision Table + EP/BVA</h1>
-<div class="meta"><span>Individual or pair</span><span>Lesson 7</span><span>Submit: Decision table + analysis</span></div>
+<h1>Homework 7 &mdash; Boarding Pass &mdash; Coverage Analysis</h1>
+<div class="meta"><span>Individual or pair</span><span>Lesson 8</span><span>Submit: Teams</span></div>
 
 <h2>Objective</h2>
-<p>Apply specification-based techniques to a rule set complex enough that intuition fails, and to a real form that really is broken.</p>
+<p>Read code coverage honestly &mdash; and see what it does not tell you.</p>
 
 <h2>Task</h2>
 <ol>
-  <li><strong>Part 1 &mdash; decision table.</strong> A user wants to print holiday photos. The business rules are:</li>
-  <li>&bull; An unregistered regular user has no permanent discount.<br>&bull; A registered user gets a 5% discount on every purchase.<br>&bull; Additional discounts: ordering more than 10 photos adds 3%; ordering photo frames as well adds 3%.<br>&bull; On a registered user's birthday, the standard 5% is replaced by 8%.</li>
-  <li>Build the decision table showing every possible combination of the business rules and the discount that applies.</li>
-  <li>Mark which combinations you would test first, and why. Note any rule that is ambiguous as written &mdash; that is a defect in the requirement.</li>
-  <li><strong>Part 2 &mdash; EP and BVA on a live form.</strong> Open the <a href="../materials/input-form-example.html">trip planner form</a>.</li>
-  <li>Define the equivalence partitions and boundary values for: number of travellers (1&ndash;8), budget (100&ndash;10000), email, and promo code (4&ndash;10 characters).</li>
-  <li>Run them. Record every case where the form's behaviour does not match its own stated rules &mdash; there are several real defects in it.</li>
-  <li>For each defect say which technique found it: would equivalence partitioning alone have caught it, or did you need the boundary values?</li>
+  <li>Open the code example: <a href="https://onecompiler.com/javascript/3yydc2m52">onecompiler.com/javascript/3yydc2m52</a></li>
+  <li>Given test cases: (1) a frequent flier is upgraded to Business class; (2) a non-frequent flier gets an Economy ticket.</li>
+  <li>How many statements do these two tests cover? (statement coverage)</li>
+  <li>How many branches do they cover? (branch coverage)</li>
+  <li>Which tests must you add to reach 100% statement coverage?</li>
+  <li>Draw a flow diagram if it helps &mdash; it usually does.</li>
+  <li>Finally: name one defect this code could contain that 100% statement coverage would still not find.</li>
 </ol>
 
 <h2>Deliverable</h2>
-<div class="box g">The complete decision table with prioritisation, plus your EP/BVA table and the list of defects found in the form.</div>
+<div class="box g">Your coverage numbers, the additional tests needed, the diagram if drawn, and the answer to the last question.</div>
 
 <h2>Assessment criteria</h2>
 <table>
   <tr><th>Criterion</th><th>What we look for</th></tr>
-  <tr><td><strong>Completeness</strong></td><td>Every combination of conditions appears in the table</td></tr>
-  <tr><td><strong>Correct outcomes</strong></td><td>The discount for each row is calculated correctly</td></tr>
-  <tr><td><strong>Partitions and boundaries</strong></td><td>Both are defined for every field, and the boundary values are the right ones</td></tr>
-  <tr><td><strong>Defects found</strong></td><td>Real mismatches between the form's rules and its behaviour, with evidence</td></tr>
-  <tr><td><strong>Technique awareness</strong></td><td>You can say which technique caught which defect</td></tr>
+  <tr><td><strong>Correct counting</strong></td><td>Statement and branch counts are right</td></tr>
+  <tr><td><strong>Additional tests</strong></td><td>The added tests genuinely reach the uncovered code</td></tr>
+  <tr><td><strong>Understanding limits</strong></td><td>You can name what coverage cannot detect</td></tr>
 </table>
 
 <h2>Resources</h2>
 <ul>
-  <li><a href="../materials/input-form-example.html">Trip planner form</a></li>
-  <li><a href="../lesson-07.html">Lesson 7 &mdash; Black Box Techniques</a></li>
+  <li><a href="https://onecompiler.com/javascript/3yydc2m52">Code example</a></li>
+  <li><a href="../lesson-08.html">Lesson 8 &mdash; White Box Techniques</a></li>
 </ul>
 
 <footer>Software Testing Fundamentals &middot; Tatjana Kirotar &middot; <span class="esc">press ESC to go back to all lessons</span></footer>

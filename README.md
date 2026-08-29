@@ -50,30 +50,30 @@ Lessons are reveal.js presentations. Use **→** to move between slides and **ES
 
 Full briefs with assessment criteria: **[homework/](homework/index.html)**
 
-| Lesson | # | Assignment | Format |
-|---|---|---|---|
-| 1 | 1 | The Quality Mindset — bring one good and one bad example | Individual |
-| 2 | 2 | Failure case analysis | Group of 3–4 |
-| 3 | 3 | Test process worksheet — calculator | Group of 3–4 |
-| 4 | 4 | Requirements for your project (FR + NFR) | Group project |
-| 5 | 5 | Project architecture diagram | Group project |
-| 6 | 6 | Peer review — [Rental-Car](https://github.com/tanjaq/Rental-Car/tree/peer-review) | Individual / pair |
-| 7 | 7 | Decision table + EP/BVA on the trip planner form | Individual / pair |
-| 8 | 8 | Boarding pass — coverage analysis | Individual / pair |
-| 9 | 9 | Exploratory session + bug report → [Bug-Reporting](https://github.com/tanjaq/Bug-Reporting/issues) | Individual |
-| 10 | 10 | Test cases for your project | Group project |
-| 11 | 11 | SQL verification — shop database | Individual / pair |
-| 12 | 12 | Accessibility audit | Individual / pair |
-| 13 | 13 | Mobile test charter | Individual / pair |
+| Lesson | # | Assignment | Format | Submit to |
+|---|---|---|---|---|
+| 1 | — | No homework — something to think about, discussed next lesson | — | — |
+| 2 | 1 | Failure case analysis | Group of 3–4 | Teams |
+| 3 | 2 | Test process worksheet — calculator | Group of 3–4 | Teams |
+| 4 | 3 | Requirements for your project (FR + NFR) | Group project | Teams |
+| 5 | 4 | Project architecture diagram | Group project | Teams |
+| 6 | 5 | Peer review — [Rental-Car](https://github.com/tanjaq/Rental-Car/tree/peer-review) | Individual / pair | Teams |
+| 7 | 6 | Decision table + EP/BVA on the trip planner form | Individual / pair | Teams |
+| 8 | 7 | Boarding pass — coverage analysis | Individual / pair | Teams |
+| 9 | 8 | Exploratory session + bug report | Individual | [Bug-Reporting](https://github.com/tanjaq/Bug-Reporting/issues) |
+| 10 | 9 | Test cases for your project | Group project | Teams |
+| 11 | 10 | SQL verification — shop database | Individual / pair | Teams |
+| 12 | 11 | Accessibility audit | Individual / pair | Teams |
+| 13 | 12 | Mobile test charter | Individual / pair | Teams |
 
-The group project runs through the whole course: requirements (L4) → architecture (L5) → test cases (L10) all land in the same SRS document. One homework per lesson.
+The group project runs through the whole course: requirements (L4) → architecture (L5) → test cases (L10) all land in the same SRS document.
 
 ---
 
 ## 📎 Materials
 
 - [SRS document template](materials/Software%20Requirements%20Specification%20(SRS)%20Document%20Template.docx) · [SRS example 1](materials/srs_example_1.pdf) · [SRS example 2](materials/srs_example_2.pdf)
-- Testing process worksheet — Homework 3: [Word version](materials/testing-process-worksheet.docx) to type into, or [fill it in on the page](homework/testing-process-worksheet.html) and print to PDF
+- Testing process worksheet — Homework 2: [Word version](materials/testing-process-worksheet.docx) to type into, or [fill it in on the page](homework/testing-process-worksheet.html) and print to PDF
 - [Trip planner form](materials/input-form-example.html) — a deliberately broken form, used in Lessons 3 and 7
 - [shop-database.sql](materials/shop-database.sql) — a sample database with planted data defects, used in Lesson 11
 

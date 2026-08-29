@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Homework 9 &ndash; Exploratory Session + Bug Report</title>
+<title>Homework 9 &ndash; Test Cases for Your Project</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:#0f0c29;color:#e0e0e0;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;padding:40px 20px;line-height:1.65;}
@@ -38,43 +38,37 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08)
 <body>
 <div class="wrap">
 <div class="crumb"><a href="../index.html">Course</a> &rsaquo; <a href="index.html">Homework</a> &rsaquo; Homework 9</div>
-<h1>Homework 9 &mdash; Exploratory Session + Bug Report</h1>
-<div class="meta"><span>Individual</span><span>Lesson 9</span><span>Submit: GitHub issue in the Bug-Reporting repository</span></div>
+<h1>Homework 9 &mdash; Test Cases for Your Project</h1>
+<div class="meta"><span>Group project</span><span>Lesson 10</span><span>Submit: Teams</span></div>
 
 <h2>Objective</h2>
-<p>Find a defect nobody scripted a test for, and report it so a developer can reproduce it without asking you anything.</p>
+<p>Close the loop: requirements you wrote in Lesson 4, verified by test cases you write now.</p>
 
 <h2>Task</h2>
 <ol>
-  <li><strong>Write a charter</strong> before you touch the product: <em>Explore &lt;target&gt; with &lt;resources&gt; to discover &lt;information&gt;.</em> Choose any application or website you use regularly.</li>
-  <li><strong>Pick a tour</strong> &mdash; money, back alley, saboteur, couch potato or guidebook &mdash; and say why that one fits your charter.</li>
-  <li><strong>Time-box the session</strong> to 45&ndash;60 minutes. Take notes as you go: what you covered, what surprised you, questions raised, what you did not get to.</li>
-  <li>Use the heuristics from the lesson: CRUD every entity you can, try Goldilocks values (zero, one, far too many), and check SFDIPOT for areas you have not touched.</li>
-  <li><strong>Pick your most interesting defect</strong> &mdash; a broken feature, a wrong error message, a missing validation, a UI glitch, a data problem.</li>
-  <li>Write the full bug report: summary title, environment, severity, priority, numbered steps to reproduce, expected result, actual result, visuals and logs. Open DevTools before reproducing so you have the console and network evidence.</li>
-  <li>File it as an issue: <a href="https://github.com/tanjaq/Bug-Reporting/issues">tanjaq/Bug-Reporting &middot; Issues</a>. Use the Bug Report template &mdash; it has all the fields pre-filled. The existing issues in that repo are worked examples using the same template.</li>
-  <li>Attach your session notes to the issue, and explain in two sentences why you chose this defect and what severity and priority you assigned.</li>
+  <li>With your team, write test cases for your project and add them to your SRS document, section 7.1 Test Cases.</li>
+  <li>The test cases must cover <strong>all</strong> of your functional requirements &mdash; check them off one by one.</li>
+  <li>Each test case needs: ID and title, description, preconditions, numbered steps, test data, expected results, and a status column.</li>
+  <li>Include negative and edge cases, not only the happy path. Use the techniques from Lessons 7 and 8 to decide which values to test.</li>
+  <li>Keep each case focused on one scenario, and make sure no case depends on the output of another.</li>
 </ol>
 
 <h2>Deliverable</h2>
-<div class="box g">One GitHub issue in the Bug-Reporting repository with all fields completed, your charter and session notes, and the severity/priority justification.</div>
+<div class="box g">Test cases in the SRS document covering every functional requirement.</div>
 
 <h2>Assessment criteria</h2>
 <table>
   <tr><th>Criterion</th><th>What we look for</th></tr>
-  <tr><td><strong>Charter</strong></td><td>A real charter was written before exploring, and the session stayed on mission</td></tr>
-  <tr><td><strong>Reproducible</strong></td><td>Someone else can follow your steps and see the same failure</td></tr>
-  <tr><td><strong>Specific actual result</strong></td><td>Names what actually happens, with values &mdash; not "it doesn't work"</td></tr>
-  <tr><td><strong>Evidence</strong></td><td>Screenshot, console error or network response included</td></tr>
-  <tr><td><strong>Severity vs priority</strong></td><td>The two are assigned separately and both justified</td></tr>
-  <tr><td><strong>Notes</strong></td><td>Your notes say what you covered and what you did not</td></tr>
+  <tr><td><strong>Traceability</strong></td><td>Every functional requirement has at least one test case, and every case names its requirement</td></tr>
+  <tr><td><strong>Executable</strong></td><td>Another team could run your cases without asking questions</td></tr>
+  <tr><td><strong>Measurable expected results</strong></td><td>No "works correctly"</td></tr>
+  <tr><td><strong>Negative coverage</strong></td><td>Invalid input and edge cases are included</td></tr>
 </table>
 
 <h2>Resources</h2>
 <ul>
-  <li><a href="https://github.com/tanjaq/Bug-Reporting">Bug-Reporting repository</a></li>
-  <li><a href="https://github.com/tanjaq/Bug-Reporting/issues">File a new issue</a></li>
-  <li><a href="../lesson-09.html">Lesson 9 &mdash; Defect Management &amp; Exploratory Testing</a></li>
+  <li><a href="../materials/Software Requirements Specification (SRS) Document Template.docx">SRS document template (.docx)</a></li>
+  <li><a href="../lesson-10.html">Lesson 10 &mdash; Test Cases &amp; Documentation</a></li>
 </ul>
 
 <footer>Software Testing Fundamentals &middot; Tatjana Kirotar &middot; <span class="esc">press ESC to go back to all lessons</span></footer>
