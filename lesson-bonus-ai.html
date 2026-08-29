@@ -140,22 +140,15 @@
 <section>
   <span class="lbl">Bad Example 1</span>
   <h3>"Write Tests for This Function"</h3>
-  <div class="g2">
-    <div>
-      <pre><code class="language-javascript">function applyDiscount(price, isMember) {
+  <pre><code class="language-javascript">function applyDiscount(price, isMember) {
   if (isMember) return price * 0.95;
   return price;
 }</code></pre>
-      <div class="card r" style="margin-top:6px"><strong>What AI typically produces</strong>Two tests: member gets 5% off, non-member pays full. Both pass. Coverage: 100%.</div>
-    </div>
-    <div class="card" style="font-size:.95em"><strong>What nobody tested</strong>
-      &middot; A negative price<br>
-      &middot; A price of 0<br>
-      &middot; <code>isMember</code> as the string "false" &mdash; which is truthy<br>
-      &middot; Floating point: 19.99 &rarr; 18.9905, and what gets stored<br>
-      &middot; The birthday rule from the requirement that is <em>not in this function at all</em><br>
-      <span style="color:var(--red)">The last one is the real defect. AI cannot see a requirement you did not give it &mdash; and 100% coverage of the wrong logic is still the wrong logic.</span></div>
+  <div class="g2" style="margin-top:.3em">
+    <div class="card r"><strong>What AI typically produces</strong>Two tests: member gets 5% off, non-member pays full. Both pass. Coverage: 100%.<br><span style="color:#888">Looks like a finished job.</span></div>
+    <div class="card"><strong>What nobody tested</strong>&middot; A negative price, or a price of 0<br>&middot; <code>isMember</code> as the string "false" &mdash; which is truthy<br>&middot; Floating point: 19.99 &rarr; 18.9905<br>&middot; The birthday rule from the requirement, which is <em>not in this function at all</em></div>
   </div>
+  <p style="font-size:.55em;margin-top:.35em;color:var(--red)">The last one is the real defect. AI cannot see a requirement you never gave it &mdash; and 100% coverage of the wrong logic is still the wrong logic.</p>
 </section>
 
 <section>
