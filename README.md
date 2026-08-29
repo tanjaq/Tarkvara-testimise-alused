@@ -29,7 +29,7 @@ Lessons are reveal.js presentations. Use **→** to move between slides and **ES
 |---|---|---|
 | 1 | Testing Fundamentals & the Quality Mindset | Course intro · AI ground rules · software quality · what can be tested · verification vs validation |
 | 2 | The Purpose of Testing | Real-world failures · consequences · where defects come from · cost of a defect · goals of testing |
-| 3 | The Testing Process & Test Plan | SDLC · waterfall, V-model, agile · the ISTQB five-step process · the test plan · seven principles |
+| 3 | The Testing Process | SDLC · waterfall, V-model, agile · the ISTQB five-step process · seven principles |
 | 4 | Software Requirements | Business vs system requirements · FR and NFR · SMART · SRS |
 | 5 | Software Architecture | Monolith · layered · microservices · event-driven · serverless · modular · monorepo |
 | 6 | Test Techniques I — Static Testing | Reviews · walkthroughs · inspections · static code analysis · PR review etiquette |
@@ -54,7 +54,7 @@ Full briefs with assessment criteria: **[homework/](homework/index.html)**
 |---|---|---|---|
 | 1 | 1 | The Quality Mindset — bring one good and one bad example | Individual |
 | 2 | 2 | Failure case analysis | Group of 3–4 |
-| 3 | 3 | Test process worksheet + one-page test plan | Group of 3–4 |
+| 3 | 3 | Test process worksheet — calculator | Group of 3–4 |
 | 4 | 4 | Requirements for your project (FR + NFR) | Group project |
 | 5 | 5 | Project architecture diagram | Group project |
 | 6 | 6 | Peer review — [Rental-Car](https://github.com/tanjaq/Rental-Car/tree/peer-review) | Individual / pair |
@@ -73,7 +73,7 @@ The group project runs through the whole course: requirements (L4) → architect
 ## 📎 Materials
 
 - [SRS document template](materials/Software%20Requirements%20Specification%20(SRS)%20Document%20Template.docx) · [SRS example 1](materials/srs_example_1.pdf) · [SRS example 2](materials/srs_example_2.pdf)
-- [Testing process worksheet](homework/testing-process-worksheet.html) — Homework 3
+- Testing process worksheet — Homework 3: [Word version](materials/testing-process-worksheet.docx) to type into, or [fill it in on the page](homework/testing-process-worksheet.html) and print to PDF
 - [Trip planner form](materials/input-form-example.html) — a deliberately broken form, used in Lessons 3 and 7
 - [shop-database.sql](materials/shop-database.sql) — a sample database with planted data defects, used in Lesson 11
 

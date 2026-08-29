@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lesson 3 &ndash; The Testing Process &amp; Test Plan</title>
+<title>Lesson 3 &ndash; The Testing Process</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/black.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css">
@@ -72,24 +72,24 @@
 <div class="reveal"><div class="slides">
 <section data-background-gradient="linear-gradient(135deg,#0f0c29,#302b63,#24243e)">
   <span class="lbl">Lesson 3 of 13</span>
-  <h2>The Testing Process &amp; Test Plan</h2>
+  <h2>The Testing Process</h2>
   <div class="divider"></div>
-  <p style="font-size:.62em">SDLC &middot; Waterfall, V-model, Agile &middot; ISTQB test process &middot; The test plan &middot; 7 principles</p>
+  <p style="font-size:.62em">SDLC &middot; Waterfall, V-model, Agile &middot; The ISTQB test process &middot; 7 principles</p>
   <p style="font-size:.5em;color:#555;margin-top:.8em">&rarr; next slide &nbsp;|&nbsp; ESC overview</p>
 </section>
 
 <section>
   <span class="lbl">Lesson Plan</span>
   <div class="plan">
-    <div class="plan-title">Lesson 3: The Testing Process &amp; Test Plan<br>Focus: How testing is organised as a process, and how you write it down</div>
+    <div class="plan-title">Lesson 3: The Testing Process<br>Focus: How testing is organised as a process, not a single activity</div>
       <div class="plan-topics">
         <p><span>1.</span> Software Development Life Cycle and its models</p>
         <p><span>2.</span> The ISTQB test process &mdash; five steps</p>
-        <p><span>3.</span> The test plan &mdash; the document that holds the process</p>
+        <p><span>3.</span> Planning, analysis and design</p>
         <p><span>4.</span> Execution, exit criteria and closure</p>
         <p><span>5.</span> The seven principles of testing</p>
       </div>
-      <div class="plan-hw"><strong>Homework:</strong> Group work &mdash; run the full five-step process on a web calculator and write a one-page test plan for it.</div>
+      <div class="plan-hw"><strong>Homework:</strong> Group work &mdash; run the full five-step test process on a simple web calculator, using the worksheet.</div>
   </div>
 </section>
 
@@ -164,42 +164,7 @@
     <div class="card"><strong>Test planning</strong>&middot; Define the scope and assess risks<br>&middot; Choose the test approach<br>&middot; Create the test strategy<br>&middot; Assign resources (people, environments, tools)<br>&middot; Build the schedule<br>&middot; Define exit criteria</div>
     <div class="card g"><strong>Test control</strong>Track progress against the plan and report it. This runs continuously through the whole project, not once at the start.</div>
   </div>
-  <p style="font-size:.6em;margin-top:.4em">The output of planning is a document. That document is the test plan.</p>
-</section>
-
-<section>
-  <span class="lbl">Topic 3</span>
-  <h3>The Test Plan &mdash; What Goes In It</h3>
-  <div class="g2">
-    <div>
-      <div class="card" style="margin-bottom:6px"><strong>Scope</strong>What is being tested, and at which level</div>
-      <div class="card g" style="margin-bottom:6px"><strong>Features to be tested</strong>Listed explicitly, traceable to requirements</div>
-      <div class="card o" style="margin-bottom:6px"><strong>Features NOT to be tested</strong>And why. This is the section that saves you later.</div>
-      <div class="card r"><strong>Approach</strong>Which techniques, manual or automated, which test levels</div>
-    </div>
-    <div>
-      <div class="card p" style="margin-bottom:6px"><strong>Entry and exit criteria</strong>When can testing start, and when is it finished?</div>
-      <div class="card" style="margin-bottom:6px"><strong>Environment and test data</strong>Which environment, which accounts, which data set</div>
-      <div class="card g" style="margin-bottom:6px"><strong>Risks and mitigations</strong>What could stop testing, and what you will do</div>
-      <div class="card o"><strong>Deliverables and schedule</strong>Test cases, reports, defect log &mdash; and by when</div>
-    </div>
-  </div>
-  <p style="font-size:.55em;color:#888;margin-top:.4em">The classic reference structure is IEEE 829. On a small project this is one page, not thirty.</p>
-</section>
-
-<section>
-  <span class="lbl">Topic 3</span>
-  <h3>A One-Page Test Plan Is Still a Test Plan</h3>
-  <div class="card g" style="font-size:.72em">
-    <strong>Example &mdash; web calculator, v1.0</strong>
-    <p style="font-size:.9em;margin:.25em 0"><strong style="display:inline">Scope:</strong> the four arithmetic operations, input validation and result display. Functional testing only.</p>
-    <p style="font-size:.9em;margin:.25em 0"><strong style="display:inline">Not tested:</strong> performance, browser compatibility beyond Chrome, accessibility &mdash; out of scope for v1.0, planned for v1.1.</p>
-    <p style="font-size:.9em;margin:.25em 0"><strong style="display:inline">Approach:</strong> equivalence partitioning and boundary value analysis on both input fields; a decision table for operator selection.</p>
-    <p style="font-size:.9em;margin:.25em 0"><strong style="display:inline">Entry criteria:</strong> build deployed to the test environment, smoke test passes.</p>
-    <p style="font-size:.9em;margin:.25em 0"><strong style="display:inline">Exit criteria:</strong> all planned cases executed, no open Critical or Major defects, at most 3 open Minor defects.</p>
-    <p style="font-size:.9em;margin:.25em 0"><strong style="display:inline">Risks:</strong> division by zero behaviour is unspecified &mdash; needs a decision from the product owner before testing can conclude.</p>
-  </div>
-  <p style="font-size:.58em;margin-top:.4em">Notice that writing the plan already found a requirements defect: nobody had decided what division by zero should do.</p>
+  <p style="font-size:.6em;margin-top:.4em">Planning is not paperwork for its own sake: it is where you decide what you will <em>not</em> test, and say so out loud.</p>
 </section>
 
 <section>
@@ -278,7 +243,7 @@
       <li>Execution &mdash; mark PASS/FAIL, describe any failure</li>
       <li>Closure &mdash; was the testing sufficient? What was left uncovered?</li>
     </ul>
-    <p style="font-size:.6em">Worksheet: <a href="homework/testing-process-worksheet.html" style="color:#9b9fe3">testing process worksheet</a></p>
+    <p style="font-size:.6em">Worksheet: <a href="materials/testing-process-worksheet.docx" style="color:#9b9fe3">Word version</a> &middot; <a href="homework/testing-process-worksheet.html" style="color:#9b9fe3">or fill it in on the page</a></p>
   </div>
 </section>
 
@@ -287,8 +252,8 @@
   <h3>Can You Answer These?</h3>
   <ul style="font-size:.68em">
     <li>Name the five steps of the ISTQB test process in order.</li>
-    <li>Why does a test plan list features that will <em>not</em> be tested?</li>
-    <li>Write one entry criterion and one exit criterion for a login feature.</li>
+    <li>Why is it worth writing down the features you will <em>not</em> test?</li>
+    <li>Write one entry criterion and one exit criterion for testing a login feature.</li>
     <li>Which principle explains why a regression suite that always passes might be worthless?</li>
     <li>In the V-model, which test level pairs with requirements analysis?</li>
   </ul>
@@ -296,8 +261,8 @@
 
 <section>
   <div class="hw">
-    <h3>Homework 3 &mdash; Test Process Worksheet + Test Plan</h3>
-    <p style="font-size:.68em">Complete the five-step worksheet for the calculator, and turn your planning section into a one-page test plan with scope, features not tested, approach, entry and exit criteria and risks.</p>
+    <h3>Homework 3 &mdash; Test Process Worksheet</h3>
+    <p style="font-size:.68em">Complete the five-step worksheet for the calculator and be ready to present it: what you covered, what you did not, and what you would improve in the next round.</p>
     <p style="font-size:.62em">Full brief: <a href="homework/hw-03.html">Homework 3</a></p>
   </div>
 </section>

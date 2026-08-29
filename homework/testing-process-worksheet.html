@@ -7,25 +7,45 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:#0f0c29;color:#e0e0e0;font-family:'Segoe UI',system-ui,sans-serif;padding:40px 20px;line-height:1.65;}
-.wrap{max-width:860px;margin:0 auto;}
+.wrap{max-width:900px;margin:0 auto;}
 a{color:#4fc3f7;}
-.crumb{font-size:.8em;color:#666;margin-bottom:1.5em;}
+.crumb{font-size:.8em;color:#666;margin-bottom:1.2em;}
 .crumb a{color:#888;text-decoration:none;}
 h1{color:#4fc3f7;font-size:1.5em;margin-bottom:.2em;}
-.meta{color:#888;font-size:.85em;margin-bottom:2em;}
+.meta{color:#888;font-size:.85em;margin-bottom:1.2em;}
 h2{color:#81c784;font-size:1.02em;margin:1.8em 0 .5em;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:.3em;}
 h3{color:#ffb74d;font-size:.92em;margin:1.2em 0 .4em;}
 p,li{font-size:.95em;}
 ul,ol{margin:.4em 0 .4em 1.4em;}
 li{margin:.3em 0;}
 .box{background:rgba(255,255,255,.05);border-left:4px solid #4fc3f7;border-radius:0 6px 6px 0;padding:12px 16px;margin:.8em 0;}
-.fill{border:1px dashed rgba(255,255,255,.25);border-radius:6px;min-height:52px;margin:.4em 0;padding:8px 12px;color:#555;font-size:.9em;}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px 16px;margin:1em 0 1.6em;font-size:.88em;}
+.bar .grow{flex:1;color:#aaa;font-size:.92em;}
+.btn{display:inline-block;background:rgba(79,195,247,.15);border:1px solid #4fc3f7;color:#4fc3f7;border-radius:8px;padding:7px 14px;text-decoration:none;font-size:.95em;cursor:pointer;font-family:inherit;}
+.btn:hover{background:rgba(79,195,247,.28);}
+.btn.g{background:rgba(129,199,132,.14);border-color:#81c784;color:#81c784;}
+.btn.g:hover{background:rgba(129,199,132,.26);}
+.btn.r{background:rgba(229,115,115,.12);border-color:#e57373;color:#e57373;}
+.btn.r:hover{background:rgba(229,115,115,.24);}
+[contenteditable]{background:rgba(255,255,255,.04);border:1px dashed rgba(255,255,255,.25);border-radius:6px;padding:8px 12px;min-height:44px;margin:.4em 0;outline:none;}
+[contenteditable]:focus{border-color:#4fc3f7;border-style:solid;background:rgba(79,195,247,.07);}
+[contenteditable]:empty:before{content:attr(data-ph);color:#555;}
+td[contenteditable]{border-radius:0;border:0;margin:0;min-height:0;}
 table{border-collapse:collapse;width:100%;margin:.8em 0;font-size:.9em;}
-th,td{border:1px solid rgba(255,255,255,.15);padding:9px 10px;text-align:left;vertical-align:top;}
-th{color:#4fc3f7;background:rgba(255,255,255,.03);}
-td.blank{height:44px;color:#444;}
+th,td{border:1px solid rgba(255,255,255,.15);padding:0;text-align:left;vertical-align:top;}
+th{color:#4fc3f7;background:rgba(255,255,255,.03);padding:9px 10px;}
+td.lbl{padding:9px 10px;color:#aaa;width:70px;}
+.saved{color:#81c784;font-size:.85em;}
 footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08);color:#555;font-size:.8em;}
-@media print{body{background:#fff;color:#111;}h1,h2,h3{color:#111;}th{color:#111;background:#eee;}th,td{border-color:#999;}.fill{border-color:#999;}a{color:#111;}}
+@media print{
+  body{background:#fff;color:#111;padding:0;}
+  h1,h2,h3{color:#111;} a{color:#111;text-decoration:none;}
+  th{color:#111;background:#eee;} th,td{border-color:#999;}
+  [contenteditable]{background:#fff;border:1px solid #999;}
+  [contenteditable]:empty:before{content:"";}
+  .bar,.crumb,footer{display:none;}
+  .box{border-left:3px solid #333;background:#f5f5f5;}
+}
 </style>
 </head>
 <body>
@@ -34,6 +54,13 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08)
 
 <h1>Testing Process Worksheet</h1>
 <div class="meta">Lesson 3 &middot; group of 3&ndash;4 &middot; the five ISTQB test process steps applied to a web calculator</div>
+
+<div class="bar">
+  <a class="btn g" href="../materials/testing-process-worksheet.docx">&darr; Word version (.docx)</a>
+  <button class="btn" onclick="window.print()">Print / save as PDF</button>
+  <button class="btn r" onclick="clearAll()">Clear</button>
+  <span class="grow">You can type straight into this page &mdash; your answers are kept in this browser. <span id="status" class="saved"></span></span>
+</div>
 
 <div class="box">
 <strong>The system under test:</strong> a simple web calculator that
@@ -45,54 +72,50 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08)
 Work through all five steps of the testing process. You may use your operating system or phone calculator when executing the tests.
 </div>
 
-<p><strong>Group members:</strong></p>
-<div class="fill">&nbsp;</div>
+<h3>Group members</h3>
+<div contenteditable="true" data-ph="Names of everyone in the group"></div>
 
 <h2>1. Planning and control</h2>
 <h3>Scope of testing &mdash; what will you test?</h3>
-<div class="fill">&nbsp;</div>
+<div contenteditable="true" data-ph="What is in scope, and what is deliberately out of scope"></div>
 <h3>Risks &mdash; what could go wrong?</h3>
-<p style="color:#888;font-size:.88em">For example: division by zero, negative numbers, empty fields, very large numbers, decimal separators, repeated operations.</p>
-<div class="fill">&nbsp;</div>
+<p style="color:#888;font-size:.88em">For example: division by zero, negative numbers, empty fields, very large numbers, decimal separators.</p>
+<div contenteditable="true" data-ph="One risk per line"></div>
 
 <h2>2. Analysis and design</h2>
 <h3>Test conditions</h3>
 <p style="color:#888;font-size:.88em">What needs to be verified? For example: "multiplication returns the correct result".</p>
-<ol>
-  <li><div class="fill">&nbsp;</div></li>
-  <li><div class="fill">&nbsp;</div></li>
-  <li><div class="fill">&nbsp;</div></li>
-</ol>
+<div contenteditable="true" data-ph="1.&#10;2.&#10;3."></div>
 <h3>Priority &mdash; which conditions matter most, and why?</h3>
 <p style="color:#888;font-size:.88em">Consider risk, frequency of use and criticality.</p>
-<div class="fill">&nbsp;</div>
+<div contenteditable="true" data-ph="Which conditions you would test first, and on what basis"></div>
 
 <h2>3. Test creation</h2>
 <p>Write at least three test cases.</p>
 <table>
-  <tr><th style="width:8%">Case</th><th style="width:22%">Inputs (number 1, number 2)</th><th style="width:18%">Operation</th><th style="width:26%">Expected result</th><th>Steps</th></tr>
-  <tr><td>TC1</td><td class="blank"></td><td></td><td></td><td></td></tr>
-  <tr><td>TC2</td><td class="blank"></td><td></td><td></td><td></td></tr>
-  <tr><td>TC3</td><td class="blank"></td><td></td><td></td><td></td></tr>
-  <tr><td>TC4</td><td class="blank"></td><td></td><td></td><td></td></tr>
+  <tr><th style="width:8%">Case</th><th style="width:22%">Inputs (number 1, number 2)</th><th style="width:16%">Operation</th><th style="width:27%">Expected result</th><th>Steps</th></tr>
+  <tr><td class="lbl">TC1</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+  <tr><td class="lbl">TC2</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+  <tr><td class="lbl">TC3</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+  <tr><td class="lbl">TC4</td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
 </table>
 
 <h2>4. Test execution</h2>
 <table>
-  <tr><th style="width:12%">Case</th><th style="width:22%">Result (PASS / FAIL)</th><th>Defect description if FAIL</th></tr>
-  <tr><td>TC1</td><td class="blank"></td><td></td></tr>
-  <tr><td>TC2</td><td class="blank"></td><td></td></tr>
-  <tr><td>TC3</td><td class="blank"></td><td></td></tr>
-  <tr><td>TC4</td><td class="blank"></td><td></td></tr>
+  <tr><th style="width:10%">Case</th><th style="width:26%">Result (PASS / FAIL)</th><th>Defect description if FAIL</th></tr>
+  <tr><td class="lbl">TC1</td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+  <tr><td class="lbl">TC2</td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+  <tr><td class="lbl">TC3</td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+  <tr><td class="lbl">TC4</td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
 </table>
 
 <h2>5. Closure</h2>
 <h3>Was the testing sufficient?</h3>
-<div class="fill">&nbsp;</div>
+<div contenteditable="true" data-ph="Your answer"></div>
 <h3>What was left uncovered?</h3>
-<div class="fill">&nbsp;</div>
+<div contenteditable="true" data-ph="Your answer"></div>
 <h3>What would you improve next time?</h3>
-<div class="fill">&nbsp;</div>
+<div contenteditable="true" data-ph="Your answer"></div>
 
 <div class="box" style="border-left-color:#81c784;margin-top:2em">
 When the worksheet is complete, present it to the class and discuss: was the testing sufficient, and what was left uncovered?
@@ -100,8 +123,50 @@ When the worksheet is complete, present it to the class and discuss: was the tes
 
 <footer>Software Testing Fundamentals &middot; Tatjana Kirotar &middot; <a href="hw-03.html">Homework 3</a></footer>
 </div>
+
 <script>
-document.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();window.location.href='../index.html';}},true);
+(function () {
+  var KEY = 'tta-worksheet-l3';
+  var fields = document.querySelectorAll('[contenteditable]');
+  fields.forEach(function (f, i) { f.dataset.k = 'f' + i; });
+
+  function status(msg) {
+    var s = document.getElementById('status');
+    s.textContent = msg;
+    clearTimeout(status.t);
+    status.t = setTimeout(function () { s.textContent = ''; }, 2000);
+  }
+  function save() {
+    try {
+      var data = {};
+      fields.forEach(function (f) { if (f.innerHTML.trim()) data[f.dataset.k] = f.innerHTML; });
+      localStorage.setItem(KEY, JSON.stringify(data));
+      status('saved');
+    } catch (e) { /* private mode, blocked storage - typing still works */ }
+  }
+  function load() {
+    try {
+      var data = JSON.parse(localStorage.getItem(KEY) || '{}');
+      fields.forEach(function (f) { if (data[f.dataset.k]) f.innerHTML = data[f.dataset.k]; });
+    } catch (e) {}
+  }
+  window.clearAll = function () {
+    if (!confirm('Clear everything you have typed on this worksheet?')) return;
+    fields.forEach(function (f) { f.innerHTML = ''; });
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    status('cleared');
+  };
+  var t;
+  fields.forEach(function (f) {
+    f.addEventListener('input', function () { clearTimeout(t); t = setTimeout(save, 500); });
+  });
+  load();
+})();
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && !/^(true)$/.test(document.activeElement.contentEditable)) {
+    e.preventDefault(); window.location.href = '../index.html';
+  }
+}, true);
 </script>
 </body>
 </html>
