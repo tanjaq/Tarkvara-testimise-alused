@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 6 &ndash; Test Techniques I &mdash; Static Testing</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/black.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css">
+<style>
+:root{--blue:#4fc3f7;--green:#81c784;--orange:#ffb74d;--red:#e57373;--purple:#ce93d8;}
+.reveal{font-family:'Segoe UI',system-ui,sans-serif;font-size:34px;}
+.reveal h2{color:var(--blue);font-size:0.95em;}
+.reveal h3{color:var(--green);margin-bottom:.3em;font-size:0.85em;}
+.reveal p{font-size:.60em;line-height:1.5;}.reveal li{font-size:.68em;line-height:1.5;}
+.reveal pre{font-size:.44em;width:100%;box-shadow:none;}
+.reveal ul{text-align:left;margin-left:1em;}
+.reveal table{font-size:.5em;}
+.reveal table th{color:var(--blue);}
+.reveal blockquote{width:100%;box-sizing:border-box;border-left:4px solid var(--blue);padding:.4em 1em;font-style:italic;color:#ccc;background:rgba(79,195,247,.06);margin:.5em 0;font-size:.60em;}
+.lbl{font-size:.38em;letter-spacing:3px;text-transform:uppercase;color:#888;display:block;margin-bottom:.2em;}
+.divider{width:40px;height:3px;background:var(--blue);margin:.3em auto .6em;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:left;}
+.card{background:rgba(255,255,255,.05);border-left:4px solid var(--blue);padding:8px 12px;border-radius:0 5px 5px 0;font-size:.65em;line-height:1.5;text-align:left;}
+.card.g{border-left-color:var(--green);}
+.card.o{border-left-color:var(--orange);}
+.card.r{border-left-color:var(--red);}
+.card.p{border-left-color:var(--purple);}
+.card strong{display:block;margin-bottom:.15em;}
+.plan{background:rgba(255,255,255,.04);border:1px solid rgba(79,195,247,.3);border-radius:10px;padding:16px 20px;text-align:left;max-width:860px;margin:0 auto;}
+.plan-title{color:var(--blue);font-size:.8em;font-weight:700;margin-bottom:.6em;border-bottom:1px solid rgba(79,195,247,.2);padding-bottom:.4em;}
+.plan-topics p{font-size:.68em;margin:.25em 0;color:#ddd;}
+.plan-topics p span{color:var(--blue);font-weight:600;}
+.plan-hw{background:rgba(79,195,247,.08);border:1px solid var(--blue);border-radius:6px;padding:8px 12px;font-size:.65em;margin-top:.7em;}
+.plan-hw strong{color:var(--blue);}
+.hw{background:rgba(79,195,247,.08);border:2px solid var(--blue);border-radius:10px;padding:14px 18px;text-align:left;}
+.hw h3{color:var(--blue)!important;margin-top:0;}
+.hw a{color:var(--orange);}
+.teams{background:rgba(100,100,255,.08);border:2px solid #6264a7;border-radius:10px;padding:14px 18px;text-align:left;}
+.teams h3{color:#9b9fe3!important;margin-top:0;}
+.ai{background:linear-gradient(135deg,rgba(206,147,216,.10),rgba(79,195,247,.08));border:2px solid var(--purple);border-radius:12px;padding:14px 18px;text-align:left;}
+.ai h3{color:var(--purple)!important;margin-top:0;}
+.bio-grid{display:grid;grid-template-columns:1fr 2fr;gap:20px;text-align:left;}
+.bio-left{background:rgba(255,255,255,.04);border-radius:8px;padding:12px;font-size:.65em;}
+.bio-left .name{font-size:1.2em;font-weight:700;color:var(--blue);margin-bottom:.3em;}
+.bio-left .role{color:var(--green);margin-bottom:.5em;}
+.timeline{font-size:.62em;line-height:1.8;}
+.timeline .year{color:var(--orange);font-weight:600;}
+.chain{display:flex;align-items:center;gap:6px;justify-content:center;margin:.6em 0;flex-wrap:wrap;}
+.chain .node{background:rgba(255,255,255,.07);border:1px solid var(--blue);border-radius:6px;padding:6px 10px;font-size:.62em;}
+.chain .arr{color:var(--orange);}
+.num{display:inline-block;width:20px;height:20px;background:var(--blue);color:#111;border-radius:50%;text-align:center;line-height:20px;font-size:.6em;font-weight:700;margin-right:5px;}
+.bug-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.bug-card{background:rgba(229,115,115,.08);border:1px solid rgba(229,115,115,.3);border-radius:6px;padding:8px 10px;font-size:.62em;line-height:1.5;text-align:left;}
+.bug-card .co{font-weight:700;color:var(--red);margin-bottom:.2em;}
+.nav{position:fixed;top:12px;right:12px;z-index:999;font-size:.55em;display:flex;gap:8px;}
+.nav a{color:#555;text-decoration:none;padding:3px 8px;border:1px solid #333;border-radius:5px;}
+.nav a:hover{color:#fff;border-color:#fff;}
+</style>
+</head>
+<body>
+<div class="nav"><a href="lesson-05.html">&larr; L5</a><a href="index.html">&#8617; All</a><a href="lesson-07.html">L7 &rarr;</a></div>
+<div class="reveal"><div class="slides">
+<section data-background-gradient="linear-gradient(135deg,#0f0c29,#302b63,#24243e)">
+  <span class="lbl">Lesson 6 of 12</span>
+  <h2>Test Techniques I &mdash; Static Testing</h2>
+  <div class="divider"></div>
+  <p style="font-size:.62em">Reviews &middot; Walkthroughs &middot; Inspections &middot; Static code analysis &middot; PR review etiquette</p>
+  <p style="font-size:.5em;color:#555;margin-top:.8em">&rarr; next slide &nbsp;|&nbsp; ESC overview</p>
+</section>
+
+<section>
+  <span class="lbl">Lesson Plan</span>
+  <div class="plan">
+    <div class="plan-title">Lesson 6: Test Techniques I &mdash; Static Testing<br>Focus: Finding defects without running a single line of code</div>
+      <div class="plan-topics">
+        <p><span>1.</span> Why static testing is worth your time</p>
+        <p><span>2.</span> Reviews, walkthroughs and inspections</p>
+        <p><span>3.</span> Static code analysis and the tools that do it</p>
+        <p><span>4.</span> How to review a pull request without starting a war</p>
+        <p><span>5.</span> In-class peer review of a real repository</p>
+      </div>
+      <div class="plan-hw"><strong>Homework:</strong> Peer review the Rental-Car repository and write up every defect and inconsistency you find.</div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Topic 1</span>
+  <h3>Which Defect Is Easier to Fix?</h3>
+  <div class="g2">
+    <div class="card g"><strong>A typo in the documentation, before development starts</strong>One person, five minutes, no deployment.</div>
+    <div class="card r"><strong>A broken SQL query, in production</strong>Incident, rollback, data repair, customer trust.</div>
+  </div>
+  <p style="font-size:.64em;margin-top:.5em">Static testing is the family of techniques that catches the first kind. It is the cheapest quality activity available &mdash; and the most often skipped.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 1</span>
+  <h3>Static Testing</h3>
+  <p style="font-size:.64em">Static testing examines the work product <strong>without executing the code</strong>. It covers code, requirements and design documents.</p>
+  <div class="g2">
+    <div class="card"><strong>Manual techniques</strong>&middot; Reviews<br>&middot; Peer reviews<br>&middot; Walkthroughs<br>&middot; Inspections</div>
+    <div class="card g"><strong>Tool-supported</strong>&middot; Static code analysis &mdash; automated tools that scan source code for possible vulnerabilities and coding-standard violations</div>
+  </div>
+  <blockquote>Dynamic testing tells you the software is broken. Static testing tells you <em>why it was going to be</em>.</blockquote>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>Peer Review</h3>
+  <div class="card" style="margin-bottom:8px"><strong>What it is</strong>An informal technique where colleagues review each other's work. Focused on finding defects and improving quality.</div>
+  <div class="card g"><strong>Example</strong>Mari reviews the test cases Jaan wrote. She notices that several tests have no "expected result" field and suggests fixing them before the CI pipeline runs.</div>
+  <p style="font-size:.6em;margin-top:.5em">Informal does not mean careless &mdash; it means no moderator and no formal defect log. It is the most common form of static testing you will do in a real team.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>Walkthroughs and Inspections</h3>
+  <div class="g2">
+    <div class="card o"><strong>Walkthrough</strong>A semi-formal session led by the author of the document. Participants ask questions and give feedback. Goal: shared understanding of the content.<br><span style="color:#888">Example: the author presents a new REST API design. A reviewer asks, "what happens if the client sends an empty request?"</span></div>
+    <div class="card r"><strong>Inspection</strong>A formal, systematic review of documents by a team, led by a moderator. Defects are logged and reviewed for resolution.<br><span style="color:#888">Example: a code inspection meeting where a module is checked against the design document. Participants: developer, tester, moderator (architect or tech lead).</span></div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>Peer Review in Practice &mdash; a Requirements Document</h3>
+  <p style="font-size:.62em"><strong>Objective:</strong> ensure the requirements are clear, complete and consistent.<br><strong>Participants:</strong> business analyst, project manager, developer, tester.</p>
+  <div class="chain">
+    <div class="node">Preparation<br><span style="font-size:.85em;color:#888">reviewers study the document individually</span></div><span class="arr">&rarr;</span>
+    <div class="node">Meeting<br><span style="font-size:.85em;color:#888">discuss ambiguities and inconsistencies</span></div><span class="arr">&rarr;</span>
+    <div class="node">Feedback<br><span style="font-size:.85em;color:#888">constructive, with suggestions</span></div><span class="arr">&rarr;</span>
+    <div class="node">Follow-up<br><span style="font-size:.85em;color:#888">author revises</span></div>
+  </div>
+  <p style="font-size:.6em;margin-top:.4em"><strong>Outcome:</strong> clearer requirements, and far fewer defects in the phases that follow.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 3</span>
+  <h3>Static Code Analysis</h3>
+  <p style="font-size:.62em">Analysing source code without running the program &mdash; checking standards, syntax and possible vulnerabilities. Mostly automated.</p>
+  <div class="g3">
+    <div class="card"><strong>Lint / ESLint</strong>Finds likely errors and code-style problems</div>
+    <div class="card g"><strong>SonarQube</strong>Continuous code-quality review through static analysis</div>
+    <div class="card o"><strong>Checkstyle</strong>Checks conformance to coding standards</div>
+  </div>
+  <p style="font-size:.6em;margin-top:.4em">Example: a developer runs SonarQube on a new module. The tool flags several potential security vulnerabilities and standard violations that must be fixed before the next stage.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 3</span>
+  <h3>What the Tool Actually Changes</h3>
+  <div class="g2">
+    <div>
+      <p style="font-size:.6em;color:var(--red)">Before</p>
+      <pre><code class="language-python">def calc_price(base, discount):
+    finalPrice = base-discount
+    print ("Price is: " + finalPrice)
+    return finalPrice</code></pre>
+    </div>
+    <div>
+      <p style="font-size:.6em;color:var(--green)">After</p>
+      <pre><code class="language-python">def calculate_price(base: float, discount: float) -> float:
+    final_price = base - discount
+    print(f"Price is: {final_price}")
+    return final_price</code></pre>
+    </div>
+  </div>
+  <p style="font-size:.58em;margin-top:.4em">The analyser caught a real defect here, not just style: concatenating a float to a string raises a TypeError at runtime.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 4</span>
+  <h3>Reviewing a Pull Request Without Starting a War</h3>
+  <div class="g2">
+    <div class="card g"><strong>Do</strong>
+      &middot; Comment on the code, never the person<br>
+      &middot; Ask questions when you are unsure: "what happens if this is null?"<br>
+      &middot; Say what is good, not only what is wrong<br>
+      &middot; Separate blocking issues from suggestions<br>
+      &middot; Give a concrete alternative, not just "this is bad"
+    </div>
+    <div class="card r"><strong>Don't</strong>
+      &middot; "You broke X" &mdash; write "X breaks when..."<br>
+      &middot; Argue style that a linter should decide<br>
+      &middot; Approve without reading because you trust the author<br>
+      &middot; Bury a critical defect in fifteen nitpicks<br>
+      &middot; Review 2,000 lines in one sitting &mdash; quality drops fast
+    </div>
+  </div>
+  <blockquote>A review comment is a defect report with a smaller audience. The same rules apply: specific, reproducible, and about the work.</blockquote>
+</section>
+
+<section>
+  <span class="lbl">In-Class Exercise</span>
+  <div class="teams">
+    <h3>Peer Review &mdash; Rental Car</h3>
+    <p style="font-size:.66em"><strong>Goal:</strong> review the given code and documentation and identify every defect, problem or concern that needs fixing.</p>
+    <p style="font-size:.68em"><strong>1) Read the documentation (README):</strong></p>
+    <ul style="font-size:.66em"><li>Does it clearly describe what the application must do?</li><li>Are all requirements understandable and precise enough?</li></ul>
+    <p style="font-size:.68em"><strong>2) Review the code:</strong></p>
+    <ul style="font-size:.66em"><li>Is the code logical and easy to read?</li><li>Are function and variable names clear?</li><li>Does the code match the documented requirements?</li><li>Is any described function missing or implemented incorrectly?</li></ul>
+    <p style="font-size:.62em">Repository: <a href="https://github.com/tanjaq/Rental-Car/tree/peer-review" style="color:#9b9fe3">tanjaq/Rental-Car &middot; peer-review branch</a></p>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Self-Check</span>
+  <h3>Can You Answer These?</h3>
+  <ul style="font-size:.68em">
+    <li>What is the difference between a walkthrough and an inspection? Who leads each?</li>
+    <li>Name two defects a static analysis tool can find and one it never will.</li>
+    <li>Rewrite this review comment so it is usable: "this function is a mess".</li>
+    <li>Why is static testing usually cheaper than dynamic testing?</li>
+  </ul>
+</section>
+
+<section>
+  <div class="hw">
+    <h3>Homework 6 &mdash; Peer Review</h3>
+    <p style="font-size:.68em">Write up every mismatch you found between the code and the documentation in the Rental-Car peer-review branch, and rank them by how serious they are.</p>
+    <p style="font-size:.62em">Full brief: <a href="homework/hw-06.html">Homework 6</a></p>
+  </div>
+</section>
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
+<script>
+Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight]});
+</script>
+</body>
+</html>

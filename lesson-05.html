@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 5 &ndash; Software Architecture</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/black.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css">
+<style>
+:root{--blue:#4fc3f7;--green:#81c784;--orange:#ffb74d;--red:#e57373;--purple:#ce93d8;}
+.reveal{font-family:'Segoe UI',system-ui,sans-serif;font-size:34px;}
+.reveal h2{color:var(--blue);font-size:0.95em;}
+.reveal h3{color:var(--green);margin-bottom:.3em;font-size:0.85em;}
+.reveal p{font-size:.60em;line-height:1.5;}.reveal li{font-size:.68em;line-height:1.5;}
+.reveal pre{font-size:.44em;width:100%;box-shadow:none;}
+.reveal ul{text-align:left;margin-left:1em;}
+.reveal table{font-size:.5em;}
+.reveal table th{color:var(--blue);}
+.reveal blockquote{width:100%;box-sizing:border-box;border-left:4px solid var(--blue);padding:.4em 1em;font-style:italic;color:#ccc;background:rgba(79,195,247,.06);margin:.5em 0;font-size:.60em;}
+.lbl{font-size:.38em;letter-spacing:3px;text-transform:uppercase;color:#888;display:block;margin-bottom:.2em;}
+.divider{width:40px;height:3px;background:var(--blue);margin:.3em auto .6em;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:left;}
+.card{background:rgba(255,255,255,.05);border-left:4px solid var(--blue);padding:8px 12px;border-radius:0 5px 5px 0;font-size:.65em;line-height:1.5;text-align:left;}
+.card.g{border-left-color:var(--green);}
+.card.o{border-left-color:var(--orange);}
+.card.r{border-left-color:var(--red);}
+.card.p{border-left-color:var(--purple);}
+.card strong{display:block;margin-bottom:.15em;}
+.plan{background:rgba(255,255,255,.04);border:1px solid rgba(79,195,247,.3);border-radius:10px;padding:16px 20px;text-align:left;max-width:860px;margin:0 auto;}
+.plan-title{color:var(--blue);font-size:.8em;font-weight:700;margin-bottom:.6em;border-bottom:1px solid rgba(79,195,247,.2);padding-bottom:.4em;}
+.plan-topics p{font-size:.68em;margin:.25em 0;color:#ddd;}
+.plan-topics p span{color:var(--blue);font-weight:600;}
+.plan-hw{background:rgba(79,195,247,.08);border:1px solid var(--blue);border-radius:6px;padding:8px 12px;font-size:.65em;margin-top:.7em;}
+.plan-hw strong{color:var(--blue);}
+.hw{background:rgba(79,195,247,.08);border:2px solid var(--blue);border-radius:10px;padding:14px 18px;text-align:left;}
+.hw h3{color:var(--blue)!important;margin-top:0;}
+.hw a{color:var(--orange);}
+.teams{background:rgba(100,100,255,.08);border:2px solid #6264a7;border-radius:10px;padding:14px 18px;text-align:left;}
+.teams h3{color:#9b9fe3!important;margin-top:0;}
+.ai{background:linear-gradient(135deg,rgba(206,147,216,.10),rgba(79,195,247,.08));border:2px solid var(--purple);border-radius:12px;padding:14px 18px;text-align:left;}
+.ai h3{color:var(--purple)!important;margin-top:0;}
+.bio-grid{display:grid;grid-template-columns:1fr 2fr;gap:20px;text-align:left;}
+.bio-left{background:rgba(255,255,255,.04);border-radius:8px;padding:12px;font-size:.65em;}
+.bio-left .name{font-size:1.2em;font-weight:700;color:var(--blue);margin-bottom:.3em;}
+.bio-left .role{color:var(--green);margin-bottom:.5em;}
+.timeline{font-size:.62em;line-height:1.8;}
+.timeline .year{color:var(--orange);font-weight:600;}
+.chain{display:flex;align-items:center;gap:6px;justify-content:center;margin:.6em 0;flex-wrap:wrap;}
+.chain .node{background:rgba(255,255,255,.07);border:1px solid var(--blue);border-radius:6px;padding:6px 10px;font-size:.62em;}
+.chain .arr{color:var(--orange);}
+.num{display:inline-block;width:20px;height:20px;background:var(--blue);color:#111;border-radius:50%;text-align:center;line-height:20px;font-size:.6em;font-weight:700;margin-right:5px;}
+.bug-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.bug-card{background:rgba(229,115,115,.08);border:1px solid rgba(229,115,115,.3);border-radius:6px;padding:8px 10px;font-size:.62em;line-height:1.5;text-align:left;}
+.bug-card .co{font-weight:700;color:var(--red);margin-bottom:.2em;}
+.nav{position:fixed;top:12px;right:12px;z-index:999;font-size:.55em;display:flex;gap:8px;}
+.nav a{color:#555;text-decoration:none;padding:3px 8px;border:1px solid #333;border-radius:5px;}
+.nav a:hover{color:#fff;border-color:#fff;}
+</style>
+</head>
+<body>
+<div class="nav"><a href="lesson-04.html">&larr; L4</a><a href="index.html">&#8617; All</a><a href="lesson-06.html">L6 &rarr;</a></div>
+<div class="reveal"><div class="slides">
+<section data-background-gradient="linear-gradient(135deg,#0f0c29,#302b63,#24243e)">
+  <span class="lbl">Lesson 5 of 12</span>
+  <h2>Software Architecture</h2>
+  <div class="divider"></div>
+  <p style="font-size:.62em">Monolith &middot; Layered &middot; Microservices &middot; Event-driven &middot; Serverless &middot; Modular &middot; Monorepo</p>
+  <p style="font-size:.5em;color:#555;margin-top:.8em">&rarr; next slide &nbsp;|&nbsp; ESC overview</p>
+</section>
+
+<section>
+  <span class="lbl">Lesson Plan</span>
+  <div class="plan">
+    <div class="plan-title">Lesson 5: Software Architecture<br>Focus: How the system is put together &mdash; and what that means for testing it</div>
+      <div class="plan-topics">
+        <p><span>1.</span> What software architecture is and why a tester cares</p>
+        <p><span>2.</span> Seven architecture styles, with pros and cons</p>
+        <p><span>3.</span> How to choose an architecture</p>
+        <p><span>4.</span> What each style changes about testing</p>
+      </div>
+      <div class="plan-hw"><strong>Homework:</strong> Group work &mdash; draw the architecture of your own project and justify the style you chose.</div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Topic 1</span>
+  <h3>What Is Software Architecture?</h3>
+  <p style="font-size:.64em">Architecture describes the structure of a system: which components exist, and how they work together.</p>
+  <p style="font-size:.64em">A good architecture gives the system scalability, maintainability and the ability to adapt.</p>
+  <blockquote>For a tester, architecture answers a practical question: <em>where can I observe this behaviour, and where can I break it?</em> A defect in a monolith and the same defect across microservices need completely different test setups.</blockquote>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>Monolithic Architecture</h3>
+  <div class="g2">
+    <div class="card"><strong>What it is</strong>One single application where all parts of the system are tightly coupled.</div>
+    <div class="card g"><strong>Advantages</strong>Simple to develop and deploy for smaller applications.</div>
+  </div>
+  <div class="g2" style="margin-top:8px">
+    <div class="card r"><strong>Disadvantages</strong>Hard to maintain and scale as the system grows.</div>
+    <div class="card o"><strong>Example</strong>Early web applications, early e-commerce platforms.</div>
+  </div>
+  <p style="font-size:.58em;margin-top:.4em"><strong>Testing angle:</strong> easy to spin up locally end to end &mdash; but every change needs a full regression run.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>Layered Architecture</h3>
+  <div class="g2">
+    <div class="card"><strong>What it is</strong>The application is split into layers &mdash; presentation, business logic, data.</div>
+    <div class="card g"><strong>Advantages</strong>Clear separation of concerns; straightforward to develop and maintain.</div>
+  </div>
+  <div class="g2" style="margin-top:8px">
+    <div class="card r"><strong>Disadvantages</strong>Can become rigid once layers start depending on each other.</div>
+    <div class="card o"><strong>Example</strong>Traditional enterprise information systems.</div>
+  </div>
+  <p style="font-size:.58em;margin-top:.4em"><strong>Testing angle:</strong> layers give you natural test levels &mdash; unit tests at the logic layer, integration tests at the data layer, UI tests at the top.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>Microservices Architecture</h3>
+  <div class="g2">
+    <div class="card"><strong>What it is</strong>The system is built from small independent services that talk to each other through APIs.</div>
+    <div class="card g"><strong>Advantages</strong>Scalability, independent deployments, technology flexibility per service.</div>
+  </div>
+  <div class="g2" style="margin-top:8px">
+    <div class="card r"><strong>Disadvantages</strong>More complex to deploy and operate; network becomes a failure mode.</div>
+    <div class="card o"><strong>Example</strong>Netflix, Amazon.</div>
+  </div>
+  <p style="font-size:.58em;margin-top:.4em"><strong>Testing angle:</strong> most defects live between services, not inside them. API and contract testing matter more than UI clicking.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>Event-Driven Architecture</h3>
+  <div class="g2">
+    <div class="card"><strong>What it is</strong>Components communicate by producing and reacting to events.</div>
+    <div class="card g"><strong>Advantages</strong>Excellent for dynamic and distributed systems.</div>
+  </div>
+  <div class="g2" style="margin-top:8px">
+    <div class="card r"><strong>Disadvantages</strong>Harder to trace and debug &mdash; there is no single call stack.</div>
+    <div class="card o"><strong>Example</strong>Real-time data systems, financial-sector applications.</div>
+  </div>
+  <p style="font-size:.58em;margin-top:.4em"><strong>Testing angle:</strong> ordering, duplicates and lost events are the classic defects. Expect to test asynchronously, with waits and correlation IDs.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>Serverless, Modular and Monorepo</h3>
+  <div class="g3">
+    <div class="card p"><strong>Serverless</strong>Logic runs as functions in the cloud; the provider manages servers.<br>+ no infrastructure to manage, scales automatically<br>&ndash; best for smaller, self-contained tasks<br><span style="color:#888">AWS Lambda, Google Cloud Functions</span></div>
+    <div class="card o"><strong>Modular</strong>The system is split into modules or plugins that can be added and removed independently.<br>+ flexible, easy to extend<br>&ndash; module dependencies can get tangled<br><span style="color:#888">Browsers and their plugins</span></div>
+    <div class="card g"><strong>Monorepo</strong>All projects and components live in one code base; build and dependency relations form a graph.<br>+ faster builds and tests through dependency tracking, shared code, one standard workflow<br>&ndash; the graph gets complex at scale<br><span style="color:#888">Google, Uber, Airbnb</span></div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Topic 3</span>
+  <h3>How to Choose an Architecture</h3>
+  <ul style="font-size:.68em">
+    <li>Size and complexity of the project</li>
+    <li>Size and experience of the team</li>
+    <li>Scalability and maintainability requirements</li>
+    <li>Budget and schedule</li>
+    <li>Technology constraints and where the product is heading</li>
+  </ul>
+  <blockquote>There is no best architecture. There is the one whose trade-offs you can live with &mdash; and that you can afford to test.</blockquote>
+</section>
+
+<section>
+  <span class="lbl">In-Class Exercise</span>
+  <div class="teams">
+    <h3>Draw Your Project's Architecture</h3>
+    <ul style="font-size:.7em">
+      <li>As a team, draw the software architecture of your own project.</li>
+      <li>Decide which of the styles above fits your project best &mdash; and why.</li>
+      <li>Draw a simple diagram: components, the relationships between them, and the communication channels.</li>
+      <li>Add notes explaining why this architecture is the right one for your project.</li>
+      <li>Present to the class: why you chose it, and what challenges you expect.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Self-Check</span>
+  <h3>Can You Answer These?</h3>
+  <ul style="font-size:.68em">
+    <li>Give one advantage and one disadvantage of microservices compared to a monolith.</li>
+    <li>Your project has 3 developers and 4 months. Which style would you argue for, and why?</li>
+    <li>Which architecture makes a defect hardest to trace, and what would you do about it as a tester?</li>
+    <li>Where would you place an integration test in a layered architecture?</li>
+  </ul>
+</section>
+
+<section>
+  <div class="hw">
+    <h3>Homework 5 &mdash; Project Architecture</h3>
+    <p style="font-size:.68em">Add an architecture diagram and a short justification to your team's SRS document.</p>
+    <p style="font-size:.62em">Full brief: <a href="homework/hw-05.html">Homework 5</a></p>
+  </div>
+</section>
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
+<script>
+Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight]});
+</script>
+</body>
+</html>

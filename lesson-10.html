@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 10 &ndash; Test Cases &amp; Documentation</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/black.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css">
+<style>
+:root{--blue:#4fc3f7;--green:#81c784;--orange:#ffb74d;--red:#e57373;--purple:#ce93d8;}
+.reveal{font-family:'Segoe UI',system-ui,sans-serif;font-size:34px;}
+.reveal h2{color:var(--blue);font-size:0.95em;}
+.reveal h3{color:var(--green);margin-bottom:.3em;font-size:0.85em;}
+.reveal p{font-size:.60em;line-height:1.5;}.reveal li{font-size:.68em;line-height:1.5;}
+.reveal pre{font-size:.44em;width:100%;box-shadow:none;}
+.reveal ul{text-align:left;margin-left:1em;}
+.reveal table{font-size:.5em;}
+.reveal table th{color:var(--blue);}
+.reveal blockquote{width:100%;box-sizing:border-box;border-left:4px solid var(--blue);padding:.4em 1em;font-style:italic;color:#ccc;background:rgba(79,195,247,.06);margin:.5em 0;font-size:.60em;}
+.lbl{font-size:.38em;letter-spacing:3px;text-transform:uppercase;color:#888;display:block;margin-bottom:.2em;}
+.divider{width:40px;height:3px;background:var(--blue);margin:.3em auto .6em;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:left;}
+.card{background:rgba(255,255,255,.05);border-left:4px solid var(--blue);padding:8px 12px;border-radius:0 5px 5px 0;font-size:.65em;line-height:1.5;text-align:left;}
+.card.g{border-left-color:var(--green);}
+.card.o{border-left-color:var(--orange);}
+.card.r{border-left-color:var(--red);}
+.card.p{border-left-color:var(--purple);}
+.card strong{display:block;margin-bottom:.15em;}
+.plan{background:rgba(255,255,255,.04);border:1px solid rgba(79,195,247,.3);border-radius:10px;padding:16px 20px;text-align:left;max-width:860px;margin:0 auto;}
+.plan-title{color:var(--blue);font-size:.8em;font-weight:700;margin-bottom:.6em;border-bottom:1px solid rgba(79,195,247,.2);padding-bottom:.4em;}
+.plan-topics p{font-size:.68em;margin:.25em 0;color:#ddd;}
+.plan-topics p span{color:var(--blue);font-weight:600;}
+.plan-hw{background:rgba(79,195,247,.08);border:1px solid var(--blue);border-radius:6px;padding:8px 12px;font-size:.65em;margin-top:.7em;}
+.plan-hw strong{color:var(--blue);}
+.hw{background:rgba(79,195,247,.08);border:2px solid var(--blue);border-radius:10px;padding:14px 18px;text-align:left;}
+.hw h3{color:var(--blue)!important;margin-top:0;}
+.hw a{color:var(--orange);}
+.teams{background:rgba(100,100,255,.08);border:2px solid #6264a7;border-radius:10px;padding:14px 18px;text-align:left;}
+.teams h3{color:#9b9fe3!important;margin-top:0;}
+.ai{background:linear-gradient(135deg,rgba(206,147,216,.10),rgba(79,195,247,.08));border:2px solid var(--purple);border-radius:12px;padding:14px 18px;text-align:left;}
+.ai h3{color:var(--purple)!important;margin-top:0;}
+.bio-grid{display:grid;grid-template-columns:1fr 2fr;gap:20px;text-align:left;}
+.bio-left{background:rgba(255,255,255,.04);border-radius:8px;padding:12px;font-size:.65em;}
+.bio-left .name{font-size:1.2em;font-weight:700;color:var(--blue);margin-bottom:.3em;}
+.bio-left .role{color:var(--green);margin-bottom:.5em;}
+.timeline{font-size:.62em;line-height:1.8;}
+.timeline .year{color:var(--orange);font-weight:600;}
+.chain{display:flex;align-items:center;gap:6px;justify-content:center;margin:.6em 0;flex-wrap:wrap;}
+.chain .node{background:rgba(255,255,255,.07);border:1px solid var(--blue);border-radius:6px;padding:6px 10px;font-size:.62em;}
+.chain .arr{color:var(--orange);}
+.num{display:inline-block;width:20px;height:20px;background:var(--blue);color:#111;border-radius:50%;text-align:center;line-height:20px;font-size:.6em;font-weight:700;margin-right:5px;}
+.bug-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.bug-card{background:rgba(229,115,115,.08);border:1px solid rgba(229,115,115,.3);border-radius:6px;padding:8px 10px;font-size:.62em;line-height:1.5;text-align:left;}
+.bug-card .co{font-weight:700;color:var(--red);margin-bottom:.2em;}
+.nav{position:fixed;top:12px;right:12px;z-index:999;font-size:.55em;display:flex;gap:8px;}
+.nav a{color:#555;text-decoration:none;padding:3px 8px;border:1px solid #333;border-radius:5px;}
+.nav a:hover{color:#fff;border-color:#fff;}
+</style>
+</head>
+<body>
+<div class="nav"><a href="lesson-09.html">&larr; L9</a><a href="index.html">&#8617; All</a><a href="lesson-11.html">L11 &rarr;</a></div>
+<div class="reveal"><div class="slides">
+<section data-background-gradient="linear-gradient(135deg,#0f0c29,#302b63,#24243e)">
+  <span class="lbl">Lesson 10 of 12</span>
+  <h2>Test Cases &amp; Documentation</h2>
+  <div class="divider"></div>
+  <p style="font-size:.62em">User story &rarr; requirement &rarr; test case &middot; Re-testing &middot; Regression &middot; Test management tools</p>
+  <p style="font-size:.5em;color:#555;margin-top:.8em">&rarr; next slide &nbsp;|&nbsp; ESC overview</p>
+</section>
+
+<section>
+  <span class="lbl">Lesson Plan</span>
+  <div class="plan">
+    <div class="plan-title">Lesson 10: Test Cases &amp; Documentation<br>Focus: Writing test documentation that another person can actually execute</div>
+      <div class="plan-topics">
+        <p><span>1.</span> From user story to test case</p>
+        <p><span>2.</span> Anatomy of a test case and a worked example</p>
+        <p><span>3.</span> The role of test cases in development</p>
+        <p><span>4.</span> Confirmation testing and regression testing</p>
+        <p><span>5.</span> Best practices and test management tools</p>
+      </div>
+      <div class="plan-hw"><strong>Homework:</strong> Group project &mdash; write the test cases for your own project and add them to your SRS document.</div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Topic 1</span>
+  <h3>From User Story to Test Case</h3>
+  <div class="card p" style="margin-bottom:6px"><strong>User story &mdash; the end-user need, from the user's point of view</strong>As an online shopper, I want to filter search results by price range, so that I can find products within my budget more easily.</div>
+  <div class="card" style="margin-bottom:6px"><strong>Requirement &mdash; derived from the story</strong>The search results page shall support filtering by minimum and maximum price, showing only products within that range.</div>
+  <div class="card g"><strong>Test case &mdash; derived from the requirement</strong>Verify that entering min $50 and max $200 in the price filter shows only products priced $50&ndash;$200.</div>
+  <p style="font-size:.6em;margin-top:.4em">One user story &rarr; many requirements. One requirement &rarr; many test cases: happy path, negative cases, edge cases. When a test case fails, you write the bug report from Lesson 9.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>Components of a Test Case</h3>
+  <div class="g2">
+    <div>
+      <div class="card" style="margin-bottom:6px"><strong>ID / title</strong>Unique identifier plus a short name describing what is tested</div>
+      <div class="card g" style="margin-bottom:6px"><strong>Description</strong>What this case verifies, and which requirement it covers</div>
+      <div class="card o" style="margin-bottom:6px"><strong>Preconditions</strong>What must already be true &mdash; logged in? specific data present?</div>
+      <div class="card r"><strong>Test steps</strong>Numbered actions, one thing per step</div>
+    </div>
+    <div>
+      <div class="card p" style="margin-bottom:6px"><strong>Test data</strong>Exact values: which account, which input, which environment</div>
+      <div class="card" style="margin-bottom:6px"><strong>Expected results</strong>What the system should do &mdash; specific and measurable</div>
+      <div class="card g" style="margin-bottom:6px"><strong>Postconditions</strong>What state the system should be left in</div>
+      <div class="card o"><strong>Status</strong>Pass / Fail / Blocked / Not executed, updated each run</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>A Test Case in Practice</h3>
+  <p style="font-size:.55em"><strong>TC-014 &middot; Price filter shows results within range.</strong> Requirement: search results can be filtered by price range. Preconditions: site accessible, user logged in, on /search.</p>
+  <table>
+    <tr><th>#</th><th>Step</th><th>Expected result</th><th>Actual result</th></tr>
+    <tr><td>1</td><td>Locate the "Price Range" filter</td><td>Filter is visible with min and max fields</td><td>Pass</td></tr>
+    <tr><td>2</td><td>Enter 50 in min and 200 in max</td><td>Both fields accept the values</td><td>Pass</td></tr>
+    <tr><td>3</td><td>Click "Apply"</td><td>Results reload; all products priced $50&ndash;$200</td><td>FAIL &mdash; products under $50 shown &rarr; PRF-115</td></tr>
+    <tr><td>4</td><td>Click "Clear" to reset</td><td>All products shown again</td><td>Not executed (step 3 failed)</td></tr>
+  </table>
+  <p style="font-size:.55em;margin-top:.4em">The link between the failing step and the bug ID is what makes QA tracking work &mdash; anyone can go from a failed test to the report and back.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 3</span>
+  <h3>Why Test Cases Matter</h3>
+  <ul style="font-size:.67em">
+    <li>Test cases define the quality of the product &mdash; they are the agreed standard of "working".</li>
+    <li>They demonstrate that the software conforms to the requirements.</li>
+    <li>They reduce defects and raise reliability.</li>
+    <li>They make confirmation testing and regression testing possible &mdash; you cannot re-run a test you never wrote down.</li>
+    <li>They improve communication in the development team: a shared, unambiguous description of expected behaviour.</li>
+  </ul>
+</section>
+
+<section>
+  <span class="lbl">Topic 4</span>
+  <h3>Confirmation Testing (Re-testing)</h3>
+  <p style="font-size:.63em">A test failed because of a defect. The defect was reported and fixed in a new version. Now run the same test again.</p>
+  <ul style="font-size:.66em">
+    <li>Run it <strong>exactly</strong> as the first time: same inputs, same data, same environment.</li>
+    <li>Only mark it fixed when it passes identically.</li>
+    <li>Testing only the fixed spot is not enough &mdash; a fix often breaks something nearby.</li>
+  </ul>
+  <blockquote>"It works on my machine now" is not confirmation. Same steps, same data, same environment, written down.</blockquote>
+</section>
+
+<section>
+  <span class="lbl">Topic 4</span>
+  <h3>Regression Testing</h3>
+  <p style="font-size:.62em">Every change or update to an application can bring surprises. After each change, check that the functionality that already worked still works &mdash; and that previously fixed defects have not returned.</p>
+  <div class="g2">
+    <div class="card"><strong>Four strategies</strong>
+      1. <strong style="display:inline">Corrective</strong> &mdash; requirements unchanged, run the old tests as they are<br>
+      2. <strong style="display:inline">Progressive</strong> &mdash; requirements changed, write new tests or update existing ones<br>
+      3. <strong style="display:inline">Retest-all</strong> &mdash; run everything<br>
+      4. <strong style="display:inline">Selective</strong> &mdash; run only the tests related to the changed functionality</div>
+    <div class="card g"><strong>Why this gets automated</strong>Regression runs the same large set of tests after every change. Doing that by hand is slow and unreliable &mdash; not because it is impossible, but because humans cannot repeat it accurately at scale.<br><span style="color:#888">Regression tests also need maintaining as requirements change.</span></div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Topic 5</span>
+  <h3>Best Practices for Writing Test Cases</h3>
+  <div class="g2">
+    <div class="card g"><strong>Do</strong>
+      &middot; Clear, precise description tied to a requirement<br>
+      &middot; Exact, well-structured steps<br>
+      &middot; Keep cases small and focused &mdash; one case, one scenario<br>
+      &middot; Specific test data: environment, user, inputs<br>
+      &middot; Prioritise by risk<br>
+      &middot; Include negative and edge cases<br>
+      &middot; Measurable, specific expected results<br>
+      &middot; Automate repetitive and regression tests</div>
+    <div class="card r"><strong>Don't</strong>
+      &middot; Test login and price filtering in the same case &mdash; when it fails you will not know which broke<br>
+      &middot; Write "works correctly" as an expected result<br>
+      &middot; Chain dependent tests &mdash; one failure cascades<br>
+      &middot; Name cases so vaguely that you must open them to know what failed</div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Topic 5</span>
+  <h3>Test Management Tools</h3>
+  <div class="g3">
+    <div class="card"><strong>Jira</strong>Atlassian's tool, widely used to manage development and testing. Create, manage and track cases and link them to development and defect tracking.</div>
+    <div class="card g"><strong>Xray</strong>Test management inside Jira &mdash; integrates test case management with the Jira workflow.</div>
+    <div class="card o"><strong>Zephyr</strong>Another popular Jira test management add-on.</div>
+  </div>
+  <div class="g3" style="margin-top:8px">
+    <div class="card r"><strong>TestRail</strong>Purpose-built test case management: create cases, plan runs, track results, generate reports.</div>
+    <div class="card p"><strong>TestLink</strong>Open-source test case management with reporting and test plans.</div>
+    <div class="card"><strong>QMetry</strong>Test management platform covering case management, automation and quality management in one place.</div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Worked Examples</span>
+  <h3>Two Small Test Cases</h3>
+  <p style="font-size:.55em"><strong>Requirement:</strong> the user can search for products by keyword. <strong>Preconditions:</strong> the site is open.</p>
+  <table>
+    <tr><th>Step</th><th>Expected result</th><th>Actual</th></tr>
+    <tr><td>1. Find the search field 2. Type "apple" 3. Press Enter</td><td>Results contain all products whose name includes "apple"</td><td>Works as expected</td></tr>
+  </table>
+  <p style="font-size:.55em;margin-top:.5em"><strong>Requirement:</strong> the user can sort found products by price. <strong>Preconditions:</strong> a search for "apple" returns more than one result.</p>
+  <table>
+    <tr><th>Step</th><th>Expected result</th><th>Actual</th></tr>
+    <tr><td>1. Open the sort control 2. Choose "Price: low to high"</td><td>Sort options are: price low, price high, name A&ndash;Z, name Z&ndash;A. Results are sorted by ascending price.</td><td>Works as expected</td></tr>
+  </table>
+</section>
+
+<section>
+  <span class="lbl">Self-Check</span>
+  <h3>Can You Answer These?</h3>
+  <ul style="font-size:.68em">
+    <li>Write one positive and one negative test case for "users can search by product name".</li>
+    <li>What is the difference between confirmation testing and regression testing?</li>
+    <li>Which regression strategy fits a hotfix released the same afternoon?</li>
+    <li>Why is "the page loads correctly" an unusable expected result?</li>
+  </ul>
+</section>
+
+<section>
+  <div class="hw">
+    <h3>Homework 10 &mdash; Test Cases for Your Project</h3>
+    <p style="font-size:.68em">With your team, write test cases for your own project and add them to your SRS document (section 7.1 Test Cases). The cases must cover all of your functional requirements.</p>
+    <p style="font-size:.62em">Full brief: <a href="homework/hw-10.html">Homework 10</a></p>
+  </div>
+</section>
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
+<script>
+Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight]});
+</script>
+</body>
+</html>

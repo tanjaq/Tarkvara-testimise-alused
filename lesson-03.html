@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 3 &ndash; The Testing Process</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/black.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css">
+<style>
+:root{--blue:#4fc3f7;--green:#81c784;--orange:#ffb74d;--red:#e57373;--purple:#ce93d8;}
+.reveal{font-family:'Segoe UI',system-ui,sans-serif;font-size:34px;}
+.reveal h2{color:var(--blue);font-size:0.95em;}
+.reveal h3{color:var(--green);margin-bottom:.3em;font-size:0.85em;}
+.reveal p{font-size:.60em;line-height:1.5;}.reveal li{font-size:.68em;line-height:1.5;}
+.reveal pre{font-size:.44em;width:100%;box-shadow:none;}
+.reveal ul{text-align:left;margin-left:1em;}
+.reveal table{font-size:.5em;}
+.reveal table th{color:var(--blue);}
+.reveal blockquote{width:100%;box-sizing:border-box;border-left:4px solid var(--blue);padding:.4em 1em;font-style:italic;color:#ccc;background:rgba(79,195,247,.06);margin:.5em 0;font-size:.60em;}
+.lbl{font-size:.38em;letter-spacing:3px;text-transform:uppercase;color:#888;display:block;margin-bottom:.2em;}
+.divider{width:40px;height:3px;background:var(--blue);margin:.3em auto .6em;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:left;}
+.card{background:rgba(255,255,255,.05);border-left:4px solid var(--blue);padding:8px 12px;border-radius:0 5px 5px 0;font-size:.65em;line-height:1.5;text-align:left;}
+.card.g{border-left-color:var(--green);}
+.card.o{border-left-color:var(--orange);}
+.card.r{border-left-color:var(--red);}
+.card.p{border-left-color:var(--purple);}
+.card strong{display:block;margin-bottom:.15em;}
+.plan{background:rgba(255,255,255,.04);border:1px solid rgba(79,195,247,.3);border-radius:10px;padding:16px 20px;text-align:left;max-width:860px;margin:0 auto;}
+.plan-title{color:var(--blue);font-size:.8em;font-weight:700;margin-bottom:.6em;border-bottom:1px solid rgba(79,195,247,.2);padding-bottom:.4em;}
+.plan-topics p{font-size:.68em;margin:.25em 0;color:#ddd;}
+.plan-topics p span{color:var(--blue);font-weight:600;}
+.plan-hw{background:rgba(79,195,247,.08);border:1px solid var(--blue);border-radius:6px;padding:8px 12px;font-size:.65em;margin-top:.7em;}
+.plan-hw strong{color:var(--blue);}
+.hw{background:rgba(79,195,247,.08);border:2px solid var(--blue);border-radius:10px;padding:14px 18px;text-align:left;}
+.hw h3{color:var(--blue)!important;margin-top:0;}
+.hw a{color:var(--orange);}
+.teams{background:rgba(100,100,255,.08);border:2px solid #6264a7;border-radius:10px;padding:14px 18px;text-align:left;}
+.teams h3{color:#9b9fe3!important;margin-top:0;}
+.ai{background:linear-gradient(135deg,rgba(206,147,216,.10),rgba(79,195,247,.08));border:2px solid var(--purple);border-radius:12px;padding:14px 18px;text-align:left;}
+.ai h3{color:var(--purple)!important;margin-top:0;}
+.bio-grid{display:grid;grid-template-columns:1fr 2fr;gap:20px;text-align:left;}
+.bio-left{background:rgba(255,255,255,.04);border-radius:8px;padding:12px;font-size:.65em;}
+.bio-left .name{font-size:1.2em;font-weight:700;color:var(--blue);margin-bottom:.3em;}
+.bio-left .role{color:var(--green);margin-bottom:.5em;}
+.timeline{font-size:.62em;line-height:1.8;}
+.timeline .year{color:var(--orange);font-weight:600;}
+.chain{display:flex;align-items:center;gap:6px;justify-content:center;margin:.6em 0;flex-wrap:wrap;}
+.chain .node{background:rgba(255,255,255,.07);border:1px solid var(--blue);border-radius:6px;padding:6px 10px;font-size:.62em;}
+.chain .arr{color:var(--orange);}
+.num{display:inline-block;width:20px;height:20px;background:var(--blue);color:#111;border-radius:50%;text-align:center;line-height:20px;font-size:.6em;font-weight:700;margin-right:5px;}
+.bug-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.bug-card{background:rgba(229,115,115,.08);border:1px solid rgba(229,115,115,.3);border-radius:6px;padding:8px 10px;font-size:.62em;line-height:1.5;text-align:left;}
+.bug-card .co{font-weight:700;color:var(--red);margin-bottom:.2em;}
+.nav{position:fixed;top:12px;right:12px;z-index:999;font-size:.55em;display:flex;gap:8px;}
+.nav a{color:#555;text-decoration:none;padding:3px 8px;border:1px solid #333;border-radius:5px;}
+.nav a:hover{color:#fff;border-color:#fff;}
+</style>
+</head>
+<body>
+<div class="nav"><a href="lesson-02.html">&larr; L2</a><a href="index.html">&#8617; All</a><a href="lesson-04.html">L4 &rarr;</a></div>
+<div class="reveal"><div class="slides">
+<section data-background-gradient="linear-gradient(135deg,#0f0c29,#302b63,#24243e)">
+  <span class="lbl">Lesson 3 of 12</span>
+  <h2>The Testing Process</h2>
+  <div class="divider"></div>
+  <p style="font-size:.62em">SDLC &middot; Waterfall, V-model, Agile &middot; The ISTQB test process &middot; 7 testing principles</p>
+  <p style="font-size:.5em;color:#555;margin-top:.8em">&rarr; next slide &nbsp;|&nbsp; ESC overview</p>
+</section>
+
+<section>
+  <span class="lbl">Lesson Plan</span>
+  <div class="plan">
+    <div class="plan-title">Lesson 3: The Testing Process<br>Focus: How testing is organised as a process, not a single activity</div>
+      <div class="plan-topics">
+        <p><span>1.</span> Software Development Life Cycle and its models</p>
+        <p><span>2.</span> The ISTQB test process &mdash; five steps</p>
+        <p><span>3.</span> Planning, analysis and design</p>
+        <p><span>4.</span> Implementation, execution and exit criteria</p>
+        <p><span>5.</span> The seven principles of testing</p>
+      </div>
+      <div class="plan-hw"><strong>Homework:</strong> Group work &mdash; run the full five-step test process on a simple web calculator, using the worksheet.</div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Topic 1</span>
+  <h3>Software Development Life Cycle</h3>
+  <p style="font-size:.63em">A set of processes used to build and deliver quality software. There are many models &mdash; but almost all of them contain the same phases.</p>
+  <table>
+    <tr><th>Phase</th><th>Entry criteria</th><th>Exit criteria</th></tr>
+    <tr><td>Kickoff / planning</td><td>Requirements gathered from stakeholders</td><td>Project accepted and planned</td></tr>
+    <tr><td>Analysis &amp; requirements</td><td>Requirements, change requests</td><td>SRS document</td></tr>
+    <tr><td>Design</td><td>SRS document</td><td>Design specification</td></tr>
+    <tr><td>Development</td><td>SRS + design spec</td><td>Build, unit tests, environment set up</td></tr>
+    <tr><td>Testing</td><td>SRS, deployed build, test cases</td><td>System tested, defects closed</td></tr>
+    <tr><td>Deployment</td><td>No high-priority defects</td><td>Build in production</td></tr>
+    <tr><td>Operation &amp; maintenance</td><td>Real users reporting issues</td><td>Fixes deployed</td></tr>
+  </table>
+</section>
+
+<section>
+  <span class="lbl">Topic 1</span>
+  <h3>Three Models You Will Meet</h3>
+  <div class="g3">
+    <div class="card"><strong>Waterfall</strong>Each phase finishes before the next begins. Testing is a phase near the end.<br><span style="color:#888">Predictable, documented &mdash; but expensive to change direction.</span></div>
+    <div class="card g"><strong>V-model</strong>Every development phase has a matching test level defined at the same time.<br><span style="color:#888">Requirements &rarr; acceptance tests, design &rarr; integration tests, code &rarr; unit tests.</span></div>
+    <div class="card o"><strong>Agile</strong>Short iterations, continuous testing, working software each sprint.<br><span style="color:#888">Testing is everyone's job and happens continuously.</span></div>
+  </div>
+  <blockquote>The model changes <em>when</em> you test. It does not change <em>what</em> good testing is.</blockquote>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>Testing Is a Process &mdash; ISTQB</h3>
+  <div class="chain">
+    <div class="node">1. Planning<br>&amp; control</div><span class="arr">&rarr;</span>
+    <div class="node">2. Analysis<br>&amp; design</div><span class="arr">&rarr;</span>
+    <div class="node">3. Implementation<br>&amp; execution</div><span class="arr">&rarr;</span>
+    <div class="node">4. Exit criteria<br>&amp; reporting</div><span class="arr">&rarr;</span>
+    <div class="node">5. Test closure</div>
+  </div>
+  <p style="font-size:.6em;margin-top:.5em">These five steps are the spine of this course. Every technique and document we cover later plugs into one of them.</p>
+</section>
+
+<section>
+  <span class="lbl">Step 1</span>
+  <h3>Planning and Control</h3>
+  <div class="g2">
+    <div class="card"><strong>Test planning</strong>Define the scope and assess risks &middot; choose the test approach &middot; create the test strategy &middot; assign resources (people, environments, tools) &middot; build the schedule &middot; define exit criteria</div>
+    <div class="card g"><strong>Test control</strong>Track progress against the plan and report it. This runs continuously through the whole project, not once at the start.</div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Step 2</span>
+  <h3>Analysis and Design</h3>
+  <ul style="font-size:.66em">
+    <li>Review the test basis: requirements, design documents, risk analysis, architecture.</li>
+    <li>Identify test conditions &mdash; what needs to be verified.</li>
+    <li>Design test cases against those conditions.</li>
+    <li>Evaluate testability of the requirements and of the system.</li>
+    <li>Define test environment requirements and select tools.</li>
+  </ul>
+  <blockquote>If a requirement cannot be tested, that is a defect in the requirement. Say so now, not in the last sprint.</blockquote>
+</section>
+
+<section>
+  <span class="lbl">Step 3</span>
+  <h3>Implementation and Execution</h3>
+  <div class="g2">
+    <div class="card o"><strong>Test implementation</strong>Write and prioritise test cases &middot; create test data &middot; group cases into test suites &middot; prepare the test environment</div>
+    <div class="card r"><strong>Test execution</strong>Run the suites &middot; compare actual to expected results &middot; report defects found &middot; run regression tests &middot; log what was run, in what order, and pass/fail</div>
+  </div>
+  <p style="font-size:.58em;margin-top:.4em">The log matters: a result you cannot reproduce or trace back to a version and environment is not evidence.</p>
+</section>
+
+<section>
+  <span class="lbl">Steps 4 &amp; 5</span>
+  <h3>Exit Criteria and Closure</h3>
+  <div class="g2">
+    <div class="card p"><strong>Evaluating exit criteria</strong>Different applications need different exit strategies, based on risk. For example: a planned number of test cases executed with a defined pass rate &middot; defect rate below an agreed level &middot; deadlines reached.<br>Then decide: do we test more, or do we change the criteria?</div>
+    <div class="card"><strong>Test closure</strong>Check the delivered software has the required functionality &middot; confirm the most important problems are resolved &middot; tidy up testware (documents, automated tests) for reuse &middot; hold a retrospective on the testing process itself</div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Topic 5</span>
+  <h3>The Seven Principles (1/2)</h3>
+  <div class="card" style="margin-bottom:8px"><strong>1. Testing shows the presence of defects</strong>It can never prove their absence. "All tests passed" means "we found nothing with these tests".</div>
+  <div class="card g" style="margin-bottom:8px"><strong>2. Exhaustive testing is impossible</strong>You cannot test every combination. A trip planner with a handful of fields already has millions of input combinations &mdash; you must choose.</div>
+  <div class="card o"><strong>3. Early testing saves time and money</strong>Start as early in the life cycle as possible. See the 1&times;&ndash;100&times; curve from Lesson 2.</div>
+</section>
+
+<section>
+  <span class="lbl">Topic 5</span>
+  <h3>The Seven Principles (2/2)</h3>
+  <div class="card r" style="margin-bottom:8px"><strong>4. Defect clustering</strong>The most-used and most-complex functionality usually contains most of the defects. Follow the clusters.</div>
+  <div class="card p" style="margin-bottom:8px"><strong>5. The pesticide paradox</strong>The same tests stop finding new bugs. Review and refresh your test set.</div>
+  <div class="card" style="margin-bottom:8px"><strong>6. Testing is context dependent</strong>A banking system, a game and an internal admin tool are tested very differently.</div>
+  <div class="card g"><strong>7. Absence-of-errors fallacy</strong>If the software does not meet the user's needs, finding and fixing defects will not make it a good product.</div>
+</section>
+
+<section>
+  <span class="lbl">In-Class Exercise</span>
+  <div class="teams">
+    <h3>The Test Process in Real Life &mdash; Calculator</h3>
+    <p style="font-size:.66em">In groups of 3&ndash;4, take a simple web calculator (two numbers, four operations, one result) and walk it through all five steps using the worksheet:</p>
+    <ul style="font-size:.68em">
+      <li>Planning and control &mdash; scope and risks (division by zero, negative numbers, empty fields)</li>
+      <li>Analysis and design &mdash; test conditions and their priority</li>
+      <li>Test creation &mdash; at least three test cases with inputs, steps and expected result</li>
+      <li>Execution &mdash; mark PASS/FAIL, describe any failure</li>
+      <li>Closure &mdash; was the testing sufficient? What was left uncovered?</li>
+    </ul>
+    <p style="font-size:.6em">Worksheet: <a href="materials/testing-process-worksheet.html" style="color:#9b9fe3">Testing process worksheet</a></p>
+  </div>
+</section>
+
+<section>
+  <div class="hw">
+    <h3>Homework 3 &mdash; Test Process Worksheet</h3>
+    <p style="font-size:.68em">Complete the five-step worksheet for the calculator and be ready to present it: what you covered, what you did not, and what you would improve in the next round.</p>
+    <p style="font-size:.62em">Full brief: <a href="homework/hw-03.html">Homework 3</a></p>
+  </div>
+</section>
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
+<script>
+Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight]});
+</script>
+</body>
+</html>

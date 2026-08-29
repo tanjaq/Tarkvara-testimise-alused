@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Software Testing Fundamentals</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#0f0c29;color:#e0e0e0;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;padding:40px 20px;}
+h1{color:#4fc3f7;font-size:1.6em;text-align:center;margin-bottom:.3em;}
+.subtitle{text-align:center;color:#888;font-size:.80em;margin-bottom:1.4em;}
+.toplinks{text-align:center;margin-bottom:2.6em;font-size:.72em;}
+.toplinks a{color:#4fc3f7;text-decoration:none;border:1px solid rgba(79,195,247,.4);border-radius:14px;padding:5px 14px;margin:0 4px;display:inline-block;}
+.toplinks a:hover{background:rgba(79,195,247,.12);}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;max-width:1100px;margin:0 auto;}
+.card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:24px;text-decoration:none;color:inherit;transition:all .2s;position:relative;overflow:hidden;}
+.card:hover{background:rgba(79,195,247,.1);border-color:#4fc3f7;transform:translateY(-2px);}
+.card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--accent,#4fc3f7);}
+.lesson-num{font-size:.58em;letter-spacing:3px;text-transform:uppercase;color:#888;margin-bottom:.4em;}
+.lesson-title{font-size:.92em;font-weight:600;color:#fff;margin-bottom:.5em;}
+.topics{font-size:.62em;color:#aaa;line-height:1.6;}
+.tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.55em;border:1px solid currentColor;margin:2px;}
+.hw-badge{position:absolute;top:16px;right:16px;font-size:.53em;background:rgba(79,195,247,.15);color:#4fc3f7;border:1px solid #4fc3f7;padding:2px 8px;border-radius:10px;}
+.l1{--accent:#4fc3f7;} .l2{--accent:#81c784;} .l3{--accent:#ffb74d;}
+.l4{--accent:#e57373;} .l5{--accent:#ce93d8;} .l6{--accent:#4fc3f7;}
+.l7{--accent:#81c784;} .l8{--accent:#ffb74d;} .l9{--accent:#e57373;}
+footer{text-align:center;color:#555;font-size:.65em;margin-top:3em;line-height:1.9;}
+</style>
+</head>
+<body>
+<h1>Software Testing Fundamentals</h1>
+<p class="subtitle">Tarkvara testimise alused &middot; 12 lessons &middot; manual testing, from quality mindset to security</p>
+<div class="toplinks">
+  <a href="homework/index.html">Homework</a>
+  <a href="materials/testing-process-worksheet.html">Worksheet</a>
+  <a href="lesson-bonus-ai.html">Bonus: AI</a>
+</div>
+
+<div class="grid">
+
+  <a href="lesson-01.html" class="card l1">
+    <div class="lesson-num">Lesson 1</div>
+    <div class="lesson-title">Testing Fundamentals &amp; the Quality Mindset</div>
+    <div class="topics">
+      <span class="tag" style="color:#4fc3f7">Quality</span>
+      <span class="tag" style="color:#4fc3f7">Terminology</span>
+      <span class="tag" style="color:#4fc3f7">V&amp;V</span>
+      <span class="tag" style="color:#4fc3f7">AI mindset</span>
+    </div>
+  </a>
+
+  <a href="lesson-02.html" class="card l2">
+    <div class="hw-badge">HW 2</div>
+    <div class="lesson-num">Lesson 2</div>
+    <div class="lesson-title">The Purpose of Testing</div>
+    <div class="topics">
+      <span class="tag" style="color:#81c784">Why test</span>
+      <span class="tag" style="color:#81c784">Real failures</span>
+      <span class="tag" style="color:#81c784">Cost of defects</span>
+    </div>
+  </a>
+
+  <a href="lesson-03.html" class="card l3">
+    <div class="hw-badge">HW 3</div>
+    <div class="lesson-num">Lesson 3</div>
+    <div class="lesson-title">The Testing Process</div>
+    <div class="topics">
+      <span class="tag" style="color:#ffb74d">SDLC</span>
+      <span class="tag" style="color:#ffb74d">ISTQB process</span>
+      <span class="tag" style="color:#ffb74d">7 principles</span>
+    </div>
+  </a>
+
+  <a href="lesson-04.html" class="card l4">
+    <div class="hw-badge">HW 4</div>
+    <div class="lesson-num">Lesson 4</div>
+    <div class="lesson-title">Software Requirements</div>
+    <div class="topics">
+      <span class="tag" style="color:#e57373">FR / NFR</span>
+      <span class="tag" style="color:#e57373">SMART</span>
+      <span class="tag" style="color:#e57373">User stories</span>
+      <span class="tag" style="color:#e57373">SRS</span>
+    </div>
+  </a>
+
+  <a href="lesson-05.html" class="card l5">
+    <div class="hw-badge">HW 5</div>
+    <div class="lesson-num">Lesson 5</div>
+    <div class="lesson-title">Software Architecture</div>
+    <div class="topics">
+      <span class="tag" style="color:#ce93d8">Monolith</span>
+      <span class="tag" style="color:#ce93d8">Microservices</span>
+      <span class="tag" style="color:#ce93d8">Event-driven</span>
+      <span class="tag" style="color:#ce93d8">Monorepo</span>
+    </div>
+  </a>
+
+  <a href="lesson-06.html" class="card l6">
+    <div class="hw-badge">HW 6</div>
+    <div class="lesson-num">Lesson 6</div>
+    <div class="lesson-title">Test Techniques I &mdash; Static Testing</div>
+    <div class="topics">
+      <span class="tag" style="color:#4fc3f7">Reviews</span>
+      <span class="tag" style="color:#4fc3f7">Inspections</span>
+      <span class="tag" style="color:#4fc3f7">Static analysis</span>
+      <span class="tag" style="color:#4fc3f7">PR review</span>
+    </div>
+  </a>
+
+  <a href="lesson-07.html" class="card l7">
+    <div class="hw-badge">HW 7</div>
+    <div class="lesson-num">Lesson 7</div>
+    <div class="lesson-title">Test Techniques II &mdash; Black Box</div>
+    <div class="topics">
+      <span class="tag" style="color:#81c784">EP</span>
+      <span class="tag" style="color:#81c784">BVA</span>
+      <span class="tag" style="color:#81c784">Decision tables</span>
+      <span class="tag" style="color:#81c784">State transition</span>
+    </div>
+  </a>
+
+  <a href="lesson-08.html" class="card l8">
+    <div class="hw-badge">HW 8</div>
+    <div class="lesson-num">Lesson 8</div>
+    <div class="lesson-title">Test Techniques III &mdash; White Box</div>
+    <div class="topics">
+      <span class="tag" style="color:#ffb74d">Statement</span>
+      <span class="tag" style="color:#ffb74d">Branch</span>
+      <span class="tag" style="color:#ffb74d">Coverage limits</span>
+    </div>
+  </a>
+
+  <a href="lesson-09.html" class="card l9">
+    <div class="hw-badge">HW 9</div>
+    <div class="lesson-num">Lesson 9</div>
+    <div class="lesson-title">Defect Management</div>
+    <div class="topics">
+      <span class="tag" style="color:#e57373">Bug reports</span>
+      <span class="tag" style="color:#e57373">Severity vs priority</span>
+      <span class="tag" style="color:#e57373">Lifecycle</span>
+      <span class="tag" style="color:#e57373">RCA</span>
+    </div>
+  </a>
+
+  <a href="lesson-10.html" class="card l1">
+    <div class="hw-badge">HW 10</div>
+    <div class="lesson-num">Lesson 10</div>
+    <div class="lesson-title">Test Cases &amp; Documentation</div>
+    <div class="topics">
+      <span class="tag" style="color:#4fc3f7">Test cases</span>
+      <span class="tag" style="color:#4fc3f7">Regression</span>
+      <span class="tag" style="color:#4fc3f7">Test tools</span>
+    </div>
+  </a>
+
+  <a href="lesson-11.html" class="card l2">
+    <div class="hw-badge">HW 11</div>
+    <div class="lesson-num">Lesson 11</div>
+    <div class="lesson-title">Performance Testing</div>
+    <div class="topics">
+      <span class="tag" style="color:#81c784">Response time</span>
+      <span class="tag" style="color:#81c784">Throughput</span>
+      <span class="tag" style="color:#81c784">Load / stress</span>
+    </div>
+  </a>
+
+  <a href="lesson-12.html" class="card l3">
+    <div class="hw-badge">HW 12</div>
+    <div class="lesson-num">Lesson 12 &middot; Last lesson</div>
+    <div class="lesson-title">Application Security</div>
+    <div class="topics">
+      <span class="tag" style="color:#ffb74d">CIA</span>
+      <span class="tag" style="color:#ffb74d">OWASP</span>
+      <span class="tag" style="color:#ffb74d">Injection</span>
+      <span class="tag" style="color:#ffb74d">XSS</span>
+    </div>
+  </a>
+
+  <a href="lesson-bonus-ai.html" class="card" style="--accent:#ce93d8">
+    <div class="lesson-num">Bonus Lesson &middot; No homework</div>
+    <div class="lesson-title">Using AI Responsibly in Testing</div>
+    <div class="topics">
+      <span class="tag" style="color:#ce93d8">Where AI helps</span>
+      <span class="tag" style="color:#ce93d8">Silent failures</span>
+      <span class="tag" style="color:#ce93d8">Ground rules</span>
+    </div>
+  </a>
+
+</div>
+
+<footer>
+  Software Testing Fundamentals &middot; Tatjana Kirotar<br>
+  Open any lesson to begin &middot; use &rarr; to move between slides, ESC for the slide overview
+</footer>
+</body>
+</html>

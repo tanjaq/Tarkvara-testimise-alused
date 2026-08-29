@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 9 &ndash; Defect Management</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/black.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css">
+<style>
+:root{--blue:#4fc3f7;--green:#81c784;--orange:#ffb74d;--red:#e57373;--purple:#ce93d8;}
+.reveal{font-family:'Segoe UI',system-ui,sans-serif;font-size:34px;}
+.reveal h2{color:var(--blue);font-size:0.95em;}
+.reveal h3{color:var(--green);margin-bottom:.3em;font-size:0.85em;}
+.reveal p{font-size:.60em;line-height:1.5;}.reveal li{font-size:.68em;line-height:1.5;}
+.reveal pre{font-size:.44em;width:100%;box-shadow:none;}
+.reveal ul{text-align:left;margin-left:1em;}
+.reveal table{font-size:.5em;}
+.reveal table th{color:var(--blue);}
+.reveal blockquote{width:100%;box-sizing:border-box;border-left:4px solid var(--blue);padding:.4em 1em;font-style:italic;color:#ccc;background:rgba(79,195,247,.06);margin:.5em 0;font-size:.60em;}
+.lbl{font-size:.38em;letter-spacing:3px;text-transform:uppercase;color:#888;display:block;margin-bottom:.2em;}
+.divider{width:40px;height:3px;background:var(--blue);margin:.3em auto .6em;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:left;}
+.card{background:rgba(255,255,255,.05);border-left:4px solid var(--blue);padding:8px 12px;border-radius:0 5px 5px 0;font-size:.65em;line-height:1.5;text-align:left;}
+.card.g{border-left-color:var(--green);}
+.card.o{border-left-color:var(--orange);}
+.card.r{border-left-color:var(--red);}
+.card.p{border-left-color:var(--purple);}
+.card strong{display:block;margin-bottom:.15em;}
+.plan{background:rgba(255,255,255,.04);border:1px solid rgba(79,195,247,.3);border-radius:10px;padding:16px 20px;text-align:left;max-width:860px;margin:0 auto;}
+.plan-title{color:var(--blue);font-size:.8em;font-weight:700;margin-bottom:.6em;border-bottom:1px solid rgba(79,195,247,.2);padding-bottom:.4em;}
+.plan-topics p{font-size:.68em;margin:.25em 0;color:#ddd;}
+.plan-topics p span{color:var(--blue);font-weight:600;}
+.plan-hw{background:rgba(79,195,247,.08);border:1px solid var(--blue);border-radius:6px;padding:8px 12px;font-size:.65em;margin-top:.7em;}
+.plan-hw strong{color:var(--blue);}
+.hw{background:rgba(79,195,247,.08);border:2px solid var(--blue);border-radius:10px;padding:14px 18px;text-align:left;}
+.hw h3{color:var(--blue)!important;margin-top:0;}
+.hw a{color:var(--orange);}
+.teams{background:rgba(100,100,255,.08);border:2px solid #6264a7;border-radius:10px;padding:14px 18px;text-align:left;}
+.teams h3{color:#9b9fe3!important;margin-top:0;}
+.ai{background:linear-gradient(135deg,rgba(206,147,216,.10),rgba(79,195,247,.08));border:2px solid var(--purple);border-radius:12px;padding:14px 18px;text-align:left;}
+.ai h3{color:var(--purple)!important;margin-top:0;}
+.bio-grid{display:grid;grid-template-columns:1fr 2fr;gap:20px;text-align:left;}
+.bio-left{background:rgba(255,255,255,.04);border-radius:8px;padding:12px;font-size:.65em;}
+.bio-left .name{font-size:1.2em;font-weight:700;color:var(--blue);margin-bottom:.3em;}
+.bio-left .role{color:var(--green);margin-bottom:.5em;}
+.timeline{font-size:.62em;line-height:1.8;}
+.timeline .year{color:var(--orange);font-weight:600;}
+.chain{display:flex;align-items:center;gap:6px;justify-content:center;margin:.6em 0;flex-wrap:wrap;}
+.chain .node{background:rgba(255,255,255,.07);border:1px solid var(--blue);border-radius:6px;padding:6px 10px;font-size:.62em;}
+.chain .arr{color:var(--orange);}
+.num{display:inline-block;width:20px;height:20px;background:var(--blue);color:#111;border-radius:50%;text-align:center;line-height:20px;font-size:.6em;font-weight:700;margin-right:5px;}
+.bug-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.bug-card{background:rgba(229,115,115,.08);border:1px solid rgba(229,115,115,.3);border-radius:6px;padding:8px 10px;font-size:.62em;line-height:1.5;text-align:left;}
+.bug-card .co{font-weight:700;color:var(--red);margin-bottom:.2em;}
+.nav{position:fixed;top:12px;right:12px;z-index:999;font-size:.55em;display:flex;gap:8px;}
+.nav a{color:#555;text-decoration:none;padding:3px 8px;border:1px solid #333;border-radius:5px;}
+.nav a:hover{color:#fff;border-color:#fff;}
+</style>
+</head>
+<body>
+<div class="nav"><a href="lesson-08.html">&larr; L8</a><a href="index.html">&#8617; All</a><a href="lesson-10.html">L10 &rarr;</a></div>
+<div class="reveal"><div class="slides">
+<section data-background-gradient="linear-gradient(135deg,#0f0c29,#302b63,#24243e)">
+  <span class="lbl">Lesson 9 of 12</span>
+  <h2>Defect Management</h2>
+  <div class="divider"></div>
+  <p style="font-size:.62em">Error, defect, failure &middot; Bug report anatomy &middot; Severity vs priority &middot; Lifecycle &middot; RCA</p>
+  <p style="font-size:.5em;color:#555;margin-top:.8em">&rarr; next slide &nbsp;|&nbsp; ESC overview</p>
+</section>
+
+<section>
+  <span class="lbl">Lesson Plan</span>
+  <div class="plan">
+    <div class="plan-title">Lesson 9: Defect Management<br>Focus: Reporting defects so they actually get fixed</div>
+      <div class="plan-topics">
+        <p><span>1.</span> Error, defect, failure &mdash; and why the words matter</p>
+        <p><span>2.</span> Who reads a bug report, and what they need from it</p>
+        <p><span>3.</span> The fields of a good bug report</p>
+        <p><span>4.</span> Severity vs priority</p>
+        <p><span>5.</span> Bug lifecycle and root cause analysis</p>
+      </div>
+      <div class="plan-hw"><strong>Homework:</strong> Find a real defect in a real application and file it as a GitHub issue using the bug report template.</div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Topic 1</span>
+  <h3>Error, Defect, Failure</h3>
+  <div class="g3">
+    <div class="card"><strong>Error</strong>A human mistake &mdash; a wrong assumption, a misread requirement.<br><span style="color:#888">The developer read "age &ge; 18" as "age &gt; 18".</span></div>
+    <div class="card o"><strong>Defect / bug</strong>The flaw in the code or document that results from the error.<br><span style="color:#888">The comparison is written as &gt; instead of &ge;.</span></div>
+    <div class="card r"><strong>Failure</strong>The observable wrong behaviour when the defect is triggered.<br><span style="color:#888">An 18-year-old cannot register.</span></div>
+  </div>
+  <p style="font-size:.62em;margin-top:.5em">A defect is any deviation from the requirements &mdash; the actual result differs from the expected result. It does not have to crash anything.</p>
+  <blockquote>Not every error causes a failure. A defect in code that never runs is still a defect &mdash; you only see the failure when that path is triggered. That is why edge cases matter.</blockquote>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>Who Reads a Bug Report?</h3>
+  <div class="g2">
+    <div>
+      <div class="card" style="margin-bottom:6px"><strong>Developer</strong>Needs exact steps to reproduce and environment details. The more precise, the faster the fix.</div>
+      <div class="card g"><strong>Product manager</strong>Needs impact: how many users, which feature, how visible to customers. And an overview of quality level.</div>
+    </div>
+    <div>
+      <div class="card o" style="margin-bottom:6px"><strong>Process manager</strong>Needs root-cause information: what process failure let this reach this stage?</div>
+      <div class="card p"><strong>The whole team</strong>Needs clarity and a professional tone. Defects are system failures, not personal ones. Never write "you broke X".</div>
+    </div>
+  </div>
+  <p style="font-size:.6em;margin-top:.4em">Always check for duplicates before filing. The same bug reported five times by five people wastes everyone's day.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>Which Defects Are Worth Reporting?</h3>
+  <p style="font-size:.62em">Testing time is always limited. Part of the job is deciding what to chase and how to report it.</p>
+  <table>
+    <tr><th></th><th>vs</th><th></th></tr>
+    <tr><td>Small and easy bug</td><td></td><td>Big and complex bug</td></tr>
+    <tr><td>Many insignificant bugs</td><td></td><td>A few valuable bugs</td></tr>
+    <tr><td>Report everything weird</td><td></td><td>Report only certain bugs</td></tr>
+    <tr><td>Undetailed report</td><td></td><td>Thorough report</td></tr>
+  </table>
+  <p style="font-size:.6em;margin-top:.4em">There is no universally right column. There is the answer that fits your product's risk &mdash; and you should be able to defend it.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 3</span>
+  <h3>Bug Report Fields (1/2)</h3>
+  <div class="card" style="margin-bottom:6px"><strong>Summary / title</strong>A short summary of the defect, ideally naming the affected functionality.<br>Good: "[Search] Price filter shows products below $50 minimum"<br>Bad: "Filter broken" &mdash; unactionable and unsearchable.</div>
+  <div class="card g" style="margin-bottom:6px"><strong>Environment</strong>Which environment (dev, QA, staging, production) &middot; which user role (regular, admin, manager) &middot; device and OS (Mac, Windows, Linux, mobile) &middot; browser and version.</div>
+  <div class="card o" style="margin-bottom:6px"><strong>Severity</strong>How badly does this break the system? Does it crash? Can you keep using it? Is there a workaround?<br>Critical &middot; Major &middot; Minor &middot; Trivial</div>
+  <div class="card r"><strong>Priority</strong>How urgent is the fix?<br>P0 &mdash; core functionality unusable &middot; P1 &mdash; key functions do not meet requirements &middot; P2 &mdash; specific functions fail but the product is usable</div>
+</section>
+
+<section>
+  <span class="lbl">Topic 3</span>
+  <h3>Bug Report Fields (2/2)</h3>
+  <div class="card" style="margin-bottom:6px"><strong>Steps to reproduce</strong>Numbered, exact, starting from a known state. Someone who has never seen the app should be able to follow them.<br>Vague: "go to search and filter". Exact: "1. Open /search 2. Set min $50, max $200 3. Click Apply 4. Scroll results".</div>
+  <div class="card g" style="margin-bottom:6px"><strong>Expected result</strong>What should happen at the final step &mdash; ideally with a link to the requirement or design that defines it.</div>
+  <div class="card o" style="margin-bottom:6px"><strong>Actual result</strong>What actually happens, precisely. Not "it doesn't work" but "products priced $12, $32 and $41 appear in the results".</div>
+  <div class="card p" style="margin-bottom:6px"><strong>Visuals</strong>Screenshots, recordings, files &mdash; anything that makes the failure obvious.</div>
+  <div class="card r"><strong>Logs</strong>Browser console and network tab &middot; device logs &middot; server-side logs. If you cannot access logs, at least record the exact time the problem occurred.</div>
+</section>
+
+<section>
+  <span class="lbl">Topic 3</span>
+  <h3>Evidence From the Browser</h3>
+  <p style="font-size:.62em">Open DevTools (F12) before you reproduce the defect, not after.</p>
+  <div class="g3">
+    <div class="card"><strong>Console</strong>JavaScript errors and stack traces &mdash; often names the exact file and line.</div>
+    <div class="card g"><strong>Network</strong>The failing request: URL, status code, request payload, response body. A 500 here saves the developer an hour.</div>
+    <div class="card o"><strong>Elements / Application</strong>The rendered DOM, cookies, local storage &mdash; useful for state and session defects.</div>
+  </div>
+  <p style="font-size:.6em;margin-top:.4em">"The page showed an error" is a complaint. A console stack trace plus the failing request is a bug report.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 3</span>
+  <h3>A Complete Example</h3>
+  <div class="card r">
+    <strong>PRF-115 &middot; [Search] Price filter shows products below the minimum price</strong>
+    <p style="font-size:.85em;margin:.2em 0">Environment: Chrome 124 &middot; macOS 14.4 &middot; QA env v2.3.1 &nbsp;&middot;&nbsp; Severity: Major &middot; Priority: P1</p>
+    <p style="font-size:.85em;margin:.3em 0"><strong style="display:inline">Steps:</strong> 1. Log in as a registered user 2. Go to product search 3. Locate the "Price Range" filter 4. Enter min $50, max $200 5. Click Apply 6. Scroll the results</p>
+    <p style="font-size:.85em;margin:.3em 0"><strong style="display:inline">Expected:</strong> all products in results are priced $50&ndash;$200 inclusive.</p>
+    <p style="font-size:.85em;margin:.3em 0"><strong style="display:inline">Actual:</strong> products priced $12, $32 and $41 appear. The minimum price is not applied.</p>
+  </div>
+  <p style="font-size:.58em;margin-top:.4em">This is the defect that failed step 3 of test case TC-014 in Lesson 10. The actual result names specific prices, so the developer can reproduce the exact failure immediately.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 4</span>
+  <h3>Severity Is Not Priority</h3>
+  <div class="g2">
+    <div class="card r"><strong>High severity + high priority</strong>Checkout crashes for all users. Fix now &mdash; every minute costs money.</div>
+    <div class="card o"><strong>Low severity + high priority</strong>The CEO's name is misspelled on the homepage. Nothing is broken &mdash; fix it before the morning press release.</div>
+  </div>
+  <div class="g2" style="margin-top:8px">
+    <div class="card p"><strong>High severity + low priority</strong>Crash when exporting a legacy report used by two internal people once a year. A real crash, low business impact.</div>
+    <div class="card"><strong>Low severity + low priority</strong>A pixel misalignment in the footer, Firefox only.</div>
+  </div>
+  <blockquote>QA sets severity from technical impact. Product sets priority from business context. If you are arguing about one number, you are probably arguing about two different things.</blockquote>
+</section>
+
+<section>
+  <span class="lbl">Topic 5</span>
+  <h3>Bug Lifecycle</h3>
+  <div class="chain">
+    <div class="node">New</div><span class="arr">&rarr;</span>
+    <div class="node">Assigned</div><span class="arr">&rarr;</span>
+    <div class="node">In progress</div><span class="arr">&rarr;</span>
+    <div class="node">Fixed</div><span class="arr">&rarr;</span>
+    <div class="node">Re-test</div><span class="arr">&rarr;</span>
+    <div class="node" style="border-color:var(--green)">Closed</div>
+  </div>
+  <div class="g2" style="margin-top:.5em">
+    <div class="card o"><strong>Alternative paths, all valid</strong>Re-opened &mdash; the fix did not work &middot; Rejected / won't fix &middot; Deferred &middot; Duplicate &middot; Cannot reproduce</div>
+    <div class="card g"><strong>Why teams track this</strong>Progress and statistics &middot; prioritising and fixing &middot; trend analysis &mdash; is the defect count growing or shrinking, and are defects coming from documentation or from code?</div>
+  </div>
+  <p style="font-size:.58em;margin-top:.4em">Tools: Jira &middot; GitHub Issues (used in this course) &middot; Linear &middot; YouTrack &middot; Azure DevOps</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 5</span>
+  <h3>Defects That Reach Production</h3>
+  <p style="font-size:.62em">The point of defect management is to fix the important ones before customers see them. Some still get through:</p>
+  <ul style="font-size:.65em">
+    <li>The defect could not be reproduced.</li>
+    <li>It was found too late in the cycle.</li>
+    <li>The team decided not to fix it.</li>
+    <li>The fix failed, or the fix created new defects.</li>
+    <li>It turned out to be a feature.</li>
+  </ul>
+</section>
+
+<section>
+  <span class="lbl">Topic 5</span>
+  <h3>Root Cause Analysis</h3>
+  <p style="font-size:.62em">Finding why the defect happened, not just fixing it and moving on. The team asks: why did this occur?</p>
+  <div class="g3">
+    <div class="card"><strong>Human cause</strong>A mistake by a person &mdash; misunderstood requirement, wrong assumption.<br><span style="color:#888">Fix: better requirements, more review.</span></div>
+    <div class="card o"><strong>Organizational cause</strong>A process failure &mdash; no review, unclear spec, no test environment, unrealistic deadline.<br><span style="color:#888">Fix: improve the process, not the person.</span></div>
+    <div class="card r"><strong>Physical / technical cause</strong>Infrastructure &mdash; server failure, network timeout, memory limit, third-party outage.<br><span style="color:#888">Fix: monitoring, redundancy.</span></div>
+  </div>
+  <blockquote>The goal of RCA is to improve the system, not to assign blame. The same defect happening twice means the process did not learn.</blockquote>
+</section>
+
+<section>
+  <span class="lbl">In-Class Exercise</span>
+  <div class="teams">
+    <h3>File a Real Bug Report</h3>
+    <ul style="font-size:.7em">
+      <li>Pick an application or website.</li>
+      <li>Do some exploratory testing using the techniques from Lessons 7 and 8.</li>
+      <li>Find one real problem &mdash; an error, a UI issue, a typo, a missing validation.</li>
+      <li>Write a full bug report for it.</li>
+      <li>File it as an issue: <a href="https://github.com/tanjaq/OnlineShopping/issues" style="color:#9b9fe3">tanjaq/OnlineShopping &middot; Issues</a> &mdash; existing issues in that repo are worked examples.</li>
+      <li>Add a couple of sentences on why you wrote the report the way you did.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Self-Check</span>
+  <h3>Can You Answer These?</h3>
+  <ul style="font-size:.68em">
+    <li>Explain error, defect and failure with one example of your own.</li>
+    <li>A crash on a rarely used admin page &mdash; what severity, what priority, and why do they differ?</li>
+    <li>Name three bug report fields and say what each one tells the developer.</li>
+    <li>Draw the bug lifecycle from memory, including two alternative paths.</li>
+  </ul>
+</section>
+
+<section>
+  <div class="hw">
+    <h3>Homework 9 &mdash; Real Bug Report</h3>
+    <p style="font-size:.68em">File one real defect as a GitHub issue with every required field completed, plus a short explanation of the severity and priority you assigned.</p>
+    <p style="font-size:.62em">Full brief: <a href="homework/hw-09.html">Homework 9</a></p>
+  </div>
+</section>
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
+<script>
+Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight]});
+</script>
+</body>
+</html>

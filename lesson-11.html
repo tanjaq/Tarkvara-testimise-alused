@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 11 &ndash; Performance Testing</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/black.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css">
+<style>
+:root{--blue:#4fc3f7;--green:#81c784;--orange:#ffb74d;--red:#e57373;--purple:#ce93d8;}
+.reveal{font-family:'Segoe UI',system-ui,sans-serif;font-size:34px;}
+.reveal h2{color:var(--blue);font-size:0.95em;}
+.reveal h3{color:var(--green);margin-bottom:.3em;font-size:0.85em;}
+.reveal p{font-size:.60em;line-height:1.5;}.reveal li{font-size:.68em;line-height:1.5;}
+.reveal pre{font-size:.44em;width:100%;box-shadow:none;}
+.reveal ul{text-align:left;margin-left:1em;}
+.reveal table{font-size:.5em;}
+.reveal table th{color:var(--blue);}
+.reveal blockquote{width:100%;box-sizing:border-box;border-left:4px solid var(--blue);padding:.4em 1em;font-style:italic;color:#ccc;background:rgba(79,195,247,.06);margin:.5em 0;font-size:.60em;}
+.lbl{font-size:.38em;letter-spacing:3px;text-transform:uppercase;color:#888;display:block;margin-bottom:.2em;}
+.divider{width:40px;height:3px;background:var(--blue);margin:.3em auto .6em;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:left;}
+.card{background:rgba(255,255,255,.05);border-left:4px solid var(--blue);padding:8px 12px;border-radius:0 5px 5px 0;font-size:.65em;line-height:1.5;text-align:left;}
+.card.g{border-left-color:var(--green);}
+.card.o{border-left-color:var(--orange);}
+.card.r{border-left-color:var(--red);}
+.card.p{border-left-color:var(--purple);}
+.card strong{display:block;margin-bottom:.15em;}
+.plan{background:rgba(255,255,255,.04);border:1px solid rgba(79,195,247,.3);border-radius:10px;padding:16px 20px;text-align:left;max-width:860px;margin:0 auto;}
+.plan-title{color:var(--blue);font-size:.8em;font-weight:700;margin-bottom:.6em;border-bottom:1px solid rgba(79,195,247,.2);padding-bottom:.4em;}
+.plan-topics p{font-size:.68em;margin:.25em 0;color:#ddd;}
+.plan-topics p span{color:var(--blue);font-weight:600;}
+.plan-hw{background:rgba(79,195,247,.08);border:1px solid var(--blue);border-radius:6px;padding:8px 12px;font-size:.65em;margin-top:.7em;}
+.plan-hw strong{color:var(--blue);}
+.hw{background:rgba(79,195,247,.08);border:2px solid var(--blue);border-radius:10px;padding:14px 18px;text-align:left;}
+.hw h3{color:var(--blue)!important;margin-top:0;}
+.hw a{color:var(--orange);}
+.teams{background:rgba(100,100,255,.08);border:2px solid #6264a7;border-radius:10px;padding:14px 18px;text-align:left;}
+.teams h3{color:#9b9fe3!important;margin-top:0;}
+.ai{background:linear-gradient(135deg,rgba(206,147,216,.10),rgba(79,195,247,.08));border:2px solid var(--purple);border-radius:12px;padding:14px 18px;text-align:left;}
+.ai h3{color:var(--purple)!important;margin-top:0;}
+.bio-grid{display:grid;grid-template-columns:1fr 2fr;gap:20px;text-align:left;}
+.bio-left{background:rgba(255,255,255,.04);border-radius:8px;padding:12px;font-size:.65em;}
+.bio-left .name{font-size:1.2em;font-weight:700;color:var(--blue);margin-bottom:.3em;}
+.bio-left .role{color:var(--green);margin-bottom:.5em;}
+.timeline{font-size:.62em;line-height:1.8;}
+.timeline .year{color:var(--orange);font-weight:600;}
+.chain{display:flex;align-items:center;gap:6px;justify-content:center;margin:.6em 0;flex-wrap:wrap;}
+.chain .node{background:rgba(255,255,255,.07);border:1px solid var(--blue);border-radius:6px;padding:6px 10px;font-size:.62em;}
+.chain .arr{color:var(--orange);}
+.num{display:inline-block;width:20px;height:20px;background:var(--blue);color:#111;border-radius:50%;text-align:center;line-height:20px;font-size:.6em;font-weight:700;margin-right:5px;}
+.bug-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.bug-card{background:rgba(229,115,115,.08);border:1px solid rgba(229,115,115,.3);border-radius:6px;padding:8px 10px;font-size:.62em;line-height:1.5;text-align:left;}
+.bug-card .co{font-weight:700;color:var(--red);margin-bottom:.2em;}
+.nav{position:fixed;top:12px;right:12px;z-index:999;font-size:.55em;display:flex;gap:8px;}
+.nav a{color:#555;text-decoration:none;padding:3px 8px;border:1px solid #333;border-radius:5px;}
+.nav a:hover{color:#fff;border-color:#fff;}
+</style>
+</head>
+<body>
+<div class="nav"><a href="lesson-10.html">&larr; L10</a><a href="index.html">&#8617; All</a><a href="lesson-12.html">L12 &rarr;</a></div>
+<div class="reveal"><div class="slides">
+<section data-background-gradient="linear-gradient(135deg,#0f0c29,#302b63,#24243e)">
+  <span class="lbl">Lesson 11 of 12</span>
+  <h2>Performance Testing</h2>
+  <div class="divider"></div>
+  <p style="font-size:.62em">Response time &middot; Throughput &middot; Resource utilization &middot; Load, stress and endurance tests</p>
+  <p style="font-size:.5em;color:#555;margin-top:.8em">&rarr; next slide &nbsp;|&nbsp; ESC overview</p>
+</section>
+
+<section>
+  <span class="lbl">Lesson Plan</span>
+  <div class="plan">
+    <div class="plan-title">Lesson 11: Performance Testing<br>Focus: Testing how fast and how much &mdash; not just whether it works</div>
+      <div class="plan-topics">
+        <p><span>1.</span> Where performance problems come from</p>
+        <p><span>2.</span> The three performance metrics</p>
+        <p><span>3.</span> Load, stress and endurance testing</p>
+        <p><span>4.</span> A performance testing approach that works</p>
+        <p><span>5.</span> Tools</p>
+      </div>
+      <div class="plan-hw"><strong>Homework:</strong> Group work &mdash; define the performance requirements for your own project and add them to your SRS.</div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Topic 1</span>
+  <h3>Why Performance Matters</h3>
+  <p style="font-size:.64em">Most performance problems come down to speed, response time, load time and poor scalability. A slow application loses users &mdash; performance testing makes sure it stays fast enough to keep their attention.</p>
+  <div class="g2">
+    <div class="card o"><strong>Long load time</strong>Load time is how long the application takes to start. Keep it to a minimum &mdash; ideally a few seconds.</div>
+    <div class="card r"><strong>Poor response time</strong>The time from a user's input to the application's response. Wait too long and the user is gone.</div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Topic 1</span>
+  <h3>Scalability and Bottlenecks</h3>
+  <div class="g2">
+    <div class="card"><strong>Poor scalability</strong>The product cannot handle the expected number of users, or does not accommodate a wide enough range of them. Load testing tells you whether it can carry the anticipated user count.</div>
+    <div class="card r"><strong>Bottlenecks</strong>Obstructions that degrade overall system performance &mdash; coding errors or hardware issues that reduce throughput under load.<br><span style="color:#888">Common ones: CPU utilization, memory utilization, network utilization, operating-system limits, disk usage.</span></div>
+  </div>
+  <p style="font-size:.6em;margin-top:.4em">Performance testing checks three things: <strong>speed</strong> (does it respond quickly), <strong>scalability</strong> (what user load can it carry), <strong>stability</strong> (is it stable under varying load).</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>Response Time</h3>
+  <p style="font-size:.62em">The amount of time taken to respond to a request. There is more than one place to measure it:</p>
+  <div class="g2">
+    <div class="card"><strong>Latency at the server</strong>For serverless applications, one form is the duration of the function from start to finish of the computation.</div>
+    <div class="card g"><strong>Latency at the client</strong>Measured from the user's perspective &mdash; includes the API gateway, request queue, computation and result queue.</div>
+  </div>
+  <p style="font-size:.6em;margin-top:.4em"><strong>Example requirement:</strong> small requests 1 second, heavy computation requests 5&ndash;7 seconds.</p>
+  <blockquote>Always state which measurement point a number refers to. "200 ms" at the server and "200 ms" at the client are very different promises.</blockquote>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>Throughput and Resource Utilization</h3>
+  <div class="g2">
+    <div class="card o"><strong>Throughput</strong>The number of requests the application handles per second. Can be defined as transactions completed per second, or concurrent function executions.<br><span style="color:#888">Example: 10 requests per second sustained for at least 5 minutes.</span></div>
+    <div class="card p"><strong>Resource utilization</strong>The cost in server and network resources: CPU &middot; memory &middot; disk I/O &middot; network I/O.<br><span style="color:#888">Example: idle CPU usage 1&ndash;5%, heavy load 80&ndash;100%.</span></div>
+  </div>
+  <p style="font-size:.6em;margin-top:.4em">These three &mdash; response time, throughput, resource utilization &mdash; are the traditional performance indicators. Every performance NFR you write should be expressed in one of them.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 3</span>
+  <h3>Three Types of Performance Test</h3>
+  <div class="g3">
+    <div class="card"><strong>Load testing</strong>Measures performance under expected, production-like workload. The closest approximation to real usage. Main goal: make sure changes still meet the agreed non-functional requirements.</div>
+    <div class="card r"><strong>Stress testing</strong>Measures the workload at which the application starts to fail. Shows the real capacity limits, which components break first, and how the system recovers.</div>
+    <div class="card o"><strong>Endurance testing</strong>Load tests run for a long time with production-like workload, to find issues that only appear after extended running &mdash; memory leaks, log growth, connection exhaustion.</div>
+  </div>
+  <p style="font-size:.6em;margin-top:.4em">Performance tests should run regularly and eventually be part of the CI/CD pipeline &mdash; a performance test run once before release tells you nothing about the trend.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 4</span>
+  <h3>A Performance Testing Approach</h3>
+  <table>
+    <tr><th>Step</th><th>Description</th></tr>
+    <tr><td>NFR capture</td><td>Gather performance NFRs from all stakeholders: performance targets, key use cases, data requirements</td></tr>
+    <tr><td>Environment build</td><td>Make a close replica of production &mdash; at minimum reflect the production deployment and database size</td></tr>
+    <tr><td>Use-case scripting</td><td>Identify key use cases and any components that need separate monitoring</td></tr>
+    <tr><td>Scenario build</td><td>Choose the test type, volume and duration</td></tr>
+    <tr><td>Execution</td><td>Run and monitor the tests</td></tr>
+    <tr><td>Analysis &amp; reporting</td><td>Collect data from all runs, compare against requirements, write the report</td></tr>
+  </table>
+  <p style="font-size:.55em;color:#888;margin-top:.4em">Approach proposed by Ian Molyneaux, <em>The Art of Application Performance Testing</em></p>
+</section>
+
+<section>
+  <span class="lbl">Topic 5</span>
+  <h3>Tools</h3>
+  <div class="g2">
+    <div>
+      <div class="card" style="margin-bottom:6px"><strong>JMeter</strong>Open source, load and performance testing across many servers and protocols. The usual starting point.</div>
+      <div class="card g" style="margin-bottom:6px"><strong>k6</strong>Modern open-source load testing, tests written in JavaScript &mdash; fits well into a CI pipeline.</div>
+      <div class="card o"><strong>BlazeMeter</strong>Scales load and performance testing; combines UX and load testing so you see what users see under load.</div>
+    </div>
+    <div>
+      <div class="card r" style="margin-bottom:6px"><strong>LoadRunner</strong>Helps identify likely causes of performance issues in applications.</div>
+      <div class="card p" style="margin-bottom:6px"><strong>LoadNinja</strong>Scriptless load test creation and playback; real-browser load execution at scale.</div>
+      <div class="card"><strong>HeadSpin</strong>Mobile app performance optimisation across applications, devices and networks.</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">In-Class Exercise</span>
+  <div class="teams">
+    <h3>Performance Requirements for Your Project</h3>
+    <ul style="font-size:.7em">
+      <li>Discuss with your team and capture performance requirements for response time and throughput, if you have not already.</li>
+      <li>Questions to answer: How quickly should the main page load? How many concurrent users should the application hold? What would a stress test scenario look like?</li>
+      <li>Write the requirements into your SRS document &mdash; expressed as numbers, with a measurement point.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Self-Check</span>
+  <h3>Can You Answer These?</h3>
+  <ul style="font-size:.68em">
+    <li>Turn "the site should handle a lot of users" into a testable requirement using all three metrics.</li>
+    <li>When would you run an endurance test rather than a load test?</li>
+    <li>Your load test passes but users still complain the app is slow. Name two explanations.</li>
+    <li>Why must the performance test environment resemble production?</li>
+  </ul>
+</section>
+
+<section>
+  <div class="hw">
+    <h3>Homework 11 &mdash; Performance Requirements</h3>
+    <p style="font-size:.68em">Add a performance section to your team's SRS: response time, throughput and resource targets, plus one load scenario and one stress scenario described in words.</p>
+    <p style="font-size:.62em">Full brief: <a href="homework/hw-11.html">Homework 11</a></p>
+  </div>
+</section>
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
+<script>
+Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight]});
+</script>
+</body>
+</html>

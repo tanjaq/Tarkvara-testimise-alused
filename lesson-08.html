@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 8 &ndash; Test Techniques III &mdash; White Box</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/black.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css">
+<style>
+:root{--blue:#4fc3f7;--green:#81c784;--orange:#ffb74d;--red:#e57373;--purple:#ce93d8;}
+.reveal{font-family:'Segoe UI',system-ui,sans-serif;font-size:34px;}
+.reveal h2{color:var(--blue);font-size:0.95em;}
+.reveal h3{color:var(--green);margin-bottom:.3em;font-size:0.85em;}
+.reveal p{font-size:.60em;line-height:1.5;}.reveal li{font-size:.68em;line-height:1.5;}
+.reveal pre{font-size:.44em;width:100%;box-shadow:none;}
+.reveal ul{text-align:left;margin-left:1em;}
+.reveal table{font-size:.5em;}
+.reveal table th{color:var(--blue);}
+.reveal blockquote{width:100%;box-sizing:border-box;border-left:4px solid var(--blue);padding:.4em 1em;font-style:italic;color:#ccc;background:rgba(79,195,247,.06);margin:.5em 0;font-size:.60em;}
+.lbl{font-size:.38em;letter-spacing:3px;text-transform:uppercase;color:#888;display:block;margin-bottom:.2em;}
+.divider{width:40px;height:3px;background:var(--blue);margin:.3em auto .6em;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:left;}
+.card{background:rgba(255,255,255,.05);border-left:4px solid var(--blue);padding:8px 12px;border-radius:0 5px 5px 0;font-size:.65em;line-height:1.5;text-align:left;}
+.card.g{border-left-color:var(--green);}
+.card.o{border-left-color:var(--orange);}
+.card.r{border-left-color:var(--red);}
+.card.p{border-left-color:var(--purple);}
+.card strong{display:block;margin-bottom:.15em;}
+.plan{background:rgba(255,255,255,.04);border:1px solid rgba(79,195,247,.3);border-radius:10px;padding:16px 20px;text-align:left;max-width:860px;margin:0 auto;}
+.plan-title{color:var(--blue);font-size:.8em;font-weight:700;margin-bottom:.6em;border-bottom:1px solid rgba(79,195,247,.2);padding-bottom:.4em;}
+.plan-topics p{font-size:.68em;margin:.25em 0;color:#ddd;}
+.plan-topics p span{color:var(--blue);font-weight:600;}
+.plan-hw{background:rgba(79,195,247,.08);border:1px solid var(--blue);border-radius:6px;padding:8px 12px;font-size:.65em;margin-top:.7em;}
+.plan-hw strong{color:var(--blue);}
+.hw{background:rgba(79,195,247,.08);border:2px solid var(--blue);border-radius:10px;padding:14px 18px;text-align:left;}
+.hw h3{color:var(--blue)!important;margin-top:0;}
+.hw a{color:var(--orange);}
+.teams{background:rgba(100,100,255,.08);border:2px solid #6264a7;border-radius:10px;padding:14px 18px;text-align:left;}
+.teams h3{color:#9b9fe3!important;margin-top:0;}
+.ai{background:linear-gradient(135deg,rgba(206,147,216,.10),rgba(79,195,247,.08));border:2px solid var(--purple);border-radius:12px;padding:14px 18px;text-align:left;}
+.ai h3{color:var(--purple)!important;margin-top:0;}
+.bio-grid{display:grid;grid-template-columns:1fr 2fr;gap:20px;text-align:left;}
+.bio-left{background:rgba(255,255,255,.04);border-radius:8px;padding:12px;font-size:.65em;}
+.bio-left .name{font-size:1.2em;font-weight:700;color:var(--blue);margin-bottom:.3em;}
+.bio-left .role{color:var(--green);margin-bottom:.5em;}
+.timeline{font-size:.62em;line-height:1.8;}
+.timeline .year{color:var(--orange);font-weight:600;}
+.chain{display:flex;align-items:center;gap:6px;justify-content:center;margin:.6em 0;flex-wrap:wrap;}
+.chain .node{background:rgba(255,255,255,.07);border:1px solid var(--blue);border-radius:6px;padding:6px 10px;font-size:.62em;}
+.chain .arr{color:var(--orange);}
+.num{display:inline-block;width:20px;height:20px;background:var(--blue);color:#111;border-radius:50%;text-align:center;line-height:20px;font-size:.6em;font-weight:700;margin-right:5px;}
+.bug-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.bug-card{background:rgba(229,115,115,.08);border:1px solid rgba(229,115,115,.3);border-radius:6px;padding:8px 10px;font-size:.62em;line-height:1.5;text-align:left;}
+.bug-card .co{font-weight:700;color:var(--red);margin-bottom:.2em;}
+.nav{position:fixed;top:12px;right:12px;z-index:999;font-size:.55em;display:flex;gap:8px;}
+.nav a{color:#555;text-decoration:none;padding:3px 8px;border:1px solid #333;border-radius:5px;}
+.nav a:hover{color:#fff;border-color:#fff;}
+</style>
+</head>
+<body>
+<div class="nav"><a href="lesson-07.html">&larr; L7</a><a href="index.html">&#8617; All</a><a href="lesson-09.html">L9 &rarr;</a></div>
+<div class="reveal"><div class="slides">
+<section data-background-gradient="linear-gradient(135deg,#0f0c29,#302b63,#24243e)">
+  <span class="lbl">Lesson 8 of 12</span>
+  <h2>Test Techniques III &mdash; White Box</h2>
+  <div class="divider"></div>
+  <p style="font-size:.62em">Function, statement and branch coverage &middot; What coverage does and does not prove</p>
+  <p style="font-size:.5em;color:#555;margin-top:.8em">&rarr; next slide &nbsp;|&nbsp; ESC overview</p>
+</section>
+
+<section>
+  <span class="lbl">Lesson Plan</span>
+  <div class="plan">
+    <div class="plan-title">Lesson 8: Test Techniques III &mdash; White Box<br>Focus: Testing the code itself &mdash; and reading a coverage report honestly</div>
+      <div class="plan-topics">
+        <p><span>1.</span> Black box vs white box, revisited</p>
+        <p><span>2.</span> Code coverage: function, statement, branch</p>
+        <p><span>3.</span> Two worked examples</p>
+        <p><span>4.</span> Why 100% coverage does not mean 100% tested</p>
+      </div>
+      <div class="plan-hw"><strong>Homework:</strong> Boarding pass exercise &mdash; work out statement and branch coverage for two given test cases and add what is missing.</div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Topic 1</span>
+  <h3>Two Kinds of Coverage</h3>
+  <div class="g2">
+    <div class="card g"><strong>Black box &rarr; test coverage</strong>How much of the <em>requirements</em> is covered by tests. Answers: did we test everything we promised to build?</div>
+    <div class="card p"><strong>White box &rarr; code coverage</strong>How much of the <em>code</em> is executed by tests. Answers: did any test ever run this line?</div>
+  </div>
+  <blockquote>These two numbers can both be high while the product is still broken &mdash; and one being high tells you nothing about the other.</blockquote>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>Three Levels of Code Coverage</h3>
+  <div class="g3">
+    <div class="card"><strong>Function coverage</strong>Was every function in the application called at least once?</div>
+    <div class="card g"><strong>Statement coverage</strong>Was every line of code executed at least once?</div>
+    <div class="card o"><strong>Branch coverage</strong>Was every branch &mdash; every true <em>and</em> false path &mdash; taken?</div>
+  </div>
+  <p style="font-size:.6em;margin-top:.5em">Each level is stricter than the one before it. 100% branch coverage implies 100% statement coverage; the reverse is not true.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 3</span>
+  <h3>Example 1 &mdash; a Conditional</h3>
+  <pre><code class="language-javascript">function calc(a, b) {
+  let c = 0;
+  if (a > b) {
+    c = a;
+  }
+  return c;
+}</code></pre>
+  <div class="g3">
+    <div class="card"><strong>Function coverage</strong>calc(1, 1)<br>The function ran &mdash; 100%.</div>
+    <div class="card g"><strong>Statement coverage</strong>calc(2, 1)<br>Every line executed, including c = a.</div>
+    <div class="card o"><strong>Branch coverage</strong>calc(2, 1) and calc(1, 3)<br>Both the true and the false path of the if.</div>
+  </div>
+  <p style="font-size:.58em;margin-top:.4em">Note that calc(1, 1) gives 100% function coverage while never executing the body of the if. This is why the metric you quote matters.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 3</span>
+  <h3>Example 2 &mdash; a Loop</h3>
+  <pre><code class="language-javascript">function loop(a) {
+  let c = 0;
+  for (let i = 0; i &lt; a; i++) {
+    c = c + 1;
+  }
+  return c;
+}</code></pre>
+  <div class="g2">
+    <div class="card"><strong>Coverage</strong>Function: loop(1) &middot; Statement: loop(1) &middot; Branch: loop(2) and loop(0) &mdash; the loop body must both run and not run.</div>
+    <div class="card r"><strong>Tests coverage will never suggest</strong>loop(-5) &middot; loop(null) &middot; loop("abs") &middot; loop(300000000000)<br>These come from black-box thinking, not from the coverage report.</div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Topic 4</span>
+  <h3>What Coverage Does Not Tell You</h3>
+  <ul style="font-size:.67em">
+    <li>100% code coverage does not mean a 100% tested product.</li>
+    <li>Coverage only measures the behaviour of the code that <em>exists</em>.</li>
+    <li>Missing code &mdash; a requirement nobody implemented &mdash; will never show up in a coverage report.</li>
+    <li>A test that executes a line without asserting anything still counts towards coverage.</li>
+  </ul>
+  <blockquote>Recommendation: black box + white box together give higher test coverage <em>and</em> higher code coverage. Neither replaces the other.</blockquote>
+</section>
+
+<section>
+  <span class="lbl">In-Class Exercise</span>
+  <div class="teams">
+    <h3>Boarding Pass &mdash; Coverage Analysis</h3>
+    <p style="font-size:.66em"><strong>Given test cases:</strong></p>
+    <ul style="font-size:.68em">
+      <li>Frequent flier is upgraded to Business class.</li>
+      <li>Non-frequent flier gets an Economy ticket.</li>
+    </ul>
+    <p style="font-size:.66em"><strong>Questions:</strong></p>
+    <ul style="font-size:.68em">
+      <li>How many statements do these two tests cover?</li>
+      <li>How many branches do they cover?</li>
+      <li>Which tests must you add to reach 100% statement coverage?</li>
+    </ul>
+    <p style="font-size:.62em">Draw the flow diagram if it helps. Code: <a href="https://onecompiler.com/javascript/3yydc2m52" style="color:#9b9fe3">onecompiler.com/javascript/3yydc2m52</a></p>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Self-Check</span>
+  <h3>Can You Answer These?</h3>
+  <ul style="font-size:.68em">
+    <li>Write a test that gives 100% statement coverage but not 100% branch coverage.</li>
+    <li>A team reports 92% coverage and zero known bugs. What would you still ask them?</li>
+    <li>Which coverage level would you require for a payment calculation, and why?</li>
+    <li>Why can a coverage tool never find a missing requirement?</li>
+  </ul>
+</section>
+
+<section>
+  <div class="hw">
+    <h3>Homework 8 &mdash; Boarding Pass Coverage</h3>
+    <p style="font-size:.68em">Submit your statement and branch coverage analysis for the boarding pass code, the additional tests needed for 100% statement coverage, and a diagram if you drew one.</p>
+    <p style="font-size:.62em">Full brief: <a href="homework/hw-08.html">Homework 8</a></p>
+  </div>
+</section>
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
+<script>
+Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight]});
+</script>
+</body>
+</html>

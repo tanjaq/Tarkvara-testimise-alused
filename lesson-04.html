@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 4 &ndash; Software Requirements</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/black.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css">
+<style>
+:root{--blue:#4fc3f7;--green:#81c784;--orange:#ffb74d;--red:#e57373;--purple:#ce93d8;}
+.reveal{font-family:'Segoe UI',system-ui,sans-serif;font-size:34px;}
+.reveal h2{color:var(--blue);font-size:0.95em;}
+.reveal h3{color:var(--green);margin-bottom:.3em;font-size:0.85em;}
+.reveal p{font-size:.60em;line-height:1.5;}.reveal li{font-size:.68em;line-height:1.5;}
+.reveal pre{font-size:.44em;width:100%;box-shadow:none;}
+.reveal ul{text-align:left;margin-left:1em;}
+.reveal table{font-size:.5em;}
+.reveal table th{color:var(--blue);}
+.reveal blockquote{width:100%;box-sizing:border-box;border-left:4px solid var(--blue);padding:.4em 1em;font-style:italic;color:#ccc;background:rgba(79,195,247,.06);margin:.5em 0;font-size:.60em;}
+.lbl{font-size:.38em;letter-spacing:3px;text-transform:uppercase;color:#888;display:block;margin-bottom:.2em;}
+.divider{width:40px;height:3px;background:var(--blue);margin:.3em auto .6em;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:left;}
+.card{background:rgba(255,255,255,.05);border-left:4px solid var(--blue);padding:8px 12px;border-radius:0 5px 5px 0;font-size:.65em;line-height:1.5;text-align:left;}
+.card.g{border-left-color:var(--green);}
+.card.o{border-left-color:var(--orange);}
+.card.r{border-left-color:var(--red);}
+.card.p{border-left-color:var(--purple);}
+.card strong{display:block;margin-bottom:.15em;}
+.plan{background:rgba(255,255,255,.04);border:1px solid rgba(79,195,247,.3);border-radius:10px;padding:16px 20px;text-align:left;max-width:860px;margin:0 auto;}
+.plan-title{color:var(--blue);font-size:.8em;font-weight:700;margin-bottom:.6em;border-bottom:1px solid rgba(79,195,247,.2);padding-bottom:.4em;}
+.plan-topics p{font-size:.68em;margin:.25em 0;color:#ddd;}
+.plan-topics p span{color:var(--blue);font-weight:600;}
+.plan-hw{background:rgba(79,195,247,.08);border:1px solid var(--blue);border-radius:6px;padding:8px 12px;font-size:.65em;margin-top:.7em;}
+.plan-hw strong{color:var(--blue);}
+.hw{background:rgba(79,195,247,.08);border:2px solid var(--blue);border-radius:10px;padding:14px 18px;text-align:left;}
+.hw h3{color:var(--blue)!important;margin-top:0;}
+.hw a{color:var(--orange);}
+.teams{background:rgba(100,100,255,.08);border:2px solid #6264a7;border-radius:10px;padding:14px 18px;text-align:left;}
+.teams h3{color:#9b9fe3!important;margin-top:0;}
+.ai{background:linear-gradient(135deg,rgba(206,147,216,.10),rgba(79,195,247,.08));border:2px solid var(--purple);border-radius:12px;padding:14px 18px;text-align:left;}
+.ai h3{color:var(--purple)!important;margin-top:0;}
+.bio-grid{display:grid;grid-template-columns:1fr 2fr;gap:20px;text-align:left;}
+.bio-left{background:rgba(255,255,255,.04);border-radius:8px;padding:12px;font-size:.65em;}
+.bio-left .name{font-size:1.2em;font-weight:700;color:var(--blue);margin-bottom:.3em;}
+.bio-left .role{color:var(--green);margin-bottom:.5em;}
+.timeline{font-size:.62em;line-height:1.8;}
+.timeline .year{color:var(--orange);font-weight:600;}
+.chain{display:flex;align-items:center;gap:6px;justify-content:center;margin:.6em 0;flex-wrap:wrap;}
+.chain .node{background:rgba(255,255,255,.07);border:1px solid var(--blue);border-radius:6px;padding:6px 10px;font-size:.62em;}
+.chain .arr{color:var(--orange);}
+.num{display:inline-block;width:20px;height:20px;background:var(--blue);color:#111;border-radius:50%;text-align:center;line-height:20px;font-size:.6em;font-weight:700;margin-right:5px;}
+.bug-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.bug-card{background:rgba(229,115,115,.08);border:1px solid rgba(229,115,115,.3);border-radius:6px;padding:8px 10px;font-size:.62em;line-height:1.5;text-align:left;}
+.bug-card .co{font-weight:700;color:var(--red);margin-bottom:.2em;}
+.nav{position:fixed;top:12px;right:12px;z-index:999;font-size:.55em;display:flex;gap:8px;}
+.nav a{color:#555;text-decoration:none;padding:3px 8px;border:1px solid #333;border-radius:5px;}
+.nav a:hover{color:#fff;border-color:#fff;}
+</style>
+</head>
+<body>
+<div class="nav"><a href="lesson-03.html">&larr; L3</a><a href="index.html">&#8617; All</a><a href="lesson-05.html">L5 &rarr;</a></div>
+<div class="reveal"><div class="slides">
+<section data-background-gradient="linear-gradient(135deg,#0f0c29,#302b63,#24243e)">
+  <span class="lbl">Lesson 4 of 12</span>
+  <h2>Software Requirements</h2>
+  <div class="divider"></div>
+  <p style="font-size:.62em">Business vs system requirements &middot; FR and NFR &middot; SMART &middot; SRS</p>
+  <p style="font-size:.5em;color:#555;margin-top:.8em">&rarr; next slide &nbsp;|&nbsp; ESC overview</p>
+</section>
+
+<section>
+  <span class="lbl">Lesson Plan</span>
+  <div class="plan">
+    <div class="plan-title">Lesson 4: Software Requirements<br>Focus: What we test against &mdash; and how to tell a good requirement from a bad one</div>
+      <div class="plan-topics">
+        <p><span>1.</span> Business requirements vs system requirements</p>
+        <p><span>2.</span> Functional requirements &mdash; and why they are not user stories</p>
+        <p><span>3.</span> Non-functional requirements and their categories</p>
+        <p><span>4.</span> SMART &mdash; what makes a requirement testable</p>
+        <p><span>5.</span> The SRS document</p>
+      </div>
+      <div class="plan-hw"><strong>Homework:</strong> Group project &mdash; write the requirements document for your own project (FR + NFR) using the SRS template.</div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Topic 1</span>
+  <h3>What Is a Requirement?</h3>
+  <p style="font-size:.64em">A requirement is a documented need that the product or service must satisfy.</p>
+  <div class="g2">
+    <div class="card"><strong>Business requirements</strong>Why the change is needed. The goal, in business terms.<br><span style="color:#888">"Reduce the time it takes a candidate to apply for a job."</span></div>
+    <div class="card g"><strong>Software / system requirements</strong>The properties and behaviour that satisfy the business requirement. Detailed and structured enough to build from.<br><span style="color:#888">Split into functional and non-functional.</span></div>
+  </div>
+  <div class="chain" style="margin-top:.5em">
+    <div class="node">Business need</div><span class="arr">&rarr;</span>
+    <div class="node">Business requirement</div><span class="arr">&rarr;</span>
+    <div class="node">System requirement (FR / NFR)</div><span class="arr">&rarr;</span>
+    <div class="node">Test case</div>
+  </div>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>Functional Requirements Are Not User Stories</h3>
+  <div class="card p" style="margin-bottom:8px"><strong>User story</strong>As a registered user, I want to be able to log into my account.</div>
+  <div class="card g"><strong>Functional requirements derived from it</strong>
+    &middot; The system must allow users to log in by entering their email and password.<br>
+    &middot; The system must allow users to log in with a social account (Google, Facebook, LinkedIn).<br>
+    &middot; The system must allow users to reset their password by clicking "I forgot my password" and receiving a link at their verified email address.
+  </div>
+  <blockquote>One user story becomes several functional requirements. Each functional requirement becomes several test cases. That chain is what makes testing traceable.</blockquote>
+</section>
+
+<section>
+  <span class="lbl">Topic 2</span>
+  <h3>Good and Bad Functional Requirements</h3>
+  <table>
+    <tr><th>Bad requirement</th><th>Good requirement</th></tr>
+    <tr><td>The system should allow users to post jobs.</td><td>Employers must be able to post job listings by providing job title, job description, location, salary range and job type.</td></tr>
+    <tr><td>Users should be able to search for jobs.</td><td>Users must be able to search for jobs by keyword and filter results by location, salary range and job type. Results are shown as a list and can be sorted by relevance, date posted or salary.</td></tr>
+  </table>
+  <p style="font-size:.6em;margin-top:.5em">Test the requirement before you test the code: can you write a test case from it that has exactly one expected result? If not, it is not finished.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 3</span>
+  <h3>Non-Functional Requirements (1/2)</h3>
+  <table>
+    <tr><th>Category</th><th>Meaning</th></tr>
+    <tr><td>Availability</td><td>System is accessible when required</td></tr>
+    <tr><td>Compatibility</td><td>System operates with other components</td></tr>
+    <tr><td>Maintainability</td><td>System is easily modified for new needs</td></tr>
+    <tr><td>Performance</td><td>System responds in time with minimum resource consumption</td></tr>
+    <tr><td>Portability</td><td>System can be moved between environments</td></tr>
+    <tr><td>Reliability</td><td>System performs its functions for a specified period</td></tr>
+    <tr><td>Scalability</td><td>System grows with increased workload</td></tr>
+    <tr><td>Security</td><td>System is protected against malicious access or use</td></tr>
+    <tr><td>Usability</td><td>System is easy for a user to learn</td></tr>
+  </table>
+</section>
+
+<section>
+  <span class="lbl">Topic 3</span>
+  <h3>Non-Functional Requirements (2/2)</h3>
+  <table>
+    <tr><th>Category</th><th>Meaning</th></tr>
+    <tr><td>Certification</td><td>System meets necessary standards or conventions</td></tr>
+    <tr><td>Compliance</td><td>System meets regulatory or legal constraints</td></tr>
+    <tr><td>Localization</td><td>System supports several locales &mdash; languages, laws, currencies, cultures</td></tr>
+    <tr><td>Service level agreements</td><td>System follows the formally agreed rules</td></tr>
+    <tr><td>Extensibility</td><td>System can be updated with new functionality easily</td></tr>
+  </table>
+  <p style="font-size:.58em;margin-top:.4em">You will come back to this table twice more: in Lesson 11 (performance) and Lesson 12 (security). Those lessons are just two NFR categories taken seriously.</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 3</span>
+  <h3>Writing NFRs That Can Be Tested</h3>
+  <div class="card p" style="margin-bottom:8px"><strong>User story</strong>As a user, I want to be able to use the website at any time.</div>
+  <div class="card g" style="margin-bottom:8px"><strong>Requirements derived from it</strong>&middot; The system must be available 99% of the time each month during business hours.<br>&middot; The system must support at least 100 concurrent users.</div>
+  <table>
+    <tr><th>Bad</th><th>Good</th></tr>
+    <tr><td>The system must respond quickly.</td><td>Each request must be processed within 3 seconds with 10,000 concurrent users.</td></tr>
+    <tr><td>The system should be secure.</td><td>User data, including CVs, must be encrypted with industry-standard TLS in transit. Passwords must be hashed and salted. Access to applications and CVs is restricted to authorised personnel.</td></tr>
+  </table>
+</section>
+
+<section>
+  <span class="lbl">Topic 4</span>
+  <h3>SMART Requirements</h3>
+  <div class="g3">
+    <div class="card"><strong>Specific</strong>One unambiguous behaviour, not a wish</div>
+    <div class="card g"><strong>Measurable</strong>You can state a number or a clear yes/no</div>
+    <div class="card o"><strong>Achievable</strong>Possible with the team, budget and technology</div>
+    <div class="card r"><strong>Realistic</strong>Justified by real user need, not gold-plating</div>
+    <div class="card p"><strong>Timely</strong>Has a defined time frame or release</div>
+  </div>
+  <blockquote>SMART is not paperwork. A requirement that is not measurable cannot fail a test &mdash; which means it cannot pass one either.</blockquote>
+  <p style="font-size:.55em;color:#888">Source: BABOK, International Institute of Business Analysis</p>
+</section>
+
+<section>
+  <span class="lbl">Topic 5</span>
+  <h3>The SRS Document</h3>
+  <p style="font-size:.63em">A Software Requirements Specification collects everything the team agreed to build: scope, functional requirements, non-functional requirements, interfaces, constraints &mdash; and later in this course, your test cases.</p>
+  <div class="g2">
+    <div class="card"><strong>Template</strong><a href="materials/Software Requirements Specification (SRS) Document Template.docx">SRS document template (.docx)</a></div>
+    <div class="card g"><strong>Real examples</strong><a href="materials/srs_example_1.pdf">Example 1</a> &middot; <a href="materials/srs_example_2.pdf">Example 2</a><br><a href="https://www.reqview.com/doc/iso-iec-ieee-29148-srs-example/">ISO/IEC/IEEE 29148 example</a></div>
+  </div>
+  <p style="font-size:.58em;margin-top:.4em">Your SRS grows through the course: requirements now, architecture in Lesson 5, test cases in Lesson 10, performance NFRs in Lesson 11, security notes in Lesson 12.</p>
+</section>
+
+<section>
+  <span class="lbl">Self-Check</span>
+  <h3>Can You Answer These?</h3>
+  <ul style="font-size:.68em">
+    <li>Turn "the app should be fast" into a testable non-functional requirement.</li>
+    <li>Write one user story and derive three functional requirements from it.</li>
+    <li>Which SMART letter does "the system should be user friendly" fail on?</li>
+    <li>Name four NFR categories that apply to a public job-search site.</li>
+  </ul>
+</section>
+
+<section>
+  <div class="hw">
+    <h3>Homework 4 &mdash; Requirements for Your Project</h3>
+    <p style="font-size:.68em">In your team, write the requirements document for your own project using the SRS template. It must contain functional requirements and non-functional requirements, all of them SMART.</p>
+    <p style="font-size:.63em">You will build the product against these requirements and test against them later &mdash; write them properly now.</p>
+    <p style="font-size:.62em">Full brief: <a href="homework/hw-04.html">Homework 4</a></p>
+  </div>
+</section>
+</div></div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
+<script>
+Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight]});
+</script>
+</body>
+</html>
