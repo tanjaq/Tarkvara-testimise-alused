@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Homework 13 &ndash; Accessibility Audit</title>
+<title>Homework 13 &ndash; Mobile Test Charter</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:#0f0c29;color:#e0e0e0;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;padding:40px 20px;line-height:1.65;}
@@ -38,45 +38,41 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08)
 <body>
 <div class="wrap">
 <div class="crumb"><a href="../index.html">Course</a> &rsaquo; <a href="index.html">Homework</a> &rsaquo; Homework 13</div>
-<h1>Homework 13 &mdash; Accessibility Audit</h1>
-<div class="meta"><span>Individual or pair</span><span>Lesson 12</span><span>Submit: Audit report</span></div>
+<h1>Homework 13 &mdash; Mobile Test Charter</h1>
+<div class="meta"><span>Individual or pair</span><span>Lesson 13</span><span>Submit: Device matrix + session report</span></div>
 
 <h2>Objective</h2>
-<p>Find real accessibility defects with a keyboard, your eyes and one scanner &mdash; and see how much the scanner misses.</p>
+<p>Test the conditions that only exist once the software is in someone's hand.</p>
 
 <h2>Task</h2>
 <ol>
-  <li>Pick <strong>one public site</strong> (a shop, a bank, a public service, a news site) and <strong>your own project</strong>.</li>
-  <li><strong>Keyboard-only walkthrough.</strong> Put the mouse away. Complete one real task using only Tab, Shift+Tab, Enter, Space and the arrow keys. Record: anything unreachable, any point where the focus indicator disappeared, any keyboard trap, any order that made no sense.</li>
-  <li><strong>Zoom.</strong> Take the page to 200% and then 400%. Does content reflow, or is text cut off and overlapping?</li>
-  <li><strong>Contrast.</strong> Check body text, placeholder text, buttons and disabled states. Normal text needs at least 4.5:1, large text and UI components 3:1.</li>
-  <li><strong>Colour only.</strong> Find at least one place where information is conveyed by colour alone &mdash; or confirm there is none.</li>
-  <li><strong>Structure.</strong> Check headings (one h1, no skipped levels), image alt text, form labels (a placeholder is not a label), link text out of context, and error messages.</li>
-  <li><strong>Automated scan.</strong> Run axe DevTools, WAVE or Lighthouse on the same pages.</li>
-  <li><strong>Optional but recommended:</strong> turn on VoiceOver, NVDA or TalkBack and try one flow with your eyes closed.</li>
-  <li><strong>Report.</strong> One row per finding: page, what is wrong, the WCAG success criterion it breaks (e.g. 1.4.3 Contrast, 2.1.1 Keyboard, 2.4.7 Focus Visible, 3.3.2 Labels), severity, and how you would fix it.</li>
-  <li>Finish with a comparison: how many findings came from the automated scan, and how many only from your manual checks?</li>
+  <li><strong>Part 1 &mdash; device matrix.</strong> For your own project (or a chosen app), decide which devices you would test on. Give five rows: device or class, OS version, screen size, why it is on the list, and what you would prioritise testing there. Include one deliberately old, small and slow device.</li>
+  <li>Say where each row would be tested: real device, emulator, or device cloud &mdash; and why.</li>
+  <li><strong>Part 2 &mdash; the session.</strong> Write a charter: <em>Explore &lt;app&gt; under interruption and poor network to discover state-loss defects.</em></li>
+  <li>Time-box it to 45 minutes on a <strong>real phone</strong>. Start a real flow &mdash; a search, a booking, a multi-step form, a checkout.</li>
+  <li>During the flow, apply the conditions from the lesson: rotate the device &middot; switch to another app and come back &middot; turn on airplane mode mid-request &middot; switch WiFi to mobile data &middot; let the screen lock &middot; deny a permission and retry &middot; tap the submit button twice quickly &middot; use a very large system font.</li>
+  <li>Record what happens each time: state lost, duplicate submission, frozen screen, silent failure, unreadable layout, unreachable button.</li>
+  <li><strong>Part 3 &mdash; report.</strong> Write up your findings as defects with severity, and pick the single worst one to write as a full bug report.</li>
+  <li>Note which conditions found the most defects &mdash; that is your priority list for next time.</li>
 </ol>
 
 <h2>Deliverable</h2>
-<div class="box g">An audit report for both sites with findings mapped to WCAG criteria, plus the manual-versus-automated comparison and a fix for at least one finding in your own project.</div>
+<div class="box g">A five-row device matrix with justification, your session notes, the defect list with severities, and one full bug report.</div>
 
 <h2>Assessment criteria</h2>
 <table>
   <tr><th>Criterion</th><th>What we look for</th></tr>
-  <tr><td><strong>Manual work</strong></td><td>The keyboard, zoom, contrast and structure checks were actually done, not just a scan</td></tr>
-  <tr><td><strong>WCAG mapping</strong></td><td>Findings reference specific success criteria</td></tr>
-  <tr><td><strong>Severity</strong></td><td>Assigned by user impact, and justified</td></tr>
-  <tr><td><strong>Comparison</strong></td><td>You can say what the scanner missed</td></tr>
-  <tr><td><strong>Your own project</strong></td><td>At least one accessibility defect in your own project is found and fixed</td></tr>
+  <tr><td><strong>Matrix reasoning</strong></td><td>Devices are chosen from real usage considerations, not at random</td></tr>
+  <tr><td><strong>Real device</strong></td><td>The session was run on an actual phone, not only an emulator</td></tr>
+  <tr><td><strong>Condition coverage</strong></td><td>Interruption, network, orientation and permission conditions were all tried</td></tr>
+  <tr><td><strong>Defects</strong></td><td>Real findings with enough detail to reproduce</td></tr>
+  <tr><td><strong>Prioritisation</strong></td><td>You can say which conditions were most productive and why</td></tr>
 </table>
 
 <h2>Resources</h2>
 <ul>
-  <li><a href="https://www.w3.org/WAI/WCAG22/quickref/">WCAG 2.2 quick reference</a></li>
-  <li><a href="https://www.deque.com/axe/devtools/">axe DevTools</a></li>
-  <li><a href="https://wave.webaim.org/">WAVE</a></li>
-  <li><a href="../lesson-12.html">Lesson 12 &mdash; Accessibility Testing</a></li>
+  <li><a href="../lesson-13.html">Lesson 13 &mdash; Mobile Testing</a></li>
+  <li><a href="../lesson-09.html">Lesson 9 &mdash; charters and tours</a></li>
 </ul>
 
 <footer>Software Testing Fundamentals &middot; Tatjana Kirotar &middot; <span class="esc">press ESC to go back to all lessons</span></footer>

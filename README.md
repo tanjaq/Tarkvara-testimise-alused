@@ -62,12 +62,11 @@ Full briefs with assessment criteria: **[homework/](homework/index.html)**
 | 8 | 8 | Boarding pass — coverage analysis | Individual / pair |
 | 9 | 9 | Exploratory session + bug report → [Bug-Reporting](https://github.com/tanjaq/Bug-Reporting/issues) | Individual |
 | 10 | 10 | Test cases for your project | Group project |
-| 10 | 11 | Cross-team SRS review | Group → group |
-| 11 | 12 | SQL verification — shop database | Individual / pair |
-| 12 | 13 | Accessibility audit | Individual / pair |
-| 13 | 14 | Mobile test charter | Individual / pair |
+| 11 | 11 | SQL verification — shop database | Individual / pair |
+| 12 | 12 | Accessibility audit | Individual / pair |
+| 13 | 13 | Mobile test charter | Individual / pair |
 
-The group project runs through the whole course: requirements (L4) → architecture (L5) → test cases (L10) → cross-team review (HW11) all land in the same SRS document.
+The group project runs through the whole course: requirements (L4) → architecture (L5) → test cases (L10) all land in the same SRS document. One homework per lesson.
 
 ---
 

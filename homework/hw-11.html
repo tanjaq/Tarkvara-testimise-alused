@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Homework 11 &ndash; Cross-Team SRS Review</title>
+<title>Homework 11 &ndash; SQL Verification &mdash; Shop Database</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:#0f0c29;color:#e0e0e0;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;padding:40px 20px;line-height:1.65;}
@@ -38,40 +38,41 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08)
 <body>
 <div class="wrap">
 <div class="crumb"><a href="../index.html">Course</a> &rsaquo; <a href="index.html">Homework</a> &rsaquo; Homework 11</div>
-<h1>Homework 11 &mdash; Cross-Team SRS Review</h1>
-<div class="meta"><span>Group &rarr; group</span><span>Lesson 10</span><span>Submit: Review report to the other team + revised SRS</span></div>
+<h1>Homework 11 &mdash; SQL Verification &mdash; Shop Database</h1>
+<div class="meta"><span>Individual or pair</span><span>Lesson 11</span><span>Submit: Queries + defect list</span></div>
 
 <h2>Objective</h2>
-<p>Do a real static review of a real document written by people who are not in the room &mdash; and find out what your own document looks like to a stranger.</p>
+<p>Prove things about data instead of trusting the screen &mdash; and see which defects a missing constraint lets through.</p>
 
 <h2>Task</h2>
 <ol>
-  <li>Teams are paired up. You review the other team's SRS; they review yours. Both reviews happen at the same time.</li>
-  <li><strong>Preparation</strong> &mdash; read the whole document individually first, without commenting. Note where you had to guess what something meant.</li>
-  <li><strong>Review against a checklist:</strong></li>
-  <li>&bull; <strong>Complete</strong> &mdash; is anything obviously missing? Are there requirements for every feature described in the scope?<br>&bull; <strong>Unambiguous</strong> &mdash; could two developers read a requirement and build different things?<br>&bull; <strong>Testable</strong> &mdash; can you write a test case with one expected result from each requirement? Try it on three of them.<br>&bull; <strong>SMART</strong> &mdash; specific, measurable, achievable, realistic, timely.<br>&bull; <strong>Consistent</strong> &mdash; do any two requirements contradict each other? Is the same term used for the same thing throughout?<br>&bull; <strong>NFRs</strong> &mdash; are performance, security, usability, availability and accessibility covered with numbers?<br>&bull; <strong>Architecture</strong> &mdash; does the diagram match the requirements?<br>&bull; <strong>Test cases</strong> &mdash; does every functional requirement have at least one, and do they have measurable expected results?</li>
-  <li><strong>Write the review report:</strong> one row per finding &mdash; location, what is wrong, which checklist item it breaks, severity (blocking / should fix / suggestion), and a suggested rewrite for at least the blocking ones.</li>
-  <li><strong>Hold the review meeting</strong> &mdash; 20 minutes with the other team. You present your findings; they ask questions. Comment on the document, never on the people. Then swap roles.</li>
-  <li><strong>Follow-up</strong> &mdash; each team revises their own SRS based on the review received, and records which findings they accepted, which they rejected, and why.</li>
+  <li>Open <a href="https://sqliteonline.com">sqliteonline.com</a> (or any SQLite client). Paste <a href="../materials/shop-database.sql">shop-database.sql</a> and run it.</li>
+  <li>The nine requirements the application is supposed to guarantee are listed in comments at the top of the file.</li>
+  <li><strong>Write one query per requirement</strong> that checks whether the data actually honours it. A good check returns zero rows when everything is fine, and the offending rows when it is not.</li>
+  <li>Run the join comparison suggested at the bottom of the file: <code>JOIN</code> versus <code>LEFT JOIN</code> on orders and customers. Explain the difference in the row count.</li>
+  <li><strong>Find the defects.</strong> There are at least six. For each one record: the query that found it, the rows returned, which requirement it breaks, and the severity you would assign.</li>
+  <li>For each defect, name the <strong>database constraint</strong> that would have prevented it &mdash; <code>NOT NULL</code>, <code>UNIQUE</code>, <code>FOREIGN KEY</code> or <code>CHECK</code>.</li>
+  <li>Finally: one of the requirements is about money. Look at how prices and totals are stored and say what you would change, and why.</li>
 </ol>
 
 <h2>Deliverable</h2>
-<div class="box g">A review report handed to the other team, plus your own revised SRS and a short list of accepted and rejected findings with reasons.</div>
+<div class="box g">Your queries, the defects found with evidence, the constraint that would have prevented each, and your note on the money storage.</div>
 
 <h2>Assessment criteria</h2>
 <table>
   <tr><th>Criterion</th><th>What we look for</th></tr>
-  <tr><td><strong>Real findings</strong></td><td>Substantive issues found, not only typos and formatting</td></tr>
-  <tr><td><strong>Testability check</strong></td><td>You actually tried to write test cases from their requirements and reported where it failed</td></tr>
-  <tr><td><strong>Severity</strong></td><td>Blocking issues separated from suggestions</td></tr>
-  <tr><td><strong>Constructive</strong></td><td>Every blocking finding comes with a suggested rewrite</td></tr>
-  <tr><td><strong>Follow-up</strong></td><td>Your own SRS improved, and rejected findings are argued rather than ignored</td></tr>
+  <tr><td><strong>Query per requirement</strong></td><td>Each requirement has a check that returns rows only when it is violated</td></tr>
+  <tr><td><strong>Defects found</strong></td><td>At least six, correctly mapped to the requirement they break</td></tr>
+  <tr><td><strong>Constraints</strong></td><td>The right constraint is named for each defect</td></tr>
+  <tr><td><strong>Join understanding</strong></td><td>You can explain the row-count difference between JOIN and LEFT JOIN</td></tr>
+  <tr><td><strong>Severity</strong></td><td>Assigned and justified per defect</td></tr>
 </table>
 
 <h2>Resources</h2>
 <ul>
-  <li><a href="../lesson-06.html">Lesson 6 &mdash; Static Testing (review types and etiquette)</a></li>
-  <li><a href="../lesson-04.html">Lesson 4 &mdash; Software Requirements</a></li>
+  <li><a href="../materials/shop-database.sql">shop-database.sql</a></li>
+  <li><a href="https://sqliteonline.com">SQLite Online</a></li>
+  <li><a href="../lesson-11.html">Lesson 11 &mdash; Database &amp; SQL Testing</a></li>
 </ul>
 
 <footer>Software Testing Fundamentals &middot; Tatjana Kirotar &middot; <span class="esc">press ESC to go back to all lessons</span></footer>
