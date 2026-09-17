@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session Plan — Compact Track</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#0f0c29;color:#e0e0e0;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;padding:40px 20px;line-height:1.65;}
+.wrap{max-width:940px;margin:0 auto;}
+a{color:#4fc3f7;}
+.crumb{font-size:.8em;color:#666;margin-bottom:1.5em;}
+.crumb a{color:#888;text-decoration:none;}
+.crumb a:hover{color:#4fc3f7;}
+h1{color:#4fc3f7;font-size:1.55em;margin-bottom:.2em;}
+.meta{color:#888;font-size:.85em;margin-bottom:1.4em;}
+.lede{background:rgba(255,255,255,.05);border-left:4px solid #4fc3f7;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:2.2em;font-size:.95em;}
+.sechead{font-size:.72em;letter-spacing:3px;text-transform:uppercase;color:#666;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:.5em;margin:2.6em 0 1.2em;}
+.session{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:20px 24px;margin-bottom:18px;position:relative;overflow:hidden;}
+.session::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--accent,#4fc3f7);}
+.snum{font-size:.62em;letter-spacing:3px;text-transform:uppercase;color:#888;}
+.session h2{font-size:1.06em;color:#fff;margin:.15em 0 .5em;}
+.decks{font-size:.85em;color:#aaa;margin-bottom:.9em;}
+.decks a{text-decoration:none;border-bottom:1px solid rgba(79,195,247,.4);}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:.6em 0;}
+.col h3{font-size:.8em;margin-bottom:.35em;letter-spacing:.5px;}
+.col.cover h3{color:#81c784;}
+.col.skip h3{color:#ffb74d;}
+.col ul{margin-left:1.1em;}
+.col li{font-size:.85em;margin:.22em 0;color:#ccc;}
+.col li a{text-decoration:none;}
+.ex,.hwline{font-size:.88em;border-radius:6px;padding:8px 12px;margin-top:.6em;}
+.ex{background:rgba(100,100,255,.1);border:1px solid #6264a7;}
+.ex strong{color:#9b9fe3;}
+.hwline{background:rgba(79,195,247,.09);border:1px solid rgba(79,195,247,.5);}
+.hwline strong{color:#4fc3f7;}
+.none{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.14);color:#999;}
+table{border-collapse:collapse;width:100%;margin:.8em 0;font-size:.88em;}
+th,td{border:1px solid rgba(255,255,255,.12);padding:8px 10px;text-align:left;vertical-align:top;}
+th{color:#4fc3f7;background:rgba(255,255,255,.03);}
+.optional{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;}
+.optcard{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:14px 16px;text-decoration:none;color:inherit;display:block;transition:all .2s;border-left:4px solid #ce93d8;}
+.optcard:hover{background:rgba(206,147,216,.1);border-color:#ce93d8;transform:translateY(-2px);}
+.optcard .t{font-weight:600;color:#fff;font-size:.95em;}
+.optcard .d{font-size:.82em;color:#aaa;margin-top:.2em;}
+footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08);color:#555;font-size:.8em;}
+@media(max-width:720px){.cols{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="crumb"><a href="../index.html">Course</a> &rsaquo; <a href="index.html">Compact track</a> &rsaquo; Session plan</div>
+
+<h1>Session Plan &mdash; 6 Sessions</h1>
+<div class="meta">For groups that meet every other week &middot; manual testing only &middot; 5 homework assignments</div>
+
+<div class="lede">
+The same course and the same slides as the full 13-lesson track &mdash; delivered in six sessions instead of thirteen.
+Each session below names the decks to open, which slides to cover in the time available, and which to leave as reading.
+Nothing here is a separate copy: every link goes to the same lesson deck, so anything you edit in a lesson shows up here too.
+</div>
+
+<div class="sechead">The six sessions</div>
+
+<div class="session" style="--accent:#4fc3f7">
+  <div class="snum">Session 1</div>
+  <h2>Quality Mindset &amp; Why We Test</h2>
+  <div class="decks">Decks: <a href="../lesson-01.html">Lesson 1 &mdash; Testing Fundamentals</a> (all of it) &middot; <a href="../lesson-02.html">Lesson 2 &mdash; The Purpose of Testing</a> (selected)</div>
+  <div class="cols">
+    <div class="col cover"><h3>Cover in class</h3><ul>
+      <li>Lesson 1 in full &mdash; intro, AI ground rules, quality, what can be tested</li>
+      <li><a href="../lesson-02.html#/4">Why test &mdash; real failures</a> and <a href="../lesson-02.html#/5">when software kills</a></li>
+      <li><a href="../lesson-02.html#/10">The cost of a defect grows with time</a></li>
+      <li><a href="../lesson-02.html#/11">The goals of software testing</a></li>
+    </ul></div>
+    <div class="col skip"><h3>Reading / skip if short</h3><ul>
+      <li><a href="../lesson-02.html#/2">Testing happens everywhere</a> and <a href="../lesson-02.html#/3">app store reviews</a></li>
+      <li><a href="../lesson-02.html#/6">Public-sector failures</a></li>
+      <li><a href="../lesson-02.html#/8">Consequences of defects</a> &mdash; the failure slides already make the point</li>
+    </ul></div>
+  </div>
+  <div class="ex"><strong>In class:</strong> <a href="../lesson-01.html#/7">Let's meet</a>, then <a href="../lesson-02.html#/7">group work &mdash; anatomy of a failure</a> (15 min, groups of 3&ndash;4, 2-minute summaries)</div>
+  <div class="hwline none"><strong>No homework.</strong> Ask them to come back with one piece of software they consider high quality and one they don't &mdash; <a href="../lesson-01.html#/15">the closing slide</a>.</div>
+</div>
+
+<div class="session" style="--accent:#81c784">
+  <div class="snum">Session 2</div>
+  <h2>The Testing Process</h2>
+  <div class="decks">Decks: <a href="../lesson-03.html">Lesson 3 &mdash; The Testing Process</a></div>
+  <div class="cols">
+    <div class="col cover"><h3>Cover in class</h3><ul>
+      <li><a href="../lesson-03.html#/2">SDLC</a>, then <a href="../lesson-03.html#/3">waterfall</a>, <a href="../lesson-03.html#/4">V-model</a>, <a href="../lesson-03.html#/5">agile</a></li>
+      <li><a href="../lesson-03.html#/7">The ISTQB five-step process</a> and all five steps</li>
+      <li><a href="../lesson-03.html#/12">The seven principles</a>, both halves</li>
+    </ul></div>
+    <div class="col skip"><h3>Reading / skip if short</h3><ul>
+      <li><a href="../lesson-03.html#/6">DevOps lifecycle</a> &mdash; useful context, not examinable here</li>
+      <li>The detail slides of steps 2&ndash;5 can be summarised from <a href="../lesson-03.html#/7">the overview</a> if time runs out</li>
+    </ul></div>
+  </div>
+  <div class="ex"><strong>In class:</strong> <a href="../lesson-03.html#/13">the trip planner combination count</a> (5 min, lands principle 2 hard), then the <a href="../lesson-03.html#/15">calculator worksheet</a> in groups</div>
+  <div class="hwline"><strong>Homework 1:</strong> <a href="../homework/hw-02.html">Test process worksheet &mdash; calculator</a>. <a href="../materials/testing-process-worksheet.docx">Word version</a> or <a href="../homework/testing-process-worksheet.html">fill in on the page</a>.</div>
+</div>
+
+<div class="session" style="--accent:#ffb74d">
+  <div class="snum">Session 3</div>
+  <h2>Requirements &amp; Architecture</h2>
+  <div class="decks">Decks: <a href="../lesson-04.html">Lesson 4 &mdash; Software Requirements</a> (most of it) &middot; <a href="../lesson-05.html">Lesson 5 &mdash; Software Architecture</a> (selected)</div>
+  <div class="cols">
+    <div class="col cover"><h3>Cover in class</h3><ul>
+      <li><a href="../lesson-04.html#/3">The chain: business need &rarr; requirement &rarr; test case</a></li>
+      <li><a href="../lesson-04.html#/4">Requirements are not user stories</a> and <a href="../lesson-04.html#/5">good vs bad examples</a></li>
+      <li><a href="../lesson-04.html#/8">Writing NFRs that can be tested</a> and <a href="../lesson-04.html#/9">SMART</a></li>
+      <li><a href="../lesson-04.html#/10">The SRS document</a> &mdash; they need this for the project</li>
+      <li>Architecture: <a href="../lesson-05.html#/2">what it is</a>, <a href="../lesson-05.html#/3">monolith</a>, <a href="../lesson-05.html#/4">layered</a>, <a href="../lesson-05.html#/5">microservices</a>, <a href="../lesson-05.html#/9">how to choose</a></li>
+    </ul></div>
+    <div class="col skip"><h3>Reading / skip if short</h3><ul>
+      <li><a href="../lesson-04.html#/6">The two NFR category tables</a> &mdash; point at them, don't read them out</li>
+      <li><a href="../lesson-05.html#/6">Event-driven</a>, <a href="../lesson-05.html#/7">serverless</a> and <a href="../lesson-05.html#/8">modular / monorepo</a> &mdash; set as reading</li>
+    </ul></div>
+  </div>
+  <div class="ex"><strong>In class:</strong> <a href="../lesson-05.html#/10">draw your project's architecture</a> in teams and present it</div>
+  <div class="hwline"><strong>Homework 2:</strong> <a href="../homework/hw-03.html">Requirements for your project</a> <em>and</em> <a href="../homework/hw-04.html">project architecture</a> &mdash; both into the same SRS document, submitted together.</div>
+</div>
+
+<div class="session" style="--accent:#e57373">
+  <div class="snum">Session 4</div>
+  <h2>Test Techniques &mdash; Static, Black Box, White Box</h2>
+  <div class="decks">Decks: <a href="../lesson-06.html">Lesson 6 &mdash; Static</a> &middot; <a href="../lesson-07.html">Lesson 7 &mdash; Black Box</a> &middot; <a href="../lesson-08.html">Lesson 8 &mdash; White Box</a> (all selected)</div>
+  <div class="cols">
+    <div class="col cover"><h3>Cover in class</h3><ul>
+      <li><a href="../lesson-06.html#/2">The map of testing techniques</a> &mdash; the frame for the whole session</li>
+      <li><a href="../lesson-06.html#/3">Which defect is easier to fix?</a> and <a href="../lesson-06.html#/4">peer review</a></li>
+      <li><a href="../lesson-06.html#/9">Review size decides review quality</a> and <a href="../lesson-06.html#/10">PR review etiquette</a></li>
+      <li><a href="../lesson-07.html#/4">Equivalence partitioning</a> and <a href="../lesson-07.html#/5">boundary value analysis</a> &mdash; the core of the session</li>
+      <li><a href="../lesson-07.html#/7">Decision tables</a> and <a href="../lesson-07.html#/8">state transition testing</a></li>
+      <li><a href="../lesson-08.html#/3">Three levels of code coverage</a> and <a href="../lesson-08.html#/6">what coverage does not tell you</a></li>
+    </ul></div>
+    <div class="col skip"><h3>Reading / skip if short</h3><ul>
+      <li><a href="../lesson-06.html#/5">Walkthroughs and inspections</a> and <a href="../lesson-06.html#/7">static code analysis</a> detail</li>
+      <li><a href="../lesson-07.html#/3">Testing types</a> and <a href="../lesson-07.html#/9">use-case testing</a></li>
+      <li><a href="../lesson-08.html#/5">Coverage example 2 (the loop)</a> &mdash; one worked example is enough live</li>
+    </ul></div>
+  </div>
+  <div class="ex"><strong>In class:</strong> <a href="../lesson-07.html#/6">EP and BVA on the trip planner form</a> &mdash; the fastest way to make the techniques real. The <a href="../lesson-07.html#/10">photo-ordering decision table</a> can start in class and finish as homework.</div>
+  <div class="hwline"><strong>Homework 3:</strong> <a href="../homework/hw-06.html">Decision table + EP/BVA on the trip planner form</a>.</div>
+</div>
+
+<div class="session" style="--accent:#ce93d8">
+  <div class="snum">Session 5</div>
+  <h2>Defects &amp; Exploratory Testing</h2>
+  <div class="decks">Decks: <a href="../lesson-09.html">Lesson 9 &mdash; Defect Management &amp; Exploratory Testing</a></div>
+  <div class="cols">
+    <div class="col cover"><h3>Cover in class</h3><ul>
+      <li><a href="../lesson-09.html#/2">Error, defect, failure</a></li>
+      <li><a href="../lesson-09.html#/3">What exploratory testing actually is</a> and <a href="../lesson-09.html#/4">session-based test management</a></li>
+      <li><a href="../lesson-09.html#/5">Tours</a> and <a href="../lesson-09.html#/6">heuristics</a></li>
+      <li><a href="../lesson-09.html#/9">Bug report fields</a>, <a href="../lesson-09.html#/11">evidence from the browser</a>, <a href="../lesson-09.html#/12">a complete example</a></li>
+      <li><a href="../lesson-09.html#/13">Severity is not priority</a> and <a href="../lesson-09.html#/14">the bug lifecycle</a></li>
+    </ul></div>
+    <div class="col skip"><h3>Reading / skip if short</h3><ul>
+      <li><a href="../lesson-09.html#/7">When to explore and what to write down</a></li>
+      <li><a href="../lesson-09.html#/15">Defects that reach production</a></li>
+      <li><a href="../lesson-09.html#/16">Root cause analysis</a> &mdash; worth 3 minutes if you have them</li>
+    </ul></div>
+  </div>
+  <div class="ex"><strong>In class:</strong> <a href="../lesson-09.html#/17">write a charter and run a 20-minute exploratory session</a> on an app they use, then compare findings</div>
+  <div class="hwline"><strong>Homework 4:</strong> <a href="../homework/hw-08.html">Exploratory session + bug report</a>, filed as a GitHub issue in the Bug-Reporting repo.</div>
+</div>
+
+<div class="session" style="--accent:#4fc3f7">
+  <div class="snum">Session 6</div>
+  <h2>Test Cases, Test Plan &amp; Documentation</h2>
+  <div class="decks">Decks: <a href="../lesson-10.html">Lesson 10 &mdash; Test Cases &amp; Documentation</a> &middot; one slide from <a href="../lesson-03.html">Lesson 3</a></div>
+  <div class="cols">
+    <div class="col cover"><h3>Cover in class</h3><ul>
+      <li><a href="../lesson-10.html#/2">From user story to test case</a> and <a href="../lesson-10.html#/3">components of a test case</a></li>
+      <li><a href="../lesson-10.html#/5">A test case in practice</a> &mdash; the worked example that links to the bug report</li>
+      <li><a href="../lesson-03.html#/8">Planning and control</a> from Lesson 3 &mdash; the grounding for the test plan they now have to write</li>
+      <li><a href="../lesson-10.html#/7">Confirmation testing</a> and <a href="../lesson-10.html#/8">regression testing</a></li>
+      <li><a href="../lesson-10.html#/9">Best practices for writing test cases</a></li>
+    </ul></div>
+    <div class="col skip"><h3>Reading / skip if short</h3><ul>
+      <li><a href="../lesson-10.html#/4">The real test case document screenshot</a></li>
+      <li><a href="../lesson-10.html#/6">Why test cases matter</a></li>
+      <li><a href="../lesson-10.html#/10">Test management tools</a> &mdash; name two, move on</li>
+    </ul></div>
+  </div>
+  <div class="ex"><strong>In class:</strong> each team drafts the scope and exit criteria of their test plan, out loud, and the others say whether the exit criteria are checkable</div>
+  <div class="hwline"><strong>Homework 5:</strong> <a href="../homework/hw-09.html">Test plan and test cases for your project</a> &mdash; SRS sections 7.1 and 7.2. This closes the group project.</div>
+</div>
+
+<div class="sechead">Homework overview</div>
+<table>
+  <tr><th>Session</th><th>Homework</th><th>Format</th><th>Where to submit</th></tr>
+  <tr><td>1</td><td>&mdash; (something to think about, discussed next session)</td><td>&mdash;</td><td>&mdash;</td></tr>
+  <tr><td>2</td><td><a href="../homework/hw-02.html">Test process worksheet &mdash; calculator</a></td><td>Group of 3&ndash;4</td><td>Teams</td></tr>
+  <tr><td>3</td><td><a href="../homework/hw-03.html">Requirements</a> + <a href="../homework/hw-04.html">architecture</a> in the SRS</td><td>Group project</td><td>Teams</td></tr>
+  <tr><td>4</td><td><a href="../homework/hw-06.html">Decision table + EP/BVA</a></td><td>Individual or pair</td><td>Teams</td></tr>
+  <tr><td>5</td><td><a href="../homework/hw-08.html">Exploratory session + bug report</a></td><td>Individual</td><td>GitHub &mdash; Bug-Reporting repo</td></tr>
+  <tr><td>6</td><td><a href="../homework/hw-09.html">Test plan + test cases</a></td><td>Group project</td><td>Teams</td></tr>
+</table>
+<p style="font-size:.88em;color:#aaa">The group project still runs end to end: requirements and architecture in session 3, test plan and test cases in session 6, all in the same SRS document.</p>
+
+<div class="sechead">Not in the compact track</div>
+<p style="font-size:.9em;color:#aaa;margin-bottom:1em">These stay on the site as optional reading and as material for anyone who wants to go further. Nothing in the five homework assignments depends on them.</p>
+<div class="optional">
+  <a class="optcard" href="../lesson-06.html#/11"><div class="t">Peer review of Rental-Car</div><div class="d">Full course homework 5 &mdash; a good optional extra if a session runs short</div></a>
+  <a class="optcard" href="../lesson-08.html#/7"><div class="t">Boarding pass coverage</div><div class="d">Full course homework 7 &mdash; the white box exercise, doable in 20 minutes in class</div></a>
+  <a class="optcard" href="../lesson-11.html"><div class="t">Lesson 11 &mdash; Database &amp; SQL testing</div><div class="d">With the shop database exercise</div></a>
+  <a class="optcard" href="../lesson-12.html"><div class="t">Lesson 12 &mdash; Accessibility testing</div><div class="d">WCAG, keyboard, contrast</div></a>
+  <a class="optcard" href="../lesson-13.html"><div class="t">Lesson 13 &mdash; Mobile testing</div><div class="d">Devices, interruptions, network</div></a>
+  <a class="optcard" href="../lesson-bonus-ai.html"><div class="t">Bonus &mdash; Using AI responsibly</div><div class="d">Worth keeping even here: the ground rules are in session 1</div></a>
+  <a class="optcard" href="../lesson-bonus-performance.html"><div class="t">Bonus &mdash; Performance testing</div><div class="d">Response time, throughput, load and stress</div></a>
+  <a class="optcard" href="../lesson-bonus-security.html"><div class="t">Bonus &mdash; Application security</div><div class="d">OWASP, injection, XSS</div></a>
+</div>
+
+<footer>Software Testing Fundamentals &middot; Tatjana Kirotar &middot; <a href="../index.html">full 13-lesson course</a> &middot; press ESC to go back</footer>
+</div>
+<script>
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();window.location.href='index.html';}},true);
+</script>
+</body>
+</html>

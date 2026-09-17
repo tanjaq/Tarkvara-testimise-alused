@@ -25,7 +25,7 @@ Lessons are reveal.js presentations. Use **→** to move between slides and **ES
 
 ## ⏱️ Compact track — 6 sessions
 
-For groups that meet every other week: **[compact/](compact/index.html)** maps the thirteen lessons onto six sessions, naming which slides to cover in class, which to leave as reading, and a reduced set of five homework assignments. It links to the same lesson decks — there is no second copy of anything to maintain.
+For groups that meet every other week: **[compact/](compact/index.html)** is the same course in six sessions with five homework assignments, laid out like the main homepage. The [session plan](compact/plan.html) behind it names which slides to cover in class and which to leave as reading. Both link to the same lesson decks — there is no second copy of anything to maintain.
 
 ## 🎓 Course outline
 
