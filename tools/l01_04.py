@@ -1,99 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lesson 1 &ndash; Testing Fundamentals &amp; the Quality Mindset</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/black.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/monokai.css">
-<style>
-:root{--blue:#4fc3f7;--green:#81c784;--orange:#ffb74d;--red:#e57373;--purple:#ce93d8;}
-.reveal{font-family:'Segoe UI',system-ui,sans-serif;font-size:34px;}
-.reveal h2{color:var(--blue);font-size:0.95em;}
-.reveal h3{color:var(--green);margin-bottom:.3em;font-size:0.85em;}
-.reveal p{font-size:.60em;line-height:1.5;}.reveal li{font-size:.68em;line-height:1.5;}
-.reveal pre{font-size:.44em;width:100%;box-shadow:none;}
-.reveal ul{text-align:left;margin-left:1em;}
-.reveal table{font-size:.5em;}
-.reveal table th{color:var(--blue);}
-.reveal blockquote{width:100%;box-sizing:border-box;border-left:4px solid var(--blue);padding:.4em 1em;font-style:italic;color:#ccc;background:rgba(79,195,247,.06);margin:.5em 0;font-size:.60em;}
-.lbl{font-size:.38em;letter-spacing:3px;text-transform:uppercase;color:#888;display:block;margin-bottom:.2em;}
-.divider{width:40px;height:3px;background:var(--blue);margin:.3em auto .6em;}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;text-align:left;}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:left;}
-.card{background:rgba(255,255,255,.05);border-left:4px solid var(--blue);padding:8px 12px;border-radius:0 5px 5px 0;font-size:.65em;line-height:1.5;text-align:left;}
-.card.g{border-left-color:var(--green);}
-.card.o{border-left-color:var(--orange);}
-.card.r{border-left-color:var(--red);}
-.card.p{border-left-color:var(--purple);}
-.card strong{display:block;margin-bottom:.15em;}
-.plan{background:rgba(255,255,255,.04);border:1px solid rgba(79,195,247,.3);border-radius:10px;padding:16px 20px;text-align:left;max-width:860px;margin:0 auto;}
-.plan-title{color:var(--blue);font-size:.8em;font-weight:700;margin-bottom:.6em;border-bottom:1px solid rgba(79,195,247,.2);padding-bottom:.4em;}
-.plan-topics p{font-size:.68em;margin:.25em 0;color:#ddd;}
-.plan-topics p span{color:var(--blue);font-weight:600;}
-.plan-hw{background:rgba(79,195,247,.08);border:1px solid var(--blue);border-radius:6px;padding:8px 12px;font-size:.65em;margin-top:.7em;}
-.plan-hw strong{color:var(--blue);}
-.hw{background:rgba(79,195,247,.08);border:2px solid var(--blue);border-radius:10px;padding:14px 18px;text-align:left;}
-.hw h3{color:var(--blue)!important;margin-top:0;}
-.hw a{color:var(--orange);}
-.teams{background:rgba(100,100,255,.08);border:2px solid #6264a7;border-radius:10px;padding:14px 18px;text-align:left;}
-.teams h3{color:#9b9fe3!important;margin-top:0;}
-.ai{background:linear-gradient(135deg,rgba(206,147,216,.10),rgba(79,195,247,.08));border:2px solid var(--purple);border-radius:12px;padding:14px 18px;text-align:left;}
-.ai h3{color:var(--purple)!important;margin-top:0;}
-.bio-grid{display:grid;grid-template-columns:1fr 2fr;gap:20px;text-align:left;}
-.bio-left{background:rgba(255,255,255,.04);border-radius:8px;padding:12px;font-size:.65em;}
-.bio-left .name{font-size:1.2em;font-weight:700;color:var(--blue);margin-bottom:.3em;}
-.bio-left .role{color:var(--green);margin-bottom:.5em;}
-.timeline{font-size:.62em;line-height:1.8;}
-.timeline .year{color:var(--orange);font-weight:600;}
-.chain{display:flex;align-items:center;gap:6px;justify-content:center;margin:.6em 0;flex-wrap:wrap;}
-.chain .node{background:rgba(255,255,255,.07);border:1px solid var(--blue);border-radius:6px;padding:6px 10px;font-size:.62em;}
-.chain .arr{color:var(--orange);}
-.num{display:inline-block;width:20px;height:20px;background:var(--blue);color:#111;border-radius:50%;text-align:center;line-height:20px;font-size:.6em;font-weight:700;margin-right:5px;}
-.bug-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
-.bug-card{background:rgba(229,115,115,.08);border:1px solid rgba(229,115,115,.3);border-radius:6px;padding:8px 10px;font-size:.62em;line-height:1.5;text-align:left;}
-.bug-card .co{font-weight:700;color:var(--red);margin-bottom:.2em;}
-.figure{text-align:center;margin:.5em 0;}
-.figure img{max-width:100%;max-height:380px;border-radius:8px;background:#fff;padding:6px;box-shadow:0 4px 18px rgba(0,0,0,.4);}
-.figure .cap{font-size:.42em;color:#888;margin-top:.35em;}
-.g2 .figure img,.g3 .figure img{max-height:300px;}
-.newsgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;align-items:start;}
-.newsgrid img{width:100%;border-radius:6px;background:#fff;padding:3px;}
-.newsgrid .n{font-size:.5em;color:#aaa;margin-top:.2em;text-align:left;line-height:1.4;}
-.portrait{width:100%;border-radius:8px;}
-.nav{position:fixed;top:12px;right:12px;z-index:999;font-size:.55em;display:flex;gap:8px;}
-.nav a{color:#555;text-decoration:none;padding:3px 8px;border:1px solid #333;border-radius:5px;}
-.nav a:hover{color:#fff;border-color:#fff;}
-</style>
-</head>
-<body>
-<div class="nav"><a href="index.html">&#8617; All lessons</a><a href="lesson-02.html">L2 &rarr;</a></div>
-<div class="reveal"><div class="slides">
-<section data-background-gradient="linear-gradient(135deg,#0f0c29,#302b63,#24243e)">
-  <span class="lbl">Lesson 1 of 13</span>
-  <h2>Testing Fundamentals &amp; the Quality Mindset</h2>
-  <div class="divider"></div>
-  <p style="font-size:.62em">Course intro &middot; Using AI in this course &middot; What is quality &middot; What can be tested</p>
-  <p style="font-size:.5em;color:#555;margin-top:.8em">&rarr; next slide &nbsp;|&nbsp; ESC overview</p>
-</section>
+# -*- coding: utf-8 -*-
+from tpl import *
 
-<section>
-  <span class="lbl">Lesson Plan</span>
-  <div class="plan">
-    <div class="plan-title">Lesson 1: Testing Fundamentals &amp; the Quality Mindset<br>Focus: Course introduction and what software quality actually means</div>
-      <div class="plan-topics">
-        <p><span>1.</span> Course introduction &mdash; structure, grading, prerequisites</p>
-        <p><span>2.</span> Using AI in this course &mdash; the ground rules</p>
-        <p><span>3.</span> Who is teaching this &mdash; and who are you</p>
-        <p><span>4.</span> What is quality? &mdash; car or code, and the seven aspects</p>
-        <p><span>5.</span> What is testing? What can be tested? Verification vs validation</p>
-      </div>
-
-  </div>
-</section>
-
-<section>
+# ---------------- LESSON 1 ----------------
+write_lesson(1,
+ "Testing Fundamentals &amp; the Quality Mindset",
+ "Course intro &middot; Using AI in this course &middot; What is quality &middot; What can be tested",
+ "Course introduction and what software quality actually means",
+ ["Course introduction &mdash; structure, grading, prerequisites",
+  "Using AI in this course &mdash; the ground rules",
+  "Who is teaching this &mdash; and who are you",
+  "What is quality? &mdash; car or code, and the seven aspects",
+  "What is testing? What can be tested? Verification vs validation"],
+ "",
+[
+"""<section>
   <span class="lbl">About Me</span>
   <div class="bio-grid">
     <div class="bio-left">
@@ -114,9 +34,9 @@
       <p style="margin-top:.3em;color:#888">Languages: Estonian &middot; English &middot; Russian</p>
     </div>
   </div>
-</section>
+</section>""",
 
-<section>
+"""<section>
   <span class="lbl">About This Course</span>
   <h3>Course Overview</h3>
   <div class="g2">
@@ -146,9 +66,9 @@
     </div>
   </div>
   <p style="font-size:.65em;margin-top:.5em">Key references: ISTQB Foundation &middot; Agile Methodology &middot; <em>Clean Code</em> by Robert C. Martin &middot; BABOK</p>
-</section>
+</section>""",
 
-<section>
+"""<section>
   <span class="lbl">Where the Course Lives</span>
   <h3>Two Places &mdash; Teams and the Course Site</h3>
   <div class="g2">
@@ -162,9 +82,9 @@
       <span style="color:#888">Slides, homework briefs, worksheets and templates</span></div>
   </div>
   <div class="card o" style="margin-top:10px"><strong>Nothing to install</strong>Both work on a phone. Follow along during the lesson, and redo an exercise afterwards.</div>
-</section>
+</section>""",
 
-<section>
+"""<section>
   <span class="lbl">Topic 2</span>
   <div class="ai">
     <h3>Using AI in This Course</h3>
@@ -175,9 +95,9 @@
     </div>
     <p style="font-size:.6em;margin-top:.5em">Full treatment, with worked good and bad examples: <a href="lesson-bonus-ai.html" style="color:var(--orange)">bonus lesson on using AI responsibly</a>.</p>
   </div>
-</section>
+</section>""",
 
-<section>
+"""<section>
   <span class="lbl">Syllabus</span>
   <h3>What We Cover</h3>
   <div class="g3" style="font-size:.95em">
@@ -189,9 +109,9 @@
     <div class="card"><strong>Bonus lessons</strong>Using AI responsibly<br>Performance testing<br>Application security</div>
   </div>
   <p style="font-size:.55em;color:#888;margin-top:.6em">The topics and exercises are chosen for what the job market actually expects from a junior QA engineer or developer.</p>
-</section>
+</section>""",
 
-<section>
+"""<section>
   <div class="teams">
     <h3>👋 Your Turn &mdash; Let's Meet</h3>
     <p style="font-size:.63em">Speak up &mdash; we go round the room.</p>
@@ -213,9 +133,9 @@
       </div>
     </div>
   </div>
-</section>
+</section>""",
 
-<section>
+"""<section>
   <span class="lbl">Topic 3</span>
   <h3>Quality is Quality &mdash; Car or Code, Same Standard</h3>
   <div class="g2" style="margin-top:.5em">
@@ -245,9 +165,9 @@
     </div>
   </div>
   <blockquote>Quality is quality. The standard is the same &mdash; whether it rolls on four wheels or runs on a server.</blockquote>
-</section>
+</section>""",
 
-<section>
+"""<section>
   <span class="lbl">Topic 3</span>
   <h3>What Is (Software) Quality?</h3>
   <div class="g2">
@@ -264,9 +184,9 @@
     </div>
   </div>
   <blockquote>Quality software is defect-free software, delivered on time and within budget, that meets requirements and expectations &mdash; and is maintainable.</blockquote>
-</section>
+</section>""",
 
-<section>
+"""<section>
   <span class="lbl">Topic 4</span>
   <h3>What Is Testing?</h3>
   <p style="font-size:.66em">The process of evaluating software quality and checking whether the product:</p>
@@ -276,9 +196,9 @@
   </div>
   <blockquote>Software testing is the process of executing a program or application with the intent of finding software defects.</blockquote>
   <p style="font-size:.55em;color:#888">Note the two halves: <em>evaluating quality</em> (are we building the right thing?) and <em>finding defects</em> (are we building it right?).</p>
-</section>
+</section>""",
 
-<section>
+"""<section>
   <span class="lbl">Topic 4</span>
   <h3>What Can Be Tested? &mdash; Everything</h3>
   <div class="g2">
@@ -294,9 +214,9 @@
     </div>
   </div>
   <p style="font-size:.58em;margin-top:.5em">Testing is not "clicking the app at the end". Every artefact in the project can be tested &mdash; and the earlier you test it, the cheaper the fix.</p>
-</section>
+</section>""",
 
-<section>
+"""<section>
   <span class="lbl">Topic 5</span>
   <h3>Two Words You Will Use Constantly</h3>
   <div class="g2">
@@ -304,16 +224,16 @@
     <div class="card g"><strong>Validation</strong>Are we building the <em>right</em> product?<br>Does it solve the user's actual problem?<br><span style="color:#888">Acceptance testing, user feedback, demos</span></div>
   </div>
   <blockquote>A product can pass every verification check and still fail validation &mdash; it was built exactly as specified, and the specification was wrong.</blockquote>
-</section>
+</section>""",
 
-<section>
+"""<section>
   <span class="lbl">And One More Thing</span>
   <h3>Know What You Are Actually Claiming</h3>
-  <div class="figure"><img src="images/fullstack-meme.png" alt="Everyone can do everything badly - full stack developer meme" style="width:48%"></div>
+  """ + img("fullstack-meme.png", "Everyone can do everything badly - full stack developer meme", "48%") + """
   <p style="font-size:.6em">"It works" is a claim. This course is about being able to say precisely <em>what</em> works, <em>under which conditions</em>, and <em>what you did not check</em>.</p>
-</section>
+</section>""",
 
-<section>
+"""<section>
   <span class="lbl">Self-Check</span>
   <h3>Can You Answer These?</h3>
   <ul style="font-size:.68em">
@@ -323,9 +243,9 @@
     <li>Why is "the software has no known bugs" not the same as "the software has quality"?</li>
     <li>What are you responsible for when you use AI on a homework submission?</li>
   </ul>
-</section>
+</section>""",
 
-<section>
+"""<section>
   <div class="hw">
     <h3>Something to Think About</h3>
     <p style="font-size:.68em">No homework for this lesson &mdash; but come to the next one ready to talk:</p>
@@ -335,13 +255,169 @@
     </ul>
     <p style="font-size:.62em;margin-top:.4em">Everyday apps count &mdash; a bank app, a ticket site, a game. We start the next lesson with your examples.</p>
   </div>
-</section>
-</div></div>
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/plugin/highlight/highlight.js"></script>
-<script>
-Reveal.initialize({hash:true,progress:true,slideNumber:'c/t',transition:'slide',transitionSpeed:'fast',plugins:[RevealHighlight],keyboard:{27:null}});
-document.addEventListener('keydown',function(e){if(e.key==='Escape'){e.preventDefault();e.stopPropagation();window.location.href='index.html';}},true);
-</script>
-</body>
-</html>
+</section>""",
+])
+
+# ---------------- LESSON 2 ----------------
+write_lesson(2,
+ "The Purpose of Testing",
+ "Why we test &middot; Real-world failures &middot; Cost of defects &middot; Where bugs come from",
+ "Why testing exists &mdash; what it costs not to do it",
+ ["Why test? &mdash; famous software failures",
+  "Consequences of software defects",
+  "Where do defects come from?",
+  "The cost of a defect over time",
+  "The goals of software testing"],
+ "Group work &mdash; pick a real software failure, analyse what happened and what testing would have caught it.",
+[
+"""<section>
+  <span class="lbl">Topic 1</span>
+  <h3>Testing Happens Everywhere, Not Only in Software</h3>
+  """ + img("iihs-safety-ratings.png", "IIHS vehicle safety ratings table", "42%",
+            "Independent crash-test ratings for midsize cars. Somebody defined the criteria, ran the tests and published the results &mdash; that is exactly what a test report is.") + """
+  <p style="font-size:.6em">You already trust test results every day. The question is what happens when nobody runs them.</p>
+</section>""",
+
+"""<section>
+  <span class="lbl">Topic 1</span>
+  <h3>Users Tell You About Quality &mdash; Constantly</h3>
+  <div class="g2">
+    <div class="figure" style="margin:0"><img src="images/uber-reviews.png" alt="Uber app store reviews" style="max-height:320px"><div class="cap">Uber &mdash; 4.8</div></div>
+    <div class="figure" style="margin:0"><img src="images/lyft-reviews.png" alt="Lyft app store reviews" style="max-height:320px"><div class="cap">Lyft &mdash; 4.9</div></div>
+  </div>
+  <p style="font-size:.58em;margin-top:.4em">App store reviews are unstructured defect reports written by your users. They arrive too late and cost you the customer &mdash; but they are still evidence of quality.</p>
+</section>""",
+
+"""<section>
+  <span class="lbl">Topic 1</span>
+  <h3>Why Test? &mdash; Real Failures</h3>
+  <div class="newsgrid">
+    <div><img src="images/uber-affair.png" alt="Uber notification bug headline"><div class="n"><strong>Uber, 2017</strong> &mdash; a man ordered a ride from his wife's phone and logged out. The app kept sending notifications to her phone, revealing his travel history. The couple divorced; he sued Uber for &euro;45m.</div></div>
+    <div><img src="images/gangnam-style.png" alt="Gangnam Style broke YouTube view counter"><div class="n"><strong>YouTube, 2014</strong> &mdash; the view counter was a signed 32-bit integer. It broke past 2,147,483,647 views. A boundary value defect, live, in front of a billion people.</div></div>
+    <div><img src="images/tesla-recall.png" alt="Tesla recall over computer memory failure"><div class="n"><strong>Tesla, 2021</strong> &mdash; 135,000 cars recalled. Flash memory in the touchscreen wore out, taking the rear-view camera and defroster controls with it.</div></div>
+  </div>
+</section>""",
+
+"""<section>
+  <span class="lbl">Topic 1</span>
+  <h3>When Software Kills</h3>
+  <div class="newsgrid">
+    <div><img src="images/boeing-737max.png" alt="Boeing 737 MAX killer software headline"><div class="n"><strong>Boeing 737 MAX, 2018 &amp; 2019</strong> &mdash; the MCAS system relied on a single angle-of-attack sensor. Two crashes, 346 people dead. No redundancy, and pilots were not told the system existed.</div></div>
+    <div><img src="images/starliner.png" alt="Boeing Starliner software errors headline"><div class="n"><strong>Boeing Starliner, 2020</strong> &mdash; two software defects in one flight: the spacecraft clock was 11 hours off, and the wrong thrusters fired. Investigators blamed the engineering culture, not one programmer.</div></div>
+    <div><img src="images/crowdstrike-airport.jpg" alt="CrowdStrike outage blue screen at an airport"><div class="n"><strong>CrowdStrike, 2024</strong> &mdash; a faulty content update crashed ~8.5 million Windows machines worldwide. Airports, hospitals and banks stopped. Estimated damage: ~US$10 billion.</div></div>
+  </div>
+  <p style="font-size:.5em;color:#888;margin-top:.4em">Data breaches belong on the same list: T-Mobile 2022 (37M users) &middot; Juspay 2021 (card data) &middot; Yahoo 2014 (500M users).</p>
+</section>""",
+
+"""<section>
+  <span class="lbl">Topic 1</span>
+  <h3>It Happens Close to Home Too</h3>
+  <div class="g2">
+    <div class="card r"><strong>A national building register</strong>Municipalities missed statutory deadlines because of defects in a newly launched register &mdash; a government system where the deadline is written into law.</div>
+    <div class="card o"><strong>A national social insurance system</strong>A large public IT project that failed after years of work. Requirements overloaded, multiple procurement disputes, deadlines missed, the system never delivered as specified.</div>
+  </div>
+  <blockquote>Most failures are not "someone wrote a bad line of code". They are requirements that were never clear, and testing that started too late.</blockquote>
+</section>""",
+
+"""<section>
+  <span class="lbl">In-Class Exercise</span>
+  <div class="teams">
+    <h3>Group Work &mdash; Anatomy of a Failure</h3>
+    <ul style="font-size:.72em">
+      <li>Form groups of 3&ndash;4.</li>
+      <li>Pick one example from the slides, or find your own software failure online.</li>
+      <li>Answer together:
+        <ul style="font-size:.95em">
+          <li>What happened?</li>
+          <li>What were the consequences?</li>
+          <li>What testing should have been done to prevent it?</li>
+        </ul>
+      </li>
+      <li>Time: 10&ndash;15 minutes. Each group gives a 2&ndash;3 minute summary.</li>
+    </ul>
+  </div>
+</section>""",
+
+"""<section>
+  <span class="lbl">Topic 2</span>
+  <h3>Consequences of Software Defects</h3>
+  <div class="g2">
+    <div>
+      <div class="card o" style="margin-bottom:6px"><strong>Time and money to fix</strong>The defect itself, plus everything blocked behind it</div>
+      <div class="card r" style="margin-bottom:6px"><strong>Loss of reputation</strong>The hardest one to buy back</div>
+      <div class="card p"><strong>Direct financial loss</strong>Lost sales, refunds, contractual penalties, fines</div>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:6px"><strong>Loss of human life</strong>Aviation, medical, automotive, industrial control</div>
+      <div class="card g"><strong>Environmental damage</strong>Control systems for energy, water, chemicals</div>
+    </div>
+  </div>
+</section>""",
+
+"""<section>
+  <span class="lbl">Topic 3</span>
+  <h3>Where Do Defects Come From?</h3>
+  <p style="font-size:.62em">Every step of development has a moment where a human mistake becomes a defect.</p>
+  <ul style="font-size:.63em">
+    <li><strong>The customer</strong> may not know exactly what they want, or forgets to state an important requirement.</li>
+    <li><strong>The analyst</strong> may misinterpret the requirement, or never document it.</li>
+    <li><strong>Design decisions</strong> made early create defects that only surface later.</li>
+    <li><strong>Development</strong> introduces coding errors and misread specifications.</li>
+    <li><strong>Testing</strong> misses defects because of time pressure, thin experience or incomplete documentation.</li>
+    <li><strong>Acceptance testing</strong> does not cover everything, and the defect ships to production.</li>
+  </ul>
+  <blockquote>Notice how few of these are "the developer wrote bad code". Most defects are born before anyone starts typing.</blockquote>
+</section>""",
+
+"""<section>
+  <span class="lbl">Topic 4</span>
+  <h3>The Cost of a Defect Grows With Time</h3>
+  <div class="chain">
+    <div class="node">Requirements<br><strong style="color:var(--green)">1&times;</strong></div><span class="arr">&rarr;</span>
+    <div class="node">Design<br><strong style="color:var(--green)">3&times;</strong></div><span class="arr">&rarr;</span>
+    <div class="node">Development<br><strong style="color:var(--orange)">10&times;</strong></div><span class="arr">&rarr;</span>
+    <div class="node">QA / Testing<br><strong style="color:var(--orange)">25&times;</strong></div><span class="arr">&rarr;</span>
+    <div class="node">Production<br><strong style="color:var(--red)">100&times;</strong></div>
+  </div>
+  <div class="g2" style="margin-top:.5em">
+    <div class="card r"><strong>Why defects escape to production</strong>&middot; Cannot be reproduced<br>&middot; Found too late<br>&middot; Team decided not to fix<br>&middot; The fix created a new defect<br>&middot; "It's not a bug, it's a feature"</div>
+    <div class="card g"><strong>What this means for you</strong>A tester reviewing a requirements document is doing the single cheapest quality work available in the whole project.</div>
+  </div>
+</section>""",
+
+"""<section>
+  <span class="lbl">Topic 5</span>
+  <h3>The Goals of Software Testing</h3>
+  <div class="g2">
+    <div>
+      <div class="card" style="margin-bottom:6px"><strong>Find defects</strong>Introduced at any point in development</div>
+      <div class="card g" style="margin-bottom:6px"><strong>Prevent defects</strong>By reviewing requirements and designs early</div>
+      <div class="card o"><strong>Build confidence</strong>Give the business real information about quality level</div>
+    </div>
+    <div>
+      <div class="card p" style="margin-bottom:6px"><strong>Prove conformance</strong>To business requirements and to the system specification</div>
+      <div class="card r"><strong>Earn customer trust</strong>By shipping a product that behaves</div>
+    </div>
+  </div>
+  <p style="font-size:.6em;margin-top:.5em">Coverage is the key metric: design test cases so that as much functionality as possible is exercised and as many problems as possible are found.</p>
+</section>""",
+
+"""<section>
+  <span class="lbl">Self-Check</span>
+  <h3>Can You Answer These?</h3>
+  <ul style="font-size:.68em">
+    <li>Pick one failure from this lesson. At which stage was the defect actually introduced?</li>
+    <li>Why does a defect found in production cost roughly 100&times; a defect found in requirements?</li>
+    <li>Give two reasons a known defect might still be shipped.</li>
+    <li>Name three goals of testing beyond "find bugs".</li>
+  </ul>
+</section>""",
+
+"""<section>
+  <div class="hw">
+    <h3>Homework 1 &mdash; Failure Case Analysis</h3>
+    <p style="font-size:.68em">In your group, write up the failure you analysed in class: what happened, what the consequences were, which testing activity would have caught it, and at which stage the defect was introduced.</p>
+    <p style="font-size:.62em">Full brief: <a href="homework/hw-01.html">Homework 1</a></p>
+  </div>
+</section>""",
+])

@@ -81,6 +81,10 @@ The group project runs through the whole course: requirements (L4) → architect
 - [Trip planner form](materials/input-form-example.html) — a deliberately broken form, used in Lessons 3 and 7
 - [shop-database.sql](materials/shop-database.sql) — a sample database with planted data defects, used in Lesson 11
 
+## 🛠️ Rebuilding the pages
+
+The lesson decks, homework pages and homepage are generated from the scripts in **[tools/](tools/README.md)** — `cd tools && python3 build.py`. If you edit a lesson's HTML by hand, make the same change in its generator, or the next rebuild will overwrite it.
+
 ## 🔗 Related repositories
 
 - [Rental-Car](https://github.com/tanjaq/Rental-Car) — peer review exercise (Lesson 6)
