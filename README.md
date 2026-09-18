@@ -4,7 +4,11 @@ Course materials for the software testing fundamentals course — manual testing
 
 ## 🌐 Live course
 
+**Full course** — 13 lessons, 3 bonus lessons, 12 homework assignments
 **https://tanjaq.github.io/Tarkvara-testimise-alused/**
+
+**Compact track** — the same course in 6 sessions with 5 homework assignments, for groups meeting every other week
+**https://tanjaq.github.io/Tarkvara-testimise-alused/compact/**
 
 ## 📚 What's in here
 
@@ -18,14 +22,11 @@ Course materials for the software testing fundamentals course — manual testing
 | `homework/` | One page per assignment: task, deliverable, assessment criteria |
 | `materials/` | SRS template and examples, trip planner form, sample shop database |
 | `images/` | Diagrams and screenshots used in the lessons |
+| `compact/` | Six-session version of the course: homepage and session plan, linking to the same lesson decks |
 
 Lessons are reveal.js presentations. Use **→** to move between slides and **ESC** to return to the course homepage.
 
 ---
-
-## ⏱️ Compact track — 6 sessions
-
-For groups that meet every other week: **[compact/](compact/index.html)** is the same course in six sessions with five homework assignments, laid out like the main homepage. The [session plan](compact/plan.html) behind it names which slides to cover in class and which to leave as reading. Both link to the same lesson decks — there is no second copy of anything to maintain.
 
 ## 🎓 Course outline
 
