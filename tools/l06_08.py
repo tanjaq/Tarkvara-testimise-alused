@@ -171,7 +171,7 @@ write_lesson(7,
   "Equivalence partitioning and boundary value analysis",
   "Decision tables",
   "State transition and use-case testing"],
- "Decision table for the photo-ordering discounts, plus EP and BVA on the trip planner form.",
+ "Decision table for the photo-ordering discounts.",
 [
 """<section>
   <span class="lbl">Topic 1</span>
@@ -305,8 +305,8 @@ write_lesson(7,
 
 """<section>
   <div class="hw">
-    <h3>Homework 6 &mdash; Decision Table + EP/BVA</h3>
-    <p style="font-size:.68em">Produce the complete decision table for the photo-ordering discount rules, and submit your EP/BVA analysis of the trip planner form together with the defects you found in it.</p>
+    <h3>Homework 6 &mdash; Decision Table</h3>
+    <p style="font-size:.68em">Produce the complete decision table for the photo-ordering discount rules, mark the combinations you would test first and note any rule that is ambiguous as written. EP and BVA on the trip planner form we do together in class.</p>
     <p style="font-size:.62em">Full brief: <a href="homework/hw-06.html">Homework 6</a></p>
   </div>
 </section>""",
