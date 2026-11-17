@@ -149,9 +149,9 @@ SELECT * FROM orders WHERE customer_id NOT IN (SELECT id FROM customers);</code>
     <h3>Find the Defects in the Shop Database</h3>
     <ul style="font-size:.68em">
       <li>Open <a href="https://sqliteonline.com" style="color:#9b9fe3">sqliteonline.com</a> and load <a href="materials/shop-database.sql" style="color:#9b9fe3">shop-database.sql</a> (paste it and run).</li>
-      <li>The schema has customers, products, orders and order_items, with the requirements written in comments at the top of the file.</li>
+      <li>The schema has customers, products, orders and order_items, with five requirements written in comments at the top of the file.</li>
       <li>Write a query for each requirement to check whether the data honours it.</li>
-      <li>There are <strong>at least six data defects</strong> in there. Find them, and for each one say which requirement it breaks and what severity you would give it.</li>
+      <li><strong>Every requirement is broken at least once.</strong> Find the defects, and for each one say which requirement it breaks and what severity you would give it.</li>
     </ul>
   </div>
 </section>""",
