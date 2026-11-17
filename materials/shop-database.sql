@@ -13,6 +13,9 @@
 --   R3  An order item quantity is at least 1.
 --   R4  A product price is greater than 0.
 --   R5  An order status is one of: NEW, PAID, SHIPPED, CANCELLED.
+--   R6  An order total equals the sum of its items (quantity * unit_price),
+--       rounded to 2 decimals.
+--   R7  No order is dated in the future.
 --
 -- Every requirement is broken at least once in the data below.
 -- For each defect: which requirement does it break, what severity would
@@ -36,7 +39,7 @@ CREATE TABLE customers (
 CREATE TABLE products (
   id          INTEGER PRIMARY KEY,
   name        TEXT,
-  price       REAL,
+  price       DECIMAL(10,2),
   active      INTEGER
 );
 
@@ -44,7 +47,7 @@ CREATE TABLE orders (
   id           INTEGER PRIMARY KEY,
   customer_id  INTEGER,
   status       TEXT,
-  total        REAL,
+  total        DECIMAL(10,2),
   created_at   TEXT
 );
 
@@ -53,7 +56,7 @@ CREATE TABLE order_items (
   order_id    INTEGER,
   product_id  INTEGER,
   quantity    INTEGER,
-  unit_price  REAL
+  unit_price  DECIMAL(10,2)
 );
 
 INSERT INTO customers (id, name, email, created_at) VALUES
@@ -74,13 +77,13 @@ INSERT INTO products (id, name, price, active) VALUES
   (16, 'Headset',         79.00, 0);
 
 INSERT INTO orders (id, customer_id, status, total, created_at) VALUES
-  (100, 1,   'PAID',      69.89,  '2026-03-01 10:00:00'),
+  (100, 1,   'PAID',      59.89,  '2026-03-01 10:00:00'),
   (101, 2,   'SHIPPED',  189.00,  '2026-03-03 12:30:00'),
   (102, 3,   'NEW',       19.99,  '2026-03-05 08:15:00'),
   (103, 99,  'PAID',      39.50,  '2026-03-06 16:45:00'),
   (104, 1,   'CANCELLED', 179.05, '2026-03-08 09:05:00'),
   (105, 5,   'PAYED',     49.90,  '2026-03-09 13:20:00'),
-  (106, 6,   'PAID',      59.70,  '2026-03-10 10:00:00'),
+  (106, 6,   'PAID',      59.70,  '2062-03-10 10:00:00'),
   (107, 2,   'PAID',      19.99,  '2026-03-12 15:00:00');
 
 INSERT INTO order_items (id, order_id, product_id, quantity, unit_price) VALUES
