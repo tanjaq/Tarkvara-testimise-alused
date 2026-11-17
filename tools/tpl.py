@@ -143,9 +143,9 @@ def plan_slide(n, title, focus, topics, hw):
   </div>
 </section>""" % (n, title, focus, t, hwhtml)
 
-def write_lesson(n, title, sub, focus, topics, hw_line, slides, extra_css=""):
+def write_lesson(n, title, sub, focus, topics, hw_line, slides):
     body = [title_slide(n, title, sub), plan_slide(n, title, focus, topics, hw_line)] + slides
-    html = HEAD.format(title="Lesson %d &ndash; %s" % (n, title), css=CSS + extra_css, nav=nav_for(n)) \
+    html = HEAD.format(title="Lesson %d &ndash; %s" % (n, title), css=CSS, nav=nav_for(n)) \
            + "\n\n".join(body) + FOOT
     with open(os.path.join(OUT, "lesson-%02d.html" % n), "w") as f:
         f.write(html)

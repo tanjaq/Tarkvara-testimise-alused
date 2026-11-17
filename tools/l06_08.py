@@ -313,71 +313,13 @@ write_lesson(7,
 ])
 
 # ---------------- LESSON 8 ----------------
-L08_CSS = """
-.reveal pre{font-size:.52em;}
-.cfg{width:100%;max-height:400px;}
-.cfg text{font-family:'Segoe UI',system-ui,sans-serif;fill:#ddd;font-size:15px;}
-.cfg .lab{font-size:13px;font-weight:700;}
-.verdict{display:inline-block;font-weight:700;padding:1px 8px;border-radius:10px;font-size:.9em;}
-.v-pass{background:rgba(129,199,132,.2);color:var(--green);}
-.v-fail{background:rgba(227,115,115,.2);color:var(--red);}
-.term{background:#1b1b1b;border:1px solid #333;border-radius:6px;padding:10px 14px;font-family:Consolas,Menlo,monospace;font-size:.42em;text-align:left;line-height:1.5;color:#ccc;white-space:pre;overflow-x:auto;}
-.term .hl{color:var(--orange);font-weight:700;}
-.term .ok{color:var(--green);}
-.lbl.further{color:var(--orange);}
-.reveal td.t{color:var(--green);} .reveal td.f{color:var(--red);}
-"""
-
-ARROW = '<defs><marker id="%s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#888"/></marker></defs>'
-
-def box(x, y, w, label):
-    return ('<rect x="%d" y="%d" width="%d" height="32" rx="5" fill="rgba(79,195,247,.12)" stroke="#4fc3f7"/>'
-            '<text x="180" y="%d" text-anchor="middle">%s</text>') % (x, y, w, y + 21, label)
-
-def diamond(cy, label):
-    return ('<polygon points="180,%d 262,%d 180,%d 98,%d" fill="rgba(255,183,77,.12)" stroke="#ffb74d"/>'
-            '<text x="180" y="%d" text-anchor="middle">%s</text>') % (cy - 30, cy, cy + 30, cy, cy + 5, label)
-
-def line(y1, y2, m, color="#888"):
-    return '<line x1="180" y1="%d" x2="180" y2="%d" stroke="%s" stroke-width="2" marker-end="url(#%s)"/>' % (y1, y2, color, m)
-
-def false_edge(cy, merge_y, m):
-    return ('<polyline points="262,%d 325,%d 325,%d 186,%d" fill="none" stroke="#e57373" stroke-width="2" marker-end="url(#%s)"/>'
-            '<text class="lab" x="276" y="%d" style="fill:#e57373">F</text>') % (cy, cy, merge_y, merge_y, m, cy - 8)
-
-def true_label(y):
-    return '<text class="lab" x="158" y="%d" style="fill:#81c784">T</text>' % y
-
-CFG_FINAL = ('<svg class="cfg" viewBox="0 0 360 300" role="img" aria-label="Control flow graph of finalPrice">'
-  + ARROW % "m1" + box(110, 4, 140, "let discount") + line(36, 58, "m1")
-  + diamond(90, "isMember?") + line(120, 146, "m1", "#81c784") + true_label(139)
-  + box(105, 148, 150, "discount = 0.1") + false_edge(90, 206, "m1")
-  + line(180, 236, "m1") + box(60, 238, 240, "return price &minus; price &times; discount")
-  + '</svg>')
-
-CFG_DELIVERY = ('<svg class="cfg" viewBox="0 0 360 440" role="img" aria-label="Control flow graph of deliveryFee with four paths">'
-  + ARROW % "m2" + box(115, 4, 130, "let fee = 5") + line(36, 58, "m2")
-  + diamond(90, "isExpress?") + line(120, 146, "m2", "#81c784") + true_label(139)
-  + box(120, 148, 120, "fee = 12") + false_edge(90, 206, "m2")
-  + line(180, 226, "m2") + diamond(258, "total &ge; 50?")
-  + line(288, 314, "m2", "#81c784") + true_label(307)
-  + box(125, 316, 110, "fee = 0") + false_edge(258, 374, "m2")
-  + line(348, 394, "m2") + box(120, 396, 120, "return fee")
-  + '</svg>')
-
-PASS = '<span class="verdict v-pass">PASS</span>'
-FAIL = '<span class="verdict v-fail">FAIL</span>'
-
 write_lesson(8,
  "Test Techniques III &mdash; White Box",
- "Function, statement and branch coverage &middot; Bugs that hide behind green coverage &middot; What coverage does and does not prove",
+ "Function, statement and branch coverage &middot; What coverage does and does not prove",
  "Testing the code itself &mdash; and reading a coverage report honestly",
  ["Black box vs white box, revisited",
   "Code coverage: function, statement, branch",
-  "Reading code as a graph",
-  "Worked examples &mdash; bugs hiding behind green coverage",
-  "Going further: compound conditions, paths, complexity",
-  "Live demo: a coverage report in Jest",
+  "Two worked examples",
   "Why 100% coverage does not mean 100% tested"],
  "Boarding pass exercise &mdash; work out statement and branch coverage for two given test cases and add what is missing.",
 [
@@ -405,25 +347,6 @@ write_lesson(8,
 
 """<section>
   <span class="lbl">Topic 3</span>
-  <h3>Reading Code as a Graph</h3>
-  <div class="g2" style="align-items:center">
-    <div>
-      <p style="font-size:.5em;color:#aaa;margin:0 0 .3em">Requirement: members get 10% off. Non-members pay the full price.</p>
-      <pre><code class="language-javascript">function finalPrice(price, isMember) {
-  let discount;
-  if (isMember) {
-    discount = 0.1;
-  }
-  return price - price * discount;
-}</code></pre>
-      <div class="card o" style="margin-top:.5em;font-size:.5em"><strong>Control flow graph</strong>Boxes = statements &middot; diamonds = decisions &middot; arrows = possible flow. Statement coverage visits every <em>box</em>; branch coverage walks every <em>arrow</em> out of a diamond.</div>
-    </div>
-    """ + CFG_FINAL + """
-  </div>
-</section>""",
-
-"""<section>
-  <span class="lbl">Topic 4</span>
   <h3>Example 1 &mdash; a Conditional</h3>
   <pre><code class="language-javascript">function calc(a, b) {
   let c = 0;
@@ -441,7 +364,7 @@ write_lesson(8,
 </section>""",
 
 """<section>
-  <span class="lbl">Topic 4</span>
+  <span class="lbl">Topic 3</span>
   <h3>Example 2 &mdash; a Loop</h3>
   <pre><code class="language-javascript">function loop(a) {
   let c = 0;
@@ -458,141 +381,6 @@ write_lesson(8,
 
 """<section>
   <span class="lbl">Topic 4</span>
-  <h3>Example 3 &mdash; 100% Statements, Still a Bug</h3>
-  <div class="g2" style="align-items:start">
-    <div>
-      <p style="font-size:.5em;color:#aaa;margin:0 0 .3em">The <code>finalPrice</code> function from the graph, with one test:</p>
-      <pre><code class="language-javascript">test('member gets 10% off', () => {
-  expect(finalPrice(100, true)).toBe(90);
-});</code></pre>
-    </div>
-    <div class="card g"><strong>Statement coverage: 100%</strong><code>let discount</code> &check;<br><code>if (isMember)</code> &check;<br><code>discount = 0.1</code> &check;<br><code>return &hellip;</code> &check;<br><br>Every line ran. Green. Ship it?</div>
-  </div>
-  <div class="card o" style="margin-top:.5em"><strong>Branch coverage: 50%</strong>The FALSE arrow out of <code>isMember?</code> was never walked. Branch coverage forces a second test: <code>finalPrice(100, false)</code>, expected 100.</div>
-  <div class="card r fragment" style="margin-top:.5em"><strong>Actual result: NaN</strong>For non-members <code>discount</code> stays <code>undefined</code>. The bug lives on the arrow you can't see in the code &mdash; the missing <code>else</code>.</div>
-</section>""",
-
-"""<section>
-  <span class="lbl">Topic 4</span>
-  <h3>Example 4 &mdash; The Loop That Runs Zero Times</h3>
-  <div class="g2" style="align-items:start">
-    <div>
-      <p style="font-size:.5em;color:#aaa;margin:0 0 .3em">Show the average star rating. A product with no ratings shows 0.</p>
-      <pre><code class="language-javascript">function averageRating(ratings) {
-  let sum = 0;
-  for (const r of ratings) {
-    sum += r;
-  }
-  return sum / ratings.length;
-}</code></pre>
-    </div>
-    <div class="card o"><strong>Test every loop with</strong><span style="color:var(--red);font-weight:700">0</span> iterations &mdash; loop skipped entirely<br><span style="color:var(--orange);font-weight:700">1</span> iteration<br><span style="color:var(--green);font-weight:700">many</span> iterations<br><span style="color:var(--purple);font-weight:700">max</span> &mdash; if there is a limit<br><br>Sound familiar? It's boundary value analysis, applied to a loop.</div>
-  </div>
-  <table style="margin-top:.5em;width:100%">
-    <tr><th>Iterations</th><th>Input</th><th>Expected</th><th>Actual</th><th>Result</th></tr>
-    <tr><td>1</td><td>[3]</td><td>3</td><td>3</td><td>""" + PASS + """</td></tr>
-    <tr><td>many</td><td>[4, 5, 3]</td><td>4</td><td>4</td><td>""" + PASS + """</td></tr>
-    <tr class="fragment"><td>0</td><td>[ ]</td><td>0</td><td>NaN (0 &divide; 0)</td><td>""" + FAIL + """</td></tr>
-  </table>
-</section>""",
-
-"""<section>
-  <span class="lbl">Topic 4</span>
-  <h3>Example 5 &mdash; Two Decisions, Four Paths</h3>
-  <div class="g2" style="align-items:center">
-    <div>
-      <p style="font-size:.48em;color:#aaa;margin:0 0 .3em">Standard delivery 5 &euro;. Orders of 50 &euro; or more get free standard delivery. Express delivery <strong>always</strong> costs 12 &euro;.</p>
-      <pre><code class="language-javascript">function deliveryFee(total, isExpress) {
-  let fee = 5;
-  if (isExpress) {
-    fee = 12;
-  }
-  if (total >= 50) {
-    fee = 0;
-  }
-  return fee;
-}</code></pre>
-      <p style="font-size:.5em;margin-top:.3em">Two decisions in a row &rarr; 2 &times; 2 = <strong>4 paths</strong> through the graph. Branch coverage only needs 2 of them.</p>
-    </div>
-    """ + CFG_DELIVERY + """
-  </div>
-</section>""",
-
-"""<section>
-  <span class="lbl">Topic 4</span>
-  <h3>100% Branch Coverage &mdash; and Still a Bug</h3>
-  <table style="width:100%">
-    <tr><th>Path</th><th>Input</th><th>isExpress</th><th>total &ge; 50</th><th>Expected</th><th>Actual</th><th>Result</th></tr>
-    <tr><td>A</td><td>(20, true)</td><td class="t">T</td><td class="f">F</td><td>12</td><td>12</td><td>""" + PASS + """</td></tr>
-    <tr><td>B</td><td>(60, false)</td><td class="f">F</td><td class="t">T</td><td>0</td><td>0</td><td>""" + PASS + """</td></tr>
-    <tr class="fragment"><td>C</td><td>(20, false)</td><td class="f">F</td><td class="f">F</td><td>5</td><td>5</td><td>""" + PASS + """</td></tr>
-    <tr class="fragment"><td>D</td><td>(60, true)</td><td class="t">T</td><td class="t">T</td><td>12</td><td>0</td><td>""" + FAIL + """</td></tr>
-  </table>
-  <div class="g2" style="margin-top:.6em">
-    <div class="card o"><strong>A + B = 100% branch coverage</strong>Each <code>if</code> was TRUE once and FALSE once. The coverage report is fully green.</div>
-    <div class="card r"><strong>Path D: free delivery wipes out express</strong>The second <code>if</code> overwrites the first. Bugs love the <em>combination</em> of decisions &mdash; that's what <em>path coverage</em> targets.</div>
-  </div>
-</section>""",
-
-"""<section>
-  <span class="lbl further">Topic 5 &middot; Going further</span>
-  <h3>Compound Conditions &mdash; the One-Character Bug</h3>
-  <p style="font-size:.52em;margin:0 0 .3em">Requirement: you can rent a car if you are at least 21 <strong>and</strong> have a licence. The developer typed <code>||</code> instead of <code>&amp;&amp;</code>:</p>
-  <pre><code class="language-javascript">if (age >= 21 || hasLicense) {   // should be &amp;&amp;
-  return true;
-}
-return false;</code></pre>
-  <table style="width:100%;margin-top:.3em">
-    <tr><th>Test</th><th>Expected (&amp;&amp;)</th><th>Actual (||)</th><th>Branch-coverage tests</th><th>Each-condition tests</th></tr>
-    <tr><td>(25, true)</td><td>true</td><td>true</td><td>""" + PASS + """</td><td>""" + PASS + """</td></tr>
-    <tr><td>(18, false)</td><td>false</td><td>false</td><td>""" + PASS + """</td><td>&mdash;</td></tr>
-    <tr><td>(18, true)</td><td>false</td><td>true</td><td>&mdash;</td><td>""" + FAIL + """</td></tr>
-    <tr><td>(25, false)</td><td>false</td><td>true</td><td>&mdash;</td><td>""" + FAIL + """</td></tr>
-  </table>
-  <p style="font-size:.5em;margin-top:.4em">Two tests give 100% statement and branch coverage &mdash; and miss the bug. Fix: show that <em>each condition on its own</em> can flip the result. This is called <strong>MC/DC</strong> and is required for flight-critical aviation software.</p>
-</section>""",
-
-"""<section>
-  <span class="lbl further">Topic 5 &middot; Going further</span>
-  <h3>How Many Tests? Cyclomatic Complexity</h3>
-  <div class="g2" style="align-items:start">
-    <div class="card r"><strong>Why not test every path?</strong>2 <code>if</code>s &rarr; 4 paths<br>10 <code>if</code>s &rarr; 1&nbsp;024 paths<br>1 loop &rarr; potentially endless paths<br><br>Full path coverage is only realistic for small, critical functions.</div>
-    <div class="card g"><strong>McCabe's rule of thumb</strong><span style="color:var(--green);font-size:1.15em">M = decisions + 1</span><br>Count every <code>if</code>, loop, <code>case</code>, <code>&amp;&amp;</code>, <code>||</code>, <code>?:</code>.<br><br>M = the number of <em>independent</em> paths &mdash; a good minimum number of tests.</div>
-  </div>
-  <table style="width:100%;margin-top:.6em">
-    <tr><th>Function</th><th>Decisions</th><th>M</th><th>All paths</th></tr>
-    <tr><td>finalPrice</td><td>1 if</td><td>2</td><td>2</td></tr>
-    <tr><td>canRent</td><td>1 if + 1 &amp;&amp;</td><td>3</td><td>3</td></tr>
-    <tr><td>deliveryFee</td><td>2 if</td><td>3</td><td>4</td></tr>
-  </table>
-  <p style="font-size:.5em;color:#aaa;margin-top:.4em">M above ~10 means the function is hard to test &mdash; refactor it. Static analysis (Lesson 6) can enforce this: ESLint <code>"complexity": ["warn", 10]</code>.</p>
-</section>""",
-
-"""<section>
-  <span class="lbl">Topic 6</span>
-  <h3>Live Demo &mdash; a Coverage Report in Jest</h3>
-  <div class="g2" style="align-items:start">
-    <div>
-      <div class="term">$ npm install
-$ npm run coverage
-
-File                | % Stmts | % Branch
---------------------|---------|---------
-01-finalPrice.js    |     100 |      <span class="hl">50</span>
-02-canRent.js       |     100 |     <span class="ok">100</span>
-03-deliveryFee.js   |     100 |     <span class="ok">100</span>
-04-averageRating.js |     100 |     <span class="ok">100</span>
-05-parkingFee.js    |   14.28 |        0
-
-Tests: 1 todo, <span class="ok">7 passed</span></div>
-      <p style="font-size:.48em;color:#aaa;margin-top:.4em">Open <code>coverage/index.html</code> &mdash; yellow and red mark code no test ever executed.</p>
-    </div>
-    <div class="card g"><strong>Demo script &mdash; White-Box-Examples</strong>1. Run coverage. Ask the class: <em>"Ship it?"</em><br>2. Open the HTML report on <code>01-finalPrice</code> &mdash; the missing else is highlighted.<br>3. Uncomment the <strong style="display:inline">STEP 2</strong> tests in each test file.<br>4. Run again &rarr; <span class="fragment"><strong style="display:inline;color:var(--red)">5 failing tests</strong> &mdash; three of the four files had 100% branch coverage.</span></div>
-  </div>
-</section>""",
-
-"""<section>
-  <span class="lbl">Topic 7</span>
   <h3>What Coverage Does Not Tell You</h3>
   <ul style="font-size:.67em">
     <li>100% code coverage does not mean a 100% tested product.</li>
@@ -601,49 +389,6 @@ Tests: 1 todo, <span class="ok">7 passed</span></div>
     <li>A test that executes a line without asserting anything still counts towards coverage.</li>
   </ul>
   <blockquote>Recommendation: black box + white box together give higher test coverage <em>and</em> higher code coverage. Neither replaces the other.</blockquote>
-</section>""",
-
-"""<section>
-  <span class="lbl">Warm-Up Exercise</span>
-  <div class="teams">
-    <h3>Parking Fee &mdash; Count Before You Test</h3>
-    <div class="g2" style="gap:16px">
-      <div>
-        <p style="font-size:.5em;color:#aaa;margin:0 0 .3em">2 &euro; per hour; 0 hours costs nothing. Residents who park <strong>more than</strong> 3 hours get 50% off.</p>
-        <pre><code class="language-javascript">function parkingFee(hours, isResident) {
-  if (hours &lt;= 0) {
-    return 0;
-  }
-  let fee = hours * 2;
-  if (isResident &amp;&amp; hours > 3) {
-    fee = fee / 2;
-  }
-  return fee;
-}</code></pre>
-      </div>
-      <ol style="font-size:.85em;line-height:1.7;text-align:left;margin:0;padding-left:1.2em">
-        <li>Draw the control flow graph</li>
-        <li>Minimum tests for <strong>100% statement</strong> coverage?</li>
-        <li>Minimum tests for <strong>100% branch</strong> coverage?</li>
-        <li>Which black-box technique adds one more test here?</li>
-        <li><span style="color:var(--orange)">Going further:</span> cyclomatic complexity? Which test proves <code>hours &gt; 3</code> matters on its own?</li>
-      </ol>
-    </div>
-  </div>
-</section>""",
-
-"""<section>
-  <span class="lbl">Warm-Up &middot; Answers</span>
-  <h3>Parking Fee &mdash; Answers</h3>
-  <table style="width:100%">
-    <tr><th>Question</th><th>Answer</th><th>Tests</th></tr>
-    <tr class="fragment"><td>100% statement</td><td><strong>2 tests</strong> (Jest: 100% statements, 83% branches)</td><td>(0, false) &rarr; 0 &middot; (5, true) &rarr; 5</td></tr>
-    <tr class="fragment"><td>100% branch</td><td><strong>3 tests</strong> &mdash; add the FALSE outcome of the second if</td><td>+ (5, false) &rarr; 10</td></tr>
-    <tr class="fragment"><td>Black box: BVA</td><td>"more than 3" &mdash; test the boundary</td><td>+ (3, true) &rarr; 6</td></tr>
-    <tr class="fragment"><td>Cyclomatic complexity</td><td>2 if + 1 &amp;&amp; + 1 = <strong>4</strong></td><td>&mdash;</td></tr>
-    <tr class="fragment"><td>hours &gt; 3 on its own</td><td>Resident, short stay &mdash; only <code>hours</code> changed vs (5, true)</td><td>+ (2, true) &rarr; 4</td></tr>
-  </table>
-  <p class="fragment" style="font-size:.52em;margin-top:.6em">After 3 tests Jest already shows <strong>100% branches</strong> &mdash; it cannot see the boundary or the single-condition case. The tool measures; <em>you</em> design.</p>
 </section>""",
 
 """<section>
@@ -683,4 +428,4 @@ Tests: 1 todo, <span class="ok">7 passed</span></div>
     <p style="font-size:.62em">Full brief: <a href="homework/hw-07.html">Homework 7</a></p>
   </div>
 </section>""",
-], extra_css=L08_CSS)
+])
