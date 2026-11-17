@@ -47,16 +47,16 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08)
 <h2>Task</h2>
 <ol>
   <li>Open <a href="https://sqliteonline.com">sqliteonline.com</a> (or any SQLite client). Paste <a href="../materials/shop-database.sql">shop-database.sql</a> and run it.</li>
-  <li>The seven requirements the application is supposed to guarantee are listed in comments at the top of the file.</li>
+  <li>The requirements the application is supposed to guarantee are listed in comments at the top of the file: six required ones (R1&ndash;R6) and an optional, trickier R7.</li>
   <li><strong>Write one query per requirement</strong> that checks whether the data actually honours it. A good check returns zero rows when everything is fine, and the offending rows when it is not.</li>
   <li>Run the join comparison suggested at the bottom of the file: <code>JOIN</code> versus <code>LEFT JOIN</code> on orders and customers. Explain the difference in the row count.</li>
   <li><strong>Find the defects.</strong> Every requirement is broken at least once. For each defect record: the query that found it, the rows returned, which requirement it breaks, and the severity you would assign.</li>
   <li>For each defect, name the <strong>database constraint</strong> that would have prevented it &mdash; <code>NOT NULL</code>, <code>FOREIGN KEY</code> or <code>CHECK</code>. Where no simple constraint can, say what would instead.</li>
-  <li>Finally: R6 says the total is compared <em>rounded to 2 decimals</em>. Run your R6 query without <code>ROUND</code> and look at order 106. Explain what you see, and what it means for testing money values.</li>
+  <li><strong>Optional, a bit trickier:</strong> R7 (order totals) needs a <code>JOIN</code> with <code>GROUP BY</code>. If you do it, also run your R7 query without <code>ROUND</code> and look at order 106. Explain what you see, and what it means for testing money values.</li>
 </ol>
 
 <h2>Deliverable</h2>
-<div class="box g">Your queries, the defects found with evidence, the constraint that would have prevented each, and your note on rounding.</div>
+<div class="box g">Your queries, the defects found with evidence, the constraint that would have prevented each, and, if you did R7, your note on rounding.</div>
 
 <h2>Assessment criteria</h2>
 <table>

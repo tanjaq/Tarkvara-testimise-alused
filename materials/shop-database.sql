@@ -13,9 +13,11 @@
 --   R3  An order item quantity is at least 1.
 --   R4  A product price is greater than 0.
 --   R5  An order status is one of: NEW, PAID, SHIPPED, CANCELLED.
---   R6  An order total equals the sum of its items (quantity * unit_price),
+--   R6  No order is dated in the future.
+--
+--   OPTIONAL - a bit trickier (needs a JOIN with GROUP BY):
+--   R7  An order total equals the sum of its items (quantity * unit_price),
 --       rounded to 2 decimals.
---   R7  No order is dated in the future.
 --
 -- Every requirement is broken at least once in the data below.
 -- For each defect: which requirement does it break, what severity would
