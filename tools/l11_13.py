@@ -320,7 +320,7 @@ write_lesson(12,
 """<section>
   <div class="hw">
     <h3>Homework 11 &mdash; Accessibility Audit</h3>
-    <p style="font-size:.68em">Audit one public site and your own project: keyboard-only walkthrough, contrast check, structural checks and an automated scan. Report the findings mapped to WCAG criteria, with severity.</p>
+    <p style="font-size:.68em">Audit one public site and your own project by hand: keyboard-only walkthrough, zoom, contrast and structural checks. Report the findings with severity.</p>
     <p style="font-size:.62em">Full brief: <a href="homework/hw-11.html">Homework 11</a></p>
   </div>
 </section>""",

@@ -42,7 +42,7 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08)
 <div class="meta"><span>Individual or pair</span><span>Lesson 12</span><span>Submit: Teams</span></div>
 
 <h2>Objective</h2>
-<p>Find real accessibility defects with a keyboard, your eyes and one scanner &mdash; and see how much the scanner misses.</p>
+<p>Find real accessibility defects by hand &mdash; with a keyboard, zoom and your own eyes.</p>
 
 <h2>Task</h2>
 <ol>
@@ -52,22 +52,18 @@ footer{margin-top:3em;padding-top:1em;border-top:1px solid rgba(255,255,255,.08)
   <li><strong>Contrast.</strong> Check body text, placeholder text, buttons and disabled states. Normal text needs at least 4.5:1, large text and UI components 3:1.</li>
   <li><strong>Colour only.</strong> Find at least one place where information is conveyed by colour alone &mdash; or confirm there is none.</li>
   <li><strong>Structure.</strong> Check headings (one h1, no skipped levels), image alt text, form labels (a placeholder is not a label), link text out of context, and error messages.</li>
-  <li><strong>Automated scan.</strong> Run axe DevTools, WAVE or Lighthouse on the same pages.</li>
-  <li><strong>Optional but recommended:</strong> turn on VoiceOver, NVDA or TalkBack and try one flow with your eyes closed.</li>
-  <li><strong>Report.</strong> One row per finding: page, what is wrong, the WCAG success criterion it breaks (e.g. 1.4.3 Contrast, 2.1.1 Keyboard, 2.4.7 Focus Visible, 3.3.2 Labels), severity, and how you would fix it.</li>
-  <li>Finish with a comparison: how many findings came from the automated scan, and how many only from your manual checks?</li>
+  <li><strong>Optional:</strong> turn on VoiceOver, NVDA or TalkBack and try one flow with your eyes closed, or run an automated tool (axe DevTools, WAVE or Lighthouse) on the same pages.</li>
+  <li><strong>Report.</strong> One row per finding: page, what is wrong, severity, and how you would fix it.</li>
 </ol>
 
 <h2>Deliverable</h2>
-<div class="box g">An audit report for both sites with findings mapped to WCAG criteria, plus the manual-versus-automated comparison and a fix for at least one finding in your own project.</div>
+<div class="box g">An audit report for both sites, with a fix for at least one finding in your own project.</div>
 
 <h2>Assessment criteria</h2>
 <table>
   <tr><th>Criterion</th><th>What we look for</th></tr>
-  <tr><td><strong>Manual work</strong></td><td>The keyboard, zoom, contrast and structure checks were actually done, not just a scan</td></tr>
-  <tr><td><strong>WCAG mapping</strong></td><td>Findings reference specific success criteria</td></tr>
+  <tr><td><strong>Manual work</strong></td><td>The keyboard, zoom, contrast, colour and structure checks were actually done</td></tr>
   <tr><td><strong>Severity</strong></td><td>Assigned by user impact, and justified</td></tr>
-  <tr><td><strong>Comparison</strong></td><td>You can say what the scanner missed</td></tr>
   <tr><td><strong>Your own project</strong></td><td>At least one accessibility defect in your own project is found and fixed</td></tr>
 </table>
 
